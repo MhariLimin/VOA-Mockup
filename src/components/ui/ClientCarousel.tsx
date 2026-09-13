@@ -9,7 +9,6 @@ export function ClientCarousel() {
   const [active, setActive] = useState(0);
   const [visible, setVisible] = useState(5);
   const [interactionPaused, setInteractionPaused] = useState(false);
-  const [autoPaused, setAutoPaused] = useState(false);
   const [transitioning, setTransitioning] = useState(true);
   const slides = useMemo(() => [...clients, ...clients.slice(0, 5)], []);
 
@@ -21,10 +20,10 @@ export function ClientCarousel() {
   }, []);
 
   useEffect(() => {
-    if (reducedMotion || interactionPaused || autoPaused) return;
-    const timer = window.setInterval(() => setActive((current) => current + 1), 2000);
+    if (reducedMotion || interactionPaused) return;
+    const timer = window.setInterval(() => setActive((current) => current + 1), 1000);
     return () => window.clearInterval(timer);
-  }, [interactionPaused, autoPaused, reducedMotion]);
+  }, [interactionPaused, reducedMotion]);
 
   useEffect(() => {
     if (active !== clients.length) return;
@@ -53,7 +52,7 @@ export function ClientCarousel() {
     </div>
     <div className="carousel-controls">
       <span>{String((active % clients.length) + 1).padStart(2, '0')} / {clients.length}</span>
-      <div><button type="button" onClick={() => setAutoPaused((value) => !value)}>{autoPaused ? 'Play' : 'Pause'}</button><button type="button" onClick={previous} aria-label="Previous client">←</button><button type="button" onClick={() => setActive((current) => current >= clients.length - 1 ? clients.length : current + 1)} aria-label="Next client">→</button></div>
+      <div><button type="button" onClick={previous} aria-label="Previous client">←</button><button type="button" onClick={() => setActive((current) => current >= clients.length - 1 ? clients.length : current + 1)} aria-label="Next client">→</button></div>
     </div>
   </div>;
 }

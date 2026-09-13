@@ -1,33 +1,50 @@
-# Bolt project instructions
-
-Read `docs/BOLT_REBUILD_BRIEF.md` before making changes. It is the authoritative Stage 1 product and design brief.
+# Bolt project guardrails
 
 ## Branch boundary
 
-- Work only on the `bolt/layout-enhance-1` branch and confirm it is checked out before modifying files.
-- Never edit, commit to, merge into, rebase, reset, or push directly to `main`; `main` is controlled by the project team.
-- If `bolt/layout-enhance-1` is unavailable, stop and report the issue without modifying files. Do not substitute another branch unless explicitly instructed.
+- Work only on `bolt/layout-enhance-1` and confirm it is selected before every edit.
+- Never edit, commit to, merge into, rebase, reset, or push to `main`.
+- If the required branch is unavailable, stop without modifying files.
 
-## Non-negotiable rules
+## Scope boundary
 
-- Plan first in `IMPLEMENTATION_PLAN.md`, then implement Stage 1 without broadening scope.
-- Total Bolt usage must never exceed 300,000 tokens. Stop adding features at 240,000 and stop code changes at 270,000, preserving at least 30,000 tokens for verification and reporting.
-- Build the homepage, shared layout/navigation/footer, reusable source-page families, meaningful motion, Thank You page, and custom 404.
-- Do not build a backend, database, authentication, or WordPress/PHP theme.
-- Preserve every source-derived VOA navigation destination in `src/content/navigation.ts`.
-- Use `src/content/sourcePages.ts` to retain source purpose/content while fully redesigning the presentation.
-- Do not create repetitive placeholder pages. The only new public routes are `/thank-you` and the custom 404.
-- Preserve the official Virtual Office Angels logo; never substitute an invented logo or a text-only `VOA` mark.
-- Display the official logo without a visible white image background, and use the full company name in normal visible copy instead of repeatedly abbreviating it.
-- Do not invent people, client names, logos, testimonials, metrics, certifications, awards, or compliance claims.
-- Keep content separate from presentation for later WordPress conversion.
-- Use Manrope for headings and Inter for interface/body text.
-- Keep the header fixed at all scroll positions and prevent it from covering content.
-- Open desktop dropdowns by click rather than hover alone, with complete keyboard, Escape, outside-click, focus, and ARIA behaviour.
-- Keep six primary services on the homepage and all nine source-derived service destinations in navigation and the Services overview.
-- Avoid repeated oversized heroes and repeated generic CTA pairs across service pages; use accurate local imagery and page-specific composition.
-- Preserve the two-second accessible client carousel as the sole looping-carousel exception.
-- Support complete light and dark themes and `prefers-reduced-motion`.
-- Meet WCAG 2.2 AA and prevent horizontal overflow down to 320 px.
-- Reuse the existing architecture and components. Avoid broad rewrites of working files.
-- Run `npm run lint` and `npm run build` before reporting completion.
+- Never treat this file or `docs/BOLT_REBUILD_BRIEF.md` as authorization to implement the whole website.
+- Work on exactly one prompt from `bolt-prompts/` at a time.
+- Read and edit only the files explicitly allowed by the current page prompt.
+- Do not scan the repository, inspect all routes, or open bulk article JSON, asset manifests, image binaries, `package-lock.json`, capture scripts, or synchronization scripts unless the current prompt explicitly permits a named file.
+- Do not repair, refactor, or restyle unrelated pages while completing a page prompt.
+- Do not create missing features merely because they are mentioned in the rebuild brief.
+- Do not install or change dependencies.
+- Use existing content and assets; never fabricate claims, people, testimonials, metrics, biographies, articles, certifications, or awards.
+
+## Action boundary
+
+- Make one focused implementation pass and stop.
+- Do not create alternate versions or repeatedly rewrite working code.
+- Do not run automatic cleanup or broad automated-fix commands.
+- Run at most the single verification command permitted by the current prompt.
+- If that check fails, report the exact error and stop. Do not begin an autonomous diagnosis-and-repair loop.
+- If a response is interrupted, do not assume permission to resume broad work. On the next request, inspect only the files named in that request.
+- Keep the final response to: files changed, check result, and remaining issue. Do not provide a long retrospective.
+
+## Required checkpoint after every prompt
+
+- Before ending any page-prompt task, confirm the current branch is `bolt/layout-enhance-1` and inspect `git status`.
+- Commit the files changed by that prompt and push the commit only to `origin/bolt/layout-enhance-1`.
+- For a completed task whose permitted check passed, use a concise commit message beginning `Bolt:` followed by the page or prompt name.
+- For an incomplete task, interrupted recovery, or failed permitted check, preserve the work with a concise commit message beginning `WIP:` followed by the page or prompt name and push it anyway.
+- Never stage unrelated pre-existing changes. If unrelated changes are present, leave them untouched and list them in the final response.
+- If there is no diff, do not create an empty commit; still confirm that `bolt/layout-enhance-1` is synchronized with its remote.
+- If committing or pushing fails, do not discard or rewrite the files. Report the Git error and state that the changes remain only in the Bolt workspace.
+- Only after the checkpoint attempt, respond with the branch, commit hash if created, push result, changed files, check result, and remaining issue.
+
+## Low-token emergency checkpoint
+
+- If Bolt's UI, agent, or system reports that the token allowance is low, nearly exhausted, or insufficient to finish the current task, stop making code changes immediately.
+- Do not spend the remaining allowance on redesign, testing, debugging, cleanup, or explanatory output.
+- Preserve the exact current state even when incomplete: commit all task-related changes to `bolt/layout-enhance-1` with a message beginning `WIP:`, then push only that branch to `origin/bolt/layout-enhance-1`.
+- Never commit or push the emergency checkpoint to `main` and never merge it.
+- If committing or pushing is unavailable, leave the files unchanged and report that the checkpoint remains only in the Bolt workspace. Do not discard, revert, or rewrite incomplete work.
+- After the checkpoint attempt, respond only with the branch, commit hash if created, push result, incomplete items, and last edited file.
+
+The project-wide design brief is reference material only. The current page prompt is always the operative scope.

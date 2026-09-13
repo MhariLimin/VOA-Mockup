@@ -9,7 +9,7 @@ export function NotFoundPage() {
         <p className="lead">Use the navigation to continue, explore Virtual Office Angels services, or return to the homepage.</p>
         <div className="button-row">
           <Link className="button" to="/">Return home</Link>
-          <Link className="button button-secondary" to="/services">Explore services</Link>
+          <Link className="button button-secondary" to="/services/mortgage-loans">Explore services</Link>
         </div>
       </div>
     </section>
