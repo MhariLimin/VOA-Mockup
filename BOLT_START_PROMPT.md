@@ -1,31 +1,23 @@
-# Prompt to paste after importing this repository into Bolt
+# Bolt import safety prompt
 
-Read `claude.md` and `docs/BOLT_REBUILD_BRIEF.md` completely before changing code. Treat this prompt as the latest instruction wherever older wording is ambiguous.
+Paste this prompt in **Discussion or Plan mode**, not Build mode.
 
-## Branch boundary
+---
 
-Perform all Bolt work only on the `bolt/layout-enhance-1` branch. Before editing, confirm that this is the checked-out branch. Do not edit, commit to, merge into, rebase, reset, or push directly to `main`; `main` is owned and controlled by the project team. If `bolt/layout-enhance-1` is unavailable or cannot be selected, stop and report the issue without modifying files. Do not create or use another working branch unless the project team explicitly instructs you to do so.
+This is an imported, working React/Vite repository. Do not edit files, run commands, install packages, scan the repository, implement the rebuild brief, or start a general improvement pass.
 
-This repository contains the approved Stage 1 layouts for the homepage and every retained route. Preserve its React/Vite/TypeScript architecture, route strategy, semantic tokens, separated navigation/content data, fixed header, local source assets, theme foundation, and verification scripts. Do not regenerate or replace the project.
+Confirm only these three things:
 
-First inspect the existing files and create a concise `IMPLEMENTATION_PLAN.md`. Then polish the existing homepage and reusable source-page families into one coherent premium direction while retaining every source-derived navigation destination in `src/content/navigation.ts`. Produce one design direction only; do not repeatedly redesign completed sections.
+1. The selected Git branch is `bolt/layout-enhance-1`.
+2. `src/pages/HomePage.tsx` exists.
+3. You are ready to receive one narrowly scoped page prompt.
 
-Use `src/content/sourcePages.ts` as the route and content model. Improve composition, motion, and finish without reducing routes to repeated templates or putting the same oversized hero on every page. Preserve the source websites' page purpose and approved content, and do not recreate the WordPress visual styling.
+Use no more than three file checks. Do not open article JSON, image assets, `package-lock.json`, the complete rebuild brief, or unrelated source files. Reply with only the branch name, the homepage-file result, and `READY FOR PAGE 01`.
 
-Keep the homepage substantial: summarize the company, its six primary staging-site services, managed-support difference, process, client proof, FAQs, and contact path. Keep homepage service cards compact. Retain all nine source-derived service destinations in the full Services overview and navigation.
+Never modify, commit to, merge into, rebase, reset, or push to `main`. If the selected branch is not `bolt/layout-enhance-1`, stop immediately without changing anything.
 
-Give every service page an accurate local service image. Replace or omit repetitive generic CTA pairs such as "Get Started Today" and "Explore Services" in favour of contextual actions. Keep Our Story and Founder & Leadership distinct, retain their fuller source-grounded content, and place the founder portrait in the Founder & Leadership content rather than repeating it in both About heroes. Keep longer Client Stories copy left-aligned and preserve the source FAQ content.
+If Bolt reports that the token allowance is nearly exhausted during any later build task, stop editing immediately and preserve all current task-related changes, complete or incomplete, by committing them with a `WIP:` message and pushing only to `origin/bolt/layout-enhance-1`. Do not test, debug, clean up, revert, or produce a long response before making that emergency checkpoint.
 
-Use the local files under `public/assets/source/staging/images/` and `public/assets/source/staging/blog-images/` before introducing any external image. The raw captured page text, 30 staging article bodies, lightweight blog index, split article files, and asset provenance are in `src/content/source/staging/`. Preserve the local `/insights/:slug` article routes, use each article's corresponding local image, and never link visitors back to the staging website. Do not fabricate testimonials, statistics, article bodies, video titles, staff biographies, or client outcomes.
+After every later page prompt, whether completed or incomplete, commit that prompt's task-related changes and push them only to `origin/bolt/layout-enhance-1` before responding. Use a `Bolt:` commit prefix when complete and a `WIP:` prefix when incomplete or when the permitted check fails. Never push to `main`.
 
-Preserve and visually polish the accessible client carousel in `ClientCarousel.tsx`. This is the sole approved looping-carousel exception. It must advance by one client every two seconds, loop continuously, remain responsive, pause during pointer/keyboard interaction, provide Play/Pause and previous/next controls, and respect reduced-motion preferences. Do not replace the complete 30-client inventory with a smaller decorative logo set or add other marquees/carousels.
-
-The only new public routes are `/thank-you` and the wildcard custom 404. Do not add Security & Continuity, Guides & Templates, standalone case studies, Privacy, Terms, Accessibility, Careers, or a public design-system route. Preserve the official Virtual Office Angels logo, display it without a visible white image background, and never replace it with initials or an invented mark. In normal visible copy, use the full company name "Virtual Office Angels" rather than repeatedly shortening it to "VOA".
-
-Keep the header fixed throughout scrolling with correct content clearance, precise alignment, comfortable spacing, and one primary CTA. Desktop dropdowns must open by click, not hover alone, and support keyboard navigation, Escape, outside-click closing, visible focus, and correct ARIA state. Use an accessible mobile accordion/menu.
-
-Use Motion/Framer Motion as the only animation library if needed and CSS transitions for simple states. Do not add a backend, database, authentication, CMS, WordPress/PHP code, or analytics SDK.
-
-Total Bolt usage must never exceed 300,000 tokens. Keep planning concise, stop adding features at 240,000 tokens, and stop code changes at 270,000 tokens, reserving at least 30,000 tokens for verification and reporting. If usage approaches 270,000, finish the current safe edit, run the required checks, and report remaining work instead of continuing. Avoid broad rewrites, duplicate components, generated filler, unnecessary packages, repeated automated-fix loops, and multiple design variants.
-
-Before stopping, run `npm run lint` and `npm run build`, verify the required responsive widths, themes, navigation, keyboard behaviour, fixed-header clearance, reduced motion, and zero horizontal overflow. Confirm that all changes and commits remain on `bolt/layout-enhance-1`. Report completed work, checks, known limitations, and approximate tokens used. Do not publish, merge into `main`, or push to `main`.
+After this acknowledgement, I will paste one prompt at a time from `bolt-prompts/`. Never execute multiple page prompts together and never infer permission to work beyond the current prompt.

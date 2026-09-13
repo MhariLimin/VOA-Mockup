@@ -7,9 +7,8 @@ export interface NavigationItem {
 export const navigation: NavigationItem[] = [
   {
     label: 'Services',
-    href: '/services',
+    href: '/services/mortgage-loans',
     children: [
-      { label: 'Services overview', href: '/services' },
       { label: 'Mortgage & Loans', href: '/services/mortgage-loans' },
       { label: 'Financial Planning', href: '/services/financial-planning' },
       { label: 'Accounting & Bookkeeping', href: '/services/accounting-bookkeeping' },

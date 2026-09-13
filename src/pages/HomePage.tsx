@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { buyerQuestions, processSteps, specialistServices, trustPoints } from '../content/homeContent';
+import { blogArticles, articleCategory, formatArticleDate } from '../content/blogContent';
+import { testimonials } from '../content/testimonials';
 import { siteContent } from '../content/siteContent';
+import { ClientCarousel } from '../components/ui/ClientCarousel';
+import { ContactForm } from '../components/ui/ContactForm';
 
 export function HomePage() {
   useEffect(() => {
@@ -27,6 +31,8 @@ export function HomePage() {
     return () => observer.disconnect();
   }, []);
 
+  const contactSection = <section className="section contact-section page-contact-section"><div className="container contact-grid"><aside><p className="eyebrow">Your next step</p><h2>Tell us what the right support would change for your business.</h2><p className="lead compact">Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the right match.</p><p className="contact-direct"><a href="tel:1300737883">1 300 737 883</a><br /><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></p></aside><ContactForm /></div></section>;
+
   return (
     <>
       <section className="section home-hero">
@@ -37,7 +43,7 @@ export function HomePage() {
             <p className="lead">{siteContent.hero.description}</p>
             <div className="button-row">
               <Link className="button" to="/contact">Get Started Today</Link>
-              <Link className="button button-secondary" to="/services">Explore services</Link>
+              <Link className="button button-secondary" to="/services/mortgage-loans">Explore services</Link>
             </div>
             <p className="proof-line">Australian-managed · Matching specialist virtual assistants since 2010</p>
           </div>
@@ -46,6 +52,13 @@ export function HomePage() {
             <div className="connector" aria-hidden="true"><span /></div>
             <div className="match-card match-profile"><span>Specialist match</span><strong>Experienced lending support</strong><small>Screened for role and workflow fit</small><em>Virtual Office Angels managed</em></div>
           </div>
+        </div>
+      </section>
+
+      <section className="section home-client-proof">
+        <div className="container">
+          <div className="section-heading"><div><p className="eyebrow">Our clients</p><h2>Trusted support for businesses that value precision.</h2></div></div>
+          <ClientCarousel />
         </div>
       </section>
 
@@ -68,11 +81,18 @@ export function HomePage() {
         </div>
       </section>
 
+      <section className="section home-founder-section">
+        <div className="container split-grid story-grid">
+          <div className="source-image founder-home-image"><img src="/assets/source/staging/images/feeae1b697-Anne-Villavieja.jpg" alt="Anne Villavieja, founder of Virtual Office Angels" loading="lazy" /></div>
+          <div><p className="eyebrow">Founder and leadership</p><h2>Built from experience. Supported with care.</h2><p className="lead">Anne Villavieja founded Virtual Office Angels after more than 35 years in Australian human resources, recruitment, and team leadership.</p><Link className="text-link" to="/about#leadership">Meet Anne and the leadership team <span aria-hidden="true">â†’</span></Link></div>
+        </div>
+      </section>
+
       <section className="section services-section" data-home-reveal="grid">
         <div className="container">
           <div className="section-heading">
             <div><p className="eyebrow">Industries and capabilities</p><h2>Specialist support where precision matters.</h2></div>
-            <Link className="button button-secondary" to="/services">View all services</Link>
+            <Link className="button button-secondary" to="/services/mortgage-loans">Explore services</Link>
           </div>
           <div className="service-grid">
             {specialistServices.map((service, index) => (
@@ -132,11 +152,23 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section insight-section" data-home-reveal="compact">
-        <div className="container section-heading">
-          <div><p className="eyebrow">Insights</p><h2>Practical guidance for building effective remote support.</h2></div>
-          <div className="button-row"><Link className="button button-secondary" to="/insights">Browse articles</Link><Link className="button button-secondary" to="/videos">Watch videos</Link></div>
+      <section className="section home-founder-section legacy-home-founder">
+        <div className="container split-grid story-grid">
+          <div className="source-image founder-home-image"><img src="/assets/source/staging/images/feeae1b697-Anne-Villavieja.jpg" alt="Anne Villavieja, founder of Virtual Office Angels" loading="lazy" /></div>
+          <div><p className="eyebrow">Founder and leadership</p><h2>Built from experience. Supported with care.</h2><p className="lead">Anne Villavieja founded Virtual Office Angels after more than 35 years in Australian human resources, recruitment, and team leadership.</p><Link className="text-link" to="/about#leadership">Meet Anne and the leadership team <span aria-hidden="true">→</span></Link></div>
         </div>
+      </section>
+
+      <section className="section insight-section" data-home-reveal="compact">
+        <div className="container">
+          <div className="section-heading"><div><p className="eyebrow">Insights</p><h2>Practical guidance for building effective remote support.</h2></div><Link className="button button-secondary" to="/insights">Browse articles</Link></div>
+          <div className="home-article-preview">{blogArticles.slice(0, 3).map((article) => <Link className="home-article-card" to={`/insights/${article.slug}`} key={article.slug}><span className="home-article-image"><img src={article.featuredImage} alt="" loading="lazy" /></span><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h3>{article.title}</h3><span className="text-link">Read article <span aria-hidden="true">→</span></span></Link>)}</div>
+        </div>
+      </section>
+
+      <section className="section home-testimonial-section">
+        <div className="container home-testimonial-intro split-grid story-grid"><div className="source-image"><img src="/assets/source/staging/images/77beacedea-25711.jpg" alt="Virtual assistant working remotely" loading="lazy" /></div><div><p className="eyebrow">Client experience</p><h2>Proof should be specific, credible, and human.</h2><p className="lead">See how the right support can create more capacity, confidence, and time for growth.</p></div></div>
+        <div className="container"><div className="section-heading"><div><p className="eyebrow">Client testimonials</p><h2>What working with the right support can feel like.</h2></div><Link className="button button-secondary" to="/client-stories">Read all testimonials</Link></div><div className="home-testimonial-grid">{testimonials.slice(0, 3).map((testimonial) => <figure key={testimonial.name}><blockquote>{`${testimonial.quote.slice(0, 145).trimEnd()}...`}</blockquote><figcaption><span className="testimonial-avatar" aria-hidden="true">{testimonial.initials}</span><span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span></figcaption></figure>)}</div></div>
       </section>
 
       <section className="section faq-section" data-home-reveal="faq">
@@ -149,12 +181,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section final-cta" data-home-reveal="cta">
-        <div className="container cta-panel">
-          <div><p className="eyebrow">Ready to start?</p><h2>Build the right support around your business.</h2><p>Tell Virtual Office Angels about the role, recurring work, tools, and coverage you need.</p></div>
-          <div className="button-row"><Link className="button" to="/contact">Get Started Today</Link><a className="button button-secondary" href="tel:1300737883">Call 1 300 737 883</a></div>
-        </div>
-      </section>
+      {contactSection}
     </>
   );
 }

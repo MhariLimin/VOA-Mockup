@@ -19,4 +19,8 @@ The six services highlighted by the staging website are presented as the primary
 
 Bolt should refine this implementation rather than regenerate it. The 30 articles shown on the staging Blogs page, their detail routes, and their source images are included locally. Final approved video embeds remain migration work.
 
-Read [`claude.md`](claude.md) and the files in [`docs/`](docs/) before changing the interface.
+## Safe Bolt workflow
+
+After importing the `bolt/layout-enhance-1` branch, paste [`BOLT_START_PROMPT.md`](BOLT_START_PROMPT.md) in Discussion or Plan mode. It performs a no-edit branch and file check. Then use the numbered files in [`bolt-prompts/`](bolt-prompts/) one at a time, beginning with the homepage. Never paste the full prompt pack or request a site-wide continuation.
+
+`claude.md` contains the permanent branch and scope guardrails. The files in `docs/` remain design reference, not authorization for an autonomous full-site pass.

@@ -15,12 +15,17 @@ const benefits = [
   ['Continuity planning', 'Backup support can be coordinated when an assigned assistant is unavailable.'],
 ] as const;
 
-const testimonials = [
+const legacyTestimonials = [
   { name: 'Paul Godden', role: 'Managing Director, Vision Quest Video Productions', quote: 'With Anne’s expertise in HR Management, the process of hiring through Virtual Office Angels was both easy and efficient. My Virtual Assistant is outstanding! She saves me time, does a fantastic job and is proving invaluable to my business. As a result, I now have more time to attend to expanding the business and to tremendously increase the amount of money I can earn. Great service! Fantastic support! I unreservedly recommend the Virtual Office Angels services to anyone or any business that is struggling with time and needs quality and reliable support.' },
   { name: 'Paul Bradley', role: 'Branch General Manager, CRG (Elite Group)', quote: 'Being an Australian company and dealing with Virtual Office Angels, you get face to face with a person experienced in HR who can put a team together for you and custom fit it for your business. The service is excellent due to the team’s ability to select and get the right people for the right match—for each organisation. It has been an outstanding service!' },
   { name: 'Karen Robertson', role: 'Children’s Book Author, Treasure Kai series', quote: 'Thank you for all the work you have done. I have been working with Marie and she has been absolutely fantastic; she is very proactive and does her job very efficiently. Another good thing is that if Marie was not available, there was always backup on hand, so I had complete peace of mind working with Virtual Office Angels.' },
   { name: 'John Dwyer', role: 'Business Marketing Consultant and Owner, The Institute of Wow', quote: 'I have a 100% satisfaction rate with the wonderful service that I am receiving. I recommend that if you are looking for virtual assistance to help you grow your business, look no further than Virtual Office Angels. To me, they get 10 out of 10.' },
 ] as const;
+
+const testimonials = legacyTestimonials.map((testimonial) => ({
+  ...testimonial,
+  initials: testimonial.name.split(' ').map((part) => part[0]).join('').slice(0, 2),
+}));
 
 function Hero({ page, aside }: { page: SourcePageBrief; aside?: ReactNode }) {
   const expressive = page.template === 'about' || page.template === 'service';
@@ -28,7 +33,11 @@ function Hero({ page, aside }: { page: SourcePageBrief; aside?: ReactNode }) {
 }
 
 function FinalCta() {
-  return <section className="section final-cta"><div className="container cta-panel"><div><p className="eyebrow">Your next step</p><h2>Make more room for the work only you can do.</h2><p>Talk through the role and recurring work with Virtual Office Angels.</p></div><div className="button-row"><Link className="button" to="/contact">Start a conversation</Link><a className="button button-secondary" href="tel:1300737883">Call 1 300 737 883</a></div></div></section>;
+  return <section className="section contact-section page-contact-section"><div className="container contact-grid"><aside><p className="eyebrow">Your next step</p><h2>Tell us what the right support would change for your business.</h2><p className="lead compact">Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the right match.</p><p className="contact-direct"><a href="tel:1300737883">1 300 737 883</a><br /><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></p></aside><ContactForm /></div></section>;
+}
+
+function ContactForm() {
+  return <form className="contact-form" action="/thank-you"><div className="field-row"><label>First name<input name="firstName" autoComplete="given-name" required /></label><label>Last name<input name="lastName" autoComplete="family-name" required /></label></div><label>Email<input type="email" name="email" autoComplete="email" required /></label><label>Phone<input type="tel" name="phone" autoComplete="tel" /></label><label>How can we help?<textarea name="message" rows={6} required /></label><label className="checkbox-field"><input type="checkbox" required /><span>I agree to the processing of my information for this enquiry.</span></label><button className="button" type="submit">Send enquiry</button><small>Prototype form only. Connect validation, spam protection, consent records, and WordPress form handling before launch.</small></form>;
 }
 
 function ServicePage({ page }: { page: SourcePageBrief }) {
@@ -52,7 +61,7 @@ function ProcessPage({ page }: { page: SourcePageBrief }) {
 }
 
 function WhyPage({ page }: { page: SourcePageBrief }) {
-  return <><Hero page={page} /><section className="section muted-section"><div className="container"><div className="feature-grid feature-grid-wide">{benefits.map(([title, text], index) => <article key={title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section><section className="section"><div className="container content-split"><h2>Designed to reduce staffing friction—not add another layer of it.</h2><p className="lead">The complete staging-page list contains 18 claims. This layout consolidates overlapping points into six credible themes, making the proposition easier to scan and less promotional.</p></div></section><FinalCta /></>;
+  return <><Hero page={page} /><section className="section muted-section"><div className="container"><div className="feature-grid feature-grid-wide">{benefits.map(([title, text], index) => <article key={title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section><section className="section"><div className="container content-split"><h2>More capacity for the work that moves your business forward.</h2><p className="lead">With the right specialist, clear communication, and ongoing Australian management, everyday work keeps moving while you stay focused on clients, growth, and the decisions only you can make.</p></div></section><FinalCta /></>;
 }
 
 function StoriesPage({ page }: { page: SourcePageBrief }) {
