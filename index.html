@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Virtual Office Angels website design prototype." />
+    <meta name="theme-color" content="#f7f6f2" />
+    <script>
+      (() => {
+        const saved = localStorage.getItem('voa-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = saved || (systemDark ? 'dark' : 'light');
+      })();
+    </script>
+    <title>Virtual Office Angels</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+:root {
+  --font-display: 'Manrope', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --container: 80rem;
+  --gutter: clamp(1.25rem, 4vw, 5rem);
+  --header-height: 5rem;
+  --space-section: clamp(3.5rem, 7vw, 7rem);
+  --radius-control: 0.75rem;
+  --radius-card: 1.125rem;
+  --motion-fast: 180ms;
+  --motion-standard: 320ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --header-height: 4.25rem;
+  }
+}
