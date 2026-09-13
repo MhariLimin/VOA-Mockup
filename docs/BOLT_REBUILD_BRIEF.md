@@ -1,5 +1,9 @@
 # VOA Stage 1 rebuild brief
 
+## Delivery branch
+
+All Bolt edits and commits belong only on `bolt/layout-enhance-1`. The `main` branch is controlled by the project team and must not be edited, committed to, merged into, rebased, reset, or pushed to by Bolt.
+
 ## Outcome
 
 Create an original, premium website prototype for Virtual Office Angels. It must feel like a high-trust managed-services company with the clarity of a modern technology product, not a WordPress or page-builder theme.
@@ -27,8 +31,10 @@ Experienced professionals for finance, property, marketing, technology, and admi
 
 Sell specialist fit, Australian HR oversight, managed performance, and continuity—not cheap labour or generic task outsourcing.
 
-Primary CTA: **Get Started Today**  
-Secondary CTA: **Explore specialist services**
+Primary site/header CTA: **Get Started Today**
+Secondary homepage CTA: **Explore specialist services**
+
+Do not repeat this CTA pair on every service page. Use contextual actions that match the service and the visitor's next step.
 
 ## Creative direction
 
@@ -59,12 +65,13 @@ Do not copy their branding, assets, layouts, wording, or claims.
 
 ## Header
 
-- Preserve the official Virtual Office Angels logo exactly. Do not replace it with initials, a text-only VOA mark, or an invented logo. Store an approved local asset before production rather than depending on the staging URL.
+- Preserve the official Virtual Office Angels logo exactly and display it without a visible white image background. Do not replace it with initials, a text-only VOA mark, or an invented logo. Use the local source asset rather than depending on the staging URL.
 - Fixed from initial load through the entire page; never hides on downward scroll.
 - 76–80 px desktop and 64–68 px mobile.
 - Reserve its height so it never covers content or anchors.
 - After 16–24 px scroll it may become slightly denser with a restrained translucent surface and border, without layout shift.
 - One primary CTA.
+- Desktop dropdowns open on click, not hover alone, and support keyboard operation, Escape, outside-click closing, focus management, and appropriate ARIA state.
 - Accessible full-screen accordion menu on mobile.
 
 Navigation:
@@ -80,8 +87,8 @@ Navigation:
   - Creative & Copywriting
   - IT & Technology
 - How It Works
-- Why VOA dropdown
-  - Why VOA
+- Why Virtual Office Angels dropdown
+  - Why Virtual Office Angels
   - Client Stories/Testimonials
   - FAQs
 - Insights dropdown
@@ -94,6 +101,20 @@ Navigation:
 - Get Started Today
 
 Every retained destination uses its final path and source-grounded content brief. Never use repeated placeholder pages, `#`, dead links, or homepage redirects.
+
+The staging homepage exposes six primary services; keep those six in the compact homepage overview. Retain all nine source-derived service destinations in the complete Services overview and navigation.
+
+## Internal page composition
+
+- Do not begin every page with the same oversized hero treatment.
+- Use varied editorial introductions and layouts appropriate to services, process, about, insights, testimonials, FAQs, and contact.
+- Give each service page an accurate local image representing that service.
+- Do not repeat "Get Started Today" and "Explore Services" as a generic pair on every service page; use contextual actions or omit a redundant action.
+- Keep service lists and cards compact, with controlled typography and vertical spacing.
+- Keep Our Story and Founder & Leadership distinct and retain their fuller source-grounded content.
+- Place the founder portrait in the Founder & Leadership content rather than reusing it in both About heroes.
+- Keep long-form Client Stories and testimonial copy left-aligned.
+- Use the full company name "Virtual Office Angels" in normal visible copy instead of repeatedly shortening it to "VOA".
 
 ## Homepage sequence
 
@@ -121,7 +142,7 @@ Every retained destination uses its final path and source-grounded content brief
 - Standard easing: `cubic-bezier(0.22, 1, 0.36, 1)`.
 - Fully support reduced motion.
 
-No carousels, looping marquees, scroll hijacking, parallax text, particles, custom cursor, autoplay video, bouncing CTAs, or generic fade-up on every section.
+The accessible two-second client carousel is the sole approved looping-carousel exception. Do not add other carousels, looping marquees, scroll hijacking, parallax text, particles, a custom cursor, autoplay video, bouncing CTAs, or generic fade-up motion on every section.
 
 ## Themes
 
