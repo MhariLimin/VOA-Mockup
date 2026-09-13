@@ -1,10 +1,10 @@
 export const specialistServices = [
-  { title: 'Mortgage & Loans', href: '/services/mortgage-loans', text: 'Loan-processing and broker administration support.' },
-  { title: 'Financial Planning', href: '/services/financial-planning', text: 'Application, document, and client administration.' },
-  { title: 'Accounting & Bookkeeping', href: '/services/accounting-bookkeeping', text: 'Reliable recurring finance and bookkeeping assistance.' },
-  { title: 'Real Estate', href: '/services/real-estate-conveyancing', text: 'CRM, documentation, scheduling, and back-office support.' },
-  { title: 'Back Office & Admin', href: '/services/back-office-admin', text: 'Everyday operational support that protects your focus.' },
-  { title: 'Digital Marketing', href: '/services/digital-marketing', text: 'Campaign, publishing, reporting, and content coordination.' },
+  { title: 'Mortgage & Loans', href: '/services/mortgage-loans', text: 'Loan-processing and broker administration support.', image: '/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg' },
+  { title: 'Financial Planning', href: '/services/financial-planning', text: 'Application, document, and client administration.', image: '/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg' },
+  { title: 'Accounting & Bookkeeping', href: '/services/accounting-bookkeeping', text: 'Reliable recurring finance and bookkeeping assistance.', image: '/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg' },
+  { title: 'Real Estate', href: '/services/real-estate-conveyancing', text: 'CRM, documentation, scheduling, and back-office support.', image: '/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg' },
+  { title: 'Back Office & Admin', href: '/services/back-office-admin', text: 'Everyday operational support that protects your focus.', image: '/assets/source/staging/images/6f63e14c16-2149013955.jpg' },
+  { title: 'Digital Marketing', href: '/services/digital-marketing', text: 'Campaign, publishing, reporting, and content coordination.', image: '/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg' },
 ] as const;
 
 export const processSteps = [
