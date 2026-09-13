@@ -1,8 +1,32 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { buyerQuestions, processSteps, specialistServices, trustPoints } from '../content/homeContent';
 import { siteContent } from '../content/siteContent';
 
 export function HomePage() {
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-home-reveal]'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    sections.forEach((section) => { section.dataset.motionReady = 'true'; });
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      sections.forEach((section) => { section.dataset.visible = 'true'; });
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        (entry.target as HTMLElement).dataset.visible = 'true';
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <section className="section home-hero">
@@ -31,7 +55,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section intro-section">
+      <section className="section intro-section" data-home-reveal="split">
         <div className="container split-grid">
           <div>
             <p className="eyebrow">A more considered match</p>
@@ -44,7 +68,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section services-section">
+      <section className="section services-section" data-home-reveal="grid">
         <div className="container">
           <div className="section-heading">
             <div><p className="eyebrow">Industries and capabilities</p><h2>Specialist support where precision matters.</h2></div>
@@ -53,9 +77,11 @@ export function HomePage() {
           <div className="service-grid">
             {specialistServices.map((service, index) => (
               <Link className={`service-card service-card-${index + 1}`} to={service.href} key={service.href}>
-                <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
+                <div className="service-card-top">
+                  <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="service-card-image"><img src={service.image} alt="" loading="lazy" /></span>
+                </div>
+                <div className="service-card-copy"><h3>{service.title}</h3><p>{service.text}</p></div>
                 <span className="card-arrow" aria-hidden="true">↗</span>
               </Link>
             ))}
@@ -63,7 +89,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section dark-section">
+      <section className="section dark-section" data-home-reveal="dark">
         <div className="container">
           <p className="eyebrow">Why Virtual Office Angels</p>
           <div className="split-grid">
@@ -79,7 +105,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section process-section">
+      <section className="section process-section" data-home-reveal="rows">
         <div className="container">
           <div className="section-heading"><div><p className="eyebrow">How it works</p><h2>From a clear brief to supported delivery.</h2></div></div>
           <ol className="process-list">
@@ -91,7 +117,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section story-section">
+      <section className="section story-section" data-home-reveal="media">
         <div className="container split-grid story-grid">
           <div className="source-image">
             <img src="/assets/source/staging/images/77beacedea-25711.jpg" alt="Virtual assistant working remotely" loading="lazy" />
@@ -106,14 +132,14 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section insight-section">
+      <section className="section insight-section" data-home-reveal="compact">
         <div className="container section-heading">
           <div><p className="eyebrow">Insights</p><h2>Practical guidance for building effective remote support.</h2></div>
           <div className="button-row"><Link className="button button-secondary" to="/insights">Browse articles</Link><Link className="button button-secondary" to="/videos">Watch videos</Link></div>
         </div>
       </section>
 
-      <section className="section faq-section">
+      <section className="section faq-section" data-home-reveal="faq">
         <div className="container faq-grid">
           <div><p className="eyebrow">Frequently asked questions</p><h2>What prospective clients usually want to know.</h2></div>
           <div className="faq-list">
@@ -123,7 +149,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section final-cta">
+      <section className="section final-cta" data-home-reveal="cta">
         <div className="container cta-panel">
           <div><p className="eyebrow">Ready to start?</p><h2>Build the right support around your business.</h2><p>Tell Virtual Office Angels about the role, recurring work, tools, and coverage you need.</p></div>
           <div className="button-row"><Link className="button" to="/contact">Get Started Today</Link><a className="button button-secondary" href="tel:1300737883">Call 1 300 737 883</a></div>
