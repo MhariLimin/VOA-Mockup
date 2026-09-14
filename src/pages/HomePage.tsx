@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { buyerQuestions, processSteps, specialistServices, trustPoints } from '../content/homeContent';
 import { blogArticles, articleCategory, formatArticleDate } from '../content/blogContent';
@@ -8,29 +7,6 @@ import { ClientCarousel } from '../components/ui/ClientCarousel';
 import { ContactForm } from '../components/ui/ContactForm';
 
 export function HomePage() {
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-home-reveal]'));
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    sections.forEach((section) => { section.dataset.motionReady = 'true'; });
-
-    if (reducedMotion || !('IntersectionObserver' in window)) {
-      sections.forEach((section) => { section.dataset.visible = 'true'; });
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        (entry.target as HTMLElement).dataset.visible = 'true';
-        observer.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
   const contactSection = <section className="section contact-section page-contact-section"><div className="container contact-grid"><aside><p className="eyebrow">Your next step</p><h2>Tell us what the right support would change for your business.</h2><p className="lead compact">Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the right match.</p><p className="contact-direct"><a href="tel:1300737883">1 300 737 883</a><br /><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></p></aside><ContactForm /></div></section>;
 
   return (
@@ -84,7 +60,7 @@ export function HomePage() {
       <section className="section home-founder-section">
         <div className="container split-grid story-grid">
           <div className="source-image founder-home-image"><img src="/assets/source/staging/images/feeae1b697-Anne-Villavieja.jpg" alt="Anne Villavieja, founder of Virtual Office Angels" loading="lazy" /></div>
-          <div><p className="eyebrow">Founder and leadership</p><h2>Built from experience. Supported with care.</h2><p className="lead">Anne Villavieja founded Virtual Office Angels after more than 35 years in Australian human resources, recruitment, and team leadership.</p><Link className="text-link" to="/about#leadership">Meet Anne and the leadership team <span aria-hidden="true">â†’</span></Link></div>
+          <div><p className="eyebrow">Founder and leadership</p><h2>Built from experience. Supported with care.</h2><p className="lead">Anne Villavieja founded Virtual Office Angels after more than 35 years in Australian human resources, recruitment, and team leadership.</p><Link className="text-link" to="/about#leadership">Meet Anne and the leadership team <span aria-hidden="true">→</span></Link></div>
         </div>
       </section>
 
