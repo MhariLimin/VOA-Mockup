@@ -7,7 +7,7 @@ export interface NavigationItem {
 export const navigation: NavigationItem[] = [
   {
     label: 'Services',
-    href: '/services/mortgage-loans',
+    href: '/services',
     children: [
       { label: 'Mortgage & Loans', href: '/services/mortgage-loans' },
       { label: 'Financial Planning', href: '/services/financial-planning' },

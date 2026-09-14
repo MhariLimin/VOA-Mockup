@@ -2,8 +2,13 @@ import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
-    <footer className="site-footer">
-      <div className="container footer-grid">
+    <footer className="site-footer l2-footer">
+      <div className="container l2-footer-lead">
+        <p className="eyebrow">A better working rhythm</p>
+        <h2>Build capacity without building complexity.</h2>
+        <Link className="button" to="/contact">Talk to Virtual Office Angels</Link>
+      </div>
+      <div className="container footer-grid l2-footer-grid">
         <div className="footer-brand">
           <strong>Virtual Office Angels</strong>
           <p>Specialist virtual assistants matched and managed for Australian businesses.</p>

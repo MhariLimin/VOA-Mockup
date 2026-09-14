@@ -46,7 +46,9 @@ export function PageShell({ children }: PropsWithChildren) {
     };
 
     const registerSections = () => {
-      const sections = main.querySelectorAll<HTMLElement>('.section, .evidence-strip');
+      const sections = main.querySelectorAll<HTMLElement>(
+        'section, header.l2-masthead, header.l2-article-header, figure.l2-article-featured, nav.l2-article-navigation, .evidence-strip',
+      );
       sections.forEach((section) => {
         if (section.classList.contains('home-hero')) return;
 
@@ -87,13 +89,13 @@ export function PageShell({ children }: PropsWithChildren) {
   }, [pathname, hash]);
 
   return (
-    <>
+    <div className="layout-two">
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
       <Header />
       <main id="main-content" className="page-stage" key={pathname}>{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }
