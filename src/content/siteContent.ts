@@ -1,8 +1,7 @@
 export const siteContent = {
   hero: {
     eyebrow: 'Australian-managed specialist support',
-    title: 'Specialist virtual assistants, matched and managed for your business.',
     description:
-      'Experienced professionals for finance, property, marketing, technology, and administration—recruited through Australian HR expertise and supported from day one.',
+      'Virtual Office Angels connects you with virtual assistants for Australian businesses who bring experience in your industry, systems and day-to-day workflows. We manage recruitment, onboarding, HR, payroll, IT and ongoing team support, giving you more time to focus on clients, profit and growth.',
   },
 } as const;

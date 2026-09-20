@@ -10,6 +10,13 @@ h3 {
   margin: 0;
   font-family: var(--font-display);
   color: var(--text);
+  /* Even out line lengths instead of filling greedily, so headings in narrow
+     columns stop breaking into short ragged lines. */
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 h1 {

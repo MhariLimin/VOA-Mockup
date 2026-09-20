@@ -8,6 +8,7 @@ import {
   type BlogArticle,
 } from '../content/blogContent';
 import { NotFoundPage } from './NotFoundPage';
+import { PageClosing } from '../components/layout/PageClosing';
 
 export function BlogArticlePage() {
   const { slug } = useParams();
@@ -46,5 +47,6 @@ export function BlogArticlePage() {
         <Link to={`/insights/${next.slug}`}><h2>{next.title}</h2><span>Continue reading →</span></Link>
       </div>
     </aside>
+    <PageClosing />
   </article>;
 }

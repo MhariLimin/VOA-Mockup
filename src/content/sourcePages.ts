@@ -23,6 +23,12 @@ const service = (
 
 export const sourcePages: readonly SourcePageBrief[] = [
   {
+    path: '/services', eyebrow: 'Specialised virtual assistant services', title: 'Specialised Virtual Assistant Services for Australian Businesses',
+    summary: 'Virtual Office Angels provides experienced virtual assistants for Australian businesses across finance, property, administration, marketing, technology and content.',
+    image: '/assets/source/staging/images/7e3d82f785-2148908840.jpg', imageAlt: 'A business owner meeting a remote team by video call',
+    template: 'services',
+  },
+  {
     path: '/about', eyebrow: 'About Virtual Office Angels', title: 'Born from HR expertise. Built to make business life easier.',
     summary: 'A carefully matched and managed virtual staffing service shaped by Australian human resources experience.',
     detail: ['Founded in 2010', 'Australian-owned and managed', 'Specialist professionals based in the Philippines'],
@@ -38,8 +44,17 @@ export const sourcePages: readonly SourcePageBrief[] = [
   service('/services/creative-copywriting', 'Creative writing assistance', 'Writing and publishing support for websites, campaigns, and recurring business content.', ['Website and campaign copy', 'Content preparation', 'Proofreading and editing support', 'Publishing assistance', 'Content library organisation'], ['This category appears on the production website and is retained for content parity.', 'Any published copy remains subject to the client’s subject-matter review and approval.'], 'production', '/assets/source/staging/images/9f1d7f532d-2150994380.jpg'),
   service('/services/it-technology', 'IT services and technology', 'Technical administration and systems support for technology-enabled business processes.', ['Website administration', 'Systems and account support', 'Technical documentation', 'Data and workflow maintenance', 'General technology assistance'], ['This category appears on the production website and is retained for content parity.', 'The precise technical scope, access controls, and service boundaries should be confirmed before launch.'], 'production', '/assets/source/staging/images/989ca88558-man-working-his-laptop-with-infographics-indoors-scaled.jpg'),
   { path: '/how-it-works', eyebrow: 'How it works', title: 'A clear path from role brief to managed support.', summary: 'Virtual Office Angels handles recruitment and matching, then stays involved through onboarding and the ongoing working relationship.', template: 'process' },
-  { path: '/why-voa', eyebrow: 'Why Virtual Office Angels', title: 'More than a placement. A managed working relationship.', summary: 'The source proposition combines careful matching, Australian-based client contact, recruitment expertise, ongoing management, and continuity support.', template: 'why' },
-  { path: '/client-stories', eyebrow: 'Our clients', title: 'Supporting Australian businesses that value precision, professionalism, and reliability.', summary: 'From boutique firms to growing enterprises, clients trust Virtual Office Angels to provide specialised virtual assistants who integrate into their teams.', template: 'stories' },
+  {
+    path: '/why-voa', eyebrow: 'Managed virtual support', title: 'HR-Managed Virtual Support for Australian Businesses',
+    summary: 'An HR-managed virtual support solution gives your business a specialised virtual assistant backed by role planning, recruitment, onboarding and ongoing employment support.',
+    image: '/assets/source/staging/images/13e3afc0dd-2796.jpg', imageAlt: 'A virtual assistant working at a desk',
+    template: 'why',
+  },
+  {
+    path: '/client-stories', eyebrow: 'Our clients', title: 'Client stories and testimonials.',
+    summary: 'From boutique firms to growing enterprises, clients trust Virtual Office Angels to provide specialised virtual assistants who integrate into their teams.',
+    template: 'stories',
+  },
   { path: '/insights', eyebrow: 'Insights', title: 'Practical thinking for building better remote support.', summary: 'A searchable editorial destination based on the existing Virtual Office Angels article catalogue.', template: 'insights' },
   { path: '/videos', eyebrow: 'Videos and resources', title: 'Useful guidance, in a format that is easy to watch.', summary: 'A structured home for approved Virtual Office Angels videos, with room for captions, transcripts, and related reading.', template: 'videos' },
   { path: '/faqs', eyebrow: 'Frequently asked questions', title: 'Straight answers before you get started.', summary: 'Key operational questions and answers retained from the staging website and organised into an accessible format.', template: 'faqs' },

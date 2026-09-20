@@ -17,3 +17,8 @@
     --header-height: 4.25rem;
   }
 }
+
+/* G1: compact scale — every rem-based size renders ~10% smaller. */
+html {
+  font-size: 90%;
+}
