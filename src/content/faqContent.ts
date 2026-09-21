@@ -12,3 +12,12 @@ export const sourceFaqs = [
   ['How can we get in touch with our virtual assistant?', 'Clients may communicate with their assigned virtual assistants through Microsoft Teams or email.'],
   ['What is your satisfaction guarantee?', 'Assigned virtual assistants are managed by Team Leaders who monitor the tasks provided. Regular communication between Team Leaders, clients, and virtual assistants helps ensure tasks are completed according to each client’s specifications.'],
 ] as const;
+
+/* Topic grouping for the FAQs page filter. Group labels are layout labels written for the prototype, not
+   source copy; the questions they reference are the verbatim source FAQs above (by index). */
+export const faqTopics = [
+  { label: 'The service', questions: [0, 1, 11] },
+  { label: 'Working with your virtual assistant', questions: [2, 3, 8, 10] },
+  { label: 'Hours & availability', questions: [6, 7] },
+  { label: 'Costs & privacy', questions: [4, 5, 9] },
+] as const;

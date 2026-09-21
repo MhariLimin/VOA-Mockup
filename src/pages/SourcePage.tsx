@@ -1,18 +1,20 @@
-import { useState, type ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { articleCategory, blogArticles, formatArticleDate } from '../content/blogContent';
-import { sourceFaqs } from '../content/faqContent';
+import { faqTopics, sourceFaqs } from '../content/faqContent';
 import { servicePages, type SourcePageBrief } from '../content/sourcePages';
-import { serviceDetails, serviceRouter } from '../content/serviceDetails';
-import { processStages } from '../content/processContent';
+import { managedStepTitles, serviceDetails, serviceRouter } from '../content/serviceDetails';
+import { processIntro, processStages } from '../content/processContent';
 import { managedSupportPage, ownershipSplit } from '../content/managedContent';
 import { testimonials } from '../content/testimonials';
+import { sisterSites } from '../content/siteContent';
 import { ClientCarousel } from '../components/ui/ClientCarousel';
-import { PageClosing } from '../components/layout/PageClosing';
+import { NextStepSection, PageClosing } from '../components/layout/PageClosing';
+import { ContactForm } from '../components/ui/ContactForm';
 
 function Hero({ page, aside }: { page: SourcePageBrief; aside?: ReactNode }) {
   const expressive = page.template === 'about' || page.template === 'service';
-  return <section className={`section inner-hero${expressive ? '' : ' compact-inner-hero'}`}><div className="container inner-hero-grid"><div><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p>{page.template === 'about' && <div className="button-row"><Link className="button" to="/services/mortgage-loans">View Our Services</Link><Link className="button button-secondary" to="/contact">Get in Touch</Link></div>}</div>{expressive && (aside ?? <div className="hero-orbit" aria-hidden="true"><span>Role brief</span><strong>Right-fit support</strong><i>Managed relationship</i></div>)}</div></section>;
+  return <section className={`section inner-hero${expressive ? '' : ' compact-inner-hero'}`}><div className="container inner-hero-grid"><div><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p>{page.template === 'about' && <div className="button-row"><Link className="button" to="/services">View Our Services</Link><Link className="button button-secondary" to="/contact">Get in Touch</Link></div>}</div>{expressive && (aside ?? <div className="hero-orbit" aria-hidden="true"><span>Role brief</span><strong>Right-fit support</strong><i>Managed relationship</i></div>)}</div></section>;
 }
 
 function Accordion({ items, idPrefix }: { items: readonly (readonly [string, string])[]; idPrefix: string }) {
@@ -45,26 +47,44 @@ function ServicePage({ page }: { page: SourcePageBrief }) {
           <h1>{detail.title}</h1>
           <p className="lead">{detail.lead}</p>
           <div className="button-row">
-            <Link className="button" to="/contact">Get Started Today</Link>
-            <a className="button button-secondary" href="#scope">See where support helps</a>
+            <Link className="button" to="/contact">Find The Right Fit</Link>
+            <a className="button button-secondary" href="#scope">See What You Can Delegate</a>
           </div>
           <ul className="scope-tags">{detail.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
         </div>
       </div>
     </section>
 
-    <section className="section" id="scope"><div className="container content-split"><div><p className="eyebrow">Where support helps</p><h2>Keep the process moving without losing visibility.</h2>{page.detail?.map((text) => <p className="lead compact" key={text}>{text}</p>)}{page.source === 'production' && <p className="source-note">Production-site service · scope requires final client confirmation</p>}</div><div className="task-panel"><span className="card-index">Typical responsibilities</span><Accordion items={detail.scope} idPrefix="scope" /></div></div></section>
+    <section className="section" id="scope"><div className="container content-split"><div><p className="eyebrow">{detail.scopeEyebrow}</p><h2>{detail.scopeHeading}</h2><p className="lead compact">{detail.scopeIntro}</p></div><div className="task-panel"><span className="card-index">Typical responsibilities</span><Accordion items={detail.scope} idPrefix="scope" /></div></div></section>
 
-    <section className="section muted-section"><div className="container systems-panel"><div><p className="eyebrow">Systems experience</p><h2>Match the role to the tools behind the work.</h2><p className="lead compact">System requirements are confirmed during role planning and assessed during candidate matching.</p></div><ul className="system-list">{detail.systems.map((system) => <li key={system}>{system}</li>)}</ul></div></section>
+    <section className="section muted-section"><div className="container systems-panel"><div><p className="eyebrow">Systems experience &amp; requirements</p><h2>{detail.systemsHeading}</h2><p className="lead compact">{detail.systemsIntro}</p></div><ul className="system-list">{detail.systems.map((system) => <li key={system}>{system}</li>)}</ul></div></section>
 
-    <section className="section"><div className="container"><div className="section-heading"><div><p className="eyebrow">When this role fits</p><h2>{detail.fitHeading}</h2></div></div><div className="split-grid role-fit">
+    <section className="section"><div className="container"><div className="section-heading"><div><p className="eyebrow">{detail.fitEyebrow}</p><h2>{detail.fitHeading}</h2></div></div><div className="split-grid role-fit">
       <article><p className="eyebrow">A good fit when</p><ul>{detail.fits.map((fit) => <li key={fit}>{fit}</li>)}</ul></article>
       <article><p className="eyebrow">{detail.boundaryLabel}</p><h3>{detail.boundaryHeading}</h3><p>{detail.boundaryText}</p></article>
     </div></div></section>
 
-    <section className="section muted-section"><div className="container faq-page-grid"><aside><p className="eyebrow">Questions about the service</p><h2>What businesses need to know before matching.</h2><p className="lead compact">Role planning confirms the final scope, systems, and responsibilities for your business.</p></aside><Accordion items={detail.faqs} idPrefix="service-faq" /></div></section>
+    <section className="section muted-section service-feedback"><div className="container">
+      <div className="section-heading"><div><p className="eyebrow">Client feedback</p><h2>{detail.feedbackHeading}</h2></div></div>
+      <div className="testimonial-grid testimonial-grid-3">{[1, 2, 3].map((slot) => (
+        <figure key={slot}>
+          <blockquote>“{detail.feedbackPlaceholder}”</blockquote>
+          <figcaption>
+            <span className="testimonial-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z" /></svg></span>
+            <span><strong>Client name</strong><small>Business</small></span>
+          </figcaption>
+        </figure>
+      ))}</div>
+    </div></section>
 
-    <PageClosing />
+    <section className="section"><div className="container faq-page-grid"><aside><p className="eyebrow">Questions about the service</p><h2>{detail.faqHeading}</h2><p className="lead compact">{detail.faqIntro}</p></aside><Accordion items={detail.faqs} idPrefix="service-faq" /></div></section>
+
+    <section className="section voa-model-section">
+      <div className="container voa-model-heading"><p className="eyebrow">{detail.managedEyebrow}</p><h2>{detail.managedHeading}</h2>{detail.managedIntro && <p className="lead compact">{detail.managedIntro}</p>}</div>
+      <div className="container voa-model-grid voa-model-grid-4">{detail.managedSteps.map((text, index) => <article key={managedStepTitles[index]}><span>0{index + 1}</span><h3>{managedStepTitles[index]}</h3><p>{text}</p></article>)}</div>
+    </section>
+
+    <NextStepSection className="service-closing" copy={{ eyebrow: 'Find the right specialised virtual assistant for your business', heading: detail.closingHeading }} />
   </>;
 }
 
@@ -76,7 +96,7 @@ function ServicesPage({ page }: { page: SourcePageBrief }) {
           <p className="eyebrow">{page.eyebrow}</p>
           <h1>{page.title}</h1>
           <p className="lead">{page.summary}</p>
-          <div className="button-row"><Link className="button" to="/contact">Get Started Today</Link></div>
+          <div className="button-row"><Link className="button" to="/contact">Find the Right Fit</Link></div>
         </div>
       </div>
     </section>
@@ -88,7 +108,7 @@ function ServicesPage({ page }: { page: SourcePageBrief }) {
         <div>
           <h2>{detail?.title ?? service.title}</h2>
           <p>{detail?.lead ?? service.summary}</p>
-          {service.source === 'production' && <small>Additional production-site service</small>}
+          
         </div>
         <img src={service.image} alt="" loading="lazy" />
         <b aria-hidden="true">↗</b>
@@ -105,37 +125,38 @@ function AboutPage({ page }: { page: SourcePageBrief }) {
   const aboutFaqs: readonly (readonly [string, string])[] = [
     ["What does Virtual Office Angels do?", "Virtual Office Angels provides specialised virtual assistant services for Australian businesses. We support role planning, recruitment, onboarding, employment administration, payroll, HR, and ongoing client care."],
     ["Is Virtual Office Angels Australian-owned?", "Virtual Office Angels is Australian-led and managed. Businesses have a local point of contact, while their virtual assistants work remotely from the Philippines."],
-    ["Who founded Virtual Office Angels?", "Anne Villavieja founded Virtual Office Angels. She brings over 35 years of human resources experience with Australian companies and first-hand knowledge of the professional talent market in the Philippines."],
+    ["Who founded Virtual Office Angels?", "Anne Villavieja founded Virtual Office Angels. She brings two decades of human resources experience with Australian companies and first-hand knowledge of the professional talent market in the Philippines."],
     ["How are virtual assistants selected?", "Candidates are assessed against the responsibilities, systems, industry knowledge, working hours, and communication requirements attached to the role. Clients review a relevant shortlist before making their decision."],
-    ["What services can a virtual assistant provide?", "Virtual assistants can support mortgage processing, financial planning administration, accounting, real estate, back-office administration, marketing, sales, e-commerce, technology, and copywriting."],
+    ["What services can a virtual assistant provide?", "Virtual assistants can support mortgage processing, financial planning administration, accounting, real estate, back-office administration, marketing, sales, e-commerce, technology, and copywriting. View our virtual assistant services for more information."],
     ["What happens after a virtual assistant starts?", "The client manages daily work and business priorities. Virtual Office Angels remains available for payroll, HR, client care, and virtual assistant performance support."],
   ];
 
   return <>
     <Hero page={page} aside={<img className="inner-hero-image" src="/assets/source/staging/images/2fab61e54e-2149013955.jpg" alt="A modern remote workspace" />} />
 
-    <section className="section" id="story">
-      <div className="container content-split">
-        <div>
+    <section className="section about-story" id="story">
+      <div className="container about-story-grid">
+        <div className="about-story-copy">
           <p className="eyebrow">Our story</p>
           <h2>Built on HR expertise.</h2>
-          <img className="founder-portrait" src={page.image} alt={page.imageAlt} loading="lazy" />
-        </div>
-        <div>
           <p className="lead compact">Anne Villavieja founded Virtual Office Angels in 2010. As an HR professional with over 35 years of experience in the Australian and Western markets, she saw an opportunity to build a company focused solely on recruiting and supporting professional virtual assistants for small and medium businesses.</p>
           <p className="lead compact">Anne understands both the local talent market and Australian business expectations. Her knowledge of Philippine workplaces, education, and culture, combined with her HR experience, continues to shape how our team recruits and supports virtual assistants today.</p>
-          <p className="lead compact">We listen before we recruit, look beyond CVs, and stay involved after the virtual assistant begins. The aim is straightforward: a strong match, clear expectations, and a working relationship that delivers long-term value for everyone involved.</p>
+          <ul className="about-facts"><li>Founded in 2010</li><li>Australian-led and managed</li></ul>
         </div>
+        <figure className="about-founder">
+          <img src={page.image} alt={page.imageAlt} loading="lazy" />
+        </figure>
       </div>
     </section>
 
-    <section className="section muted-section">
+    <section className="section muted-section about-support">
       <div className="container content-split">
         <div>
           <p className="eyebrow">Who we support</p>
           <h2>Different businesses need different expertise.</h2>
           <p className="lead compact">Some roles need strong administration skills. Others require someone who already understands an industry's terminology, systems, and day-to-day processes.</p>
-          <Link className="button button-secondary" to="/services/mortgage-loans">View our services</Link>
+          <p className="lead compact">That is why Virtual Office Angels works across a range of business functions, including:</p>
+          <Link className="button button-secondary" to="/services">View our services</Link>
         </div>
         <ul className="check-list">
           <li>Mortgage and loans processing</li>
@@ -150,12 +171,30 @@ function AboutPage({ page }: { page: SourcePageBrief }) {
       </div>
     </section>
 
+    <section className="section about-sites">
+      <div className="container">
+        <div className="section-heading"><div><p className="eyebrow">Also from Virtual Office Angels</p><h2>Our specialist websites.</h2></div></div>
+        <div className="brand-grid">
+          {sisterSites.map((site) => (
+            <a className="brand-card" href={site.url} target="_blank" rel="noopener noreferrer" key={site.url}>
+              <span className="brand-logo"><img src={site.logo} alt="" loading="lazy" /></span>
+              <h3>{site.name} <span className="brand-arrow" aria-hidden="true">↗</span></h3>
+              <p>{site.description}</p>
+              <span className="brand-domain">{site.domain}<span className="sr-only"> (opens in a new tab)</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section className="section dark-section">
       <div className="container">
         <div className="section-heading">
           <div>
             <p className="eyebrow">The way we work</p>
             <h2>The standards behind our support.</h2>
+            <p className="lead compact">These values shape how we recruit, communicate, and support our clients.</p>
+            <p className="lead compact">We listen before we recruit, look beyond CVs, and stay involved after the virtual assistant begins. The aim is straightforward: a strong match, clear expectations, and a working relationship that delivers long-term value for everyone involved.</p>
           </div>
         </div>
         <div className="values-grid">
@@ -178,7 +217,7 @@ function AboutPage({ page }: { page: SourcePageBrief }) {
       </div>
     </section>
 
-    <PageClosing />
+    <PageClosing nextStep={{ eyebrow: "Let’s talk", heading: "Looking for the right virtual support?", text: "Share the work that is taking time away from clients, revenue, or delivery. We’ll help clarify the virtual support role and the experience it requires." }} />
   </>;
 }
 
@@ -190,7 +229,7 @@ function ProcessPage({ page }: { page: SourcePageBrief }) {
       <aside>
         <p className="eyebrow">{page.eyebrow}</p>
         <h1>{page.title}</h1>
-        <p className="lead">You receive more than a candidate introduction. Our team helps define the role, assesses the match and supports the working relationship after placement.</p>
+        <p className="lead">{processIntro.text}</p>
         <Link className="button button-secondary" to="/contact">Start with a role brief</Link>
       </aside>
       <ol className="process-timeline">{processStages.map((stage, index) => {
@@ -205,7 +244,6 @@ function ProcessPage({ page }: { page: SourcePageBrief }) {
               </button>
             </h3>
             <div className="process-stage-panel" id={`stage-${index}`} hidden={!open}>
-              <p>{stage.detail}</p>
               <ul className="process-checkpoints">{stage.checkpoints.map((point) => <li key={point}>{point}</li>)}</ul>
             </div>
           </div>
@@ -219,18 +257,18 @@ function ProcessPage({ page }: { page: SourcePageBrief }) {
 
 function WhyPage({ page }: { page: SourcePageBrief }) {
   return <>
-    <section className="section inner-hero service-hero" style={page.image ? { backgroundImage: `url(${page.image})` } : undefined}>
+    <section className="section inner-hero">
       <div className="container inner-hero-grid">
         <div>
           <p className="eyebrow">{page.eyebrow}</p>
           <h1>{page.title}</h1>
           <p className="lead">{page.summary}</p>
           <div className="button-row">
-            <Link className="button" to="/contact">Get Started Today</Link>
-            <Link className="button button-secondary" to="/how-it-works">See the complete process</Link>
+            <Link className="button" to="/contact">Get in touch</Link>
+            <a className="button button-secondary" href="#what-we-manage">See what we manage</a>
           </div>
-          <ul className="scope-tags">{managedSupportPage.heroTags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
         </div>
+        {page.image && <img className="inner-hero-image" src={page.image} alt={page.imageAlt ?? ''} />}
       </div>
     </section>
 
@@ -240,15 +278,14 @@ function WhyPage({ page }: { page: SourcePageBrief }) {
         <h2>What is an HR-managed virtual support solution?</h2>
         {managedSupportPage.definition.map((text) => <p className="lead compact" key={text}>{text}</p>)}
       </div>
-      <div className="task-panel">
+      <div className="task-panel" id="what-we-manage">
         <span className="card-index">{managedSupportPage.includesLabel}</span>
-        <h3 className="panel-heading">{managedSupportPage.includesHeading}</h3>
         <ul className="check-list">{managedSupportPage.includes.map((item) => <li key={item}>{item}</li>)}</ul>
       </div>
     </div></section>
 
     <section className="section muted-section"><div className="container">
-      <div className="section-heading"><div><p className="eyebrow">Shared responsibilities</p><h2>Clear ownership keeps the working relationship effective.</h2><p className="lead compact">{managedSupportPage.ownershipIntro}</p></div></div>
+      <div className="section-heading"><div><p className="eyebrow">Shared responsibilities</p><h2>Clear ownership keeps the role effective.</h2><p className="lead compact">{managedSupportPage.ownershipIntro}</p></div></div>
       <div className="split-grid role-fit">
         {ownershipSplit.map((column) => (
           <article key={column.heading}>
@@ -263,14 +300,14 @@ function WhyPage({ page }: { page: SourcePageBrief }) {
 
     <section className="section"><div className="container faq-page-grid">
       <aside>
-        <p className="eyebrow">Managed support questions</p>
-        <h2>What to know before building the role.</h2>
+        <p className="eyebrow">HR-managed virtual support FAQs</p>
+        <h2>What to know before hiring.</h2>
         <p className="lead compact">{managedSupportPage.questionsIntro}</p>
       </aside>
       <Accordion items={managedSupportPage.questions} idPrefix="managed-faq" />
     </div></section>
 
-    <PageClosing />
+    <PageClosing nextStep={{ eyebrow: "Let’s talk", heading: "Tell us what support your business needs.", text: "Share the responsibilities, systems, and experience the role requires. We’ll help clarify the position and explain how our HR-managed virtual support works." }} />
   </>;
 }
 
@@ -302,8 +339,39 @@ function StoriesPage({ page }: { page: SourcePageBrief }) {
   </>;
 }
 
+function scrollToSection(section: HTMLElement | null) {
+  if (!section) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  section.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+}
+
+function Pagination({ label, currentPage, pageCount, onChange }: { label: string; currentPage: number; pageCount: number; onChange: (page: number) => void }) {
+  if (pageCount < 2) return null;
+  return <nav className="pagination" aria-label={label}>
+    <button type="button" onClick={() => onChange(currentPage - 1)} disabled={currentPage === 1}>← Previous</button>
+    {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => <button type="button" key={n} onClick={() => onChange(n)} className={currentPage === n ? 'active' : ''} aria-label={`Page ${n}`} aria-current={currentPage === n ? 'page' : undefined}>{n}</button>)}
+    <button type="button" onClick={() => onChange(currentPage + 1)} disabled={currentPage === pageCount}>Next →</button>
+  </nav>;
+}
+
+function ImageHero({ page, primary, secondary, aside }: { page: SourcePageBrief; primary: readonly [string, string]; secondary: readonly [string, string]; aside?: ReactNode }) {
+  const cta = ([label, href]: readonly [string, string], className: string) => href.startsWith('#') ? <a className={className} href={href}>{label}</a> : <Link className={className} to={href}>{label}</Link>;
+  return <section className="section inner-hero">
+    <div className="container inner-hero-grid">
+      <div>
+        <p className="eyebrow">{page.eyebrow}</p>
+        <h1>{page.title}</h1>
+        {page.summary && <p className="lead">{page.summary}</p>}
+        <div className="button-row">{cta(primary, 'button')}{cta(secondary, 'button button-secondary')}</div>
+      </div>
+      {aside ?? (page.image && <img className="inner-hero-image" src={page.image} alt={page.imageAlt ?? ''} />)}
+    </div>
+  </section>;
+}
+
 function InsightsPage({ page }: { page: SourcePageBrief }) {
   const PER_PAGE = 10;
+  const listRef = useRef<HTMLElement>(null);
   const categories = ['All insights', ...new Set(blogArticles.map(articleCategory))];
   const [activeCategory, setActiveCategory] = useState('All insights');
   const [currentPage, setCurrentPage] = useState(1);
@@ -311,26 +379,75 @@ function InsightsPage({ page }: { page: SourcePageBrief }) {
   const pageCount = Math.ceil(visibleArticles.length / PER_PAGE);
   const pageArticles = visibleArticles.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
   function selectCategory(cat: string) { setActiveCategory(cat); setCurrentPage(1); }
-  return <><section className="section"><div className="container"><div className="page-intro"><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p></div><div className="filter-row" aria-label="Article topics">{categories.map((category) => <button className={activeCategory === category ? 'active' : ''} type="button" key={category} onClick={() => selectCategory(category)}>{category}</button>)}</div><div className="article-grid">{pageArticles.map((article, index) => <article className={index === 0 && currentPage === 1 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={article.featuredImage} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <span>→</span></Link></div></article>)}</div>{pageCount > 1 && <nav className="pagination" aria-label="Article pages"><button type="button" onClick={() => setCurrentPage(p => p - 1)} disabled={currentPage === 1}>← Previous</button>{Array.from({ length: pageCount }, (_, i) => i + 1).map(n => <button type="button" key={n} onClick={() => setCurrentPage(n)} className={currentPage === n ? 'active' : ''} aria-label={`Page ${n}`} aria-current={currentPage === n ? 'page' : undefined}>{n}</button>)}<button type="button" onClick={() => setCurrentPage(p => p + 1)} disabled={currentPage === pageCount}>Next →</button></nav>}</div></section><PageClosing /></>;
+  function goToPage(n: number) { setCurrentPage(n); scrollToSection(listRef.current); }
+  return <>
+    <ImageHero page={page} primary={['Browse articles', '#articles']} secondary={['Watch videos', '/videos']} />
+    <section className="section library-section" id="articles" ref={listRef}><div className="container">
+      <div className="section-heading library-heading"><p className="eyebrow">Article library</p><p className="library-count">{visibleArticles.length} {visibleArticles.length === 1 ? 'article' : 'articles'}</p></div>
+      <div className="filter-row" aria-label="Article topics">{categories.map((category) => <button className={activeCategory === category ? 'active' : ''} aria-pressed={activeCategory === category} type="button" key={category} onClick={() => selectCategory(category)}>{category}</button>)}</div>
+      <div className="article-grid">{pageArticles.map((article, index) => <article className={index === 0 && currentPage === 1 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={article.featuredImage} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <span>→</span></Link></div></article>)}</div>
+      <Pagination label="Article pages" currentPage={currentPage} pageCount={pageCount} onChange={goToPage} />
+    </div></section>
+    <PageClosing />
+  </>;
 }
 
 const VIDEO_PLACEHOLDERS = ['Choosing the right virtual assistant', 'Preparing your business to delegate', 'Building a strong remote working rhythm'] as const;
 
+/* Stand-in artwork until approved videos exist: a player-style frame, clearly marked as coming soon. */
+function VideoPoster({ label, title, className = '' }: { label: string; title?: string; className?: string }) {
+  return <div className={`video-poster ${className}`.trim()} aria-hidden="true">
+    <span className="video-poster-chip">Coming soon</span>
+    <span className="video-poster-label">{label}</span>
+    <span className="video-poster-play">▶</span>
+    {title && <span className="video-poster-title">{title}</span>}
+    <span className="video-poster-bar"><i /><b>0:00</b></span>
+  </div>;
+}
+
 function VideosPage({ page }: { page: SourcePageBrief }) {
   const PER_PAGE = 10;
+  const listRef = useRef<HTMLElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const pageCount = Math.ceil(VIDEO_PLACEHOLDERS.length / PER_PAGE);
   const pageItems = VIDEO_PLACEHOLDERS.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
-  return <><section className="section"><div className="container"><div className="page-intro"><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p></div><div className="media-grid">{pageItems.map((title, index) => <article className="video-card" key={title}><div className="video-placeholder"><button type="button" aria-label={`Play ${title}`}>▶</button><span>0{(currentPage - 1) * PER_PAGE + index + 1}</span></div><p className="eyebrow">Video resource</p><h2>{title}</h2><p>Reserved for an existing, client-approved video with captions and a written transcript.</p></article>)}</div>{pageCount > 1 && <nav className="pagination" aria-label="Video pages"><button type="button" onClick={() => setCurrentPage(p => p - 1)} disabled={currentPage === 1}>← Previous</button>{Array.from({ length: pageCount }, (_, i) => i + 1).map(n => <button type="button" key={n} onClick={() => setCurrentPage(n)} className={currentPage === n ? 'active' : ''} aria-label={`Page ${n}`} aria-current={currentPage === n ? 'page' : undefined}>{n}</button>)}<button type="button" onClick={() => setCurrentPage(p => p + 1)} disabled={currentPage === pageCount}>Next →</button></nav>}</div></section><PageClosing /></>;
+  function goToPage(n: number) { setCurrentPage(n); scrollToSection(listRef.current); }
+  return <>
+    <ImageHero page={page} primary={['Watch videos', '#videos']} secondary={['Read articles', '/insights']} aside={<VideoPoster className="video-hero-poster" label="Video library" />} />
+    <section className="section library-section" id="videos" ref={listRef}><div className="container">
+      <div className="section-heading library-heading"><p className="eyebrow">Video library</p><p className="library-count">{VIDEO_PLACEHOLDERS.length} videos</p></div>
+      <div className="media-grid">{pageItems.map((title, index) => <article className="video-card" key={title}><VideoPoster label={`Video 0${(currentPage - 1) * PER_PAGE + index + 1}`} title={title} /><p className="eyebrow">Video resource</p><h2>{title}</h2><p>Reserved for an existing, client-approved video with captions and a written transcript.</p></article>)}</div>
+      <Pagination label="Video pages" currentPage={currentPage} pageCount={pageCount} onChange={goToPage} />
+    </div></section>
+    <PageClosing />
+  </>;
 }
 
 function FaqPage({ page }: { page: SourcePageBrief }) {
+  const topics = [{ label: 'All questions', questions: sourceFaqs.map((_, i) => i) }, ...faqTopics];
+  const [activeTopic, setActiveTopic] = useState(1);
   const [openFaq, setOpenFaq] = useState(-1);
-  return <><section className="section"><div className="container faq-page-grid"><aside><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p>{page.summary}</p><Link className="button button-secondary" to="/contact">Ask another question</Link></aside><div><div className="faq-list">{sourceFaqs.map(([question, answer], i) => <details key={question} open={openFaq === i}><summary onClick={e => { e.preventDefault(); setOpenFaq(openFaq === i ? -1 : i); }}>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div><div className="faq-closing"><p>We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.</p><p>If you need any other clarification, call Virtual Office Angels or email <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a>.</p></div></div></div></section><PageClosing /></>;
+  function selectTopic(index: number) { setActiveTopic(index); setOpenFaq(-1); }
+  return <>
+    <section className="section faq-page"><div className="container faq-page-grid">
+      <aside>
+        <p className="eyebrow">{page.eyebrow}</p>
+        <h1>{page.title}</h1>
+        {page.summary && <p>{page.summary}</p>}
+        <div className="faq-topics" role="group" aria-label="Question topics">{topics.map((topic, index) => <button className={activeTopic === index ? 'active' : ''} aria-pressed={activeTopic === index} type="button" key={topic.label} onClick={() => selectTopic(index)}><span>{topic.label}</span><small>{topic.questions.length}</small></button>)}</div>
+        <Link className="button button-secondary" to="/contact">Ask another question</Link>
+      </aside>
+      <div>
+        <div className="faq-list">{topics[activeTopic].questions.map((i) => { const [question, answer] = sourceFaqs[i]; return <details key={question} open={openFaq === i}><summary onClick={(e) => { e.preventDefault(); setOpenFaq(openFaq === i ? -1 : i); }}>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>; })}</div>
+        <div className="faq-closing"><p>We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.</p><p>If you need any other clarification, call Virtual Office Angels or email <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a>.</p></div>
+      </div>
+    </div></section>
+    <PageClosing />
+  </>;
 }
 
 function ContactPage({ page }: { page: SourcePageBrief }) {
-  return <section className="section contact-section"><div className="container contact-grid"><aside><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead compact">{page.summary}</p><dl><div><dt>Phone</dt><dd><a href="tel:1300737883">1 300 737 883</a></dd></div><div><dt>Email</dt><dd><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></dd></div><div><dt>Address</dt><dd>Ground Floor, 465 Victoria Avenue<br />Chatswood NSW 2067, Australia</dd></div><div><dt>Company</dt><dd>ABN 58 155 459 788<br />ACN 155 459 788</dd></div></dl></aside><form className="contact-form" action="/thank-you"><div className="field-row"><label>First name<input name="firstName" autoComplete="given-name" required /></label><label>Last name<input name="lastName" autoComplete="family-name" required /></label></div><label>Email<input type="email" name="email" autoComplete="email" required /></label><label>Phone<input type="tel" name="phone" autoComplete="tel" /></label><label>How can we help?<textarea name="message" rows={6} required /></label><label className="checkbox-field"><input type="checkbox" required /><span>I agree to the processing of my information for this enquiry.</span></label><button className="button" type="submit">Send enquiry</button><small>Prototype form only. Connect validation, spam protection, consent records, and WordPress form handling before launch.</small></form></div></section>;
+  return <section className="section contact-section"><div className="container contact-grid"><aside><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead compact">{page.summary}</p><dl><div><dt>Phone</dt><dd><a href="tel:1300737883">1 300 737 883</a></dd></div><div><dt>Email</dt><dd><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></dd></div><div><dt>Address</dt><dd>Ground Floor, 465 Victoria Avenue<br />Chatswood NSW 2067, Australia</dd></div><div><dt>Company</dt><dd>ABN 58 155 459 788<br />ACN 155 459 788</dd></div></dl></aside><ContactForm /></div></section>;
 }
 
 export function SourcePage({ page }: { page: SourcePageBrief }) {

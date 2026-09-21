@@ -6,7 +6,7 @@ export function ThankYouPage() {
       <div className="container narrow">
         <p className="eyebrow">Enquiry received</p>
         <h1>Thank you for contacting Virtual Office Angels.</h1>
-        <p className="lead">Your form has been submitted. The production version will state the verified response process and timeframe here.</p>
+        <p className="lead">Your form has been submitted.</p>
         <Link className="button" to="/">Return home</Link>
       </div>
     </section>

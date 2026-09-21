@@ -2,40 +2,40 @@ export interface ProcessStage {
   number: string;
   title: string;
   summary: string;
-  detail: string;
   checkpoints: readonly string[];
 }
 
-/* The "More than recruitment" section from the Virtual Office Angels content proposal, kept to the
-   letter: stage names, one-line summaries, detail paragraphs and checkpoints. The /how-it-works
-   page renders it in the source's expandable format; the home page shows the summaries only. */
+/* "From Role Planning to Ongoing Support", verbatim from HR-Managed Virtual Support.pdf in
+   docs/updated_src. /how-it-works renders it in full; the home page shows the summaries only. */
+export const processIntro = {
+  eyebrow: 'End-to-end support',
+  heading: 'From role planning to ongoing support.',
+  text: 'The entire HR-managed virtual support solution is built around defining the role, matching the right person, and supporting the business long-term.',
+} as const;
+
 export const processStages: readonly ProcessStage[] = [
   {
     number: '01',
-    title: 'Support planning',
-    summary: 'Clarify the role before recruitment starts.',
-    detail: 'We review the work that needs attention, the systems involved and the experience required.',
-    checkpoints: ['Role scope and task priorities', 'Working hours and communication expectations', 'Industry and software requirements'],
+    title: 'Consulting & Role Planning',
+    summary: 'Talk to our team and define what the role needs to achieve before candidate matching begins.',
+    checkpoints: ['Role scope and task priorities', 'Working hours and reporting lines', 'Industry and system requirements'],
   },
   {
     number: '02',
-    title: 'Specialist matching',
-    summary: 'Assess capability, experience and working fit.',
-    detail: 'We screen candidates against the practical demands of your role, then present a focused shortlist for your review.',
-    checkpoints: ['Relevant industry background', 'Systems and task capability', 'Communication and work-style alignment'],
+    title: 'Sourcing & Candidate Matching',
+    summary: 'We assess candidates against the experience and working requirements of the virtual assistant role.',
+    checkpoints: ['Focused candidate sourcing', 'Interviews and experience checks', 'Relevant shortlist for your review'],
   },
   {
     number: '03',
-    title: 'Onboarding & integration',
-    summary: 'Prepare the person and the working relationship.',
-    detail: 'We help establish expectations, reporting lines and the initial working rhythm while your business provides its role-specific processes and approvals.',
-    checkpoints: ['Role briefing and business orientation', 'Access and workflow checklist', 'Communication and review cadence'],
+    title: 'Onboarding & Integration',
+    summary: 'After hiring, we prepare your virtual assistant to work within your business structure and established procedures.',
+    checkpoints: ['Role and business orientation', 'Systems and access checklist', 'Communication and reporting'],
   },
   {
     number: '04',
-    title: 'Ongoing delivery support',
-    summary: 'Keep performance and communication on track.',
-    detail: 'A dedicated support structure helps address feedback, availability and performance matters throughout the engagement.',
-    checkpoints: ['Client care contact', 'Team leader and performance support', 'Replacement pathway and optional backup support'],
+    title: 'Ongoing Delivery & Support',
+    summary: 'Maintain the employment and support structure around your virtual assistant after they start.',
+    checkpoints: ['HR and payroll administration', 'Day-to-day performance support', 'Team Leader and Client Care support'],
   },
 ];

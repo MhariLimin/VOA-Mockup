@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { buyerQuestions, heroStats, specialistServices } from '../content/homeContent';
 import { ownershipSplit } from '../content/managedContent';
-import { processStages } from '../content/processContent';
+import { processIntro, processStages } from '../content/processContent';
 import { blogArticles, articleCategory, formatArticleDate } from '../content/blogContent';
 import { testimonials } from '../content/testimonials';
 import { siteContent } from '../content/siteContent';
@@ -18,10 +18,10 @@ export function HomePage() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">{siteContent.hero.eyebrow}</p>
-            <h1>Get <em>Specialised</em> Virtual Support, <em>Fully Managed</em>.</h1>
+            <h1>Get <em>Specialised</em> &amp; <em>HR Managed</em> Virtual Support!</h1>
             <p className="lead">{siteContent.hero.description}</p>
             <div className="button-row">
-              <Link className="button" to="/contact">Get Started Today</Link>
+              <Link className="button" to="/contact">Find the Right Fit</Link>
               <Link className="button button-secondary" to="/services">Explore services</Link>
             </div>
           </div>
@@ -87,11 +87,11 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section dark-section" data-home-reveal="dark">
+      <section className="section dark-section home-managed" data-home-reveal="dark">
         <div className="container">
           <div className="managed-copy">
             <p className="eyebrow">Managed virtual support</p>
-            <h2>What managed virtual support means at Virtual Office Angels.</h2>
+            <h2>What managed virtual support means at <em>Virtual Office Angels</em>.</h2>
             <p className="lead">You receive more than a candidate introduction. Your business remains in control of the work, while Virtual Office Angels manages the employment relationship and support structure around the virtual assistant.</p>
             <Link className="text-link light-link" to="/why-voa">Explore managed virtual support <span aria-hidden="true">→</span></Link>
           </div>
@@ -110,7 +110,7 @@ export function HomePage() {
 
       <section className="section process-section" data-home-reveal="rows">
         <div className="container">
-          <div className="section-heading"><div><p className="eyebrow">How it works</p><h2>The four parts of managed virtual support.</h2><p className="lead compact">Each stage addresses a different part of building and maintaining a productive virtual support relationship.</p></div><Link className="button button-secondary" to="/how-it-works">See the complete process</Link></div>
+          <div className="section-heading"><div><p className="eyebrow">How it works</p><h2>{processIntro.heading}</h2><p className="lead compact">{processIntro.text}</p></div><Link className="button button-secondary" to="/how-it-works">See the complete process</Link></div>
           <ol className="process-list">
             {processStages.map((stage) => (
               <li key={stage.number}><span>{stage.number}</span><div><h3>{stage.title}</h3><p>{stage.summary}</p></div></li>

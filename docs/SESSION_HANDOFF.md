@@ -69,28 +69,24 @@ These rules were agreed across both sessions and carry over.
 - **Dev server:** `npm run dev`. It frequently lands on **port 5174** because 5173 is still held.
 - **Never invent copy.** Everything user-facing comes from `VOA Content` or existing captured source. When something had to be written, it was flagged explicitly.
 - **Report format:** bullets and short sections, not paragraphs. Lead with what changed, then what needs their eye.
-- **VOA Content location on this device:** `D:\Mhari\Apollo\VOA-Content\voa-mockup` (not E: drive — that path is from a different device).
+- **VOA Content location differs by device:**
+  - E: device → `E:\_Yua\VOA\Mock Layout\VOA Content`
+  - D: device → `D:\Mhari\Apollo\VOA-Content\voa-mockup`
+- **Git: commit only.** Sessions commit locally and never push; the user pushes.
 
-## Next task: service pages update from SERVICE PAGES_VOA.pdf
+## Service pages — integrated from SERVICE PAGES_VOA.pdf (2026-09-21)
 
-This is the only outstanding content task. The PDF is at `docs/updated_src/SERVICE PAGES_VOA.pdf`.
+All ten service pages now use the PDF's copy. `src/content/serviceDetails.ts` was generated from a transcription that was machine-checked against the PDF text: 522 strings, zero mismatches. Deliberate edits only: "VOA" written out as "Virtual Office Angels" in four FAQ answers, and "authorised"/"fulfilment" in Australian spelling.
 
-**Before starting:** Read the PDF using pdfplumber via Python — `python -c "import pdfplumber; ..."`. Do not use pandoc (not installed on this device's PATH from Bash). Python is available via PowerShell as `python`.
-
-**What the PDF contains (from prior session read):**
-- Updated hero titles, lead copy, scope tags for all services
-- Updated role scope items (with descriptions), systems lists, "when to hire" fits
-- Updated managed support section and FAQs per service
-- One new service: **Insurance Processing**
-- Renamed services: Back Office & Admin → **Executive & Administrative Virtual Support**; Sales & Marketing → **Sales & E-Commerce** (Shopify scope); Creative & Copywriting → **Copywriting Virtual Assistant Support**
-
-**Files to change:**
-- `src/content/serviceDetails.ts` — all service content (titles, leads, tags, scope, systems, fits, FAQs)
-- `src/content/sourcePages.ts` — service briefs (paths, titles, summaries, images); add new Insurance Processing entry
-- `src/content/navigation.ts` — if service names or paths change in the dropdown
-- `src/app/App.tsx` — if a new route is added for Insurance Processing
-
-**User instruction:** "use these updated content to modify the current content we have on our website."
+- **Page order:** hero → role scope → systems → when to hire (+ boundary card) → FAQs → per-service managed-support band (four steps, dark) → "Find the right specialised virtual assistant" contact section. Service pages no longer show the sitewide three-column model band.
+- **Hero buttons** follow the PDF: "Find The Right Fit" / "See What You Can Delegate".
+- **New service:** Insurance Processing at `/services/insurance-processing`.
+- **Renamed services keep their old URLs:** Executive & Administrative (`/services/back-office-admin`), Sales & E-Commerce (`/services/sales-marketing`), Copywriting (`/services/creative-copywriting`). Settle URL naming with a redirect map at WordPress migration.
+- **Boundary card kept** at the user's request. It is not in the PDF; nine services carry the older VOA Content text, and Insurance uses its own PDF FAQ answer on advice.
+- **Client feedback sections omitted:** the PDF has only "Feedback currently being gathered" placeholders.
+- **SEO titles and meta descriptions** are stored per service in `serviceDetails.ts` but not yet applied (no per-route meta exists).
+- The "production-site service" flags are removed, since the client has now supplied full content for those services.
+- Reading PDFs on this device: `pdftotext -raw` (Git Bash) extracts table cells correctly; pdfplumber is not installed.
 
 ## Content architecture — do not break this
 
@@ -116,8 +112,19 @@ Five categories:
 
 **Blocked on the client**
 - **H4** — the real high-resolution logo file has not been supplied.
-- Insurance Processing service: needs a route, image, and confirmation this is a new service (not a rename of an existing one).
-- The three production-only services (Sales & Marketing, Creative & Copywriting, IT & Technology) — scope still unconfirmed. Built to be cleanly removable.
+- **Insurance hero image:** uses an unused library photo (house model, coins, laptop). Replace if the client has a better one.
+- **Service testimonials:** each service page has a "Client feedback" section (PDF heading, three "Client name/business" cards with the PDF placeholder "Feedback (is) currently being gathered."). Replace the placeholders with real, approved feedback.
+
+**Needs client confirmation**
+- **Anne's experience:** the About Us document says "over 35 years" in Our Story but "two decades" in the FAQ. Both are shown exactly as written until the client confirms.
+- **Industry dropdown values:** the documents specify the field but not its options. It currently lists the About document's "Who we support" areas plus "Other".
+
+**Corrections made in the third session (2026-09-21)**
+- The Managed Virtual Support page was **not** fully integrated as previously recorded: several bullets and both FAQ answers were paraphrased rather than taken from the PDF. All copy is now verbatim from `HR-Managed Virtual Support.pdf`. The home page ownership band shares this data and changed with it.
+- About page: H1 restored to "About Virtual Office Angels" (the intro paragraph had been used as the H1); "View our services" links now go to `/services`; two dropped source sentences restored; Our Story and Founder recombined into one section (text left, portrait right, no caption); the "We listen before we recruit" paragraph moved to "The way we work". A specialist-websites section links to Virtual Financial Support and Virtual Loans Assistant.
+- The four stages on `/how-it-works` and the home preview now use the PDF's names and text (Consulting & Role Planning, Sourcing & Candidate Matching, Onboarding & Integration, Ongoing Delivery & Support).
+- The shared contact form now matches both documents (Business name, Industry dropdown, "What support do you need?", "Submit enquiry"). About and Managed Virtual Support use their documents' own "Let's talk" copy; the contact page uses the shared form instead of its own copy.
+- Managed Virtual Support uses the About-style hero. Photo-background heroes are reserved for the service pages and the `/services` index.
 
 **Decisions still outstanding**
 - `/why-voa` route name versus its "Managed Virtual Support" label — confirm before WordPress.
@@ -127,12 +134,11 @@ Five categories:
 - `SourcePage.tsx` fallback branch for services without a `serviceDetails` entry — harmless dead code once all services are confirmed.
 - Route-specific SEO/meta not implemented; `index.html` has one generic title.
 - Contact forms are prototypes — no real submission, validation, spam protection, or consent record.
-- `SourcePage.tsx` still contains dead `ServicesPage` renderer and `services` template union — no route points to it.
-- Homepage has hidden `.legacy-home-founder` markup — cleanup candidate only in a focused pass.
+- `ServicesPage` in `SourcePage.tsx` is **live** — it renders the `/services` index (template `services`). Do not remove it.
 
 ## Verification at handoff
 
 - `npm run lint` — clean
 - `tsc --noEmit` on both configs — clean
 - Production build — succeeds (built in ~1.5s)
-- All work committed on `main`. **Nothing has been pushed**; remote is untouched.
+- All work committed on `main`. `d4ff43f` is already on `origin/main` (pushed by the user). Future sessions commit only; the user pushes.
