@@ -12,7 +12,7 @@ import { PageClosing } from '../components/layout/PageClosing';
 
 function Hero({ page, aside }: { page: SourcePageBrief; aside?: ReactNode }) {
   const expressive = page.template === 'about' || page.template === 'service';
-  return <section className={`section inner-hero${expressive ? '' : ' compact-inner-hero'}`}><div className="container inner-hero-grid"><div><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p>{page.template === 'about' && <div className="button-row"><a className="button" href="#story">Our story</a><a className="button button-secondary" href="#leadership">Meet the founder</a></div>}</div>{expressive && (aside ?? <div className="hero-orbit" aria-hidden="true"><span>Role brief</span><strong>Right-fit support</strong><i>Managed relationship</i></div>)}</div></section>;
+  return <section className={`section inner-hero${expressive ? '' : ' compact-inner-hero'}`}><div className="container inner-hero-grid"><div><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p>{page.template === 'about' && <div className="button-row"><Link className="button" to="/services/mortgage-loans">View Our Services</Link><Link className="button button-secondary" to="/contact">Get in Touch</Link></div>}</div>{expressive && (aside ?? <div className="hero-orbit" aria-hidden="true"><span>Role brief</span><strong>Right-fit support</strong><i>Managed relationship</i></div>)}</div></section>;
 }
 
 function Accordion({ items, idPrefix }: { items: readonly (readonly [string, string])[]; idPrefix: string }) {
@@ -102,9 +102,84 @@ function ServicesPage({ page }: { page: SourcePageBrief }) {
 }
 
 function AboutPage({ page }: { page: SourcePageBrief }) {
-  return <><Hero page={page} aside={<img className="inner-hero-image" src="/assets/source/staging/images/2fab61e54e-2149013955.jpg" alt="A modern remote workspace" />} />
-    <section className="section" id="story"><div className="container content-split"><div><p className="eyebrow">Our story</p><h2>A smarter response to the pressure on business owners.</h2></div><div><p className="lead compact">Virtual Office Angels was founded by Anne Villavieja, a seasoned Australian human resources professional with over 35 years of experience.</p><p className="lead compact">After witnessing the growing pressure on business owners to do it all—manage administration, grow their brand, and serve clients—she saw a smarter solution: pairing them with talented Filipino virtual assistants who truly fit their needs.</p><p className="lead compact">At Virtual Office Angels, we do not simply place virtual assistants. We match them carefully, manage them with ongoing support, and help them become a seamless part of each client’s team.</p></div></div></section>
-    <section className="section dark-section" id="leadership"><div className="container content-split"><div><p className="eyebrow">Founder and leadership</p><h2>Meet Anne Villavieja—the heart behind Virtual Office Angels.</h2><img className="founder-portrait" src={page.image} alt={page.imageAlt} loading="lazy" /></div><div><p className="lead">Anne brings deep experience from two decades in Australian human resources, specialising in recruitment, team building, and performance management.</p><p>Her passion for helping people—both clients and virtual assistants—led her to build a virtual staffing agency that is supportive, proactive, and results-focused.</p><p>She is known for her personal touch, smart processes, and ability to match the right person to the right role.</p><div className="fact-row">{page.detail?.map((item) => <span key={item}>{item}</span>)}</div></div></div></section><PageClosing /></>;
+  const aboutFaqs: readonly (readonly [string, string])[] = [
+    ["What does Virtual Office Angels do?", "Virtual Office Angels provides specialised virtual assistant services for Australian businesses. We support role planning, recruitment, onboarding, employment administration, payroll, HR, and ongoing client care."],
+    ["Is Virtual Office Angels Australian-owned?", "Virtual Office Angels is Australian-led and managed. Businesses have a local point of contact, while their virtual assistants work remotely from the Philippines."],
+    ["Who founded Virtual Office Angels?", "Anne Villavieja founded Virtual Office Angels. She brings over 35 years of human resources experience with Australian companies and first-hand knowledge of the professional talent market in the Philippines."],
+    ["How are virtual assistants selected?", "Candidates are assessed against the responsibilities, systems, industry knowledge, working hours, and communication requirements attached to the role. Clients review a relevant shortlist before making their decision."],
+    ["What services can a virtual assistant provide?", "Virtual assistants can support mortgage processing, financial planning administration, accounting, real estate, back-office administration, marketing, sales, e-commerce, technology, and copywriting."],
+    ["What happens after a virtual assistant starts?", "The client manages daily work and business priorities. Virtual Office Angels remains available for payroll, HR, client care, and virtual assistant performance support."],
+  ];
+
+  return <>
+    <Hero page={page} aside={<img className="inner-hero-image" src="/assets/source/staging/images/2fab61e54e-2149013955.jpg" alt="A modern remote workspace" />} />
+
+    <section className="section" id="story">
+      <div className="container content-split">
+        <div>
+          <p className="eyebrow">Our story</p>
+          <h2>Built on HR expertise.</h2>
+          <img className="founder-portrait" src={page.image} alt={page.imageAlt} loading="lazy" />
+        </div>
+        <div>
+          <p className="lead compact">Anne Villavieja founded Virtual Office Angels in 2010. As an HR professional with over 35 years of experience in the Australian and Western markets, she saw an opportunity to build a company focused solely on recruiting and supporting professional virtual assistants for small and medium businesses.</p>
+          <p className="lead compact">Anne understands both the local talent market and Australian business expectations. Her knowledge of Philippine workplaces, education, and culture, combined with her HR experience, continues to shape how our team recruits and supports virtual assistants today.</p>
+          <p className="lead compact">We listen before we recruit, look beyond CVs, and stay involved after the virtual assistant begins. The aim is straightforward: a strong match, clear expectations, and a working relationship that delivers long-term value for everyone involved.</p>
+        </div>
+      </div>
+    </section>
+
+    <section className="section muted-section">
+      <div className="container content-split">
+        <div>
+          <p className="eyebrow">Who we support</p>
+          <h2>Different businesses need different expertise.</h2>
+          <p className="lead compact">Some roles need strong administration skills. Others require someone who already understands an industry's terminology, systems, and day-to-day processes.</p>
+          <Link className="button button-secondary" to="/services/mortgage-loans">View our services</Link>
+        </div>
+        <ul className="check-list">
+          <li>Mortgage and loans processing</li>
+          <li>Financial planning administration</li>
+          <li>Accounting and bookkeeping</li>
+          <li>Real estate and administration</li>
+          <li>Back-office support</li>
+          <li>Digital marketing</li>
+          <li>Sales and e-commerce</li>
+          <li>Creative and business support</li>
+        </ul>
+      </div>
+    </section>
+
+    <section className="section dark-section">
+      <div className="container">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">The way we work</p>
+            <h2>The standards behind our support.</h2>
+          </div>
+        </div>
+        <div className="values-grid">
+          <article><h3>Clarity</h3><p>Good work depends on clear expectations. We define responsibilities, communication channels, approval points, and measures of success so everyone understands how the role should work.</p></article>
+          <article><h3>Accountability</h3><p>We take ownership of the support we provide. When an issue arises, we address it directly, agree on the next steps, and follow through on what was discussed.</p></article>
+          <article><h3>Consistency</h3><p>Reliable support requires steady communication and dependable processes. We keep recruitment, onboarding, HR, and client care organised throughout the working relationship.</p></article>
+          <article><h3>Client Care</h3><p>Our involvement continues after recruitment. We check in, listen to feedback, and support adjustments when responsibilities, systems, or business priorities change.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section className="section">
+      <div className="container faq-page-grid">
+        <aside>
+          <p className="eyebrow">About Virtual Office Angels</p>
+          <h2>Frequently asked questions.</h2>
+          <p className="lead compact">Common questions about who we are, how we work, and what to expect.</p>
+        </aside>
+        <Accordion items={aboutFaqs} idPrefix="about-faq" />
+      </div>
+    </section>
+
+    <PageClosing />
+  </>;
 }
 
 function ProcessPage({ page }: { page: SourcePageBrief }) {
@@ -228,18 +303,30 @@ function StoriesPage({ page }: { page: SourcePageBrief }) {
 }
 
 function InsightsPage({ page }: { page: SourcePageBrief }) {
+  const PER_PAGE = 10;
   const categories = ['All insights', ...new Set(blogArticles.map(articleCategory))];
   const [activeCategory, setActiveCategory] = useState('All insights');
+  const [currentPage, setCurrentPage] = useState(1);
   const visibleArticles = activeCategory === 'All insights' ? blogArticles : blogArticles.filter((article) => articleCategory(article) === activeCategory);
-  return <><section className="section"><div className="container"><div className="page-intro"><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p></div><div className="filter-row" aria-label="Article topics">{categories.map((category) => <button className={activeCategory === category ? 'active' : ''} type="button" key={category} onClick={() => setActiveCategory(category)}>{category}</button>)}</div><div className="article-grid">{visibleArticles.map((article, index) => <article className={index === 0 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={article.featuredImage} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <span>→</span></Link></div></article>)}</div></div></section><PageClosing /></>;
+  const pageCount = Math.ceil(visibleArticles.length / PER_PAGE);
+  const pageArticles = visibleArticles.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+  function selectCategory(cat: string) { setActiveCategory(cat); setCurrentPage(1); }
+  return <><section className="section"><div className="container"><div className="page-intro"><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p></div><div className="filter-row" aria-label="Article topics">{categories.map((category) => <button className={activeCategory === category ? 'active' : ''} type="button" key={category} onClick={() => selectCategory(category)}>{category}</button>)}</div><div className="article-grid">{pageArticles.map((article, index) => <article className={index === 0 && currentPage === 1 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={article.featuredImage} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <span>→</span></Link></div></article>)}</div>{pageCount > 1 && <nav className="pagination" aria-label="Article pages"><button type="button" onClick={() => setCurrentPage(p => p - 1)} disabled={currentPage === 1}>← Previous</button>{Array.from({ length: pageCount }, (_, i) => i + 1).map(n => <button type="button" key={n} onClick={() => setCurrentPage(n)} className={currentPage === n ? 'active' : ''} aria-label={`Page ${n}`} aria-current={currentPage === n ? 'page' : undefined}>{n}</button>)}<button type="button" onClick={() => setCurrentPage(p => p + 1)} disabled={currentPage === pageCount}>Next →</button></nav>}</div></section><PageClosing /></>;
 }
 
+const VIDEO_PLACEHOLDERS = ['Choosing the right virtual assistant', 'Preparing your business to delegate', 'Building a strong remote working rhythm'] as const;
+
 function VideosPage({ page }: { page: SourcePageBrief }) {
-  return <><section className="section"><div className="container"><div className="page-intro"><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p></div><div className="media-grid">{['Choosing the right virtual assistant', 'Preparing your business to delegate', 'Building a strong remote working rhythm'].map((title, index) => <article className="video-card" key={title}><div className="video-placeholder"><button type="button" aria-label={`Play ${title}`}>▶</button><span>0{index + 1}</span></div><p className="eyebrow">Video resource</p><h2>{title}</h2><p>Reserved for an existing, client-approved video with captions and a written transcript.</p></article>)}</div></div></section><PageClosing /></>;
+  const PER_PAGE = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageCount = Math.ceil(VIDEO_PLACEHOLDERS.length / PER_PAGE);
+  const pageItems = VIDEO_PLACEHOLDERS.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+  return <><section className="section"><div className="container"><div className="page-intro"><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p className="lead">{page.summary}</p></div><div className="media-grid">{pageItems.map((title, index) => <article className="video-card" key={title}><div className="video-placeholder"><button type="button" aria-label={`Play ${title}`}>▶</button><span>0{(currentPage - 1) * PER_PAGE + index + 1}</span></div><p className="eyebrow">Video resource</p><h2>{title}</h2><p>Reserved for an existing, client-approved video with captions and a written transcript.</p></article>)}</div>{pageCount > 1 && <nav className="pagination" aria-label="Video pages"><button type="button" onClick={() => setCurrentPage(p => p - 1)} disabled={currentPage === 1}>← Previous</button>{Array.from({ length: pageCount }, (_, i) => i + 1).map(n => <button type="button" key={n} onClick={() => setCurrentPage(n)} className={currentPage === n ? 'active' : ''} aria-label={`Page ${n}`} aria-current={currentPage === n ? 'page' : undefined}>{n}</button>)}<button type="button" onClick={() => setCurrentPage(p => p + 1)} disabled={currentPage === pageCount}>Next →</button></nav>}</div></section><PageClosing /></>;
 }
 
 function FaqPage({ page }: { page: SourcePageBrief }) {
-  return <><section className="section"><div className="container faq-page-grid"><aside><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p>{page.summary}</p><Link className="button button-secondary" to="/contact">Ask another question</Link></aside><div><div className="faq-list">{sourceFaqs.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div><div className="faq-closing"><p>We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.</p><p>If you need any other clarification, call Virtual Office Angels or email <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a>.</p></div></div></div></section><PageClosing /></>;
+  const [openFaq, setOpenFaq] = useState(-1);
+  return <><section className="section"><div className="container faq-page-grid"><aside><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p>{page.summary}</p><Link className="button button-secondary" to="/contact">Ask another question</Link></aside><div><div className="faq-list">{sourceFaqs.map(([question, answer], i) => <details key={question} open={openFaq === i}><summary onClick={e => { e.preventDefault(); setOpenFaq(openFaq === i ? -1 : i); }}>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div><div className="faq-closing"><p>We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.</p><p>If you need any other clarification, call Virtual Office Angels or email <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a>.</p></div></div></div></section><PageClosing /></>;
 }
 
 function ContactPage({ page }: { page: SourcePageBrief }) {

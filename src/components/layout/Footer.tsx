@@ -5,8 +5,10 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <strong>Virtual Office Angels</strong>
-          <p>Specialist virtual assistants matched and managed for Australian businesses.</p>
+          <Link to="/" aria-label="Virtual Office Angels home">
+            <img className="footer-logo" src="/assets/voa-logo-orange.png" alt="Virtual Office Angels" />
+          </Link>
+          <p>Specialised virtual assistants with managed support for Australian businesses.</p>
         </div>
         <div><strong>Company</strong><Link to="/about">About Us</Link><Link to="/why-voa">Managed Virtual Support</Link><Link to="/how-it-works">How It Works</Link><Link to="/client-stories">Testimonials</Link></div>
         <div><strong>Explore</strong><Link to="/services/mortgage-loans">Services</Link><Link to="/insights">Blog</Link><Link to="/videos">Videos</Link><Link to="/faqs">FAQs</Link></div>

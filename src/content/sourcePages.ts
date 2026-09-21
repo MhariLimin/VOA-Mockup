@@ -29,9 +29,8 @@ export const sourcePages: readonly SourcePageBrief[] = [
     template: 'services',
   },
   {
-    path: '/about', eyebrow: 'About Virtual Office Angels', title: 'Born from HR expertise. Built to make business life easier.',
-    summary: 'A carefully matched and managed virtual staffing service shaped by Australian human resources experience.',
-    detail: ['Founded in 2010', 'Australian-owned and managed', 'Specialist professionals based in the Philippines'],
+    path: '/about', eyebrow: 'About Virtual Office Angels', title: 'We work with Australian businesses that need capable, experienced virtual assistants who can contribute from day one.',
+    summary: 'Whether the role is specialised or operational, we focus on finding support that fits the work and how your business runs.',
     image: '/assets/source/staging/images/feeae1b697-Anne-Villavieja.jpg', imageAlt: 'Anne Villavieja, founder of Virtual Office Angels', template: 'about',
   },
   service('/services/mortgage-loans', 'Mortgage and loans processing support', 'Accurate, process-focused assistance for mortgage brokers—from application preparation through to settlement.', ['CRM data entry and file setup', 'Serviceability calculations and lender research', 'Document collection and compliance checks', 'Valuations, lodgement, and settlement follow-up', 'Borrower and broker progress updates'], ['Mortgage processing demands accuracy, focus, and consistent follow-through.', 'A matched lending specialist can take on repetitive administration so brokers have more time for client relationships and business development.'], 'staging', '/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg'),
