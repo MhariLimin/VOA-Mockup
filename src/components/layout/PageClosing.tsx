@@ -1,10 +1,5 @@
 import { ContactForm } from '../ui/ContactForm';
-
-const modelPillars = [
-  ['Specialist matching', 'Candidates are considered against the role, industry, systems, and preferred working style.'],
-  ['Australian-managed', 'Clients have an Australian-based contact supporting communication and expectations.'],
-  ['End-to-end support', 'Recruitment, onboarding, feedback, performance, and continuity sit within one service.'],
-] as const;
+import { heroStats } from '../../content/homeContent';
 
 export interface NextStepCopy {
   eyebrow: string;
@@ -18,8 +13,9 @@ const defaultNextStep: NextStepCopy = {
   text: 'Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the right match.',
 };
 
+/* Compact separator before the contact form: the four figures from the VOA Content homepage hero. */
 export function VoaModelSection() {
-  return <section className="section voa-model-section"><div className="container voa-model-heading"><p className="eyebrow">The Virtual Office Angels model</p><h2>Matched around more than a job title.</h2></div><div className="container voa-model-grid">{modelPillars.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>;
+  return <section className="voa-strip" aria-label="The Virtual Office Angels model"><div className="container voa-strip-grid"><p className="eyebrow">The Virtual Office Angels model</p>{heroStats.map(([value, label]) => <div className="voa-strip-item" key={value}><strong>{value}</strong><span>{label}</span></div>)}</div></section>;
 }
 
 export function NextStepSection({ copy = defaultNextStep, className }: { copy?: NextStepCopy; className?: string }) {

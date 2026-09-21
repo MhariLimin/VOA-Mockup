@@ -1581,11 +1581,16 @@ code { padding: 0.125rem 0.35rem; border-radius: 0.25rem; background: var(--surf
 /* Home "Managed virtual support" band: tighter than the shared dark-section sizing. */
 .home-managed { padding-block: clamp(3.5rem, 6vw, 5.5rem); }
 .home-managed .managed-copy h2 { font-size: clamp(1.75rem, 3vw, 2.4rem); }
+/* Highlighted words in section headings (colours follow the VOA Content homepage). */
+main h2 em { color: var(--heading-accent); font-style: normal; }
 .home-managed .managed-copy h2 em { color: var(--action); font-style: normal; }
 .home-managed .managed-copy .lead { margin-bottom: 1.25rem; font-size: 1rem; }
 .home-managed .ownership-grid { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); }
 .home-managed .ownership-grid article { padding: clamp(1.15rem, 2vw, 1.5rem); }
 .home-managed .ownership-grid ul { gap: 0.45rem; margin-top: 1rem; }
+.home-managed .button-row { margin-top: 0.25rem; }
+.home-managed .button-secondary { color: #f8f7f2; border-color: rgb(255 255 255 / 35%); }
+.home-managed .button-secondary:hover { border-color: rgb(255 255 255 / 60%); background: rgb(255 255 255 / 8%); }
 
 .values-grid {
   display: grid;
@@ -1831,3 +1836,17 @@ code { padding: 0.125rem 0.35rem; border-radius: 0.25rem; background: var(--surf
 .video-poster-bar b { color: rgb(255 255 255 / 80%); font-size: 0.68rem; }
 .video-hero-poster { width: 100%; aspect-ratio: 4 / 3; margin: 0; border-radius: 1.5rem; box-shadow: 0 2rem 5rem rgb(15 38 61 / 15%); }
 .video-hero-poster .video-poster-play { width: 4.5rem; height: 4.5rem; font-size: 1.3rem; }
+
+/* Sitewide "Virtual Office Angels model" separator: one compact row of four figures. */
+.voa-strip { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); color: #fff; background: #0b2236; }
+.voa-strip-grid { display: grid; grid-template-columns: minmax(9rem, 0.8fr) repeat(4, minmax(0, 1fr)); align-items: center; gap: 0; }
+.voa-strip .eyebrow { margin: 0; padding-right: 1.5rem; color: #83cfff; line-height: 1.5; }
+.voa-strip-item { display: grid; gap: 0.3rem; padding: 0.35rem 1.25rem; border-left: 1px solid rgb(255 255 255 / 15%); transition: transform var(--motion-fast) ease; }
+.voa-strip-item strong { color: var(--action); font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.7rem); line-height: 1.1; }
+.voa-strip-item span { color: #b9c9d5; font-size: 0.78rem; line-height: 1.45; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .voa-strip-item:hover { transform: translateY(-0.2rem); } }
+@media (max-width: 62rem) {
+  .voa-strip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.25rem; }
+  .voa-strip .eyebrow { grid-column: 1 / -1; padding-right: 0; }
+  .voa-strip-item:nth-of-type(odd) { border-left: 0; padding-left: 0; }
+}

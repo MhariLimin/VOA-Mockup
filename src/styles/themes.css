@@ -8,6 +8,7 @@
   --border: rgb(16 34 53 / 14%);
   --accent: #075fae;
   --action: #ee7d16;
+  --heading-accent: #dc4f1e;
   --action-text: #17202a;
   --focus: #075fae;
 }
@@ -21,6 +22,7 @@
   --border: rgb(220 235 247 / 18%);
   --accent: #6fc6ff;
   --action: #ff9a3d;
+  --heading-accent: #ff9a3d;
   --action-text: #101820;
   --focus: #79d0ff;
 }

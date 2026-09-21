@@ -1,8 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { buyerQuestions, heroStats, specialistServices } from '../content/homeContent';
-import { ownershipSplit } from '../content/managedContent';
-import { processIntro, processStages } from '../content/processContent';
+import { buyerQuestions, heroStats, moreThanRecruitment, specialistServices } from '../content/homeContent';
 import { blogArticles, articleCategory, formatArticleDate } from '../content/blogContent';
 import { testimonials } from '../content/testimonials';
 import { siteContent } from '../content/siteContent';
@@ -44,7 +42,7 @@ export function HomePage() {
         <div className="container home-client-layout">
           <header>
             <p className="eyebrow">Our clients</p>
-            <h2>Trusted support for businesses that value precision.</h2>
+            <h2>Trusted by leading <em>Australian businesses</em>.</h2>
             <p>Supporting Australian businesses with dependable, carefully matched professionals.</p>
           </header>
           <ClientCarousel />
@@ -56,7 +54,7 @@ export function HomePage() {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Specialised virtual assistant services</p>
-              <h2>Virtual support tailored around your industry, systems and standards.</h2>
+              <h2>Virtual support tailored around your <em>industry</em>, <em>systems</em> and <em>standards</em>.</h2>
               <p className="lead compact">Our professional virtual assistant services go beyond general administration. We match businesses with professionals who understand the terminology, documentation and workflows common to their field.</p>
             </div>
             <Link className="button button-secondary" to="/services">Explore services</Link>
@@ -90,32 +88,23 @@ export function HomePage() {
       <section className="section dark-section home-managed" data-home-reveal="dark">
         <div className="container">
           <div className="managed-copy">
-            <p className="eyebrow">Managed virtual support</p>
-            <h2>What managed virtual support means at <em>Virtual Office Angels</em>.</h2>
-            <p className="lead">You receive more than a candidate introduction. Your business remains in control of the work, while Virtual Office Angels manages the employment relationship and support structure around the virtual assistant.</p>
-            <Link className="text-link light-link" to="/why-voa">Explore managed virtual support <span aria-hidden="true">→</span></Link>
+            <p className="eyebrow">More than recruitment</p>
+            <h2>What is an <em>HR Managed Virtual Support</em> Solution?</h2>
+            <p className="lead">{moreThanRecruitment.intro}</p>
+            <div className="button-row">
+              <Link className="button" to="/how-it-works">See how it works</Link>
+              <Link className="button button-secondary" to="/why-voa">Explore managed virtual support</Link>
+            </div>
           </div>
           <div className="ownership-grid">
-            {ownershipSplit.map((column) => (
-              <article key={column.heading}>
-                <p className="eyebrow">{column.label}</p>
-                <h3>{column.heading}</h3>
-                <p>{column.summary}</p>
-                <ul>{column.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            {moreThanRecruitment.stages.map((stage, index) => (
+              <article key={stage.name}>
+                <p className="eyebrow">{String(index + 1).padStart(2, '0')} · {stage.name}</p>
+                <h3>{stage.heading}</h3>
+                <p>{stage.text}</p>
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="section process-section" data-home-reveal="rows">
-        <div className="container">
-          <div className="section-heading"><div><p className="eyebrow">How it works</p><h2>{processIntro.heading}</h2><p className="lead compact">{processIntro.text}</p></div><Link className="button button-secondary" to="/how-it-works">See the complete process</Link></div>
-          <ol className="process-list">
-            {processStages.map((stage) => (
-              <li key={stage.number}><span>{stage.number}</span><div><h3>{stage.title}</h3><p>{stage.summary}</p></div></li>
-            ))}
-          </ol>
         </div>
       </section>
 
@@ -123,10 +112,10 @@ export function HomePage() {
         <div className="container split-grid story-grid">
           <div className="source-image founder-home-image"><img src="/assets/source/staging/images/feeae1b697-Anne-Villavieja.jpg" alt="Anne Villavieja, founder of Virtual Office Angels" loading="lazy" /></div>
           <div>
-            <p className="eyebrow">A more considered match</p>
-            <h2>Support selected around your business—not a generic task list.</h2>
-            <p className="lead">Virtual Office Angels connects Australian businesses with experienced professionals in the Philippines and supports the relationship after placement.</p>
-            <p>Founded by Anne Villavieja after more than 35 years in Australian human resources, recruitment, and team leadership, the service pairs local HR judgement with specialists matched to the work itself.</p>
+            <p className="eyebrow">Australian-led, people-first outsourcing company</p>
+            <h2>Built on <em>HR expertise</em> and first-hand <em>market experience</em>.</h2>
+            <p className="lead">Virtual Office Angels was established by Anne Villavieja, whose two decades of HR experience with Australian companies shape our practical approach to recruitment and long-term virtual support.</p>
+            <p>Based in Australia and originally from the Philippines, Anne brings together an understanding of the country’s professional talent with the expectations of Australian businesses. That perspective helps Virtual Office Angels build working relationships designed for confidence, continuity, and long-term value.</p>
             <Link className="text-link" to="/about">Learn more about us <span aria-hidden="true">→</span></Link>
           </div>
         </div>
@@ -134,7 +123,7 @@ export function HomePage() {
 
       <section className="section insight-section" data-home-reveal="compact">
         <div className="container">
-          <div className="section-heading"><div><p className="eyebrow">Insights</p><h2>Practical thinking for better delegation and virtual staffing.</h2><p className="lead compact">Explore current guidance on building capacity, choosing the right support and getting more value from a virtual team.</p></div><Link className="button button-secondary" to="/insights">Browse articles</Link></div>
+          <div className="section-heading"><div><p className="eyebrow">Insights and resources</p><h2>Learn more about <em>delegation</em> and <em>virtual staffing</em>.</h2><p className="lead compact">Explore current guidance on building capacity, choosing the right virtual assistant, and getting more value from a remote team.</p></div><Link className="button button-secondary" to="/insights">Browse articles</Link></div>
           <div className="home-article-preview">{blogArticles.slice(0, 3).map((article) => <Link className="home-article-card" to={`/insights/${article.slug}`} key={article.slug}><span className="home-article-image"><img src={article.featuredImage} alt="" loading="lazy" /></span><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h3>{article.title}</h3><span className="text-link">Read article <span aria-hidden="true">→</span></span></Link>)}</div>
         </div>
       </section>
@@ -145,9 +134,9 @@ export function HomePage() {
             <img src="/assets/source/staging/images/77beacedea-25711.jpg" alt="Virtual assistant working remotely" loading="lazy" />
           </div>
           <div>
-            <p className="eyebrow">Client experience</p>
-            <h2>What working with the right support can feel like.</h2>
-            <p className="lead">Whether they are in accounting, legal, real estate, or finance, the tailored approach is intended to provide the right support every time.</p>
+            <p className="eyebrow">Client feedback</p>
+            <h2>What Australian businesses say about <em>working with Virtual Office Angels</em>.</h2>
+            <p className="lead">Real feedback on matching, service quality, and the day-to-day value of dependable virtual support.</p>
             <Link className="text-link" to="/client-stories">Read all testimonials <span aria-hidden="true">→</span></Link>
           </div>
         </div>
@@ -158,16 +147,16 @@ export function HomePage() {
         <div className="container faq-grid">
           <div>
             <p className="eyebrow">Frequently asked questions</p>
-            <h2>What prospective clients usually want to know.</h2>
-            <p className="lead compact">Direct answers to the questions Australian businesses ask when considering managed virtual support.</p>
+            <h2>Before you delegate and <em>get started</em>.</h2>
+            <p className="lead compact">Here are direct answers to the questions Australian businesses ask when considering fully managed virtual support.</p>
           </div>
           <div className="faq-list">
-            {buyerQuestions.map(([question, answer]) => (
+            {buyerQuestions.map(({ question, answer, link }) => (
               <details key={question} open={openQuestion === question}>
                 <summary onClick={(event) => { event.preventDefault(); setOpenQuestion(openQuestion === question ? '' : question); }}>
                   {question}<span aria-hidden="true">+</span>
                 </summary>
-                <p>{answer}</p>
+                <p>{answer}{link && <> <Link to={link.href}>{link.label}</Link>.</>}</p>
               </details>
             ))}
             <Link className="text-link" to="/faqs">View all FAQs <span aria-hidden="true">→</span></Link>
@@ -175,7 +164,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section contact-section page-contact-section" data-home-reveal="contact"><div className="container contact-grid"><aside><p className="eyebrow">Your next step</p><h2>Tell us what the right support would change for your business.</h2><p className="lead compact">Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the right match.</p><p className="contact-direct"><a href="tel:1300737883">1 300 737 883</a><br /><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></p></aside><ContactForm /></div></section>
+      <section className="section contact-section page-contact-section" data-home-reveal="contact"><div className="container contact-grid"><aside><p className="eyebrow">Let’s talk</p><h2>Tell us where your business needs virtual support.</h2><p className="lead compact">Share the work that is taking time away from clients, revenue or delivery. We’ll help clarify the remote role and the experience it needs.</p><p className="contact-direct"><a href="tel:1300737883">1 300 737 883</a><br /><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></p></aside><ContactForm /></div></section>
     </>
   );
 }
