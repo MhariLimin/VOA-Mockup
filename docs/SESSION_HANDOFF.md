@@ -221,19 +221,80 @@ is still `/why-voa`.
 
 ## 7. How to work on this
 
-- **Work one item at a time.** Implement, report, wait for approval.
-- **Browser use is opt-in.** The Chrome extension costs tokens; the user says when to use it. Any
-  visual claim that was not checked must be stated as unverified.
+### 7.1 The working loop (this is how the user runs the project)
+
+1. **The user gives raw feedback**, usually per page or per section, often a screenshot, a pasted
+   phrase from the deployed site, or a short list of gripes ("this section feels too big", "there's a
+   bug on the bullets").
+2. **Turn it into an unambiguous spec before touching code.** For a large batch this means rewriting
+   the raw notes into `docs/MOCKUP_1_REVISION_GUIDE.md`: grouped by page/category, one numbered ID per
+   change (G-, H-, HP-, SP-, HIW-, WVOA-, CST-, FAQ-, ART-, ABT-, FTR-), each written so it is
+   independently checkable, with a legend resolving every term the user used ("Layout 2",
+   "VOA Content", "image2.png"). Tag each item **[Confirmed]**, **[Assumption]** (state the
+   interpretation) or **[Blocked]** (name the missing input). For a small batch, restate the same
+   structure in the reply instead of editing the guide.
+3. **Ask the open questions in one batch** before implementing. The user prefers being handed a short
+   list of decisions ("Ask me the questions you need to proceed") over being asked one at a time
+   mid-task. Where there is an obvious default, recommend one rather than listing options neutrally.
+4. **Implement one page or category at a time**, in the smallest patch that does the job.
+5. **Verify**, then **report** (see 7.3) and **wait for approval** before moving to the next category.
+   The user answers "Passed" / "That's good" / "you can now work on X".
+6. **Record the outcome in the guide** for batch work: a status line per category ("Status: HP1–HP12
+   implemented, awaiting review"), the files touched, the verification actually run, the judgment calls
+   made, and anything deliberately left for the user to reverse.
+7. **Commit only when asked.** Sessions never push.
+
+### 7.2 Implementation and styling conventions
+
+- **Reuse before inventing.** Match an existing section's markup and classes (`section-heading`,
+  `content-split`, `task-panel`, `home-testimonial-grid`, `faq-list`, `inner-hero-grid`) so a new
+  section inherits the site's spacing, elevation, hover and reveal behaviour for free.
+- **Scope new CSS to a new class** on the section, appended to `global.css` with a one-line comment
+  saying what it is for. Never restyle a shared component to fix one page — add a modifier
+  (`.service-closing h2`, `.home-managed`, `.voa-strip`, `.testimonial-grid-3`).
+- **Watch specificity when adding to old rules.** A `.video-placeholder > span` rule silently overrode
+  new child spans this session; the fix was a separate class, not `!important`.
+- **Colour comes from tokens** in `themes.css`, defined for both themes. Check contrast before using
+  orange on a light background — `--action` (#ee7d16) fails at heading sizes, which is why
+  `--heading-accent` exists.
+- **Preserve motion and accessibility on every change:** scroll reveals, staggered cards, hover lift,
+  `prefers-reduced-motion`, keyboard operation, `aria-pressed` on filter buttons, `aria-label` on
+  paginations, real focus states.
+- **Prefer the honest placeholder** over invented content: "Coming soon" posters, initials or a generic
+  icon instead of fake portraits, the document's own "feedback currently being gathered" text.
+- **Content lives in `src/content/*`,** not inline in components, when it is copy the client may change.
+- **Small patches only.** No unrelated refactors, no formatting churn, no new dependencies.
+- **Check the rendered page before declaring a visual defect** — class names are not evidence.
+
+### 7.3 Response preferences
+
+- **Bullets and short labelled sections. Never paragraphs.** Short tables are welcome for
+  before/after or per-page mappings.
+- **Lead with the outcome**, then what changed (file paths), then what was verified, then what needs
+  the user's decision. Close with "Nothing is committed yet" when that is the case.
+- **Be explicit about what was not checked** — mobile widths and dark theme are the usual gaps. Never
+  imply a browser check that did not happen.
+- **Name invented text every time.** The user repeatedly asks for source-backed copy only.
+- **Recommend, don't survey.** When asked "is X better or ours?", give a recommendation with reasons,
+  then apply it if it is reversible, and say so.
+- **Keep it short.** No preamble, no recap of the request, no narrating what is about to happen.
+
+### 7.4 Commands and environment
+
 - **After every change:** `npm run lint`, `npx tsc --noEmit -p tsconfig.app.json`,
   `npx tsc --noEmit -p tsconfig.node.json`, and a production build to a scratch directory
   (`npx vite build --outDir <scratch> --emptyOutDir`) — deleting the existing `dist` hits `EPERM` here.
+- **Browser use is opt-in.** The Chrome extension costs tokens; the user says when to use it. Batch
+  browser steps into one call. Reveal animations must be forced
+  (`data-visible` / `data-page-visible`) before screenshotting, and Chrome skips smooth scrolling and
+  sometimes screenshots entirely while the tab is in the background.
 - **Dev server:** `npm run dev` (port 5173). It stops when the session ends.
-- **Git: commit only.** Sessions commit locally; the user pushes.
-- **Report format:** bullets and short sections, not paragraphs.
 - **Editing tips learned here:** complex multi-line edits are more reliable written as a Python script
   in the scratchpad than as a shell heredoc. Write source files with `newline='\n'` — the repo is LF.
 - **Reading PDFs on this device:** `pdftotext -raw` (Git Bash) handles table cells correctly.
   pdfplumber and PIL are not installed. The Read tool opens PDFs directly.
+- **Long sessions get expensive.** Context is re-read every turn; start a fresh session per work block
+  and rely on this handoff.
 
 ---
 
@@ -269,6 +330,17 @@ is still `/why-voa`.
 - **`/why-voa` route name** versus its Managed Virtual Support label — settle before WordPress.
 - **Client Stories** under About vs. Insights.
 - Whether the two "Prototype…" notices in section 5.6 should be removed.
+
+**Documents that are now out of date — fix or ignore deliberately**
+- `CLAUDE.md` → "Homepage composition currently implemented" still lists the old 13-section home page
+  (separate founder, services, Why VOA, How It Works sections) and the old carousel/CTA notes. The home
+  page has since been rebuilt; treat this handoff as current for the home page.
+- `CLAUDE.md` also still says service pages show the sitewide model band and that Layout 1 dropdowns
+  are click-only (H1 made them hover-on-pointer).
+- `MOCKUP_1_REVISION_GUIDE.md` → G3 describes the three-column model band that section 5.5 replaced.
+- `docs/WEEK_2_ACTION_PLAN.md` → items 1 and 2 (mockup revisions, content integration) are done.
+  **Not started:** the content/asset audit, the WordPress + SEO/GEO decision record, the WordPress
+  theme and content architecture, the starter theme foundation, and the progress report.
 
 **Known debt**
 - Route-specific SEO/meta not implemented; `index.html` has one generic title. Per-service SEO strings
