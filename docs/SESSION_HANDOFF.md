@@ -1,144 +1,291 @@
-# Session handoff — content integration and page updates
+# Session handoff — Virtual Office Angels Mock Layout 1
 
-Written 2026-09-21 (second session). Read this file first, then `docs/MOCKUP_1_REVISION_GUIDE.md`.
+Written 2026-09-26 (end of the week 2 work). Read `CLAUDE.md` first, then this file, then
+`docs/MOCKUP_1_REVISION_GUIDE.md` for the numbered revision items.
 
-## Where things stand
+---
 
-All Mockup 1 revision categories are now complete and approved. In addition, three updated content documents supplied by the client were read and integrated this session.
+## 1. Where the project stands
 
-| Category | Items | Status |
+- The React/Vite prototype on `main` is the approved **Mock Layout 1** design and the visual reference
+  for the planned custom WordPress theme.
+- All numbered Mockup 1 revision categories are complete and approved.
+- All three client content documents in `docs/updated_src/` are integrated.
+- The home page now follows the **deployed VOA Content site** (`https://voa-mockup.vercel.app/`) for
+  section headings, descriptions and highlight colours.
+- Nothing is deployed from this repository by a session. The user pushes and deploys.
+
+### Branches (2026-09-26)
+
+| Branch | Commit | Purpose |
 | --- | --- | --- |
-| Global | G1–G3 | Approved |
-| Header | H1–H3, H5–H7 | Approved (**H4 blocked** — client logo file) |
-| Home page | HP1–HP12 | Approved |
-| Services pages | SP1–SP7 | Approved |
-| `/services` index | — | Approved (revamp beyond original scope) |
-| How It Works | HIW1–HIW3 | Approved |
-| Managed Virtual Support (was Why VOA) | WVOA1–WVOA2 | Approved |
-| Client Stories & Testimonials | CST1–CST2 | Approved |
-| FAQs page | FAQ1 | Approved |
-| Articles & Blog / Videos | ART1–ART2 | Approved |
-| About page | ABT1–ABT2 | Approved |
-| Footer | FTR1 | Approved |
+| `main` | `c1e6563` | Current work. Pushed to `origin/main`. |
+| `legacy-w2` | `c1e6563` | Rollback point taken at the end of week 2. |
+| `legacy-w1` | `b351731` | Rollback point from week 1. |
+| `mock-layout-2` | `8f552ef` | Rejected alternate design. Do not merge its visual system in. |
+| `bolt/layout-enhance-1` | `2b41706` | Historical Bolt work, already merged where applicable. |
 
-## Content documents integrated this session
+Week 2 commits on `main`: `69f6a64`, `d4ff43f`, `fcf6558`, `c1e6563`.
 
-Three documents were supplied in `docs/updated_src/` and read this session:
+---
 
-| File | Status |
+## 2. Connected Virtual Office Angels websites
+
+The client also operates these sites. They are linked from the About page "Other specialist websites"
+section (`sisterSites` in `src/content/siteContent.ts`) and are a **useful source of imagery and copy
+references** for future changes.
+
+| Site | URL | Local logo | Focus |
+| --- | --- | --- | --- |
+| Virtual Office Angels — production | `https://virtualofficeangels.com.au/` | `public/assets/source/staging/images/0afc8f6269-untitled-5.png` (header logo) | Main company site |
+| Virtual Office Angels — staging | `https://virtualofficeangels.com.au/stagingsite2/` | — | Source of the captured content in `src/content/source/staging/` |
+| VOA Content proposal (deployed) | `https://voa-mockup.vercel.app/` | — | The newest approved homepage copy. See section 4. |
+| Virtual Financial Support | `https://virtualfinancialsupport.com.au/` | `public/assets/brands/virtual-financial-support.png` (354×69) | Virtual support for financial planners, mortgage and insurance brokers, accountants, bookkeepers |
+| Virtual Loans Assistant | `https://virtualloansassistant.com.au/` | `public/assets/brands/virtual-loans-assistant.png` (631×87) | Online loans processing through virtual assistants |
+
+Notes for using these as image sources:
+- Both sister-site logos have an **orange background**, so `.brand-logo` renders them on a matching
+  orange plate (`#e37818`) at equal height. Keep that treatment if you add more brands.
+- Plain `curl` is rejected by the sister sites (HTTP 406). Send browser-like headers, or open them in
+  the browser tool.
+- Do not scrape or re-run the sync scripts (`sync:staging`, `sync:blogs`, `sync:clients`) unless the
+  user explicitly asks. They overwrite generated source data.
+- Any image taken from these sites needs client confirmation of rights before production.
+
+---
+
+## 3. Local image libraries (what is already available)
+
+| Location | Contents |
 | --- | --- |
-| `HR-Managed Virtual Support.pdf` | **Integrated** — `managedContent.ts` updated |
-| `About Us Page_CONTENT_VOA.docx` | **Integrated** — About page fully updated |
-| `SERVICE PAGES_VOA.pdf` | **Not started** — deferred at user request; do this next |
+| `public/assets/source/staging/images/` | 116 staging images: service photos, founder portrait, 30 client logos |
+| `public/assets/source/staging/blog-images/` | 39 article images |
+| `public/assets/brands/` | The two sister-site logos |
+| `public/assets/voa-logo-orange.png` | Footer logo for the dark background |
 
-`HR-Managed Virtual Support (1).pdf` was a duplicate of the above PDF and has been removed.
+Useful facts found while assigning images this session:
+- Filenames are `<hash>-<original name>`. The **same original name means the same photo**, so different
+  hashes are duplicates or crops. Check before assigning an image, or the same photo appears twice.
+- The staging library has **no unused photographs left**. Everything unused is a client logo.
+- Two blog images were saved to disk under **truncated filenames**, so their articles rendered with no
+  preview. `src/content/blogContent.ts` maps the long names to the saved files (`savedImageNames`).
+  If more source images are captured, check for the same truncation.
 
-## What was done this session
+---
 
-### Mockup revisions (all approved)
-- **FAQ1** — FAQs page converted to single-open controlled `<details>` accordion.
-- **ART1/ART2** — Insights page gains category filter + pagination (10 per page). Videos page gains pagination structure. `VIDEO_PLACEHOLDERS` const added.
-- **ABT1/ABT2** — About page restructured: Our Story now Anne-focused; Founder & Leadership section replaced.
-- **FTR1** — Footer brand logo changed to orange variant (`/assets/voa-logo-orange.png`, width 260px).
+## 4. Copy sources, in order of authority
 
-### Content integration from source documents
-- **About page** — fully rebuilt from `About Us Page_CONTENT_VOA.docx`:
-  - Hero: new title + summary from document; CTAs now link to `/services/mortgage-loans` and `/contact`
-  - Our Story: Anne-founded narrative ("Built on HR expertise")
-  - Who We Support: new section with 8 service areas + link
-  - The Way We Work: new dark section with 4 value cards (Clarity, Accountability, Consistency, Client Care)
-  - FAQs: 6 Q&As using the existing Accordion component
-- **Managed Virtual Support page** — updated from `HR-Managed Virtual Support.pdf`:
-  - `ownershipSplit` bullets updated in both columns
-  - `includes` checklist updated (6 items, new wording)
-  - `questions` reduced from 4 to 2 (the two the PDF specifies)
+1. **The user's current instruction.**
+2. **The deployed VOA Content site**, `https://voa-mockup.vercel.app/`. Its live text lives in
+   `VOA Content/saved-state/owner-saved-state.json` under `content` → `homepage-text-<n>`.
+   **The local `VOA Content/dist/index.html` is older** (15 Sep) and still has the previous hero
+   headline, so read the saved state, not `dist`.
+3. **The client documents** in `docs/updated_src/`:
+   - `SERVICE PAGES_VOA.pdf` — all ten service pages
+   - `About Us Page_CONTENT_VOA.docx` — About page
+   - `HR-Managed Virtual Support.pdf` — Managed Virtual Support page
+4. **Captured staging content** in `src/content/source/staging/`.
 
-### New files added this session
-| File | Purpose |
-| --- | --- |
-| `public/assets/voa-logo-orange.png` | Orange logo for dark footer background |
-| `.values-grid` CSS | 2-column card grid used in the About page "The way we work" section |
+Never invent user-facing copy. When something has to be written, flag it (see section 8).
 
-## How to work on this
+**VOA Content location differs by device:**
+- E: device → `E:\_Yua\VOA\Mock Layout\VOA Content`
+- D: device → `D:\Mhari\Apollo\VOA-Content\voa-mockup`
 
-These rules were agreed across both sessions and carry over.
+---
 
-- **Work one category at a time.** Implement, report, wait for approval, then move on.
-- **Browser use is opt-in.** The user asked that the Chrome plugin not be used freely because of token cost. Ask first, or use it only when they say so. Visual claims that were not checked must be stated as unverified.
-- **After every change:** `npm run lint`, `npx tsc --noEmit -p tsconfig.app.json`, `npx tsc --noEmit -p tsconfig.node.json`, and a production build. Build to a scratch directory (`npx vite build --outDir <scratch>`) because deleting the existing `dist` hits `EPERM` in this environment.
-- **Dev server:** `npm run dev`. It frequently lands on **port 5174** because 5173 is still held.
-- **Never invent copy.** Everything user-facing comes from `VOA Content` or existing captured source. When something had to be written, it was flagged explicitly.
-- **Report format:** bullets and short sections, not paragraphs. Lead with what changed, then what needs their eye.
-- **VOA Content location differs by device:**
-  - E: device → `E:\_Yua\VOA\Mock Layout\VOA Content`
-  - D: device → `D:\Mhari\Apollo\VOA-Content\voa-mockup`
-- **Git: commit only.** Sessions commit locally and never push; the user pushes.
+## 5. What was done in this session
 
-## Service pages — integrated from SERVICE PAGES_VOA.pdf (2026-09-21)
+### 5.1 Service pages — all ten rebuilt from `SERVICE PAGES_VOA.pdf`
 
-All ten service pages now use the PDF's copy. `src/content/serviceDetails.ts` was generated from a transcription that was machine-checked against the PDF text: 522 strings, zero mismatches. Deliberate edits only: "VOA" written out as "Virtual Office Angels" in four FAQ answers, and "authorised"/"fulfilment" in Australian spelling.
+`src/content/serviceDetails.ts` was generated from a transcription machine-checked against the PDF
+text: 522 strings, zero mismatches. Deliberate edits only: "VOA" written out as "Virtual Office Angels"
+in four FAQ answers, and "authorised"/"fulfilment" in Australian spelling.
 
-- **Page order:** hero → role scope → systems → when to hire (+ boundary card) → FAQs → per-service managed-support band (four steps, dark) → "Find the right specialised virtual assistant" contact section. Service pages no longer show the sitewide three-column model band.
+- **Page order:** hero → role scope (accordion) → systems → when this role fits (+ boundary card) →
+  **client feedback** → FAQs → four-step managed band (dark) → closing contact form.
 - **Hero buttons** follow the PDF: "Find The Right Fit" / "See What You Can Delegate".
 - **New service:** Insurance Processing at `/services/insurance-processing`.
-- **Renamed services keep their old URLs:** Executive & Administrative (`/services/back-office-admin`), Sales & E-Commerce (`/services/sales-marketing`), Copywriting (`/services/creative-copywriting`). Settle URL naming with a redirect map at WordPress migration.
-- **Boundary card kept** at the user's request. It is not in the PDF; nine services carry the older VOA Content text, and Insurance uses its own PDF FAQ answer on advice.
-- **Client feedback sections omitted:** the PDF has only "Feedback currently being gathered" placeholders.
-- **SEO titles and meta descriptions** are stored per service in `serviceDetails.ts` but not yet applied (no per-route meta exists).
-- The "production-site service" flags are removed, since the client has now supplied full content for those services.
-- Reading PDFs on this device: `pdftotext -raw` (Git Bash) extracts table cells correctly; pdfplumber is not installed.
+- **Renamed services keep their old URLs:** Executive & Administrative (`/services/back-office-admin`),
+  Sales & E-Commerce (`/services/sales-marketing`), Copywriting (`/services/creative-copywriting`).
+  Settle naming with a redirect map at WordPress migration.
+- **Boundary card kept** at the user's request. It is not in the PDF: nine services carry the older
+  VOA Content text, Insurance uses its own PDF FAQ answer.
+- **Client feedback section** uses the Client Stories card style with the PDF's own placeholders
+  ("Feedback currently being gathered." on Mortgage and Financial Planning, "Feedback is currently
+  being gathered." on the other eight), three cards labelled "Client name" / "Business", and a generic
+  person icon instead of initials. Replace with approved feedback when it exists.
+- **Closing heading** uses a smaller size (`.service-closing h2`) because the PDF headings are long.
+- **SEO titles and meta descriptions** are stored per service but **not applied** — no per-route meta
+  exists yet.
+- Services mega menu regrouped into two columns of five, with the PDF labels.
 
-## Content architecture — do not break this
+### 5.2 About and Managed Virtual Support (corrections from the previous session)
 
-| Where | Content | Source |
+- The Managed Virtual Support page had been **paraphrased**; all copy is now verbatim from the PDF.
+  The home ownership band shared that data and changed with it.
+- About: H1 restored to "About Virtual Office Angels"; Our Story and Founder recombined (text left,
+  portrait right); "We listen before we recruit" moved into "The way we work"; a specialist-websites
+  section added (see section 2); hover states added throughout.
+- Managed Virtual Support uses the About-style hero. Photo-background heroes are reserved for service
+  pages and the `/services` index.
+- The shared contact form matches both documents: Business name, Industry dropdown,
+  "What support do you need?", "Submit enquiry".
+
+### 5.3 Insights, Videos and FAQs
+
+- **Insights and Videos** now open with an image hero in the Managed Virtual Support style (heading,
+  two buttons, image or poster), then the list section.
+- **Section headings were removed** at the user's request — the list sections show only a small label
+  and a count ("Article library · 30 articles").
+- **Pagination scrolls back** to the top of its section (`scrollToSection`, smooth unless the visitor
+  prefers reduced motion). Note: Chrome skips smooth scrolling in background tabs, so automated checks
+  can look like it failed.
+- **FAQs page has no hero.** It uses a two-column layout: a sticky left column with the heading, the
+  topic list (with counts) and "Ask another question"; the questions on the right. It opens on
+  "The service" so the page starts with 3 rows instead of 12. Topics live in `faqContent.ts`
+  (`faqTopics`) and reference the verbatim source questions by index.
+- **Video placeholders:** `VideoPoster` renders a player-style frame marked "Coming soon" with the
+  video number, title and a 0:00 bar. It is also the Videos hero image.
+- **Two article images repaired** (see section 3).
+
+### 5.4 Home page aligned with the deployed site
+
+| Section | Now reads |
+| --- | --- |
+| Hero | "Get **Specialised** & **HR Managed** Virtual Support!" + the deployed description. Emphasis uses our blue (`--accent`), not the deployed orange. Buttons: "Find the Right Fit" / "Explore services". |
+| Fourth hero figure | "HR, payroll, and ongoing team support" |
+| Our clients | "Trusted by leading **Australian businesses**." |
+| Specialised services | "…your **industry**, **systems** and **standards**." |
+| More than recruitment | Merged section, see below |
+| Founder | "Australian-led, people-first outsourcing company" / "Built on **HR expertise** and first-hand **market experience**." |
+| Insights | "Insights and resources" / "Learn more about **delegation** and **virtual staffing**." |
+| Client feedback | "What Australian businesses say about **working with Virtual Office Angels**." |
+| FAQs | "Before you delegate and **get started**." + the five deployed Q&As |
+| Let's talk | "Tell us where your business needs virtual support." |
+
+- **Highlight colour:** `--heading-accent` in `themes.css` — `#dc4f1e` in light theme (our button orange
+  `#ee7d16` fails contrast on the pale background at heading sizes), `#ff9a3d` in dark theme. Applied
+  through `main h2 em`.
+- **"More than recruitment"** replaces the two separate sections (Managed virtual support + How it
+  works). It has the deployed heading, intro, two buttons (`/how-it-works`, `/why-voa`) and four stage
+  cards: Consulting & Planning, Sourcing & Matching, Onboarding & Integration, Ongoing Delivery &
+  Support. **The bullets were deliberately dropped** so the How It Works page keeps its purpose.
+  Copy lives in `homeContent.ts` → `moreThanRecruitment`.
+- **Home FAQs** are the deployed five questions with their links: "specialised virtual assistant
+  services" → `/services`, "how our matching process works" → `/why-voa` (the deployed site links its
+  own Managed Virtual Support page). The four questions written for the first mockup were removed.
+- **Managed virtual support band bug fixed:** its checkmark had been saved corrupted as `'¹3'` and
+  rendered as "13". It is now `'\2713'`.
+
+### 5.5 "The Virtual Office Angels model" separator
+
+Revision G3's three-column band (Specialist matching / Australian-managed / End-to-end support) was
+unsourced copy. It is now a **compact dark strip** (`.voa-strip`, ~130px tall) carrying the four
+sourced hero figures: 15+ years, Top 5%, 12 months, 100% managed. It appears on every page that uses
+`PageClosing`, immediately above the contact form. The home page does not use it, so the figures never
+appear twice on one page. **`MOCKUP_1_REVISION_GUIDE.md` G3 is now out of date.**
+
+### 5.6 Meta language removed
+
+User-facing text that described the prototype or referred to the staging/production sites was removed:
+the Insights, Videos and FAQs hero descriptions, and the Thank You page's "The production version
+will state…" line.
+
+**Still present, awaiting a decision:**
+- Footer: "Prototype content requires final Virtual Office Angels verification."
+- Under every contact form: "Prototype form only. Connect validation, spam protection, consent
+  records, and WordPress form handling before launch."
+
+---
+
+## 6. Content architecture — do not break this
+
+| Where | Content | Source module |
 | --- | --- | --- |
-| Home → "How it works" | Four stages, summaries only | `processContent.ts` |
-| Home → "Managed virtual support" dark band | Ownership split, two cards | `managedContent.ts` → `ownershipSplit` |
-| `/how-it-works` | Four stages, expandable, with detail + checkpoints | `processContent.ts` |
-| `/why-voa` | Definition, full ownership split, 2 FAQs | `managedContent.ts` → `managedSupportPage` |
+| Home → hero, figures, service cards, FAQs, "More than recruitment" | | `homeContent.ts`, `siteContent.ts` |
+| Home → founder section | Two paragraphs from the deployed site | `HomePage.tsx` |
+| `/how-it-works` | Four stages, expandable, with detail | `processContent.ts` |
+| `/why-voa` (Managed Virtual Support) | Definition, ownership split, FAQs | `managedContent.ts` |
+| Service pages (10) | Everything | `serviceDetails.ts` |
+| `/faqs` | 12 source questions + topic grouping | `faqContent.ts` |
+| `/insights`, `/insights/:slug` | 30 articles | `blogContent.ts` + `source/staging/` |
+| Client Stories, home testimonials | 4 testimonials | `testimonials.ts` |
+| Shared closing | Separator strip + contact form | `components/layout/PageClosing.tsx` |
 
-## Navigation (unchanged from prior session)
+Navigation (`navigation.ts`): Services (mega dropdown, two columns of five), Virtual Support, Insights,
+FAQs, About. "Why Virtual Office Angels" is labelled **Managed Virtual Support** everywhere; the route
+is still `/why-voa`.
 
-Five categories:
-- **Services** — mega dropdown (two link columns + summary panel)
-- **Virtual Support** — How It Works, Managed Virtual Support
-- **Insights** — Articles & Blog, Videos & Resources
-- **FAQs** — top level, no dropdown
-- **About** — About us, Client Stories & Testimonials, Contact
+---
 
-"Why Virtual Office Angels" is labelled **Managed Virtual Support** everywhere. Route stays `/why-voa` — confirm before WordPress migration.
+## 7. How to work on this
 
-## Open items
+- **Work one item at a time.** Implement, report, wait for approval.
+- **Browser use is opt-in.** The Chrome extension costs tokens; the user says when to use it. Any
+  visual claim that was not checked must be stated as unverified.
+- **After every change:** `npm run lint`, `npx tsc --noEmit -p tsconfig.app.json`,
+  `npx tsc --noEmit -p tsconfig.node.json`, and a production build to a scratch directory
+  (`npx vite build --outDir <scratch> --emptyOutDir`) — deleting the existing `dist` hits `EPERM` here.
+- **Dev server:** `npm run dev` (port 5173). It stops when the session ends.
+- **Git: commit only.** Sessions commit locally; the user pushes.
+- **Report format:** bullets and short sections, not paragraphs.
+- **Editing tips learned here:** complex multi-line edits are more reliable written as a Python script
+  in the scratchpad than as a shell heredoc. Write source files with `newline='\n'` — the repo is LF.
+- **Reading PDFs on this device:** `pdftotext -raw` (Git Bash) handles table cells correctly.
+  pdfplumber and PIL are not installed. The Read tool opens PDFs directly.
+
+---
+
+## 8. Text written for the prototype (needs approved copy)
+
+- Insights and Videos: no hero description at all now.
+- FAQ topic names: The service · Working with your virtual assistant · Hours & availability ·
+  Costs & privacy.
+- Section labels and buttons: "Article library", "Video library", "Questions and answers",
+  "Browse articles", "Watch videos", "Read articles", "Browse questions", "See how it works",
+  "Explore managed virtual support", "Find the Right Fit".
+- Video placeholder titles (three) and the "Coming soon" label.
+- The home page eyebrow "Australian-managed specialist support" (from the first mockup; the deployed
+  hero has no eyebrow).
+- The line under "Trusted by leading Australian businesses" — no deployed equivalent; removal was
+  suggested and is still open.
+
+---
+
+## 9. Open items
 
 **Blocked on the client**
 - **H4** — the real high-resolution logo file has not been supplied.
-- **Insurance hero image:** uses an unused library photo (house model, coins, laptop). Replace if the client has a better one.
-- **Service testimonials:** each service page has a "Client feedback" section (PDF heading, three "Client name/business" cards with the PDF placeholder "Feedback (is) currently being gathered."). Replace the placeholders with real, approved feedback.
+- **Insurance hero image** — currently an unused library photo (house model, coins, laptop).
+- **Service client feedback** — all 30 cards are placeholders.
+- **Approved videos** — URLs, captions and transcripts; the three cards are placeholders.
+- **Client logos, testimonials and portraits** — consent and rights confirmation.
 
 **Needs client confirmation**
-- **Anne's experience:** the About Us document says "over 35 years" in Our Story but "two decades" in the FAQ. Both are shown exactly as written until the client confirms.
-- **Industry dropdown values:** the documents specify the field but not its options. It currently lists the About document's "Who we support" areas plus "Other".
-
-**Corrections made in the third session (2026-09-21)**
-- The Managed Virtual Support page was **not** fully integrated as previously recorded: several bullets and both FAQ answers were paraphrased rather than taken from the PDF. All copy is now verbatim from `HR-Managed Virtual Support.pdf`. The home page ownership band shares this data and changed with it.
-- About page: H1 restored to "About Virtual Office Angels" (the intro paragraph had been used as the H1); "View our services" links now go to `/services`; two dropped source sentences restored; Our Story and Founder recombined into one section (text left, portrait right, no caption); the "We listen before we recruit" paragraph moved to "The way we work". A specialist-websites section links to Virtual Financial Support and Virtual Loans Assistant.
-- The four stages on `/how-it-works` and the home preview now use the PDF's names and text (Consulting & Role Planning, Sourcing & Candidate Matching, Onboarding & Integration, Ongoing Delivery & Support).
-- The shared contact form now matches both documents (Business name, Industry dropdown, "What support do you need?", "Submit enquiry"). About and Managed Virtual Support use their documents' own "Let's talk" copy; the contact page uses the shared form instead of its own copy.
-- Managed Virtual Support uses the About-style hero. Photo-background heroes are reserved for the service pages and the `/services` index.
-
-**Decisions still outstanding**
-- `/why-voa` route name versus its "Managed Virtual Support" label — confirm before WordPress.
-- Client Stories under About vs. Insights — easy to move.
+- **Anne's experience:** the home page now says "two decades" (deployed copy) while the About page's
+  Our Story still says "over 35 years" (the About document). The conflict is unresolved.
+- **Industry dropdown values** — the documents specify the field, not its options.
+- **`/why-voa` route name** versus its Managed Virtual Support label — settle before WordPress.
+- **Client Stories** under About vs. Insights.
+- Whether the two "Prototype…" notices in section 5.6 should be removed.
 
 **Known debt**
-- `SourcePage.tsx` fallback branch for services without a `serviceDetails` entry — harmless dead code once all services are confirmed.
-- Route-specific SEO/meta not implemented; `index.html` has one generic title.
-- Contact forms are prototypes — no real submission, validation, spam protection, or consent record.
-- `ServicesPage` in `SourcePage.tsx` is **live** — it renders the `/services` index (template `services`). Do not remove it.
+- Route-specific SEO/meta not implemented; `index.html` has one generic title. Per-service SEO strings
+  already exist in `serviceDetails.ts`.
+- Contact forms are prototypes — no submission, validation, spam protection or consent record.
+- `ServicesPage` in `SourcePage.tsx` is **live** (the `/services` index). Do not remove it.
+- `SourcePage.tsx` keeps a fallback branch for services without a `serviceDetails` entry.
+- `MOCKUP_1_REVISION_GUIDE.md` G3 no longer matches the built section (see 5.5).
 
-## Verification at handoff
+---
+
+## 10. Verification at handoff
 
 - `npm run lint` — clean
-- `tsc --noEmit` on both configs — clean
-- Production build — succeeds (built in ~1.5s)
-- All work committed on `main`. `d4ff43f` is already on `origin/main` (pushed by the user). Future sessions commit only; the user pushes.
+- `npx tsc --noEmit` on both configs — clean
+- Production build — succeeds (~4.3s, built to a scratch directory)
+- Browser-checked this session: service pages (Insurance, Executive & Administrative), About,
+  Insights, Videos, FAQs, Client Stories and the whole home page, **desktop light theme only**
+- **Not checked:** mobile widths and dark theme for everything changed this session
+- Working tree clean; `main` and `legacy-w2` both at `c1e6563`
