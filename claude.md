@@ -1,6 +1,6 @@
 # Virtual Office Angels project context
 
-This file is the authoritative handoff for AI-assisted work in this repository. Read it before inspecting or changing code. The older Bolt prompts and rebuild brief are historical artifacts only; they are not current instructions.
+This file is the authoritative handoff for AI-assisted work in this repository. Read it before inspecting or changing code, then read `docs/SESSION_HANDOFF.md`, which carries the current page-by-page state, the working method the user expects, and the open client items. Where the two disagree on what is built today, the session handoff is newer. The older Bolt prompts and rebuild brief are historical artifacts only; they are not current instructions.
 
 ## Current outcome and direction
 
@@ -21,9 +21,10 @@ This file is the authoritative handoff for AI-assisted work in this repository. 
 - Repository: `https://github.com/MhariLimin/VOA-Mockup.git`
 - Selected branch: `main`
 - `main` was synchronized with `origin/main` before this handoff was prepared. The expected uncommitted changes after preparation are this context file and `docs/WEEK_2_ACTION_PLAN.md`; treat them as user-owned documentation.
-- Recorded HEAD at handoff: `b351731` (`Polish site motion and visual surfaces`).
+- Recorded HEAD when this file was first written: `b351731`. Week 2 then added `69f6a64`, `d4ff43f`, `fcf6558`, `c1e6563`, `5d11b21`, `15857eb`; see `docs/SESSION_HANDOFF.md` for the current branch table.
 - Other branches:
-  - `mock-layout-2`: rejected alternate design; do not copy its visual system into Layout 1.
+  - `legacy-w1` and `legacy-w2`: rollback points taken at the end of weeks 1 and 2. Do not develop on them.
+  - `mock-layout-2`: rejected alternate design as a whole. Specific components named in `docs/MOCKUP_1_REVISION_GUIDE.md` were adopted deliberately; do not copy anything else from it.
   - `bolt/layout-enhance-1`: historical Bolt work already merged as applicable; it is no longer the required working branch.
 - Before editing, run `git status --short --branch`. Preserve unrelated user changes.
 - Do not commit, push, merge, deploy, create branches, or change remote state unless the user explicitly asks.
@@ -89,10 +90,11 @@ Routes are generated through React Router:
 
 - `/`
 - `/about` with `#story` and `#leadership` sections
-- Nine service routes:
+- Ten service routes:
   - `/services/mortgage-loans`
   - `/services/financial-planning`
   - `/services/accounting-bookkeeping`
+  - `/services/insurance-processing`
   - `/services/real-estate-conveyancing`
   - `/services/back-office-admin`
   - `/services/digital-marketing`
@@ -110,9 +112,9 @@ Routes are generated through React Router:
 - `/thank-you`
 - Custom not-found route
 
-The standalone Services Overview page was intentionally removed. The Services navigation label links to Mortgage & Loans and exposes the nine service destinations in its dropdown.
+`/services` is live again: the user reinstated it (revision HP1) and it renders through `ServicesPage` in `SourcePage.tsx`. The Services mega menu shows all ten destinations in two columns of five, using the labels from `SERVICE PAGES_VOA.pdf`. Renamed services keep their original URLs (Executive & Administrative at `/services/back-office-admin`, Sales & E-Commerce at `/services/sales-marketing`, Copywriting at `/services/creative-copywriting`); settle naming with a redirect map at WordPress migration.
 
-The staging source presented six primary services. The additional Sales & Marketing, Creative & Copywriting, and IT & Technology routes came from the production site and remain flagged for client confirmation. Do not represent them as staging-derived or invent their scope.
+The staging source presented six primary services. The client has since supplied full content for all ten in `SERVICE PAGES_VOA.pdf`, so the earlier "production-only, unconfirmed" flags have been removed. Do not invent scope beyond that document.
 
 Captured local source library at handoff:
 
@@ -131,7 +133,7 @@ Captured local source library at handoff:
 - Use restrained section sizing, readable line lengths, standard indentation, and compact cards rather than oversized typography or boxes.
 - Preserve the real Virtual Office Angels logo; never replace it with plain `VOA` lettering. The current local logo has a transparent background.
 - Fixed header remains visible while scrolling.
-- Layout 1 dropdowns are click-operated and keyboard dismissible. Do not silently change this interaction.
+- Header dropdowns open on hover on pointer devices, and stay click/Enter to open and Escape to close for keyboard and touch (revision H1, which supersedes the earlier click-only rule). Do not silently change this interaction.
 - Light/dark theme uses `data-theme` and `localStorage` key `voa-theme`.
 - Motion includes visible scroll reveals, staggered cards, hover elevation, carousel movement, and page-section entry animation.
 - Always preserve `prefers-reduced-motion` behavior and keyboard accessibility.
@@ -141,33 +143,31 @@ Captured local source library at handoff:
 
 ## Homepage composition currently implemented
 
-The homepage currently includes:
+Rebuilt during week 2 to follow the deployed VOA Content proposal (`https://voa-mockup.vercel.app/`). In order:
 
-1. Hero with matching/support visual and two CTAs.
-2. Client-logo trust carousel.
-3. Evidence strip.
-4. “A more considered match” introduction.
-5. Founder summary and portrait.
-6. Six compact primary-service cards.
-7. Why Virtual Office Angels summary.
-8. How It Works summary.
-9. Client-experience media section.
-10. Three article previews.
-11. Three shortened testimonial previews with a link to all testimonials.
-12. Summary FAQs.
-13. Direct contact form.
+1. Hero: "Get Specialised & HR Managed Virtual Support!", the deployed description, two CTAs, and the four-figure row.
+2. Client-logo trust carousel under "Trusted by leading Australian businesses."
+3. Six compact service cards under "Virtual support tailored around your industry, systems and standards."
+4. "More than recruitment" dark section: "What is an HR Managed Virtual Support Solution?", four stage cards, and links to How It Works and Managed Virtual Support. This single section replaced the former separate "Managed virtual support" band and "How it works" summary.
+5. Founder section: "Australian-led, people-first outsourcing company" / "Built on HR expertise and first-hand market experience."
+6. "Insights and resources" with three article previews.
+7. "Client feedback" media section with three shortened testimonial previews.
+8. FAQs: the five deployed questions and answers.
+9. "Let's talk" direct contact form.
+
+Section headings highlight specific words in `--heading-accent` through `main h2 em`, matching the words the deployed site colours.
 
 Historical duplicate founder markup still exists under `.legacy-home-founder` but is hidden by CSS. Treat this as a cleanup candidate only if it is within an approved task; do not alter the visible design incidentally.
 
 ## Explicit decisions made during Layout 1 iteration
 
 - Only two proposed utility pages were retained: the form-submission/Thank You page and the custom 404 page. Do not reintroduce other speculative pages.
-- The standalone Services Overview page was removed from both routing and the Services dropdown. Do not restore it without a new request.
+- The standalone Services Overview page was removed, then reinstated by the user in revision HP1. `/services` is live; keep it.
 - The homepage client carousel must appear directly after the hero, use the complete local client set, advance every 1 second, and have no pause button. The current intentional pause-on-hover/focus behavior supports usability.
 - The old repeated blue “Ready to Start” CTA panels were rejected. Relevant pages use a direct contact form instead. The internal function name `FinalCta` is historical; its rendered content is a contact form.
 - Homepage testimonial previews should remain compact, visually elevated, consistently sized, shortened with an ellipsis, and link to the full testimonials page.
 - Real profile photos were requested for testimonials, but verified portraits are not currently available. Initials are placeholders; never generate or assign fake portraits.
-- The founder summary belongs near the “more considered match” section on the homepage. The detailed founder portrait/content belongs in the leadership section rather than being repeated as page-hero decoration.
+- The homepage founder section (now “Australian-led, people-first outsourcing company”) carries the summary and portrait. The detailed founder narrative belongs in the About page’s leadership section rather than being repeated as page-hero decoration.
 - Each service page should retain a relevant, service-specific image. Avoid generic repeated hero imagery.
 - Our Story and Founder & Leadership must remain distinct narratives; do not duplicate the same copy between them.
 - Insights previews and article pages must use local source article content and images, not outbound links back to the staging site. Article detail pages include next-article navigation.
@@ -180,19 +180,31 @@ Historical duplicate founder markup still exists under `.legacy-home-founder` bu
 ## Known prototype limitations and validation items
 
 - Contact forms currently navigate to `/thank-you`; there is no real form submission, server-side validation, consent record, email delivery, or spam protection.
-- Video cards are placeholders pending approved video URLs, captions, and transcripts.
-- Testimonial “avatars” are initials, not verified client portraits. Do not fabricate photographs.
+- Video cards are placeholders pending approved video URLs, captions, and transcripts. They render a “Coming soon” player-style poster (`VideoPoster`), not a real thumbnail.
+- Testimonial “avatars” are initials, not verified client portraits, and the service-page feedback cards use a generic icon with the document’s own “feedback currently being gathered” placeholder. Do not fabricate photographs or quotes.
 - Source testimonials, logos, founder biography, company details, service scope, and images require final client approval for accuracy, rights, and consent.
-- The three production-only services require explicit confirmation before WordPress migration.
+- All ten services now have client-supplied content. What still needs confirmation is the route naming for the renamed services and for `/why-voa`.
 - `index.html` has one generic prototype title and description. Route-specific production SEO is not implemented.
 - The SPA depends on the Vercel rewrite for direct route loading.
 - The design tokens name Manrope and Inter, but no webfont loading was found at handoff; browsers may use system fallbacks. Record this in the audit and confirm font licensing/source before production.
-- `SourcePage.tsx` currently duplicates testimonial data and contact-form markup that also exist in `src/content/testimonials.ts` and `src/components/ui/ContactForm.tsx`. Record this as migration/refactoring debt; do not refactor it incidentally during unrelated visual work.
-- `SourcePage.tsx` still contains a `ServicesPage` renderer and the `services` template union even though no Services Overview route is registered. Treat it as dead-code/audit work, not permission to restore that page.
+- The duplicated testimonial data and contact-form markup in `SourcePage.tsx` were removed; both now come from `src/content/testimonials.ts` and `src/components/ui/ContactForm.tsx`.
+- `ServicesPage` in `SourcePage.tsx` is **live** — it renders the `/services` index. Do not remove it as dead code. A fallback branch for services without a `serviceDetails` entry is unused while all ten are defined.
 - The homepage contains hidden legacy founder markup. Confirm visual and content parity before removing it in a focused cleanup.
 - Multiple page templates use the historically named `FinalCta`, but it renders the requested contact form. Judge rendered behavior, not the function name.
 - Some historical Bolt prompt files may describe abandoned or superseded requests. Never treat them as the current backlog.
 - Review the actual rendered UI before declaring a visual defect; do not infer appearance only from class names.
+
+## How the user runs this project
+
+Read `docs/SESSION_HANDOFF.md` section 7 in full before implementing anything. In short:
+
+- Requests arrive **per page or per section**, often as a screenshot, a pasted phrase from the deployed VOA Content site, or a short list of gripes. Turn them into numbered, independently checkable items before coding — `docs/MOCKUP_1_REVISION_GUIDE.md` is the pattern, including its [Confirmed] / [Assumption] / [Blocked] tags and its legend for the user's shorthand.
+- Ask the open questions **in one batch** before implementing, and recommend a default rather than listing neutral options.
+- Implement **one page or category at a time**, verify, report, and wait for approval before the next.
+- Build new sections from existing markup and classes; scope new CSS to a modifier class rather than restyling shared components; keep motion, reduced-motion and keyboard behaviour intact.
+- Never invent user-facing copy, and name every string that had to be written.
+- Replies are bullets and short sections: outcome, changed files, verification actually run, then decisions needed. State plainly what was not checked.
+- Commit only when asked; never push.
 
 ## WordPress production recommendation
 
