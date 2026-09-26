@@ -197,6 +197,22 @@ will state…" line.
 - Under every contact form: "Prototype form only. Connect validation, spam protection, consent
   records, and WordPress form handling before launch."
 
+### 5.7 Small details that are easy to trip on
+
+- **`heroStats` feeds two places:** the home hero figures and the sitewide separator strip. Editing it
+  changes both.
+- **Button label capitalisation differs on purpose:** the home and `/services` heroes say
+  "Find the Right Fit"; the ten service pages say "Find The Right Fit" because that is the PDF's own
+  capitalisation. The user was told; unify only if asked.
+- **`ownershipSplit` and `processContent` are no longer used by the home page** after the merge in 5.4,
+  but both are still live on `/why-voa` and `/how-it-works`. Do not delete them.
+- **`main h2 em` is the highlight hook.** Any new `<em>` inside a page heading picks up the accent
+  colour automatically, so do not use `<em>` for real emphasis in headings.
+- **The dark band on service pages** (`voa-model-grid-4`) is separate from the sitewide strip
+  (`.voa-strip`). They look related but share no CSS.
+- **`FinalCta` is a historical function name** that renders a contact form. Judge rendered behaviour,
+  not names.
+
 ---
 
 ## 6. Content architecture — do not break this
