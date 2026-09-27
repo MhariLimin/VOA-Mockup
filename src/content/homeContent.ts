@@ -1,3 +1,41 @@
+/* Hero background slideshow. Client-supplied photographs in public/assets/client/hero, plus the two
+   from the previous set the client asked to keep (the team meeting and the home-office laptop).
+   Replacing them is an edit to this array alone. */
+export const heroBackgrounds = [
+  '/assets/source/staging/images/74d91c0837-job-5382501_1280.jpg',
+  '/assets/client/hero/hero-teamwork-meeting.jpg',
+  '/assets/client/hero/hero-video-call-team.jpg',
+  '/assets/source/staging/images/c88686d2b0-1690.jpg',
+  '/assets/client/hero/hero-tablet-office.jpg',
+  '/assets/client/hero/hero-project-analytics.jpg',
+  '/assets/client/hero/hero-pexels-sora-shimazaki-5673503.jpg',
+  '/assets/client/hero/hero-pexels-ivan-s-8117494.jpg',
+] as const;
+
+/* The closing contact sections run their own set: the client's contact photographs plus the
+   home-and-laptop image the client asked to keep. Separate from the hero so the two can differ.
+
+   The backdrop is masked so only its left side shows, so every image here has to carry its subject
+   on the left. Two of the supplied contact photographs did not — a financial still life with a blank
+   curtain down the left, and a handshake dead centre — and zooming past the crop to pan them into
+   view still read as neither visible nor a fit for a "let's talk" section. Both were replaced with
+   photographs of people in conversation.
+
+   `frame` and `focus` stay available for any future image that needs panning. */
+export interface ContactBackground {
+  src: string;
+  frame?: string;
+  focus?: string;
+}
+
+export const contactBackgrounds: readonly ContactBackground[] = [
+  { src: '/assets/source/staging/images/c88686d2b0-1690.jpg' },
+  { src: '/assets/client/contact/contact-team-laptop.jpg' },
+  { src: '/assets/client/hero/hero-teamwork-meeting.jpg' },
+  { src: '/assets/client/contact/contact-home-office-call.jpg' },
+  { src: '/assets/source/sister/virtualloansassistant-client-meeting.jpg' },
+];
+
 export const heroStats = [
   ['15+ years', 'of helping Australian businesses'],
   ['Top 5%', 'hiring selection and requirements'],
@@ -8,9 +46,9 @@ export const heroStats = [
 /* Card systems lists are trimmed to keep the six cards visually even; each service page carries
    the complete list from the content proposal. */
 export const specialistServices = [
-  { title: 'Mortgage & Loans', href: '/services/mortgage-loans', text: 'Loan-processing and broker administration support.', image: '/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg', systems: ['Connective', 'Mercury', 'Symmetry', 'AdviserLogic'] },
-  { title: 'Financial Planning', href: '/services/financial-planning', text: 'Application, document, and client administration.', image: '/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg', systems: ['Xplan', 'Risk Researcher', 'CALM', 'AdviserLogic'] },
-  { title: 'Accounting & Bookkeeping', href: '/services/accounting-bookkeeping', text: 'Reliable recurring finance and bookkeeping assistance.', image: '/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg', systems: ['Xero', 'Saasu', 'MYOB'] },
+  { title: 'Mortgage & Loans', href: '/services/mortgage-loans', text: 'Loan-processing and broker administration support.', image: '/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg', systems: ['Mercury Nexus', 'Salestrekker', 'AFG FLEX', 'Infinity'] },
+  { title: 'Financial Planning', href: '/services/financial-planning', text: 'Application, document, and client administration.', image: '/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg', systems: ['Xplan', 'AdviserLogic', 'Midwinter', 'Worksorted'] },
+  { title: 'Accounting & Bookkeeping', href: '/services/accounting-bookkeeping', text: 'Reliable recurring finance and bookkeeping assistance.', image: '/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg', systems: ['Xero', 'MYOB', 'QuickBooks', 'SAP'] },
   { title: 'Real Estate', href: '/services/real-estate-conveyancing', text: 'CRM, documentation, scheduling, and back-office support.', image: '/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg', systems: ['your property CRM', 'email and administration platforms'] },
   { title: 'Executive & Administrative', href: '/services/back-office-admin', text: 'Everyday operational support that protects your focus.', image: '/assets/source/staging/images/6f63e14c16-2149013955.jpg', systems: ['Your CRM', 'Microsoft 365 or Google Workspace', 'Task-management tools'] },
   { title: 'Digital Marketing', href: '/services/digital-marketing', text: 'Campaign, publishing, reporting, and content coordination.', image: '/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg', systems: ['Google Analytics', 'Facebook and Instagram', 'Your CMS'] },
@@ -27,11 +65,14 @@ export const buyerQuestions: readonly { question: string; answer: string; link?:
 ];
 
 /* "More than recruitment" section, verbatim from the VOA Content homepage (saved state). */
+/* Stage names are the full titles from HR-Managed Virtual Support.pdf, matching processContent.ts and
+   the /how-it-works page. They had been shortened here ("Consulting & Planning", "Sourcing &
+   Matching"); the same stage should not carry two different names across the site. */
 export const moreThanRecruitment = {
   intro: 'At Virtual Office Angels, you receive more than a candidate list. Our team helps define the role, assesses the match, and supports the working relationship after placement.',
   stages: [
-    { name: 'Consulting & Planning', heading: 'Clarify the role before recruitment starts.', text: 'We review the work that needs attention, the systems involved and the experience required.' },
-    { name: 'Sourcing & Matching', heading: 'Assess capability, experience and working fit.', text: 'We screen candidates against the practical demands of your role, then present a focused shortlist for your review.' },
+    { name: 'Consulting & Role Planning', heading: 'Clarify the role before recruitment starts.', text: 'We review the work that needs attention, the systems involved and the experience required.' },
+    { name: 'Sourcing & Candidate Matching', heading: 'Assess capability, experience and working fit.', text: 'We screen candidates against the practical demands of your role, then present a focused shortlist for your review.' },
     { name: 'Onboarding & Integration', heading: 'Prepare the new hire and the working conditions.', text: 'We help establish expectations, reporting lines and the initial working rhythm while your business provides its role-specific processes and approvals.' },
     { name: 'Ongoing Delivery & Support', heading: 'Keep performance and communication on track.', text: 'A dedicated support structure helps address feedback, availability, and performance matters throughout the engagement.' },
   ],

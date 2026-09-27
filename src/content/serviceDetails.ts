@@ -66,7 +66,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ],
     systemsHeading: "Match the role to the tools you use.",
     systemsIntro: "Our virtual mortgage and loan processing support starts with the outcomes, recurring work, and systems that need coverage. We then define the role around tasks you can document, review, and integrate into your existing team.",
-    systems: ["Connective", "Mercury", "Podium", "Salestrekker", "Symmetry", "Flex", "AdviserLogic", "COIN"],
+    systems: ["Mercury Nexus", "Salestrekker", "AFG FLEX", "Infinity", "MyCRM", "BrokerEngine"],
     fitEyebrow: "When to hire a virtual loans assistant",
     fitHeading: "Choose specialised support when loan processing needs more than general admin.",
     fits: [
@@ -117,7 +117,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ],
     systemsHeading: "Match the role to the systems behind the work.",
     systemsIntro: "Tell us which platforms form part of your workflow. We factor relevant system experience into the candidate matching process.",
-    systems: ["XPlan", "WealthSolver", "Risk Researcher", "CALM / XTools", "Midwinter", "AdviserLogic"],
+    systems: ["Xplan", "AdviserLogic", "Midwinter", "Worksorted", "Practifi"],
     fitEyebrow: "When to hire virtual financial support",
     fitHeading: "Choose specialised support when admin starts taking advisers away from clients.",
     fits: [
@@ -168,7 +168,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ],
     systemsHeading: "Match the role to your accounting software and tools.",
     systemsIntro: "Tell us which systems form part of your accounting and bookkeeping process. Relevant software experience is factored into the candidate matching process.",
-    systems: ["Xero", "MYOB", "QuickBooks", "Saasu", "Microsoft Excel", "Client Document Systems"],
+    systems: ["Xero", "MYOB", "QuickBooks", "SAP", "Airwallex", "Stripe"],
     fitEyebrow: "When to hire a virtual assistant for accounting & bookkeeping",
     fitHeading: "Choose specialised support when your bookkeeping needs more consistent attention.",
     fits: [

@@ -141,7 +141,10 @@ export function Header() {
           <ThemeToggle />
           <Link className="header-phone" to="/contact">
             <PhoneIcon />
-            <span>{phoneNumber}</span>
+            <span className="header-phone-text">
+              <small>Call us</small>
+              <strong>{phoneNumber}</strong>
+            </span>
           </Link>
         </div>
       </div>

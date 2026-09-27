@@ -11,6 +11,14 @@
   --heading-accent: #dc4f1e;
   --action-text: #17202a;
   --focus: #075fae;
+  /* W3-HP1/HP4: the hero photograph reads through a scrim that keeps the light surface behind the
+     copy and clears toward the right, and the figures sit on it as a glass panel. */
+  --hero-scrim: linear-gradient(104deg, rgb(247 246 242 / 95%) 0%, rgb(247 246 242 / 80%) 40%, rgb(247 246 242 / 20%) 100%);
+  --glass-surface: rgb(255 255 255 / 34%);
+  --glass-border: rgb(16 34 53 / 12%);
+  /* W3-HP7 / W3-HP10: how strongly a photograph washes through a section behind its content. */
+  --service-wash: 0.2;
+  --section-wash: 0.34;
 }
 
 :root[data-theme='dark'] {
@@ -25,4 +33,9 @@
   --heading-accent: #ff9a3d;
   --action-text: #101820;
   --focus: #79d0ff;
+  --hero-scrim: linear-gradient(104deg, rgb(8 21 34 / 95%) 0%, rgb(8 21 34 / 86%) 46%, rgb(8 21 34 / 48%) 100%);
+  --glass-surface: rgb(16 34 53 / 40%);
+  --glass-border: rgb(220 235 247 / 20%);
+  --service-wash: 0.22;
+  --section-wash: 0.34;
 }

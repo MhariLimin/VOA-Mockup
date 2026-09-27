@@ -51,7 +51,6 @@ export function ClientCarousel() {
       </div>
     </div>
     <div className="carousel-controls">
-      <span>{String((active % clients.length) + 1).padStart(2, '0')} / {clients.length}</span>
       <div><button type="button" onClick={previous} aria-label="Previous client">←</button><button type="button" onClick={() => setActive((current) => current >= clients.length - 1 ? clients.length : current + 1)} aria-label="Next client">→</button></div>
     </div>
   </div>;
