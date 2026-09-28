@@ -14,6 +14,8 @@ import { ContactForm } from '../components/ui/ContactForm';
 import { RotatingBackdrop } from '../components/ui/RotatingBackdrop';
 import { HeadingAccent } from '../components/ui/HeadingAccent';
 import { stageGlyphs } from '../components/ui/StageGlyphs';
+import { ItemGlyph, RoleGlyph } from '../components/ui/ItemGlyphs';
+import { ArrowLeft, ArrowRight, ArrowUpRight, BuildingIcon, MailIcon, PhoneIcon, PinIcon, PlayMark, PlusMark, ValueIcon } from '../components/ui/Icons';
 import { contactBackgrounds } from '../content/homeContent';
 
 function Hero({ page, aside }: { page: SourcePageBrief; aside?: ReactNode }) {
@@ -51,20 +53,8 @@ function StackGlyph() {
   </svg>;
 }
 
-function FocusGlyph() {
-  return <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-    <circle cx="14" cy="14" r="9.5" opacity="0.45" /><circle cx="14" cy="14" r="5.5" />
-    <circle cx="14" cy="14" r="1.9" fill="currentColor" stroke="none" />
-  </svg>;
-}
-
-function ShieldGlyph() {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 2.75 20 6v6.1c0 4.4-3.3 7.8-8 9.15-4.7-1.35-8-4.75-8-9.15V6l8-3.25Z" />
-    <path d="m8.6 12.2 2.4 2.4 4.4-4.9" strokeLinecap="round" />
-  </svg>;
-}
-
+/* A rising trend, not the shield this card used to carry: it now lists what improves for the
+   business rather than what stays outside the role. */
 /* W3-SP1: systems as a hub-and-spoke constellation. Chip positions are computed on an ellipse so the
    layout stays even for any count between four and eight, and the connector lines are drawn in a
    stretched viewBox with non-scaling strokes so they stay hairline at every width. */
@@ -111,6 +101,8 @@ function SystemsDiagram({ systems }: { systems: readonly string[] }) {
   );
 }
 
+
+
 function ServicePage({ page }: { page: SourcePageBrief }) {
   const detail = serviceDetails[page.path];
   const heroAside = page.image ? <img className="inner-hero-image" src={page.image} alt={page.imageAlt ?? ''} /> : undefined;
@@ -143,27 +135,52 @@ function ServicePage({ page }: { page: SourcePageBrief }) {
       <SystemsDiagram systems={detail.systems} />
     </div></section>
 
-    <section className="section"><div className="container"><div className="section-heading"><div><p className="eyebrow">{detail.fitEyebrow}</p><h2><HeadingAccent text={detail.fitHeading} /></h2></div></div>{/* W3-SP3: the four signals sit either side of a central backbone that carries the role emblem.
-        The boundary is kept off the backbone and given its own shield-marked card, because it is a
-        constraint on the role rather than a fifth signal. */}
-    <p className="eyebrow fit-legend">A good fit when</p>
-    <div className="fit-backbone" style={{ '--fit-rows': Math.ceil(detail.fits.length / 2) } as CSSProperties}>
-      {detail.fits.map((fit, index) => (
-        <article className="fit-signal" key={fit} data-side={index % 2 === 0 ? 'start' : 'end'}>
-          <span className="fit-badge" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-          <p>{fit}</p>
-        </article>
-      ))}
-      <span className="fit-spine" aria-hidden="true"><i className="fit-emblem"><FocusGlyph /></i></span>
-    </div>
-    <aside className="fit-boundary">
-      <span className="fit-boundary-mark" aria-hidden="true"><ShieldGlyph /></span>
-      <div>
-        <p className="eyebrow">{detail.boundaryLabel}</p>
-        <h3>{detail.boundaryHeading}</h3>
-        <p>{detail.boundaryText}</p>
+    <section className="section"><div className="container">
+      <div className="section-heading"><div><p className="eyebrow">{detail.fitEyebrow}</p><h2><HeadingAccent text={detail.fitHeading} /></h2></div></div>
+
+      {/* W3-SP3 revision: one diagram rather than a list of signals and a card of outcomes. The
+          conditions converge on the matched specialist and the results fan back out, so the section
+          reads left to right as cause, role, effect. No card or box anywhere — the wires, the icons
+          and the hub carry it. Each item's icon is resolved from its own wording (see ItemGlyphs). */}
+      <div className="fit-flow">
+        <div className="fit-flow-side" data-side="in">
+          <p className="eyebrow">A good fit when</p>
+          <ul>
+            {detail.fits.map((fit) => (
+              <li key={fit}>
+                <span className="fit-flow-text">{fit}</span>
+                <span className="fit-flow-icon" aria-hidden="true"><ItemGlyph text={fit} /></span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="fit-flow-hub">
+          <svg className="fit-flow-wires" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            {[12.5, 37.5, 62.5, 87.5].map((y) => (
+              <path key={`in-${y}`} className="fit-flow-wire" d={`M0,${y} C 26,${y} 28,50 50,50`} vectorEffect="non-scaling-stroke" />
+            ))}
+            {[12.5, 37.5, 62.5, 87.5].map((y) => (
+              <path key={`out-${y}`} className="fit-flow-wire" data-out="true" d={`M50,50 C 72,50 74,${y} 100,${y}`} vectorEffect="non-scaling-stroke" />
+            ))}
+          </svg>
+          <span className="fit-flow-node" aria-hidden="true"><RoleGlyph /></span>
+        </div>
+
+        <div className="fit-flow-side" data-side="out">
+          <p className="eyebrow">{detail.outcomeLabel}</p>
+          <ul>
+            {detail.outcomePoints.map((point) => (
+              <li key={point}>
+                <span className="fit-flow-icon" aria-hidden="true"><ItemGlyph text={point} /></span>
+                <span className="fit-flow-text">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </aside></div></section>
+      <p className="fit-flow-note">{detail.outcomeHeading}</p>
+    </div></section>
 
     <section className="section muted-section service-feedback"><div className="container">
       <div className="section-heading"><div><p className="eyebrow">Client feedback</p><h2><HeadingAccent text={detail.feedbackHeading} /></h2></div></div>
@@ -212,11 +229,11 @@ function ServicesPage({ page }: { page: SourcePageBrief }) {
           <p><span>{detail?.lead ?? service.summary}</span></p>
         </div>
         <img src={service.image} alt="" loading="lazy" />
-        <b aria-hidden="true">↗</b>
+        <ArrowUpRight />
       </Link>;
     })}</div></div></section>
 
-    <section className="section muted-section"><div className="container"><div className="section-heading"><div><p className="eyebrow">Start from the work</p><h2>Not sure which service <em>fits the work</em>?</h2></div></div><div className="service-router">{serviceRouter.map(([label, href]) => <Link to={href} key={href}>{label} <span aria-hidden="true">→</span></Link>)}</div></div></section>
+    <section className="section muted-section"><div className="container"><div className="section-heading"><div><p className="eyebrow">Start from the work</p><h2>Not sure which service <em>fits the work</em>?</h2></div></div><div className="service-router">{serviceRouter.map(([label, href]) => <Link to={href} key={href}>{label} <ArrowRight /></Link>)}</div></div></section>
 
     <PageClosing />
   </>;
@@ -279,7 +296,7 @@ function AboutPage({ page }: { page: SourcePageBrief }) {
           {sisterSites.map((site) => (
             <a className="brand-card" href={site.url} target="_blank" rel="noopener noreferrer" key={site.url}>
               <span className="brand-logo"><img src={site.logo} alt="" loading="lazy" /></span>
-              <h3>{site.name} <span className="brand-arrow" aria-hidden="true">↗</span></h3>
+              <h3>{site.name} <ArrowUpRight className="brand-arrow" /></h3>
               <p>{site.description}</p>
               <span className="brand-domain">{site.domain}<span className="sr-only"> (opens in a new tab)</span></span>
             </a>
@@ -299,10 +316,10 @@ function AboutPage({ page }: { page: SourcePageBrief }) {
           </div>
         </div>
         <div className="values-grid">
-          <article><h3>Clarity</h3><p>Good work depends on clear expectations. We define responsibilities, communication channels, approval points, and measures of success so everyone understands how the role should work.</p></article>
-          <article><h3>Accountability</h3><p>We take ownership of the support we provide. When an issue arises, we address it directly, agree on the next steps, and follow through on what was discussed.</p></article>
-          <article><h3>Consistency</h3><p>Reliable support requires steady communication and dependable processes. We keep recruitment, onboarding, HR, and client care organised throughout the working relationship.</p></article>
-          <article><h3>Client Care</h3><p>Our involvement continues after recruitment. We check in, listen to feedback, and support adjustments when responsibilities, systems, or business priorities change.</p></article>
+          <article><span className="value-icon" aria-hidden="true"><ValueIcon index={0} /></span><h3>Clarity</h3><p>Good work depends on clear expectations. We define responsibilities, communication channels, approval points, and measures of success so everyone understands how the role should work.</p></article>
+          <article><span className="value-icon" aria-hidden="true"><ValueIcon index={1} /></span><h3>Accountability</h3><p>We take ownership of the support we provide. When an issue arises, we address it directly, agree on the next steps, and follow through on what was discussed.</p></article>
+          <article><span className="value-icon" aria-hidden="true"><ValueIcon index={2} /></span><h3>Consistency</h3><p>Reliable support requires steady communication and dependable processes. We keep recruitment, onboarding, HR, and client care organised throughout the working relationship.</p></article>
+          <article><span className="value-icon" aria-hidden="true"><ValueIcon index={3} /></span><h3>Client Care</h3><p>Our involvement continues after recruitment. We check in, listen to feedback, and support adjustments when responsibilities, systems, or business priorities change.</p></article>
         </div>
       </div>
     </section>
@@ -489,9 +506,9 @@ function scrollToSection(section: HTMLElement | null) {
 function Pagination({ label, currentPage, pageCount, onChange }: { label: string; currentPage: number; pageCount: number; onChange: (page: number) => void }) {
   if (pageCount < 2) return null;
   return <nav className="pagination" aria-label={label}>
-    <button type="button" onClick={() => onChange(currentPage - 1)} disabled={currentPage === 1}>← Previous</button>
+    <button type="button" onClick={() => onChange(currentPage - 1)} disabled={currentPage === 1}><ArrowLeft /> Previous</button>
     {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => <button type="button" key={n} onClick={() => onChange(n)} className={currentPage === n ? 'active' : ''} aria-label={`Page ${n}`} aria-current={currentPage === n ? 'page' : undefined}>{n}</button>)}
-    <button type="button" onClick={() => onChange(currentPage + 1)} disabled={currentPage === pageCount}>Next →</button>
+    <button type="button" onClick={() => onChange(currentPage + 1)} disabled={currentPage === pageCount}>Next <ArrowRight /></button>
   </nav>;
 }
 
@@ -536,7 +553,7 @@ function InsightsPage({ page }: { page: SourcePageBrief }) {
     <section className="section library-section" id="articles" ref={listRef}><div className="container">
       <div className="section-heading library-heading"><p className="eyebrow">Article library</p><p className="library-count">{visibleArticles.length} {visibleArticles.length === 1 ? 'article' : 'articles'}</p></div>
       <div className="filter-row" aria-label="Article topics">{categories.map((category) => <button className={activeCategory === category ? 'active' : ''} aria-pressed={activeCategory === category} type="button" key={category} onClick={() => selectCategory(category)}>{category}</button>)}</div>
-      <div className="article-grid">{pageArticles.map((article, index) => <article className={index === 0 && currentPage === 1 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={article.featuredImage} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <span>→</span></Link></div></article>)}</div>
+      <div className="article-grid">{pageArticles.map((article, index) => <article className={index === 0 && currentPage === 1 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={article.featuredImage} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <ArrowRight /></Link></div></article>)}</div>
       <Pagination label="Article pages" currentPage={currentPage} pageCount={pageCount} onChange={goToPage} />
     </div></section>
     <PageClosing />
@@ -550,7 +567,7 @@ function VideoPoster({ label, title, className = '' }: { label: string; title?: 
   return <div className={`video-poster ${className}`.trim()} aria-hidden="true">
     <span className="video-poster-chip">Coming soon</span>
     <span className="video-poster-label">{label}</span>
-    <span className="video-poster-play">▶</span>
+    <span className="video-poster-play"><PlayMark /></span>
     {title && <span className="video-poster-title">{title}</span>}
     <span className="video-poster-bar"><i /><b>0:00</b></span>
   </div>;
@@ -589,7 +606,7 @@ function FaqPage({ page }: { page: SourcePageBrief }) {
         <Link className="button button-secondary" to="/contact">Ask another question</Link>
       </aside>
       <div>
-        <div className="faq-list">{topics[activeTopic].questions.map((i) => { const [question, answer] = sourceFaqs[i]; return <details key={question} open={openFaq === i}><summary onClick={(e) => { e.preventDefault(); setOpenFaq(openFaq === i ? -1 : i); }}>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>; })}</div>
+        <div className="faq-list">{topics[activeTopic].questions.map((i) => { const [question, answer] = sourceFaqs[i]; return <details key={question} open={openFaq === i}><summary onClick={(e) => { e.preventDefault(); setOpenFaq(openFaq === i ? -1 : i); }}>{question}<PlusMark /></summary><p>{answer}</p></details>; })}</div>
         <div className="faq-closing"><p>We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.</p><p>If you need any other clarification, call Virtual Office Angels or email <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a>.</p></div>
       </div>
     </div></section>
@@ -600,7 +617,7 @@ function FaqPage({ page }: { page: SourcePageBrief }) {
 function ContactPage({ page }: { page: SourcePageBrief }) {
   /* W3-CON1: this page builds its own contact section rather than using NextStepSection, so it wires
      the same rotating backdrop directly. */
-  return <section className="section contact-section has-section-backdrop"><RotatingBackdrop images={contactBackgrounds} /><div className="container contact-grid"><aside><p className="eyebrow">{page.eyebrow}</p><h1><HeadingAccent text={page.title} /></h1><p className="lead compact">{page.summary}</p><dl><div><dt>Phone</dt><dd><a href="tel:1300737883">1 300 737 883</a></dd></div><div><dt>Email</dt><dd><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></dd></div><div><dt>Address</dt><dd>Ground Floor, 465 Victoria Avenue<br />Chatswood NSW 2067, Australia</dd></div><div><dt>Company</dt><dd>ABN 58 155 459 788<br />ACN 155 459 788</dd></div></dl></aside><ContactForm /></div></section>;
+  return <section className="section contact-section has-section-backdrop"><RotatingBackdrop images={contactBackgrounds} /><div className="container contact-grid"><aside><p className="eyebrow">{page.eyebrow}</p><h1><HeadingAccent text={page.title} /></h1><p className="lead compact">{page.summary}</p><dl className="contact-details"><div><dt><span className="contact-detail-icon" aria-hidden="true"><PhoneIcon /></span>Phone</dt><dd><a href="tel:1300737883">1 300 737 883</a></dd></div><div><dt><span className="contact-detail-icon" aria-hidden="true"><MailIcon /></span>Email</dt><dd><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></dd></div><div><dt><span className="contact-detail-icon" aria-hidden="true"><PinIcon /></span>Address</dt><dd>Ground Floor, 465 Victoria Avenue<br />Chatswood NSW 2067, Australia</dd></div><div><dt><span className="contact-detail-icon" aria-hidden="true"><BuildingIcon /></span>Company</dt><dd>ABN 58 155 459 788<br />ACN 155 459 788</dd></div></dl></aside><ContactForm /></div></section>;
 }
 
 export function SourcePage({ page }: { page: SourcePageBrief }) {

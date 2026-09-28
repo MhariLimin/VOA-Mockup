@@ -6,6 +6,7 @@ import { testimonials } from '../content/testimonials';
 import { siteContent } from '../content/siteContent';
 import { ClientCarousel } from '../components/ui/ClientCarousel';
 import { ContactForm } from '../components/ui/ContactForm';
+import { ArrowLeft, ArrowRight, ArrowUpRight, MailIcon, PhoneIcon, PlusMark, HeroStatIcon } from '../components/ui/Icons';
 import { RotatingBackdrop } from '../components/ui/RotatingBackdrop';
 import { stageGlyphs } from '../components/ui/StageGlyphs';
 import { useImageRotator } from '../hooks/useImageRotator';
@@ -56,8 +57,8 @@ export function HomePage() {
         </div>
         <div className="container">
           <dl className="hero-stats">
-            {heroStats.map(([figure, label]) => (
-              <div key={figure}><dt>{figure}</dt><dd>{label}</dd></div>
+            {heroStats.map(([figure, label], index) => (
+              <div key={figure}><dt><span className="hero-stat-icon" aria-hidden="true"><HeroStatIcon index={index} /></span>{figure}</dt><dd>{label}</dd></div>
             ))}
           </dl>
           <div className="hero-dots" role="group" aria-label="Choose a background image">
@@ -129,7 +130,7 @@ export function HomePage() {
                     ))}
                   </p>
                 </div>
-                <span className="card-arrow" aria-hidden="true">↗</span>
+                <ArrowUpRight className="card-arrow" />
               </Link>
             ))}
           </div>
@@ -211,7 +212,7 @@ export function HomePage() {
             <h2>Built on <em>HR expertise</em> and first-hand <em>market experience</em>.</h2>
             <p className="lead">Virtual Office Angels was established by Anne Villavieja, whose two decades of HR experience with Australian companies shape our practical approach to recruitment and long-term virtual support.</p>
             <p>Based in Australia and originally from the Philippines, Anne brings together an understanding of the country’s professional talent with the expectations of Australian businesses. That perspective helps Virtual Office Angels build working relationships designed for confidence, continuity, and long-term value.</p>
-            <Link className="text-link" to="/about">Learn more about us <span aria-hidden="true">→</span></Link>
+            <Link className="text-link" to="/about">Learn more about us <ArrowRight /></Link>
           </div>
         </div>
       </section>
@@ -220,11 +221,11 @@ export function HomePage() {
         <div className="container">
           <div className="section-heading"><div><p className="eyebrow">Insights and resources</p><h2>Learn more about <em>delegation</em> and <em>virtual staffing</em>.</h2><p className="lead compact">Explore current guidance on building capacity, choosing the right virtual assistant, and getting more value from a remote team.</p></div><Link className="button button-secondary" to="/insights">Browse articles</Link></div>
           <div className="article-rail" ref={articleRail} tabIndex={0} role="group" aria-label="Latest articles">
-            {blogArticles.map((article) => <Link className="home-article-card" to={`/insights/${article.slug}`} key={article.slug}><span className="home-article-image"><img src={article.featuredImage} alt="" loading="lazy" /></span><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h3>{article.title}</h3><span className="text-link">Read article <span aria-hidden="true">→</span></span></Link>)}
+            {blogArticles.map((article) => <Link className="home-article-card" to={`/insights/${article.slug}`} key={article.slug}><span className="home-article-image"><img src={article.featuredImage} alt="" loading="lazy" /></span><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h3>{article.title}</h3><span className="text-link">Read article <ArrowRight /></span></Link>)}
           </div>
           <div className="rail-controls">
-            <button type="button" onClick={() => scrollRail(-1)} aria-label="Scroll to earlier articles">←</button>
-            <button type="button" onClick={() => scrollRail(1)} aria-label="Scroll to more articles">→</button>
+            <button type="button" onClick={() => scrollRail(-1)} aria-label="Scroll to earlier articles"><ArrowLeft /></button>
+            <button type="button" onClick={() => scrollRail(1)} aria-label="Scroll to more articles"><ArrowRight /></button>
           </div>
         </div>
       </section>
@@ -238,7 +239,7 @@ export function HomePage() {
             <p className="eyebrow">Client feedback</p>
             <h2>What Australian businesses say about <em>working with Virtual Office Angels</em>.</h2>
             <p className="lead">Real feedback on matching, service quality, and the day-to-day value of dependable virtual support.</p>
-            <Link className="text-link" to="/client-stories">Read all testimonials <span aria-hidden="true">→</span></Link>
+            <Link className="text-link" to="/client-stories">Read all testimonials <ArrowRight /></Link>
           </div>
         </div>
         <div className="container"><div className="home-testimonial-grid">{testimonials.slice(0, 3).map((testimonial) => <figure key={testimonial.name}><blockquote>{`${testimonial.quote.slice(0, 145).trimEnd()}...`}</blockquote><figcaption><span className="testimonial-avatar" aria-hidden="true">{testimonial.initials}</span><span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span></figcaption></figure>)}</div></div>
@@ -255,17 +256,17 @@ export function HomePage() {
             {buyerQuestions.map(({ question, answer, link }) => (
               <details key={question} open={openQuestion === question}>
                 <summary onClick={(event) => { event.preventDefault(); setOpenQuestion(openQuestion === question ? '' : question); }}>
-                  {question}<span aria-hidden="true">+</span>
+                  {question}<PlusMark />
                 </summary>
                 <p>{answer}{link && <> <Link to={link.href}>{link.label}</Link>.</>}</p>
               </details>
             ))}
-            <Link className="text-link" to="/faqs">View all FAQs <span aria-hidden="true">→</span></Link>
+            <Link className="text-link" to="/faqs">View all FAQs <ArrowRight /></Link>
           </div>
         </div>
       </section>
 
-      <section className="section contact-section page-contact-section has-section-backdrop" data-home-reveal="contact"><RotatingBackdrop images={contactBackgrounds} /><div className="container contact-grid"><aside><p className="eyebrow">Let’s talk</p><h2>Tell us where your business needs virtual support.</h2><p className="lead compact">Share the work that is taking time away from clients, revenue or delivery. We’ll help clarify the remote role and the experience it needs.</p><p className="contact-direct"><a href="tel:1300737883">1 300 737 883</a><br /><a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a></p></aside><ContactForm /></div></section>
+      <section className="section contact-section page-contact-section has-section-backdrop" data-home-reveal="contact"><RotatingBackdrop images={contactBackgrounds} /><div className="container contact-grid"><aside><p className="eyebrow">Let’s talk</p><h2>Tell us where your business needs virtual support.</h2><p className="lead compact">Share the work that is taking time away from clients, revenue or delivery. We’ll help clarify the remote role and the experience it needs.</p><p className="contact-direct"><a href="tel:1300737883"><PhoneIcon />1 300 737 883</a><a href="mailto:clientcare@virtualofficeangels.com.au"><MailIcon />clientcare@virtualofficeangels.com.au</a></p></aside><ContactForm /></div></section>
     </>
   );
 }

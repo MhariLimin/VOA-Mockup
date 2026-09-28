@@ -2,11 +2,11 @@
    from the previous set the client asked to keep (the team meeting and the home-office laptop).
    Replacing them is an edit to this array alone. */
 export const heroBackgrounds = [
-  '/assets/source/staging/images/74d91c0837-job-5382501_1280.jpg',
+  '/assets/client/hero/hero-tablet-office.jpg',
   '/assets/client/hero/hero-teamwork-meeting.jpg',
   '/assets/client/hero/hero-video-call-team.jpg',
   '/assets/source/staging/images/c88686d2b0-1690.jpg',
-  '/assets/client/hero/hero-tablet-office.jpg',
+  '/assets/source/staging/images/74d91c0837-job-5382501_1280.jpg',
   '/assets/client/hero/hero-project-analytics.jpg',
   '/assets/client/hero/hero-pexels-sora-shimazaki-5673503.jpg',
   '/assets/client/hero/hero-pexels-ivan-s-8117494.jpg',

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from '../ui/Icons';
 import { navigation, type NavigationItem } from '../../content/navigation';
 import { ThemeToggle } from '../ui/ThemeToggle';
 
@@ -70,7 +71,7 @@ export function Header() {
               <h3>{item.summary.heading}</h3>
               <p>{item.summary.text}</p>
               <Link className="nav-mega-link" to={item.summary.href} onClick={closeNavigation}>
-                {item.summary.linkLabel} <span aria-hidden="true">→</span>
+                {item.summary.linkLabel} <ArrowRight />
               </Link>
             </aside>
           )}

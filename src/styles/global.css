@@ -305,7 +305,25 @@ main { padding-top: var(--header-height); }
 
 .hero-stats > div { padding: 1rem clamp(0.9rem, 1.8vw, 1.5rem); border-right: 1px solid var(--border); }
 .hero-stats > div:last-child { border-right: 0; }
-.hero-stats dt { color: var(--action); font-family: var(--font-display); font-size: clamp(1.15rem, 1.9vw, 1.5rem); font-weight: 700; letter-spacing: -0.02em; }
+.hero-stat-icon {
+  display: grid;
+  /* Inside the <dt>, beside the figure: a dl > div may only contain dt and dd, so the mark cannot
+     be a sibling of them. `flex: none` keeps it square while a long figure wraps next to it. */
+  place-items: center;
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.6rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+  transition: color var(--motion-fast) ease, background-color var(--motion-fast) ease;
+}
+.hero-stat-icon .icon { width: 1rem; height: 1rem; }
+/* Over the hero photograph the panel is glass, so the mark takes the warmer accent to stay legible. */
+.home-hero .hero-stat-icon { color: var(--heading-accent); background: color-mix(in srgb, var(--action) 12%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--action) 26%, transparent); }
+
+.hero-stats dt { display: flex; align-items: center; gap: 0.6rem; color: var(--action); font-family: var(--font-display); font-size: clamp(1.15rem, 1.9vw, 1.5rem); font-weight: 700; letter-spacing: -0.02em; }
 .hero-stats dd { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.8rem; line-height: 1.45; }
 
 .match-visual {
@@ -337,9 +355,20 @@ main { padding-top: var(--header-height); }
 
 h2 { margin: 0; font-size: clamp(2rem, 3vw, 3rem); line-height: 1.08; letter-spacing: -0.035em; }
 h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
+/* W3-IC1: every inline mark is now a stroke icon rather than a typed character (→ ↗ ← + ▶). Sized
+   in em so it takes the font size, colour and hover transform of whatever it sits in, and pulled to
+   the optical centre of the line rather than the text baseline. */
+.icon { width: 1em; height: 1em; flex: none; vertical-align: -0.14em; }
+
+/* The tick in the various check lists is a CSS mask rather than a character, for the same reason.
+   `background` still sets its colour, so the existing accent rules keep working. */
+:root {
+  --icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.7 4.6 4.6L19 6.7'/%3E%3C/svg%3E");
+}
+
 .text-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; color: var(--accent); font-weight: 700; text-decoration: none; }
-.text-link span, .card-arrow { transition: transform var(--motion-fast) var(--ease-standard); }
-.text-link:hover span { transform: translateX(0.3rem); }
+.text-link .icon, .card-arrow { transition: transform var(--motion-fast) var(--ease-standard); }
+.text-link:hover .icon { transform: translateX(0.3rem); }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 3rem; }
 .section-heading > div:first-child { max-width: 48rem; }
 
@@ -440,7 +469,15 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .role-fit ul { display: grid; gap: 0.7rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
 .role-fit li { position: relative; padding-left: 1.6rem; color: var(--muted); font-size: 0.86rem; line-height: 1.55; }
 .role-fit li::before { position: absolute; top: 0; left: 0; font-weight: 800; transition: transform var(--motion-standard) var(--ease-standard); }
-.role-fit li::before { content: '✓'; color: var(--accent); }
+.role-fit li::before {
+  content: '';
+  top: 0.19rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  background: var(--accent);
+  -webkit-mask: var(--icon-check) center / contain no-repeat;
+  mask: var(--icon-check) center / contain no-repeat;
+}
 
 /* The split reveal sets its own transition on these children, so the hover properties are
    re-declared at matching weight rather than being dropped. */
@@ -494,8 +531,8 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .faq-list details { border-bottom: 1px solid var(--border); }
 .faq-list summary { display: flex; min-height: 4.5rem; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; font-family: var(--font-display); font-weight: 700; list-style: none; }
 .faq-list summary::-webkit-details-marker { display: none; }
-.faq-list summary span { font-size: 1.5rem; font-weight: 400; transition: transform var(--motion-fast); }
-.faq-list details[open] summary span { transform: rotate(45deg); }
+.faq-list summary .icon { width: 1.15rem; height: 1.15rem; color: var(--accent); transition: transform var(--motion-fast); }
+.faq-list details[open] summary .icon { transform: rotate(45deg); }
 .faq-list details p { max-width: 42rem; margin: 0 0 1.5rem; color: var(--muted); }
 .faq-closing { margin-top: 2rem; padding: 1.5rem; border-radius: var(--radius-card); background: var(--surface); color: var(--muted); }
 .faq-closing p { margin: 0; }
@@ -766,7 +803,17 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .task-panel { padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: 0 1.5rem 4rem rgb(15 38 61 / 6%); }
 .check-list { display: grid; gap: 0; margin: 1rem 0 0; padding: 0; list-style: none; }
 .check-list li { position: relative; padding: 0.9rem 0 0.9rem 2rem; border-bottom: 1px solid var(--border); }
-.check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 900; }
+.check-list li::before {
+  content: '';
+  position: absolute;
+  top: 1.15rem;
+  left: 0;
+  width: 1.05rem;
+  height: 1.05rem;
+  background: var(--accent);
+  -webkit-mask: var(--icon-check) center / contain no-repeat;
+  mask: var(--icon-check) center / contain no-repeat;
+}
 .source-note { margin: 1.25rem 0 0; color: var(--muted); font-size: 0.75rem; }
 
 /* SP1: service hero follows Layout 2 — a service image dimmed behind the copy. */
@@ -871,11 +918,11 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
   transition: transform var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) ease, color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
 }
 
-.service-router span { color: var(--accent); transition: transform var(--motion-fast) var(--ease-standard); }
+.service-router .icon { color: var(--accent); transition: transform var(--motion-fast) var(--ease-standard); }
 
 @media (hover: hover) {
   .service-router a:hover { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); box-shadow: 0 0.9rem 2rem rgb(15 38 61 / 10%); transform: translateY(-0.2rem); }
-  .service-router a:hover span { transform: translateX(0.25rem); }
+  .service-router a:hover .icon { transform: translateX(0.25rem); }
 }
 
 /* The shared card treatment would turn these rows back into floating cards, so it is undone here. */
@@ -941,7 +988,17 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 
 .process-checkpoints { display: grid; gap: 0.55rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
 .process-checkpoints li { display: block; padding: 0 0 0 1.6rem; position: relative; color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
-.process-checkpoints li::before { content: '✓'; position: absolute; top: 0; left: 0; color: var(--accent); font-weight: 800; }
+.process-checkpoints li::before {
+  content: '';
+  position: absolute;
+  top: 0.16rem;
+  left: 0;
+  width: 0.95rem;
+  height: 0.95rem;
+  background: var(--accent);
+  -webkit-mask: var(--icon-check) center / contain no-repeat;
+  mask: var(--icon-check) center / contain no-repeat;
+}
 
 @media (hover: hover) {
   .process-timeline > li:hover > span { box-shadow: 0 0 0 0.6rem color-mix(in srgb, var(--accent) 18%, transparent); transform: scale(1.06); }
@@ -974,7 +1031,8 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 /* W3-HP5: the slide counter was removed, so the arrows hold the right edge on their own. */
 .carousel-controls { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; margin-top: 1rem; color: var(--muted); font-size: 0.75rem; font-weight: 800; }
 .carousel-controls > div { display: flex; gap: 0.4rem; }
-.carousel-controls button { min-width: 2.5rem; height: 2.5rem; padding-inline: 0.7rem; border: 1px solid var(--border); border-radius: 0.6rem; background: var(--surface); font: 700 0.75rem/1 var(--font-body); cursor: pointer; }
+.carousel-controls button { display: grid; place-items: center; min-width: 2.5rem; height: 2.5rem; padding-inline: 0.7rem; border: 1px solid var(--border); border-radius: 0.6rem; background: var(--surface); font: 700 0.75rem/1 var(--font-body); color: inherit; cursor: pointer; }
+.carousel-controls button .icon { width: 1.05rem; height: 1.05rem; }
 .carousel-controls button:hover { color: var(--accent); border-color: var(--accent); }
 .testimonial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .testimonial-grid figure { display: flex; min-height: 18rem; flex-direction: column; justify-content: space-between; margin: 0; padding: clamp(1.5rem, 3vw, 2.25rem); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
@@ -990,7 +1048,8 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .filter-row button { padding: 0.65rem 0.9rem; border: 1px solid var(--border); border-radius: 999px; background: transparent; font: 700 0.78rem/1 var(--font-body); cursor: pointer; }
 .filter-row button.active { color: #fff; border-color: var(--accent); background: var(--accent); }
 .pagination { display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 3rem; flex-wrap: wrap; }
-.pagination button { min-width: 2.2rem; height: 2.2rem; padding-inline: 0.75rem; border: 1px solid var(--border); border-radius: 999px; background: transparent; font: 600 0.82rem/1 var(--font-body); cursor: pointer; color: inherit; }
+.pagination button { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; min-width: 2.2rem; height: 2.2rem; padding-inline: 0.75rem; border: 1px solid var(--border); border-radius: 999px; background: transparent; font: 600 0.82rem/1 var(--font-body); cursor: pointer; color: inherit; }
+.pagination button .icon { width: 0.9rem; height: 0.9rem; }
 .pagination button.active { color: #fff; border-color: var(--accent); background: var(--accent); }
 .pagination button:disabled { opacity: 0.38; cursor: not-allowed; }
 .article-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -1011,7 +1070,7 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .blog-header { padding-bottom: clamp(2.5rem, 5vw, 4rem); text-align: center; background: var(--surface); }
 .blog-header h1 { max-width: 22ch; margin-inline: auto; }
 .blog-header .eyebrow { margin-top: 2rem; }
-.article-back { color: var(--muted); font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+.article-back { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.82rem; font-weight: 700; text-decoration: none; }
 .blog-meta { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; color: var(--muted); font-size: 0.82rem; }
 .blog-featured { max-width: 68rem; margin-top: clamp(2rem, 5vw, 4rem); }
 .blog-featured img { width: 100%; max-height: 38rem; object-fit: cover; border-radius: 1.25rem; background: var(--surface); }
@@ -1039,6 +1098,23 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .contact-grid { display: grid; grid-template-columns: minmax(16rem, 4fr) minmax(24rem, 6fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
 .contact-grid dl { margin-top: 2.5rem; }
 .contact-grid dl div { padding-block: 1rem; border-bottom: 1px solid var(--border); }
+/* B2: each detail gains a mark in its own column; the label and value keep a single left edge. */
+.contact-details dt { display: flex; align-items: center; gap: 0.7rem; }
+/* The value lines up under the label rather than under the mark. */
+.contact-details dd { margin-left: calc(1.9rem + 0.7rem); }
+.contact-detail-icon {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  flex: none;
+  border-radius: 0.6rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+  transition: color var(--motion-fast) ease, background-color var(--motion-fast) ease;
+}
+.contact-detail-icon .icon { width: 1rem; height: 1rem; }
 .contact-grid dt { color: var(--muted); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
 .contact-grid dd { margin: 0.35rem 0 0; }
 .contact-form { display: grid; gap: 1rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: 0 1.5rem 4rem rgb(15 38 61 / 6%); }
@@ -1095,8 +1171,9 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .page-contact-section .contact-grid { align-items: center; }
 .page-contact-section h2 { max-width: 17ch; }
 .service-closing h2 { max-width: 22ch; font-size: clamp(1.6rem, 2.4vw, 2rem); line-height: 1.2; }
-.contact-direct { margin-top: 2rem; color: var(--accent); font-weight: 750; line-height: 1.8; }
-.contact-direct a { text-decoration: none; }
+.contact-direct { display: grid; justify-items: start; gap: 0.55rem; margin-top: 2rem; color: var(--accent); font-weight: 750; line-height: 1.5; }
+.contact-direct a { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.contact-direct .icon { width: 1.05rem; height: 1.05rem; opacity: 0.85; }
 .founder-home-image img { aspect-ratio: 1 / 1; max-width: 25rem; border-radius: 2rem 7rem 2rem 7rem; box-shadow: 1.25rem 1.25rem 0 color-mix(in srgb, var(--accent), transparent 86%), 0 1.5rem 3rem rgb(15 38 61 / 14%); }
 .founder-portrait { width: min(20rem, 88%); aspect-ratio: 3 / 4; border-radius: 3rem 6rem 3rem 6rem; box-shadow: 1rem 1rem 0 rgb(115 201 255 / 18%), 0 1.5rem 3rem rgb(0 0 0 / 22%); filter: saturate(1.06) contrast(1.04); }
 
@@ -1166,6 +1243,8 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .footer-grid > div { display: flex; flex-direction: column; align-items: flex-start; gap: 0.65rem; }
 .footer-grid strong { color: #fff; font-family: var(--font-display); }
 .footer-grid a { color: #c6d5e1; font-size: 0.9rem; text-decoration: none; }
+.footer-contact a { display: inline-flex; align-items: center; gap: 0.55rem; }
+.footer-contact .icon { width: 1rem; height: 1rem; opacity: 0.7; transition: opacity var(--motion-fast) ease; }
 .footer-grid a:hover { color: #73c9ff; }
 .footer-brand p { max-width: 23rem; color: #aebfcd; }
 .footer-logo { display: block; width: 260px; height: auto; max-width: 100%; }
@@ -1690,20 +1769,41 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 }
 
 .values-grid article {
+  /* The mark and the heading share the first row; the paragraph runs full width beneath both, so it
+     keeps a readable line length rather than being indented past the mark. */
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0 1rem;
   border: 1px solid rgb(255 255 255 / 14%);
   border-radius: 0.75rem;
   padding: 1.75rem 2rem;
 }
 
+.value-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.7rem;
+  color: #73c9ff;
+  background: rgb(115 201 255 / 12%);
+  box-shadow: 0 0 0 1px rgb(115 201 255 / 24%);
+  transition: transform var(--motion-standard) var(--ease-standard), background-color var(--motion-fast) ease;
+}
+.value-icon .icon { width: 1.35rem; height: 1.35rem; }
+
 .values-grid article h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  margin: 0 0 0.6rem;
+  margin: 0;
   color: #f8f7f2;
 }
 
 .values-grid article p {
-  margin: 0;
+  grid-column: 1 / -1;
+  margin: 1rem 0 0;
   font-size: 0.9rem;
   line-height: 1.65;
 }
@@ -1862,6 +1962,9 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
   .inner-hero-image:hover { transform: translateY(-0.35rem); box-shadow: 0 2.5rem 5.5rem rgb(15 38 61 / 20%); }
   .about-founder:hover img { transform: translateY(-0.35rem); box-shadow: 1.4rem 1.4rem 0 color-mix(in srgb, var(--accent) 20%, transparent), 0 2rem 3.5rem rgb(15 38 61 / 18%); }
   .about-facts li:hover { transform: translateY(-0.15rem); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  .values-grid article:hover .value-icon { transform: translateY(-0.15rem); background: rgb(115 201 255 / 20%); }
+  .contact-grid .contact-details div:hover .contact-detail-icon { color: var(--heading-accent); background: color-mix(in srgb, var(--action) 14%, transparent); }
+  .footer-contact a:hover .icon { opacity: 1; }
   .about-support .check-list li:hover { color: var(--accent); transform: translateX(0.35rem); }
   .values-grid article:hover { transform: translateY(-0.3rem); border-color: rgb(115 201 255 / 45%); background: rgb(255 255 255 / 5%); }
   .brand-card:hover { transform: translateY(-0.35rem); border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); box-shadow: 0 1.4rem 3rem rgb(15 38 61 / 16%); }
@@ -1918,7 +2021,7 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 .video-poster::before { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(125deg, transparent 0 18px, rgb(255 255 255 / 4%) 19px); }
 .video-poster-chip { position: absolute; left: 1rem; top: 1rem; padding: 0.3rem 0.6rem; border-radius: 999px; color: #0b2135; background: #fff; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
 .video-poster-label { position: absolute; right: 1rem; top: 1.2rem; color: rgb(255 255 255 / 80%); font-size: 0.72rem; font-weight: 800; }
-.video-poster-play { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; padding-left: 0.2rem; border-radius: 50%; color: #0b2135; background: #fff; box-shadow: 0 0 0 0.6rem rgb(255 255 255 / 16%); font-size: 1rem; transition: transform var(--motion-fast) ease; }
+.video-poster-play { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; padding-left: 0.12rem; border-radius: 50%; color: #0b2135; background: #fff; box-shadow: 0 0 0 0.6rem rgb(255 255 255 / 16%); font-size: 1rem; transition: transform var(--motion-fast) ease; }
 .video-card:hover .video-poster-play { transform: scale(1.08); }
 .video-poster-title { position: absolute; left: 1rem; right: 1rem; bottom: 2.4rem; color: #fff; font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; line-height: 1.3; }
 .video-poster-bar { position: absolute; left: 1rem; right: 1rem; bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
@@ -2326,128 +2429,173 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 }
 .systems-chip svg { flex: none; width: 0.95rem; height: 0.95rem; color: var(--accent); transition: color var(--motion-fast) ease; }
 
-/* W3-SP3: the fit signals hang off a central backbone that carries the role emblem. */
-.fit-legend { margin: clamp(2rem, 4vw, 2.75rem) 0 0; }
-.fit-backbone {
-  --fit-gutter: clamp(4rem, 8vw, 7rem);
-  position: relative;
+/* W3-SP3 revision: the "when to hire" section as one diagram. Four conditions converge on the
+   matched specialist and four results fan back out, so the section reads left to right as cause,
+   role, effect. Replaces the signal cards and the separate outcomes card — there is no card or box
+   here, only wires, icons and the hub. */
+.fit-flow {
+  --fit-point: clamp(1rem, 1.8vw, 1.5rem);
   display: grid;
-  /* Explicit rows so the spine can span all of them — with implicit rows `1 / -1` collapses to the
-     first row and the emblem ends up level with the top pair. Row count comes from the item count. */
-  grid-template-columns: minmax(0, 1fr) var(--fit-gutter) minmax(0, 1fr);
-  grid-template-rows: repeat(var(--fit-rows, 2), auto);
-  gap: clamp(1rem, 2.5vw, 1.75rem) 0;
-  margin-top: 1.25rem;
+  grid-template-columns: minmax(0, 1fr) clamp(6.5rem, 13vw, 11rem) minmax(0, 1fr);
+  align-items: stretch;
+  margin-top: clamp(2.25rem, 4.5vw, 3.25rem);
 }
-.fit-spine {
-  position: relative;
-  grid-row: 1 / -1;
-  grid-column: 2;
-  justify-self: center;
-  width: 2px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--accent) 38%, transparent) 12%, color-mix(in srgb, var(--accent) 38%, transparent) 88%, transparent);
+
+/* Both columns are one auto row for the label and one filled row for the list, so the two lists get
+   the same height and their four equal rows line up — plates on the left and right then match, not
+   just within a side. */
+.fit-flow-side { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.fit-flow-side .eyebrow { margin-bottom: 1.25rem; }
+.fit-flow-side[data-side='in'] { text-align: right; }
+.fit-flow-side[data-side='out'] .eyebrow { color: var(--heading-accent); }
+
+.fit-flow-side ul {
+  display: grid;
+  /* Four equal rows so each item's centre lines up with the wire that meets it. */
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.fit-emblem {
+.fit-flow-side li {
+  display: grid;
+  gap: 1rem;
+  /* Stretch, so every plate is the same height as its row and all eight match. */
+  align-items: stretch;
+  padding: 0.5rem 0;
+}
+.fit-flow-side li .fit-flow-icon { align-self: center; }
+.fit-flow-side[data-side='in'] li { grid-template-columns: minmax(0, 1fr) auto; }
+.fit-flow-side[data-side='out'] li { grid-template-columns: auto minmax(0, 1fr); }
+
+/* The text sits in a faded plate rather than a card: no border or solid fill, a tint that fades
+   along the direction of travel, and a point on the right so both sides read left to right — the
+   conditions aim at the hub and the results carry on past it. clip-path cannot show a border, which
+   is why the shape is defined by the fill alone. */
+/* One plate, mirrored across the hub: the two sides are the same shape and size, the right being the
+   horizontal flip of the left. Both points therefore aim inwards at the hub, and each plate's tint
+   is strongest at its own point and fades away from it — so the fill always carries the silhouette
+   right out to the tip, which matters because a `clip-path` element cannot show a border. */
+.fit-flow-text {
+  display: grid;
+  align-content: center;
+  color: var(--muted);
+  font-size: clamp(0.92rem, 0.88rem + 0.2vw, 1.02rem);
+  line-height: 1.55;
+  transition: background var(--motion-standard) ease, color var(--motion-fast) ease;
+}
+/* Conditions point right, tinted blue towards the hub. */
+.fit-flow-side[data-side='in'] .fit-flow-text {
+  padding: 0.9rem calc(var(--fit-point) + 0.9rem) 0.9rem 1.15rem;
+  clip-path: polygon(0 0, calc(100% - var(--fit-point)) 0, 100% 50%, calc(100% - var(--fit-point)) 100%, 0 100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 22%, transparent));
+}
+/* Results are the same plate flipped: point on the left, tinted orange from the hub outwards. */
+.fit-flow-side[data-side='out'] .fit-flow-text {
+  padding: 0.9rem 1.15rem 0.9rem calc(var(--fit-point) + 0.9rem);
+  clip-path: polygon(var(--fit-point) 0, 100% 0, 100% 100%, var(--fit-point) 100%, 0 50%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--action) 22%, transparent), transparent);
+}
+.fit-flow-icon {
+  width: 3.15rem;
+  height: 3.15rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  color: var(--accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+  transition: color var(--motion-fast) ease, background-color var(--motion-fast) ease,
+    box-shadow var(--motion-standard) ease, transform var(--motion-standard) var(--ease-standard);
+}
+.fit-flow-icon svg { width: 1.5rem; height: 1.5rem; }
+/* The results side is the orange half of the story. */
+.fit-flow-side[data-side='out'] .fit-flow-icon {
+  background: color-mix(in srgb, var(--action) 10%, var(--surface));
+  color: var(--heading-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--action) 24%, transparent);
+}
+
+/* The hub column owns the wires, so the curve endpoints sit exactly on the column edges where the
+   icons are — the alignment holds at any width without guessing at percentages. */
+.fit-flow-hub { position: relative; }
+.fit-flow-wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.fit-flow-wire {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 34%, transparent);
+  stroke-width: 1.8;
+  stroke-dasharray: 3 4;
+}
+.fit-flow-wire[data-out='true'] { stroke: color-mix(in srgb, var(--action) 38%, transparent); }
+
+.fit-flow-node {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: clamp(3.25rem, 5vw, 4.25rem);
-  height: clamp(3.25rem, 5vw, 4.25rem);
+  width: clamp(4.6rem, 7vw, 6.2rem);
+  height: clamp(4.6rem, 7vw, 6.2rem);
   display: grid;
   place-items: center;
   transform: translate(-50%, -50%);
-  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--border));
   border-radius: 50%;
-  background: var(--surface);
+  /* Blue on the left of the gradient, orange on the right: the hub is where one becomes the other. */
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), color-mix(in srgb, var(--action) 14%, var(--surface)));
   color: var(--accent);
-  box-shadow: 0 1rem 2.25rem rgb(15 38 61 / 12%);
+  box-shadow: 0 1rem 2.5rem rgb(15 38 61 / 12%), 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
 }
-.fit-emblem svg { width: 55%; height: 55%; }
+.fit-flow-node svg { width: 55%; height: 55%; }
 
-.fit-signal {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.9rem;
-  align-items: start;
-  padding: clamp(0.9rem, 2vw, 1.15rem) clamp(1rem, 2.2vw, 1.35rem);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  transition: transform var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) ease,
-    box-shadow var(--motion-fast) ease;
+.fit-flow-note {
+  max-width: 58rem;
+  margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.4;
+  text-align: center;
 }
-.fit-signal[data-side='start'] { grid-column: 1; }
-.fit-signal[data-side='end'] { grid-column: 3; }
 
-/* The stub tying each card to the backbone, with a node where the two meet. */
-.fit-signal::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  /* Exactly half the middle column, so the stub meets the spine instead of stopping short of it. */
-  width: calc(var(--fit-gutter) / 2);
-  height: 1px;
-  background: color-mix(in srgb, var(--accent) 38%, transparent);
-  transition: background-color var(--motion-fast) ease, height var(--motion-fast) ease;
+@media (hover: hover) {
+  .fit-flow-side li:hover .fit-flow-icon {
+    color: var(--action-text);
+    background: var(--action);
+    box-shadow: 0 0.75rem 1.75rem rgb(15 38 61 / 14%), 0 0 0 1px var(--action);
+    transform: scale(1.06);
+  }
+  .fit-flow-side li:hover .fit-flow-text { color: var(--text); }
+  .fit-flow-side[data-side='in'] li:hover .fit-flow-text {
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--action) 28%, transparent));
+  }
+  .fit-flow-side[data-side='out'] li:hover .fit-flow-text {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--action) 30%, transparent), transparent);
+  }
 }
-.fit-signal::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 0.45rem;
-  height: 0.45rem;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  background: var(--accent);
-  transition: background-color var(--motion-fast) ease, box-shadow var(--motion-standard) ease;
-}
-/* The node sits where the stub meets the spine. */
-.fit-signal[data-side='start']::before { left: 100%; }
-.fit-signal[data-side='start']::after { left: calc(100% + (var(--fit-gutter) / 2) - 0.225rem); }
-.fit-signal[data-side='end']::before { right: 100%; }
-.fit-signal[data-side='end']::after { right: calc(100% + (var(--fit-gutter) / 2) - 0.225rem); }
 
-.fit-badge {
-  width: 2.1rem;
-  height: 2.35rem;
-  display: grid;
-  place-items: center;
-  /* A hexagon marks the signal without claiming a meaning the source does not give. */
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 800;
-  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease;
-}
-.fit-signal p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+@media (max-width: 62rem) {
+  /* Stacked there is no left and right to flow between, so the wires come off and the hub becomes a
+     divider between the conditions and what they lead to. */
+  .fit-flow { grid-template-columns: 1fr; }
+  .fit-flow-side[data-side='in'] { text-align: left; }
+  .fit-flow-side[data-side='in'] li { grid-template-columns: auto minmax(0, 1fr); }
+  .fit-flow-side[data-side='in'] li .fit-flow-icon { order: -1; }
+  /* Stacked, both columns sit the same way round, so there is no mirror to hold — every plate takes
+     the left-pointing form and keeps its own colour. */
+  .fit-flow-side[data-side='in'] .fit-flow-text {
+    padding: 0.9rem 1.15rem 0.9rem calc(var(--fit-point) + 0.9rem);
+    clip-path: polygon(var(--fit-point) 0, 100% 0, 100% 100%, var(--fit-point) 100%, 0 50%);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 22%, transparent), transparent);
+  }
 
-.fit-boundary {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: clamp(1rem, 2.5vw, 1.5rem);
-  align-items: start;
-  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
-  padding: clamp(1.4rem, 3vw, 1.9rem);
-  border: 1px dashed color-mix(in srgb, var(--action) 50%, var(--border));
-  border-radius: var(--radius-card);
-  background: color-mix(in srgb, var(--action) 5%, var(--surface));
+  .fit-flow-side ul { grid-template-rows: none; gap: 0.35rem; }
+  .fit-flow-hub { height: 5.5rem; }
+  .fit-flow-wires { display: none; }
+  .fit-flow-side[data-side='out'] { margin-top: 0.5rem; }
 }
-.fit-boundary-mark {
-  width: 2.9rem;
-  height: 2.9rem;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--action) 14%, transparent);
-  color: var(--heading-accent);
+
+@media (prefers-reduced-motion: reduce) {
+  .fit-flow-icon, .hero-stat-icon, .value-icon, .contact-detail-icon { transition: none; }
 }
-.fit-boundary-mark svg { width: 55%; height: 55%; }
-.fit-boundary .eyebrow { margin-bottom: 0.4rem; color: var(--heading-accent); }
-.fit-boundary h3 { font-size: 1.05rem; line-height: 1.3; }
-.fit-boundary p { max-width: 62rem; margin: 0.6rem 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
 
 /* Hover states are orange and explain the structure: the system's own spoke lights up back to the
    core, and the fit card's stub and node light up back to the backbone. The chip and card text stay
@@ -2475,36 +2623,17 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 }
 .systems-chip[data-active='true'] svg { color: var(--heading-accent); }
 
-@media (hover: hover) {
-  .fit-signal:hover {
-    border-color: var(--action);
-    box-shadow: 0 1rem 2.25rem rgb(15 38 61 / 12%);
-    transform: translateY(-0.2rem);
-  }
-  .fit-signal:hover .fit-badge { color: var(--action-text); background: var(--action); }
-  .fit-signal:hover::before { background: var(--action); height: 2px; }
-  .fit-signal:hover::after {
-    background: var(--action);
-    box-shadow: 0 0 0 0.3rem color-mix(in srgb, var(--action) 16%, transparent);
-  }
-}
-
-/* Below this width the constellation and the two-sided backbone stop being readable, so both fall
-   back to a single column that keeps the symbols. */
+/* Below this width the constellation stops being readable, so it falls back to a plain row of chips
+   that keeps the symbols. */
 @media (max-width: 62rem) {
   .systems-diagram { min-height: 0; }
   .systems-links, .systems-core { display: none; }
   .systems-diagram ul { display: flex; flex-wrap: wrap; gap: 0.6rem; }
   .systems-diagram li { position: static; transform: none; }
-  .fit-backbone { grid-template-columns: 1fr; gap: 1rem; }
-  .fit-spine { display: none; }
-  .fit-signal[data-side='start'], .fit-signal[data-side='end'] { grid-column: 1; }
-  .fit-signal::before, .fit-signal::after { display: none; }
-  .fit-boundary { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .systems-chip, .fit-signal, .fit-badge { transition: none; }
+  .systems-chip { transition: none; }
 }
 
 /* ---- Week 3: /how-it-works ---- */
@@ -2852,8 +2981,7 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 .insight-section .home-article-card h3 { transition: color var(--motion-fast) ease; }
 .insight-section .home-article-image img { transition: transform 600ms var(--ease-standard), filter 400ms ease; }
 /* The arrow is the second span inside the link, so it can slide on its own. */
-.insight-section .home-article-card .text-link span {
-  display: inline-block;
+.insight-section .home-article-card .text-link .icon {
   transition: transform var(--motion-standard) var(--ease-standard);
 }
 
@@ -2865,11 +2993,11 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
   }
   .insight-section .home-article-card:hover h3 { color: var(--heading-accent); }
   .insight-section .home-article-card:hover .home-article-image img { transform: scale(1.06); filter: saturate(1.08); }
-  .insight-section .home-article-card:hover .text-link span { transform: translateX(0.4rem); }
+  .insight-section .home-article-card:hover .text-link .icon { transform: translateX(0.4rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .insight-section .home-article-card,
   .insight-section .home-article-image img,
-  .insight-section .home-article-card .text-link span { transition: none; }
+  .insight-section .home-article-card .text-link .icon { transition: none; }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import clientsSource from '../../content/source/staging/clients.json';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { ArrowLeft, ArrowRight } from './Icons';
 
 const clients = clientsSource.clients;
 
@@ -51,7 +52,7 @@ export function ClientCarousel() {
       </div>
     </div>
     <div className="carousel-controls">
-      <div><button type="button" onClick={previous} aria-label="Previous client">←</button><button type="button" onClick={() => setActive((current) => current >= clients.length - 1 ? clients.length : current + 1)} aria-label="Next client">→</button></div>
+      <div><button type="button" onClick={previous} aria-label="Previous client"><ArrowLeft /></button><button type="button" onClick={() => setActive((current) => current >= clients.length - 1 ? clients.length : current + 1)} aria-label="Next client"><ArrowRight /></button></div>
     </div>
   </div>;
 }

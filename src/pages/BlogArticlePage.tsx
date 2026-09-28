@@ -9,6 +9,7 @@ import {
 } from '../content/blogContent';
 import { NotFoundPage } from './NotFoundPage';
 import { PageClosing } from '../components/layout/PageClosing';
+import { ArrowLeft, ArrowRight } from '../components/ui/Icons';
 
 export function BlogArticlePage() {
   const { slug } = useParams();
@@ -31,7 +32,7 @@ export function BlogArticlePage() {
   return <article className="blog-detail">
     <header className="section blog-header">
       <div className="container narrow">
-        <Link className="article-back" to="/insights">← All insights</Link>
+        <Link className="article-back" to="/insights"><ArrowLeft /> All insights</Link>
         <p className="eyebrow">{articleCategory(article)}</p>
         <h1>{article.title}</h1>
         <div className="blog-meta"><span>{formatArticleDate(article.date)}</span><span>By {article.author}</span></div>
@@ -44,7 +45,7 @@ export function BlogArticlePage() {
     <aside className="section related-article">
       <div className="container narrow">
         <p className="eyebrow">Read next</p>
-        <Link to={`/insights/${next.slug}`}><h2>{next.title}</h2><span>Continue reading →</span></Link>
+        <Link to={`/insights/${next.slug}`}><h2>{next.title}</h2><span>Continue reading <ArrowRight /></span></Link>
       </div>
     </aside>
     <PageClosing />

@@ -721,6 +721,110 @@ the client sends replacements; a centred subject cannot be rescued by positionin
 `contact-financial-charts.jpg` and `contact-handshake.png` are now unused. They are left in
 `public/assets/client/contact/` rather than deleted, since the client supplied them.
 
+### VOA_Services Changes.docx applied (2026-09-28)
+
+Two instructions in the client's services document.
+
+**1. Systems lists** for mortgage, financial planning and accounting — already applied on 2026-09-27
+and unchanged; the document matches what shipped.
+
+**2. The "Clear role boundaries" card is replaced on all ten services** with the client's
+"What changes for your <business>" outcomes: a label, a heading and four bullets each.
+
+This is a shape change, not a text swap. `boundaryLabel` / `boundaryHeading` / `boundaryText` (one
+paragraph) became `outcomeLabel` / `outcomeHeading` / `outcomePoints` (a four-item list) on the
+`ServiceDetail` interface and on all ten entries.
+
+**The card was restyled because its meaning inverted.** It used to hold a caveat — what stays outside
+the role — and was styled as one: dashed edge, shield mark, warning tone, and deliberately held off
+the "when to hire" backbone as a constraint rather than a fifth signal. It now lists business gains,
+so a dashed caution box would read wrong. It is a solid card with an orange spine down the left, a
+rising-trend mark in place of the shield, and the four outcomes in two columns (one column below
+52rem). It still sits off the backbone, for the same structural reason: outcomes are what the role
+produces, not another reason to hire one.
+
+**Extraction trap:** in the .docx the label and heading share one paragraph separated only by a line
+break, so a naive text extraction yields
+"WHAT CHANGES FOR YOUR MORTGAGE BUSINESSSpecialised loan support…". The two have to be split on the
+run boundary.
+
+Labels are stored in sentence case because `.eyebrow` already applies `text-transform: uppercase`;
+they render as the document's capitals. Bullet punctuation is verbatim — mortgage's bullets end in
+full stops and the others do not, and mortgage's heading has no closing full stop while the rest do.
+
+**Verified by diffing the shipped content back against the .docx**: ten services, labels, headings and
+all forty bullets, zero mismatches. The production bundle carries ten "What changes for your…" labels
+and no trace of the old boundary copy.
+
+**Content question for the client:** the document removes the role-boundary caveat entirely. The text
+about credit decisions, product recommendations, responsible-lending judgements and regulated advice
+remaining with the broker or authorised professional is now nowhere on the site. On regulated
+services — mortgage, financial planning, insurance — that disclaimer may be doing real work. Confirm
+it is meant to go rather than move elsewhere.
+
+### "When to hire" rebuilt as a flow diagram (2026-09-28)
+
+The section held two separate things: the four "a good fit when" signals on a backbone, and the
+outcomes in a card beneath. Both were cards or boxes, and the two halves did not relate to each
+other on screen. They are now **one diagram**: the four conditions converge on the matched
+specialist, and the four results fan back out, so the section reads left to right as cause, role,
+effect. No card, box, border or fill anywhere — the wires, the icons and the hub carry it.
+
+Mechanics worth keeping:
+- **The hub column owns the wires.** The SVG is absolutely positioned inside the middle grid column,
+  so the curve endpoints land exactly on the column edges where the icons sit. Drawing the wires
+  across the whole diagram would have meant guessing percentage endpoints that drift with width.
+- Both sides use `grid-template-rows: repeat(4, 1fr)`, so each item's centre lines up with the wire
+  that meets it.
+- The hub's gradient runs blue on the left to orange on the right: conditions are blue, results are
+  orange, and the hub is where one becomes the other.
+- Below 62rem there is no left and right to flow between, so the wires come off and the hub becomes
+  a divider.
+
+**The text plates are one shared shape, mirrored across the hub, not cards.** Each line sits on a
+faded plate with no border and no solid fill. The right side is the horizontal flip of the left: the
+same clip-path, padding and size, with the point moved from the right edge to the left, so both
+points aim inwards at the hub. Each plate keeps its gradient, strongest at its own point and fading
+away from it — blue for conditions, orange for results. Measured 329x94, all eight identical.
+
+Two things that had to be got right:
+- **The gradient has to run towards the point, not away from it.** With `clip-path` there is no
+  border to fall back on, so the fill alone carries the silhouette; a gradient fading towards the tip
+  makes the tip disappear. Mirroring the shape therefore means mirroring the gradient with it. A flat
+  tint solves the same problem and was tried first, but it was rejected — the fade is wanted.
+- **Equal plates need the two lists to share a height.** Each side's list sets its own four equal
+  rows, so with the columns sized to their own content the left plates came out 94px and the right
+  71px. Each side is now `grid-template-rows: auto minmax(0, 1fr)` — label, then a list filling the
+  same container height — which makes the rows match across the gap.
+
+**`outcomeHeading` stays where it is, centred under the whole diagram as `.fit-flow-note`.** It was
+briefly moved into a shared header row above the two columns, with the labels, so it sat directly
+under "What changes for your mortgage business". That was rejected: the header row forced the plates
+larger and the user's verdict was that the section had been perfect before. Reverted in full — do not
+reintroduce `.fit-flow-head` or `.fit-flow-lead`.
+
+**A definite `grid-row` with no column breaks this diagram**, worth recording since the header-row
+attempt is the kind of thing that gets retried. `.fit-flow-hub { grid-row: 2 }` placed the hub ahead
+of the two fully-auto lists, so it claimed column 1 and pushed the lists out — the hub measured
+497x1163 in column 1 and the plates came out 99px and 437px wide. DOM order alone places the hub
+correctly; the property is not needed.
+
+**Icons are resolved from each item's own wording** (`src/components/ui/ItemGlyphs.tsx`), not from
+its position. This matters: the four signals and four outcomes are in no fixed order across the ten
+services, so a per-position icon would be wrong on most pages — the same reason the service-page
+badges were left generic earlier. Ten glyphs (clock, doc, check, eye, flow, alert, calendar, people,
+chart, systems), an ordered keyword rule set, and a short override table for the lines where the
+plain keyword match picks the wrong idea — "A more dependable buying experience" matching *systems*
+on the word "experience", for instance.
+
+All **80 items resolve with zero fallbacks**; distribution is calendar 13, flow 12, alert 12,
+people 11, doc 9, eye 8, clock 6, systems 6, chart 3. If the client rewrites an item, it still
+renders — `check` is the fallback — but the mapping is worth re-checking.
+
+`ItemGlyphs.tsx` exports components rather than an element and a helper, because ESLint's
+`react-refresh/only-export-components` treats a JSX-returning helper as a component and warns on the
+mix.
+
 ### Tuning values, all in `themes.css` — the user set these by eye
 
 | Token | Light | Dark |
@@ -785,3 +889,59 @@ Both **[Assumption]** tags above (W3-HP3, W3-HP5) are now **[Confirmed]** by the
 Nothing in this guide requires new user-facing copy as specified. If implementation forces a string —
 a dot-navigation label, a table column header for W3-SP1, an expand/collapse label for W3-HP8 — it is
 named in the report for that block, per the standing rule.
+
+### W3-IC1 — icons and symbols pass (2026-09-28)
+
+Three requests in one message; the first two were single edits, the third was a survey.
+
+**Hero background order.** `heroBackgrounds` positions 1 and 5 swapped: `hero-tablet-office.jpg`
+now opens the rotation and `74d91c0837-job-5382501_1280.jpg` moved to fifth. Nothing else moved.
+
+**Sourcing & Candidate Matching glyph.** The old mark was a magnifier with a single shoulder arc
+drawn *outside* the lens, so the figure read as missing one side — the "uneven shoulders" the user
+saw. The figure now sits inside the lens: head plus a symmetric shoulder arc, both well clear of the
+rim (shoulder ends 6.1 units from a centre of radius 8.5) and a 1.7-unit gap between head and
+shoulders so the strokes do not merge at small sizes. Shared by the home journey diagram and the
+/how-it-works medallions, so both change together.
+
+**The icons pass itself.** Two findings came out of reading every page template.
+
+*Finding A — nine places used a typed character as an icon* (`→ ↗ ← + ▶ ✓`). A character falls back
+to whatever font loads, sits on the text baseline rather than the optical centre, and changes weight
+between themes. All are now stroke icons in `src/components/ui/Icons.tsx`, sized in `em` so each one
+inherits the colour, size, hover transform and transition of whatever it sits in — the existing CSS
+kept working, it just targets `.icon` instead of `span`. Swapped across the home page, /services,
+About, /insights, /videos, /faqs, article pages, the header dropdown, the client carousel, the
+pagination controls and the footer.
+
+The check marks could not be components, because they are CSS `::before` content. They became a
+`--icon-check` mask token: `background` still sets the colour, so every existing accent rule kept
+working. Applied to `.check-list`, `.process-checkpoints` and `.role-fit` — note `.role-fit` is dead
+CSS, nothing renders it since the fit section became `.fit-flow`.
+
+*Finding B — text-only sections.* Eleven candidates were listed; B1–B5 were built, the rest held so
+the site does not tip into being busy:
+- **B1** the four hero figures, **B2** the contact-page details, **B3** the four About values,
+  **B4** the home page "Let's talk" direct lines, **B5** the footer contact column.
+- Held: About facts pills, article date lines, library counts, FAQ topic buttons, testimonial quote
+  marks. `/services` router links were covered by Finding A.
+
+Two things worth keeping:
+- **`dl > div` may only contain `dt` and `dd`.** The hero figures and the contact details both put
+  the mark in a `span` beside them at first, which is invalid. Both marks moved inside the `<dt>` —
+  above the figure in the hero, beside the label on the contact page, with the `dd` indented to line
+  up with the label rather than the mark.
+- **A file that exports both components and a plain array trips `react-refresh/only-export-
+  components`.** `heroStatIcons` and `valueIcons` started as exported arrays and warned; they are
+  now private arrays reached through `HeroStatIcon` and `ValueIcon`. `StageGlyphs.tsx` exports only
+  an array, which is why it never warned. Same resolution as `ItemGlyphs.tsx`.
+
+**Follow-up: B1 and B3 put the mark beside the heading, not above it.** The hero `<dt>` became a flex
+row (mark, then figure) with `flex: none` on the mark so a long figure such as "100% managed" wraps
+beside it rather than squeezing it. Each About value card became a two-column grid — mark and `<h3>`
+share row one, and the paragraph spans both columns beneath, so it keeps a readable line length
+instead of being indented past a 2.5rem mark. No markup changed for the values; the existing sibling
+order already placed correctly.
+
+No copy changed anywhere in this pass. Every glyph follows the existing stroke vocabulary: 1.7 weight
+for the feature icons, 2 for the inline marks that render at around 1em.

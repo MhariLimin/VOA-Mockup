@@ -8,10 +8,12 @@ export const stageGlyphs = [
     <path d="M11 5h10v3H11z" /><path d="M21 6.5h3.5v20h-17v-20H11" />
     <path d="M11.5 14h9M11.5 18.5h9M11.5 23h5.5" />
   </svg>,
-  /* Sourcing & Candidate Matching */
+  /* Sourcing & Candidate Matching. The person sits inside the lens rather than under it: the earlier
+     version put a lone shoulder arc outside the circle, which read as a figure missing one side. */
   <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" key="match">
-    <circle cx="13.5" cy="12.5" r="5.5" /><path d="m18 17 7 7" />
-    <path d="M6 26c1.6-3.6 4.4-5.4 7.5-5.4" />
+    <circle cx="14" cy="13.5" r="8.5" /><path d="m20.2 19.7 5.8 5.8" />
+    <circle cx="14" cy="10.5" r="2.2" />
+    <path d="M10 18.2c0-2.2 1.8-3.8 4-3.8s4 1.6 4 3.8" />
   </svg>,
   /* Onboarding & Integration */
   <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" key="onboard">

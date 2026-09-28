@@ -14,9 +14,9 @@ export interface ServiceDetail {
   fitEyebrow: string;
   fitHeading: string;
   fits: readonly string[];
-  boundaryLabel: string;
-  boundaryHeading: string;
-  boundaryText: string;
+  outcomeLabel: string;
+  outcomeHeading: string;
+  outcomePoints: readonly string[];
   managedEyebrow: string;
   managedHeading: string;
   managedIntro?: string;
@@ -44,8 +44,14 @@ export const serviceRouter: readonly (readonly [string, string])[] = [
 ];
 
 /* Service page content, taken from SERVICE PAGES_VOA.pdf (docs/updated_src). Deliberate edits: "VOA"
-   is written out as "Virtual Office Angels", and two US spellings are Australian. The boundary card
-   text predates the PDF (captured from the VOA Content proposal); Insurance uses its own FAQ answer. */
+   is written out as "Virtual Office Angels", and two US spellings are Australian.
+
+   `outcomeLabel` / `outcomeHeading` / `outcomePoints` come from VOA_Services Changes.docx, which
+   replaced the role-boundary card on every service with these business outcomes. The systems lists
+   for mortgage, financial planning and accounting come from the same document and supersede the
+   PDF's. Note the document drops the boundary caveat entirely — the text about credit decisions,
+   product recommendations and regulated advice remaining with the authorised professional is no
+   longer anywhere on the site. Worth confirming that is intended rather than relocated. */
 export const serviceDetails: Record<string, ServiceDetail> = {
   "/services/mortgage-loans": {
     seoTitle: "Mortgage Processing Virtual Assistant Support | VOA",
@@ -75,9 +81,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "You need someone familiar with mortgage terminology, lender systems, and broker workflows.",
       "You want recruitment, onboarding, and ongoing team support managed through one provider.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The virtual assistant supports administration under your documented procedures. Credit decisions, product recommendations, responsible-lending judgements and regulated advice remain with the broker or appropriately authorised professional.",
+    outcomeLabel: "What changes for your mortgage business",
+    outcomeHeading: "Specialised loan support can improve your day-to-day operations",
+    outcomePoints: [
+      "More consistent progress across active loan files.",
+      "Better visibility of outstanding documents and next actions.",
+      "Fewer administrative bottlenecks across the application process.",
+      "More capacity to manage a growing loan pipeline.",
+    ],
     managedEyebrow: "Managed virtual support for Australian mortgage businesses",
     managedHeading: "The role is managed beyond the initial match.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your business can stay focused on loan-processing quality, client service, and growth. The role is supported around the systems, procedures, and working standards your business requires.",
@@ -126,9 +137,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "The role requires familiarity with financial planning terminology, systems, tools, and established advice workflows.",
       "You want recruitment, onboarding, and ongoing team support managed through one provider.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The virtual assistant provides administrative support to the practice. They do not provide personal financial advice, select strategies, make recommendations or replace the review and authorisation required from a licensed adviser.",
+    outcomeLabel: "What changes for your financial planning business",
+    outcomeHeading: "Make progress easier to see and manage.",
+    outcomePoints: [
+      "Smoother progress from approved advice to implementation",
+      "Fewer delays caused by incomplete client information",
+      "More consistent service between client reviews",
+      "Better visibility of upcoming reviews and provider actions",
+    ],
     managedEyebrow: "Managed virtual support for Australian financial planning businesses",
     managedHeading: "Your virtual financial support assistant is managed beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your team can stay focused on clients, delivering financial advice, and growing the business. Our virtual financial support solution is built around your systems, procedures, and working standards.",
@@ -177,9 +193,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Financial records need to stay current so management and accountants have reliable information to work from.",
       "You need someone already familiar with accounting software and routine bookkeeping processes.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The virtual assistant works within your approvals and internal controls. Tax advice, audit opinions, statutory sign-off and decisions reserved for a registered accountant, tax agent or business owner remain with those authorised parties.",
+    outcomeLabel: "What changes for your business",
+    outcomeHeading: "Get clearer figures for business decisions.",
+    outcomePoints: [
+      "Overdue customer balances are identified sooner",
+      "Upcoming bills are visible before they fall due",
+      "Month-end reports need fewer corrections",
+      "Cash commitments are easier to review",
+    ],
     managedEyebrow: "Managed virtual support for Australian businesses",
     managedHeading: "We manage your accounting & bookkeeping VA beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship around the role, so your business has ongoing support for the people, systems, and processes behind day-to-day accounting administration.",
@@ -228,9 +249,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Claims and renewal activity needs regular tracking so outstanding actions are easier to identify.",
       "The role requires familiarity with insurance terminology, broker workflows, and policy administration.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "No. The role supports insurance administration and processing within agreed procedures. Policy recommendations, coverage decisions and other matters requiring professional advice or authorised judgement remain with the appropriate broker or authorised person.",
+    outcomeLabel: "What changes for your insurance brokerage",
+    outcomeHeading: "Deliver steadier service for your clients.",
+    outcomePoints: [
+      "Better-prepared renewals ahead of expiry",
+      "Less avoidable rework on policy changes",
+      "Clearer progress updates during claims",
+      "Better visibility of upcoming policy deadlines",
+    ],
     managedEyebrow: "Managed virtual support for Australian businesses",
     managedHeading: "We manage your insurance processing virtual assistant beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your team can focus on clients, policy advice and business development while routine insurance processing stays organised.",
@@ -279,9 +305,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Listing and property files need clearer document, status and milestone tracking.",
       "Agents need calendars, appointments and recurring administration kept organised behind the scenes.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The virtual assistant follows the agency’s approved scripts, authorities and escalation process. Licensed activity, negotiation, legal interpretation and decisions requiring a local or authorised professional stay with the appropriate team member.",
+    outcomeLabel: "What changes for your real estate business",
+    outcomeHeading: "Keep every property transaction on track.",
+    outcomePoints: [
+      "More timely responses to property enquiries",
+      "Better-prepared listings before publication",
+      "Clearer updates for clients during transactions",
+      "Earlier visibility of outstanding property milestones",
+    ],
     managedEyebrow: "Managed virtual support for Australian real estate businesses",
     managedHeading: "We manage your real estate virtual assistant beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your agents can stay focused on clients, listings and business development while recurring property administration stays organised.",
@@ -330,9 +361,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Customer enquiries and routine communications need reliable day-to-day attention.",
       "Documents, records and recurring administrative tasks need clearer ownership.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The role follows your documented permissions, approval levels and escalation points. Commercial commitments, legal decisions, sensitive approvals and work outside the agreed authority remain with your nominated team members.",
+    outcomeLabel: "What changes for your business",
+    outcomeHeading: "Keep business commitments on track.",
+    outcomePoints: [
+      "Fewer actions missed after meetings",
+      "Clearer visibility of deadlines and commitments",
+      "Smoother handovers across the team",
+      "More consistent follow-through on business priorities",
+    ],
     managedEyebrow: "Managed virtual support for Australian businesses",
     managedHeading: "We manage your executive and administrative virtual assistant beyond recruitment.",
     managedSteps: [
@@ -381,9 +417,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Reporting needs to happen regularly so your team can see what is working and what needs attention.",
       "The role requires someone who already understands digital marketing channels, content workflows, and reporting tools.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The virtual assistant executes approved tasks and reports results. Brand strategy, budgets, claims, campaign approvals and access permissions remain with your authorised marketing or business lead.",
+    outcomeLabel: "What changes for your business",
+    outcomeHeading: "Bring more consistency to your marketing.",
+    outcomePoints: [
+      "A steadier presence across digital channels",
+      "Fewer delays between campaign approval and launch",
+      "Better use of existing content and campaign assets",
+      "Clearer insight into what to improve next",
+    ],
     managedEyebrow: "Managed virtual support for Australian businesses",
     managedHeading: "We manage your digital marketing virtual assistant beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your marketing team has consistent execution support across campaigns, content, and reporting.",
@@ -433,9 +474,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Shopify updates and routine store administration are competing with sales and business-development work.",
       "Orders need consistent checking, tracking, and follow-up from purchase through to fulfilment.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The virtual assistant works from your approved scripts, offers, permissions and contact policies. Pricing decisions, commercial commitments, contract approval and regulated marketing responsibilities stay with authorised staff.",
+    outcomeLabel: "What changes for your sales & e-commerce business",
+    outcomeHeading: "Make sales and leads easier to follow through.",
+    outcomePoints: [
+      "More opportunities to re-engage interested buyers",
+      "Better visibility of potential sales",
+      "Fewer avoidable issues after checkout",
+      "A more dependable buying experience",
+    ],
     managedEyebrow: "Managed virtual support for Australian businesses",
     managedHeading: "We manage your sales and e-commerce virtual assistant beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your business has consistent support across lead administration, customer enquiries and e-commerce operations.",
@@ -484,9 +530,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Website traffic and performance need regular monitoring rather than occasional checks.",
       "Your business needs ongoing WordPress or website support without relying on ad hoc technical fixes.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "Access, change approval, backups, security controls and escalation paths are defined by your technical owner. High-risk infrastructure changes, security decisions and work outside the agreed technical authority remain with qualified authorised personnel.",
+    outcomeLabel: "What changes for your business",
+    outcomeHeading: "Make your digital assets easier to rely on.",
+    outcomePoints: [
+      "Fewer broken links and 404 errors on key pages",
+      "Earlier warning of uptime and page speed issues",
+      "Less disruption from plugin conflicts after updates",
+      "More reliable contact forms and enquiry notifications",
+    ],
     managedEyebrow: "Managed virtual support for Australian businesses",
     managedHeading: "We manage your IT and technology virtual assistant beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your business has consistent support for recurring website and technology tasks.",
@@ -536,9 +587,14 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Writers need research and source material organised before content production begins.",
       "Blog uploads, formatting and publication tasks are delaying an otherwise approved content schedule.",
     ],
-    boundaryLabel: "Clear role boundaries",
-    boundaryHeading: "Support works best with defined authority and review.",
-    boundaryText: "The virtual assistant works from approved briefs and sources. Your business retains responsibility for factual claims, legal or compliance review, brand approval and final publication decisions.",
+    outcomeLabel: "What changes for your business",
+    outcomeHeading: "Get more from the content you publish.",
+    outcomePoints: [
+      "Clearer explanations of your products and services",
+      "A more consistent voice across website pages",
+      "Better answers to common customer questions",
+      "Content your team can reuse in future campaigns",
+    ],
     managedEyebrow: "Managed virtual support for Australian businesses",
     managedHeading: "We manage your copywriting virtual assistant beyond recruitment.",
     managedIntro: "Virtual Office Angels manages the staffing relationship so your business has consistent writing and publishing support for ongoing content needs.",
