@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <Link to="/" aria-label="Virtual Office Angels home">
-            <img className="footer-logo" src="/assets/voa-logo-orange.png" alt="Virtual Office Angels" />
+            <img className="footer-logo" src="/assets/voa-logo-dark.png" width="700" height="127" alt="Virtual Office Angels" />
           </Link>
           <p>Specialised virtual assistants with managed support for Australian businesses.</p>
         </div>

@@ -945,3 +945,45 @@ order already placed correctly.
 
 No copy changed anywhere in this pass. Every glyph follows the existing stroke vocabulary: 1.7 weight
 for the feature icons, 2 for the inline marks that render at around 1em.
+
+### W3-LOGO — the client's high-resolution logo (2026-09-29)
+
+`VOA LOGOS.png` (2458x680) replaces the header and footer marks. Two derived files are committed to
+`public/assets/`; the source stays at the repository root as the master.
+
+**The supplied file has no alpha channel.** It is 24bpp RGB on solid white, so dropping it in as-is
+would have put a white rectangle in the header and a worse one on the dark theme. It is keyed in
+`scratchpad/logo/build.ps1` (System.Drawing; no ImageMagick or PIL on this machine):
+
+1. Crop to the content box — 2323x422 of the 2458x680 sheet, ratio 5.505.
+2. **Downscale on the white background first**, then key. Keying first and scaling second bleeds
+   transparent pixels into the edges and leaves a pale fringe, which is exactly the halo the old
+   header asset showed on the dark theme.
+3. Alpha from distance to white over a 60-level feather, so the grey tagline (min channel 166) and
+   the pale halo highlights stay fully opaque while the paper keys out cleanly.
+4. Unmatte each partial pixel — the observed value is ink over white, so the ink is recovered rather
+   than left washed out.
+
+Exported at 700x127, about 3x the largest rendered size (223 CSS px in the header, 260 in the footer).
+
+**Dark variant.** Measured, not guessed: the brand blue is `rgb(18,93,183)`, which reaches only
+**2.55:1** on the dark header surface. `voa-logo-dark.png` lifts the blue to `rgb(122,172,227)` and
+the grey tagline to `rgb(211,211,210)`, giving **7.12:1** and **11.76:1**. The orange halo is
+pixel-identical between the two files — only the blue and the grey move. Swapped by CSS on
+`[data-theme='dark']`, with both images decorative since the `<Link>` carries the accessible name.
+
+**The swap selectors must be scoped through `.brand`.** `.brand img` is specificity 0-1-1, so a bare
+`.brand-mark-dark { display: none }` at 0-1-0 loses to it and both logos render side by side — which
+is what shipped on the first attempt and had to be corrected. `.brand .brand-mark-dark` is 0-2-0 and
+wins.
+
+**Sizing.** The new artwork is proportionally taller than the old (content ratio 5.505 against
+6.055), because its tagline sits lower. The brand column is a fixed width, so the wordmark renders at
+the same size as before and only the block height changes — from a 48.4px box to 40.4px, since the
+old asset carried 19px of internal vertical padding that the new one does not.
+
+**Footer.** `voa-logo-orange.png` was a 553x116 indexed-colour solid orange plate with navy text,
+sitting on the navy footer. It now uses the dark variant, which matches the header and is the same
+higher-quality artwork. The orange file is left in place; revert the `src` in `Footer.tsx` to bring
+it back. The old header asset, `source/staging/images/0afc8f6269-untitled-5.png`, is captured source
+material and is left where it is, simply no longer referenced.

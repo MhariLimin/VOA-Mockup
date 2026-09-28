@@ -75,6 +75,14 @@ main { padding-top: var(--header-height); }
 
 .brand { display: inline-flex; align-items: center; text-decoration: none; }
 .brand img { display: block; width: 100%; height: auto; }
+/* The brand blue (#125bb7) reaches only 2.55:1 against the dark header surface, so dark mode swaps
+   in a lifted export of the same artwork: the wordmark rises to 7.12:1 and the tagline to 11.76:1,
+   while the orange halo is pixel-identical in both files. */
+/* Scoped through .brand on purpose: `.brand img` above is 0-1-1, so a bare `.brand-mark-dark`
+   selector at 0-1-0 loses to it and both images render side by side. */
+.brand .brand-mark-dark { display: none; }
+[data-theme='dark'] .brand .brand-mark-light { display: none; }
+[data-theme='dark'] .brand .brand-mark-dark { display: block; }
 
 .primary-navigation { min-width: 0; }
 .nav-list, .nav-popover { margin: 0; padding: 0; list-style: none; }

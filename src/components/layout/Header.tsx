@@ -94,12 +94,10 @@ export function Header() {
     <header className="site-header" ref={headerRef}>
       <div className="container header-inner">
         <Link className="brand" to="/" aria-label="Virtual Office Angels home">
-          <img
-            src="/assets/source/staging/images/0afc8f6269-untitled-5.png"
-            width="341"
-            height="74"
-            alt="Virtual Office Angels"
-          />
+          {/* Two exports of the same client artwork. The <Link> carries the accessible name, so
+              both images are decorative. */}
+          <img className="brand-mark-light" src="/assets/voa-logo.png" width="700" height="127" alt="" />
+          <img className="brand-mark-dark" src="/assets/voa-logo-dark.png" width="700" height="127" alt="" />
         </Link>
         <button
           className="menu-toggle"
