@@ -54,7 +54,7 @@ defined( 'ABSPATH' ) || exit;
 			 * label above it reads as more prominent than weight or size alone, both of which were
 			 * rejected. The label is sourced from the production site's own title attribute.
 			 */
-			$voa_phone = get_theme_mod( 'voa_phone', '1 300 737 883' );
+			$voa_phone = voa_option( 'voa_phone' );
 			?>
 			<button
 				class="theme-toggle"

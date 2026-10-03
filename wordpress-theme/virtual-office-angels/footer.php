@@ -7,9 +7,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$voa_phone = get_theme_mod( 'voa_phone', '1 300 737 883' );
-$voa_email = get_theme_mod( 'voa_email', 'clientcare@virtualofficeangels.com.au' );
-$voa_abn   = get_theme_mod( 'voa_abn', 'ABN 58 155 459 788' );
+$voa_phone = voa_option( 'voa_phone' );
+$voa_email = voa_option( 'voa_email' );
+$voa_abn   = voa_option( 'voa_abn' );
 ?>
 </main>
 

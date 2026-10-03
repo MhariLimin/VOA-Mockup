@@ -41,6 +41,30 @@ theme — not a shortcode, and not a page-builder module.
 ACF **free** may still earn its place for a handful of flat, single-value settings. That is a small,
 reversible decision; the repeater question is the one that matters and it is settled.
 
+### Refinement, 2026-10-03: where blocks apply, and where they do not
+
+Building step 5 made the boundary clearer than the original wording.
+
+**Blocks are for content the client restructures** — ordinary pages, and the service pages, where
+sections may be reordered or dropped per service.
+
+**The home page is not that.** It is a fixed composition the client approved section by section over
+three weeks of revisions, and several of its sections are not expressible as blocks at all: a hero
+with a cross-fading photographic backdrop and dot controls, a four-stage diagram whose markers sit on
+a drawn curve, a one-second logo carousel. Rebuilding those as editable blocks would invite the layout
+to be taken apart by accident, and would be a great deal of work to enable something nobody asked for.
+
+So the home page is **template parts**, and the content inside them comes from:
+
+| Source | What |
+| --- | --- |
+| Real content types | services, testimonials, client logos, posts — all editable as posts |
+| Customizer fields | the hero headline, lead, figures, phone and email |
+| The template | structural copy and labels, translatable |
+
+This is not a retreat from the governing principle. Nothing is locked in a plugin's private format;
+every word is either a post, a theme mod, or translatable text in a file under version control.
+
 ---
 
 ## 2. Content model

@@ -101,3 +101,124 @@ function voa_show_closing_section() {
 		&& ! is_page_template( 'page-templates/page-thank-you.php' )
 		&& ! is_404();
 }
+
+/**
+ * Background image URLs for a rotating backdrop.
+ *
+ * Stored as an option holding attachment IDs, so the client picks them from the media library rather
+ * than pasting paths. An ID whose attachment has been deleted is skipped rather than rendering a
+ * broken image.
+ *
+ * @param string $option Option name, e.g. voa_hero_backgrounds.
+ * @return string[] Image URLs.
+ */
+function voa_background_images( $option ) {
+	$ids  = get_option( $option, array() );
+	$urls = array();
+
+	if ( ! is_array( $ids ) ) {
+		return $urls;
+	}
+
+	foreach ( $ids as $id ) {
+		$url = wp_get_attachment_image_url( (int) $id, 'voa-hero' );
+
+		if ( $url ) {
+			$urls[] = $url;
+		}
+	}
+
+	return $urls;
+}
+
+/**
+ * The URL of a page by slug, falling back to the home page.
+ *
+ * Templates link to /contact and /services by name. Before those pages exist — on a fresh install, or
+ * while content is still being built — this returns home rather than an empty href, which would be a
+ * dead link in the markup.
+ *
+ * @param string $slug Page slug.
+ * @return string
+ */
+function voa_page_url( $slug ) {
+	$page = get_page_by_path( $slug );
+
+	return $page ? get_permalink( $page ) : home_url( '/' );
+}
+
+/**
+ * A service's systems list.
+ *
+ * Stored as one system per line in post meta rather than as a repeater field, which is what let this
+ * build avoid an ACF Pro licence. Blank lines are dropped so a stray newline in the editor does not
+ * render an empty item.
+ *
+ * @param int $post_id Service post id.
+ * @return string[]
+ */
+function voa_service_systems( $post_id ) {
+	$raw = (string) get_post_meta( $post_id, 'voa_systems', true );
+
+	if ( '' === trim( $raw ) ) {
+		return array();
+	}
+
+	return array_values( array_filter( array_map( 'trim', preg_split( '/
+|
+|
+/', $raw ) ) ) );
+}
+
+/**
+ * Shorten text to a whole word, with an ellipsis.
+ *
+ * Home-page testimonial previews are shortened rather than wrapped, so the three cards stay the same
+ * height. Cuts on a word boundary — a mid-word truncation reads as a rendering fault.
+ *
+ * @param string $text  Plain text.
+ * @param int    $limit Maximum characters.
+ * @return string
+ */
+function voa_shorten( $text, $limit ) {
+	$text = trim( preg_replace( '/\s+/', ' ', $text ) );
+
+	if ( mb_strlen( $text ) <= $limit ) {
+		return $text;
+	}
+
+	$cut   = mb_substr( $text, 0, $limit );
+	$space = mb_strrpos( $cut, ' ' );
+
+	if ( false !== $space ) {
+		$cut = mb_substr( $cut, 0, $space );
+	}
+
+	return rtrim( $cut, ' ,.;:' ) . '…';
+}
+
+/**
+ * Initials from a name, for the testimonial avatars.
+ *
+ * These are placeholders standing in for photographs. No verified client portraits exist, and none
+ * may be generated or assigned.
+ *
+ * @param string $name Full name.
+ * @return string One or two uppercase letters.
+ */
+function voa_initials( $name ) {
+	$parts = preg_split( '/\s+/', trim( (string) $name ) );
+	$parts = array_values( array_filter( $parts ) );
+
+	if ( ! $parts ) {
+		return '';
+	}
+
+	$first = mb_strtoupper( mb_substr( $parts[0], 0, 1 ) );
+
+	if ( count( $parts ) < 2 ) {
+		return $first;
+	}
+
+	return $first . mb_strtoupper( mb_substr( end( $parts ), 0, 1 ) );
+}
