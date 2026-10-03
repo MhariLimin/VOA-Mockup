@@ -1,0 +1,46 @@
+/* Self-hosted variable fonts. Decision 2026-10-03: both faces ship with the theme rather than loading
+   from Google — no third-party request, no visitor IPs leaving the site, and both are open-licensed
+   so there is no cost. `font-display: swap` shows the fallback immediately rather than blocking text.
+
+   The .woff2 files are NOT yet in assets/fonts/; until they are, these rules are inert and the
+   fallback stack in --font-display / --font-body is what renders. */
+@font-face {
+  font-family: 'Manrope';
+  src: url('../fonts/manrope-variable.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-display: 'Manrope', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --container: 80rem;
+  --gutter: clamp(1.25rem, 4vw, 5rem);
+  --header-height: 5rem;
+  --space-section: clamp(3.5rem, 7vw, 7rem);
+  --radius-control: 0.75rem;
+  --radius-card: 1.125rem;
+  --motion-fast: 180ms;
+  --motion-standard: 320ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --header-height: 4.25rem;
+  }
+}
+
+/* G1: compact scale — every rem-based size renders ~10% smaller. */
+html {
+  font-size: 90%;
+}

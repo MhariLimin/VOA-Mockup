@@ -1,0 +1,31 @@
+/*
+Theme Name: Virtual Office Angels
+Theme URI: https://virtualofficeangels.com.au/
+Author: Virtual Office Angels
+Description: Custom theme for Virtual Office Angels, reproducing the approved Mock Layout 1 design. Hybrid build: PHP templates with core-block content, a light and dark theme driven by data-theme, and no page-builder dependency.
+Version: 0.1.0
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: voa
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+*/
+
+/*
+ * WordPress only reads the header above from this file.
+ * The actual styles are enqueued from assets/css/ — see inc/enqueue.php.
+ *
+ * They are split rather than kept in one file because the React build's global.css had grown to
+ * 3,011 lines and was becoming hard to navigate:
+ *
+ *   tokens.css      structural custom properties (container, spacing, motion, radii)
+ *   themes.css      the light and dark palettes, switched by data-theme on <html>
+ *   typography.css  the type scale
+ *   base.css        resets and element defaults
+ *   layout.css      header, footer, grid, containers
+ *   components.css  buttons, cards, forms, accordions, carousels
+ *   sections.css    the page sections and diagrams
+ *   utilities.css   helpers and accessibility
+ */
