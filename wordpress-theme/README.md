@@ -9,19 +9,19 @@ destabilise it to make progress here.**
 Plan: `docs/WORDPRESS_ARCHITECTURE.md` · Steps: `docs/MIGRATION_RUNBOOK.md` ·
 Live site facts: `docs/WORDPRESS_LIVE_SITE_STATUS.md`
 
-## State: build step 1 of 10 complete
+## State: build steps 1–5 and 8 complete
 
 | | Step | Status |
 | --- | --- | --- |
 | 1 | Skeleton — activates cleanly, renders header and footer | **Done** |
-| 2 | CSS port, ~3,011 lines from `src/styles/global.css` | Next |
-| 3 | JS modules | Placeholder files in place |
-| 4 | Post types, nav walker, icons | **Done** in step 1 |
-| 5 | `front-page.php` | |
-| 6 | `single-voa_service.php` + custom blocks | |
-| 7 | Remaining page templates | |
-| 8 | `home.php`, `single.php`, `archive.php`, `404.php` | |
-| 9 | Patterns | |
+| 2 | CSS port, 3,011 lines from `src/styles/global.css` | **Done** |
+| 3 | JS modules | **Done** — 8 modules |
+| 4 | Post types, nav walker, icons | **Done** |
+| 5 | `front-page.php` and its nine section parts | **Done** |
+| 6 | `single-voa_service.php` + custom blocks | Next |
+| 7 | Remaining page templates (About, How It Works, Why, Client Stories, Videos, FAQs, Contact, Thank you, Services index) | |
+| 8 | `home.php`, `single.php`, `archive.php`, `search.php`, `page.php`, `404.php` | **Done** |
+| 9 | Patterns for client-editable sections | |
 | 10 | Content, forms, Yoast, redirects | Needs staging |
 
 Steps 1–9 need no server access.
