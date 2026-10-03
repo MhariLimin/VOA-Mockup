@@ -8,15 +8,21 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The stylesheets, in cascade order. Split out of what was one 3,011-line file in the React build.
+ * The stylesheets, in cascade order — the same four the React build loads, in the same sequence.
+ *
+ * global.css is deliberately NOT split into base/layout/components/sections. Its order is
+ * load-bearing: several rules sit where they do so they override an earlier one, and a few say so in
+ * their own comments ("Declared here rather than with the other breakpoints, so they follow the rule
+ * above"). Reordering 3,011 lines across five files to look tidier would risk breakage that is hard
+ * to see and harder to trace. The section comments already make it navigable.
  */
-const VOA_STYLES = array( 'tokens', 'themes', 'typography', 'base', 'layout', 'components', 'sections', 'utilities' );
+const VOA_STYLES = array( 'tokens', 'themes', 'typography', 'global' );
 
 /**
  * The behaviour modules. Each replaces a React hook or component; see docs/WORDPRESS_ARCHITECTURE.md
  * section 5 for the mapping. All are plain modules — no framework, no build step.
  */
-const VOA_SCRIPTS = array( 'motion', 'theme-toggle', 'nav', 'reveal', 'backdrop-rotator', 'client-carousel', 'journey' );
+const VOA_SCRIPTS = array( 'motion', 'theme-toggle', 'nav', 'reveal', 'backdrop-rotator', 'client-carousel', 'journey', 'accordion' );
 
 /**
  * File modification time as the cache-busting version, so a changed file is never served stale and an

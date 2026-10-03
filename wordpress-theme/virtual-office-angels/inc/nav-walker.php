@@ -58,7 +58,8 @@ class VOA_Nav_Walker extends Walker_Nav_Menu {
 			return;
 		}
 
-		$output .= '</ul>';
+		// Closes the popover and the .nav-group opened in start_el().
+		$output .= '</ul></div>';
 	}
 
 	/**
@@ -84,11 +85,18 @@ class VOA_Nav_Walker extends Walker_Nav_Menu {
 			);
 
 			if ( $has_children ) {
-				// A panel trigger, not a link: it opens a menu rather than navigating.
+				/*
+				 * The wrapper matters: hover opens the panel, and it has to cover both the trigger
+				 * and the panel itself or the menu closes as the pointer travels between them. The
+				 * CSS also positions the popover against this element.
+				 *
+				 * A button, not a link — it opens a panel rather than navigating, which is what
+				 * assistive technology expects.
+				 */
 				$output .= sprintf(
-					'<button class="nav-trigger" type="button" aria-expanded="false">%s%s</button>',
+					'<div class="nav-group"><button class="nav-trigger" type="button" aria-expanded="false"><span>%s</span>%s</button>',
 					esc_html( $item->title ),
-					voa_get_icon( 'plus', 'nav-caret' )
+					voa_get_chevron()
 				);
 				return;
 			}

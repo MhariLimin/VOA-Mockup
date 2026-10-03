@@ -17,15 +17,15 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
  * WordPress only reads the header above from this file.
  * The actual styles are enqueued from assets/css/ — see inc/enqueue.php.
  *
- * They are split rather than kept in one file because the React build's global.css had grown to
- * 3,011 lines and was becoming hard to navigate:
- *
- *   tokens.css      structural custom properties (container, spacing, motion, radii)
+ *   tokens.css      structural custom properties, plus the two @font-face rules
  *   themes.css      the light and dark palettes, switched by data-theme on <html>
  *   typography.css  the type scale
- *   base.css        resets and element defaults
- *   layout.css      header, footer, grid, containers
- *   components.css  buttons, cards, forms, accordions, carousels
- *   sections.css    the page sections and diagrams
- *   utilities.css   helpers and accessibility
+ *   global.css      everything else, in the order the React build proved
+ *
+ * global.css is one file on purpose. Its order is load-bearing — several rules sit where they do so
+ * they override an earlier one — so splitting it by concern would risk breakage that is hard to
+ * trace. The section comments inside it are what make it navigable.
+ *
+ * The templates reuse the React build's class names exactly, which is why 3,011 lines of proven CSS
+ * transfer with no rewriting at all.
  */

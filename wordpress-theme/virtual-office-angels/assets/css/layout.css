@@ -1,9 +1,0 @@
-/* layout.css — Virtual Office Angels
- *
- * PLACEHOLDER. The rules land here during build step 2 (CSS port), ported from the React build's
- * src/styles/global.css. That file is 3,011 lines of plain CSS with custom properties — no
- * preprocessor, no CSS-in-JS — so the port is largely a rename of React class names to the
- * WordPress markup, not a rewrite of the design.
- *
- * Enqueued in cascade order from inc/enqueue.php. Empty is fine; a missing file is not.
- */

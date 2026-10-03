@@ -115,3 +115,13 @@ function voa_get_play_icon( $class = '' ) {
 		esc_attr( trim( 'icon ' . $class ) )
 	);
 }
+
+/**
+ * The navigation chevron.
+ *
+ * Separate from the shared set because it uses its own 12x7 viewBox, matching the React build. CSS
+ * rotates it 180 degrees when its panel is open.
+ */
+function voa_get_chevron() {
+	return '<svg class="nav-chevron" viewBox="0 0 12 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg>';
+}

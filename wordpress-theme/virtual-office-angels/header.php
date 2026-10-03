@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="skip-link sr-only" href="#main"><?php esc_html_e( 'Skip to content', 'voa' ); ?></a>
+<a class="skip-link" href="#main-content"><?php esc_html_e( 'Skip to content', 'voa' ); ?></a>
 
 <header class="site-header">
 	<div class="container header-inner">
@@ -42,7 +42,7 @@ defined( 'ABSPATH' ) || exit;
 			class="primary-navigation"
 			id="primary-navigation"
 			data-open="false"
-			aria-label="<?php esc_attr_e( 'Primary', 'voa' ); ?>"
+			aria-label="<?php esc_attr_e( 'Primary navigation', 'voa' ); ?>"
 		>
 			<?php voa_primary_menu(); ?>
 		</nav>
@@ -76,4 +76,4 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 </header>
 
-<main id="main">
+<main id="main-content" class="page-stage">
