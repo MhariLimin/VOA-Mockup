@@ -3,8 +3,8 @@
 Reworded, numbered version of the client's Week 3 change list. This is the spec to implement
 against — nothing here is implemented yet.
 
-Read `claude.md` and `docs/SESSION_HANDOFF.md` first. This guide follows the same conventions as
-`docs/MOCKUP_1_REVISION_GUIDE.md`: one ID per independently checkable change, tagged
+Read `claude.md` and `docs/project/SESSION_HANDOFF.md` first. This guide follows the same conventions as
+`docs/revisions/MOCKUP_1_REVISION_GUIDE.md`: one ID per independently checkable change, tagged
 **[Confirmed]** (clear enough to build), **[Assumption]** (building against a stated
 interpretation the user can reverse) or **[Blocked]** (waiting on an external input).
 

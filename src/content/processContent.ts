@@ -6,7 +6,7 @@ export interface ProcessStage {
 }
 
 /* "From Role Planning to Ongoing Support", verbatim from HR-Managed Virtual Support.pdf in
-   docs/updated_src. /how-it-works renders it in full; the home page shows the summaries only. */
+   docs/client-content. /how-it-works renders it in full; the home page shows the summaries only. */
 export const processIntro = {
   eyebrow: 'End-to-end support',
   heading: 'From role planning to ongoing support.',

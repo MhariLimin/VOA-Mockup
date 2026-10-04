@@ -43,7 +43,7 @@ export const serviceRouter: readonly (readonly [string, string])[] = [
   ['Campaign and content execution', '/services/digital-marketing'],
 ];
 
-/* Service page content, taken from SERVICE PAGES_VOA.pdf (docs/updated_src). Deliberate edits: "VOA"
+/* Service page content, taken from SERVICE PAGES_VOA.pdf (docs/client-content). Deliberate edits: "VOA"
    is written out as "Virtual Office Angels", and two US spellings are Australian.
 
    `outcomeLabel` / `outcomeHeading` / `outcomePoints` come from VOA_Services Changes.docx, which

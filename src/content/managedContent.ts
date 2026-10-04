@@ -26,7 +26,7 @@ export const ownershipSplit = [
   },
 ] as const;
 
-/* Text below is taken verbatim from HR-Managed Virtual Support.pdf in docs/updated_src. */
+/* Text below is taken verbatim from HR-Managed Virtual Support.pdf in docs/client-content. */
 export const managedSupportPage = {
   heroLead: 'Build a specialised virtual assistant role around the work your business needs. Virtual Office Angels manages recruitment, onboarding, employment administration, payroll, and ongoing people support, while you manage day-to-day operations.',
   definition: [

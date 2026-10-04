@@ -4,7 +4,8 @@
  *
  * Separate from the twelve on /faqs. Each page owns its own FAQ rather than drawing from a central
  * store: centralising them would mean another system to maintain, and the client edits a page's
- * questions where they appear. A known trade-off, recorded in docs/WORDPRESS_ARCHITECTURE.md 2.5.
+ * questions where they appear. A known trade-off, recorded in section 2.5 of
+ * docs/wordpress-integration/reference/WORDPRESS_ARCHITECTURE.md.
  *
  * Native <details>/<summary>, which the .faq-list CSS already styles — keyboard support for free, and
  * no JavaScript. The service-page accordions use button markup instead, because their CSS targets

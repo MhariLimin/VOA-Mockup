@@ -10,7 +10,7 @@
  * section, and several of its parts cannot be expressed as blocks at all — a hero with a cross-fading
  * backdrop, a four-stage diagram whose markers sit on a drawn curve, a one-second logo carousel.
  * Making it editable would invite the layout to be taken apart by accident. See
- * docs/WORDPRESS_ARCHITECTURE.md section 1.
+ * docs/wordpress-integration/reference/WORDPRESS_ARCHITECTURE.md section 1.
  *
  * Section order, from the approved build:
  *   1. Hero

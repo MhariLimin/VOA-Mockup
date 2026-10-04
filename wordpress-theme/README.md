@@ -6,8 +6,8 @@ lives in this repository as the React app in `src/`.
 The React build stays the visual and behavioural reference until this theme is approved. **Do not
 destabilise it to make progress here.**
 
-Plan: `docs/WORDPRESS_ARCHITECTURE.md` · Steps: `docs/MIGRATION_RUNBOOK.md` ·
-Live site facts: `docs/WORDPRESS_LIVE_SITE_STATUS.md`
+Status, tasks and blockers: `docs/wordpress-integration/` · Plan, steps and live-site facts:
+`docs/wordpress-integration/reference/`
 
 ## State: build steps 1–5 and 8 complete
 

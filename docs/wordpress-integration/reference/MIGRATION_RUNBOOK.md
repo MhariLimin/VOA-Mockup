@@ -397,7 +397,7 @@ accumulated ranking is lost.
 3. Fix the sitemap emitting `http://` URLs — usually **Settings → General**, where the WordPress
    Address and Site Address should both be `https://`
 4. **Tools → Redirection** — enter the redirect map. The full map is in
-   `docs/WORDPRESS_LIVE_SITE_STATUS.md` section 5.2
+   `WORDPRESS_LIVE_SITE_STATUS.md` section 5.2
 5. The **ten orphan pages** need a decision each — redirect or let them 404. Check Google Search
    Console for traffic first. Seven are from 2017
 

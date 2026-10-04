@@ -1,7 +1,7 @@
 # Session handoff — Virtual Office Angels Mock Layout 1
 
 Written 2026-09-26 (end of the week 2 work). Read `CLAUDE.md` first, then this file, then
-`docs/MOCKUP_1_REVISION_GUIDE.md` for the numbered revision items.
+`docs/revisions/MOCKUP_1_REVISION_GUIDE.md` for the numbered revision items.
 
 ---
 
@@ -10,7 +10,7 @@ Written 2026-09-26 (end of the week 2 work). Read `CLAUDE.md` first, then this f
 - The React/Vite prototype on `main` is the approved **Mock Layout 1** design and the visual reference
   for the planned custom WordPress theme.
 - All numbered Mockup 1 revision categories are complete and approved.
-- All three client content documents in `docs/updated_src/` are integrated.
+- All three client content documents in `docs/client-content/` are integrated.
 - The home page now follows the **deployed VOA Content site** (`https://voa-mockup.vercel.app/`) for
   section headings, descriptions and highlight colours.
 - Nothing is deployed from this repository by a session. The user pushes and deploys.
@@ -80,7 +80,7 @@ Useful facts found while assigning images this session:
    `VOA Content/saved-state/owner-saved-state.json` under `content` → `homepage-text-<n>`.
    **The local `VOA Content/dist/index.html` is older** (15 Sep) and still has the previous hero
    headline, so read the saved state, not `dist`.
-3. **The client documents** in `docs/updated_src/`:
+3. **The client documents** in `docs/client-content/`:
    - `SERVICE PAGES_VOA.pdf` — all ten service pages
    - `About Us Page_CONTENT_VOA.docx` — About page
    - `HR-Managed Virtual Support.pdf` — Managed Virtual Support page
@@ -243,7 +243,7 @@ is still `/why-voa`.
    phrase from the deployed site, or a short list of gripes ("this section feels too big", "there's a
    bug on the bullets").
 2. **Turn it into an unambiguous spec before touching code.** For a large batch this means rewriting
-   the raw notes into `docs/MOCKUP_1_REVISION_GUIDE.md`: grouped by page/category, one numbered ID per
+   the raw notes into `docs/revisions/MOCKUP_1_REVISION_GUIDE.md`: grouped by page/category, one numbered ID per
    change (G-, H-, HP-, SP-, HIW-, WVOA-, CST-, FAQ-, ART-, ABT-, FTR-), each written so it is
    independently checkable, with a legend resolving every term the user used ("Layout 2",
    "VOA Content", "image2.png"). Tag each item **[Confirmed]**, **[Assumption]** (state the
@@ -354,7 +354,7 @@ is still `/why-voa`.
 - `CLAUDE.md` also still says service pages show the sitewide model band and that Layout 1 dropdowns
   are click-only (H1 made them hover-on-pointer).
 - `MOCKUP_1_REVISION_GUIDE.md` → G3 describes the three-column model band that section 5.5 replaced.
-- `docs/WEEK_2_ACTION_PLAN.md` → items 1 and 2 (mockup revisions, content integration) are done.
+- `docs/WEEK_2_ACTION_PLAN.md` → deleted 2026-10-04; week 2 is complete.
   **Not started:** the content/asset audit, the WordPress + SEO/GEO decision record, the WordPress
   theme and content architecture, the starter theme foundation, and the progress report.
 

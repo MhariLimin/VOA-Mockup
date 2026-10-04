@@ -19,8 +19,8 @@ defined( 'ABSPATH' ) || exit;
 const VOA_STYLES = array( 'tokens', 'themes', 'typography', 'global' );
 
 /**
- * The behaviour modules. Each replaces a React hook or component; see docs/WORDPRESS_ARCHITECTURE.md
- * section 5 for the mapping. All are plain modules — no framework, no build step.
+ * The behaviour modules. Each replaces a React hook or component; see section 5 of
+ * docs/wordpress-integration/reference/WORDPRESS_ARCHITECTURE.md for the mapping. All are plain modules — no framework, no build step.
  */
 const VOA_SCRIPTS = array( 'motion', 'theme-toggle', 'nav', 'reveal', 'backdrop-rotator', 'client-carousel', 'journey', 'accordion' );
 

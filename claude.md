@@ -1,6 +1,8 @@
 # Virtual Office Angels project context
 
-This file is the authoritative handoff for AI-assisted work in this repository. Read it before inspecting or changing code, then read `docs/SESSION_HANDOFF.md`, which carries the current page-by-page state, the working method the user expects, and the open client items. Where the two disagree on what is built today, the session handoff is newer. The older Bolt prompts and rebuild brief are historical artifacts only; they are not current instructions.
+This file is the authoritative handoff for AI-assisted work in this repository. Read it before inspecting or changing code, then read `docs/project/SESSION_HANDOFF.md`, which carries the current page-by-page state, the working method the user expects, and the open client items. Where the two disagree on what is built today, the session handoff is newer. The older Bolt prompts and rebuild brief are historical artifacts only; they are not current instructions.
+
+For the WordPress migration, start at `docs/wordpress-integration/README.md`: it indexes what is completed, pending and blocked, the current task list, and the reference documents. `docs/README.md` maps the rest of the documentation.
 
 ## Current outcome and direction
 
@@ -20,11 +22,11 @@ This file is the authoritative handoff for AI-assisted work in this repository. 
 
 - Repository: `https://github.com/MhariLimin/VOA-Mockup.git`
 - Selected branch: `main`
-- `main` was synchronized with `origin/main` before this handoff was prepared. The expected uncommitted changes after preparation are this context file and `docs/WEEK_2_ACTION_PLAN.md`; treat them as user-owned documentation.
-- Recorded HEAD when this file was first written: `b351731`. Week 2 then added `69f6a64`, `d4ff43f`, `fcf6558`, `c1e6563`, `5d11b21`, `15857eb`; see `docs/SESSION_HANDOFF.md` for the current branch table.
+- `main` was synchronized with `origin/main` before this handoff was prepared. The Week 2 action plan has since been completed and removed (2026-10-04).
+- Recorded HEAD when this file was first written: `b351731`. Week 2 then added `69f6a64`, `d4ff43f`, `fcf6558`, `c1e6563`, `5d11b21`, `15857eb`; see `docs/project/SESSION_HANDOFF.md` for the current branch table.
 - Other branches:
   - `legacy-w1` and `legacy-w2`: rollback points taken at the end of weeks 1 and 2. Do not develop on them.
-  - `mock-layout-2`: rejected alternate design as a whole. Specific components named in `docs/MOCKUP_1_REVISION_GUIDE.md` were adopted deliberately; do not copy anything else from it.
+  - `mock-layout-2`: rejected alternate design as a whole. Specific components named in `docs/revisions/MOCKUP_1_REVISION_GUIDE.md` were adopted deliberately; do not copy anything else from it.
   - `bolt/layout-enhance-1`: historical Bolt work already merged as applicable; it is no longer the required working branch.
 - Before editing, run `git status --short --branch`. Preserve unrelated user changes.
 - Do not commit, push, merge, deploy, create branches, or change remote state unless the user explicitly asks.
@@ -196,9 +198,9 @@ Historical duplicate founder markup still exists under `.legacy-home-founder` bu
 
 ## How the user runs this project
 
-Read `docs/SESSION_HANDOFF.md` section 7 in full before implementing anything. In short:
+Read `docs/project/SESSION_HANDOFF.md` section 7 in full before implementing anything. In short:
 
-- Requests arrive **per page or per section**, often as a screenshot, a pasted phrase from the deployed VOA Content site, or a short list of gripes. Turn them into numbered, independently checkable items before coding — `docs/MOCKUP_1_REVISION_GUIDE.md` is the pattern, including its [Confirmed] / [Assumption] / [Blocked] tags and its legend for the user's shorthand.
+- Requests arrive **per page or per section**, often as a screenshot, a pasted phrase from the deployed VOA Content site, or a short list of gripes. Turn them into numbered, independently checkable items before coding — `docs/revisions/MOCKUP_1_REVISION_GUIDE.md` is the pattern, including its [Confirmed] / [Assumption] / [Blocked] tags and its legend for the user's shorthand.
 - Ask the open questions **in one batch** before implementing, and recommend a default rather than listing neutral options.
 - Implement **one page or category at a time**, verify, report, and wait for approval before the next.
 - Build new sections from existing markup and classes; scope new CSS to a modifier class rather than restyling shared components; keep motion, reduced-motion and keyboard behaviour intact.
