@@ -17,7 +17,6 @@ export function Footer() {
       </div>
       <div className="container footer-bottom">
         <span>Virtual Office Angels Pty. Ltd. · ABN 58 155 459 788</span>
-        <span>Prototype content requires final Virtual Office Angels verification.</span>
       </div>
     </footer>
   );

@@ -26,6 +26,5 @@ export function ContactForm() {
     <label>What support do you need? *<textarea name="message" rows={5} required /></label>
     <label className="checkbox-field"><input type="checkbox" required /><span>I agree to the processing of my information for this enquiry.</span></label>
     <button className="button" type="submit">Submit enquiry</button>
-    <small>Prototype form only. Connect validation, spam protection, consent records, and WordPress form handling before launch.</small>
   </form>;
 }

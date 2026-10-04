@@ -4,8 +4,9 @@
  *
  * Still the prototype's form, field for field, and still submitted to /thank-you without being sent
  * anywhere. Wiring it to real delivery, spam protection and a consent record is migration step 9, and
- * needs the recipient address the client has not yet confirmed. The small print says so, as it does
- * in the React build; it must go once the form is live.
+ * needs the recipient address the client has not yet confirmed. The "prototype form only" small print
+ * was removed from both builds on 2026-10-04, so nothing on the page says the form is not live — it
+ * must be connected before launch.
  *
  * Industry options follow the "Who we support" list in the client's About Us document.
  *
@@ -41,5 +42,4 @@ $voa_industries = array(
 	<label>What support do you need? *<textarea name="message" rows="5" required></textarea></label>
 	<label class="checkbox-field"><input type="checkbox" required><span>I agree to the processing of my information for this enquiry.</span></label>
 	<button class="button" type="submit">Submit enquiry</button>
-	<small>Prototype form only. Connect validation, spam protection, consent records, and WordPress form handling before launch.</small>
 </form>

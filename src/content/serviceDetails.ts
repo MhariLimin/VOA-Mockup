@@ -44,7 +44,8 @@ export const serviceRouter: readonly (readonly [string, string])[] = [
 ];
 
 /* Service page content, taken from SERVICE PAGES_VOA.pdf (docs/client-content). Deliberate edits: "VOA"
-   is written out as "Virtual Office Angels", and two US spellings are Australian.
+   is written out as "Virtual Office Angels" — in the SEO titles too, since 2026-10-04 — and two US
+   spellings are Australian.
 
    `outcomeLabel` / `outcomeHeading` / `outcomePoints` come from VOA_Services Changes.docx, which
    replaced the role-boundary card on every service with these business outcomes. The systems lists
@@ -54,7 +55,7 @@ export const serviceRouter: readonly (readonly [string, string])[] = [
    longer anywhere on the site. Worth confirming that is intended rather than relocated. */
 export const serviceDetails: Record<string, ServiceDetail> = {
   "/services/mortgage-loans": {
-    seoTitle: "Mortgage Processing Virtual Assistant Support | VOA",
+    seoTitle: "Mortgage Processing Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an experienced mortgage processing virtual assistant for CRM updates, document coordination, lodgement, and settlement support for Australian businesses.",
     title: "Mortgage & Loans Processing Virtual Support",
     lead: "Virtual Office Angels matches mortgage businesses with experienced virtual assistants who support loan administration from application through to settlement, working within your systems and approved procedures.",
@@ -110,7 +111,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackPlaceholder: "Feedback currently being gathered.",
   },
   "/services/financial-planning": {
-    seoTitle: "Financial Planning Virtual Assistant Support | VOA",
+    seoTitle: "Financial Planning Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find a financial planning virtual assistant for client admin, review preparation, software updates, and implementation support for Australian businesses.",
     title: "Financial Planning & Admin Support",
     lead: "Virtual Office Angels matches financial planning businesses with experienced virtual assistants who support client administration, review preparation, and implementation tasks within your systems and documented processes.",
@@ -166,7 +167,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackPlaceholder: "Feedback currently being gathered.",
   },
   "/services/accounting-bookkeeping": {
-    seoTitle: "Accounting & Bookkeeping Virtual Assistant Support | VOA",
+    seoTitle: "Accounting & Bookkeeping Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an accounting and bookkeeping virtual assistant for invoicing, accounts, payroll administration, reconciliations, and ongoing bookkeeping support.",
     title: "Accounting and Bookkeeping Virtual Support",
     lead: "Virtual Office Angels matches businesses and accounting practices with experienced virtual assistants who support day-to-day bookkeeping, transaction processing, and financial administration within your existing systems and procedures.",
@@ -222,7 +223,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
   "/services/insurance-processing": {
-    seoTitle: "Insurance Processing Virtual Assistant Support | VOA",
+    seoTitle: "Insurance Processing Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an insurance processing virtual assistant for policy administration, renewals, claims, CRM updates, and broker support for Australian insurance businesses.",
     title: "Insurance Processing Virtual Support",
     lead: "Virtual Office Angels matches insurance businesses with experienced virtual assistants who support policy administration, renewals, claims processing, and client records within your systems and documented procedures.",
@@ -278,7 +279,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
   "/services/real-estate-conveyancing": {
-    seoTitle: "Real Estate Virtual Assistant & Admin Support | VOA",
+    seoTitle: "Real Estate Virtual Assistant & Admin Support | Virtual Office Angels",
     metaDescription: "Find a real estate virtual assistant for CRM administration, property listings, prospect follow-up, appointment coordination, and ongoing agency support.",
     title: "Real Estate & Admin Virtual Support",
     lead: "Virtual Office Angels matches real estate businesses with experienced virtual assistants who support property administration, CRM management, prospect follow-up, and day-to-day agency workflows.",
@@ -334,7 +335,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
   "/services/back-office-admin": {
-    seoTitle: "Executive & Administrative Virtual Assistant Support | VOA",
+    seoTitle: "Executive & Administrative Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an experienced executive and administrative virtual assistant for inboxes, calendars, customer enquiries, documents, and daily business support.",
     title: "Executive & Administrative Virtual Support",
     lead: "Virtual Office Angels matches business owners and leadership teams with experienced virtual assistants who manage recurring administration, executive coordination, and day-to-day business support.",
@@ -447,7 +448,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
   "/services/sales-marketing": {
-    seoTitle: "Sales & E-Commerce Virtual Assistant Support | VOA",
+    seoTitle: "Sales & E-Commerce Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find a sales and e-commerce virtual assistant for lead management, Shopify administration, customer enquiries, order processing, and fulfilment support.",
     title: "Sales & E-Commerce Virtual Assistance",
     lead: "Virtual Office Angels matches businesses with experienced virtual assistants who support lead management, customer enquiries, Shopify administration, order processing, and day-to-day sales activity.",
@@ -503,7 +504,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
   "/services/it-technology": {
-    seoTitle: "IT Virtual Assistant & Technology Support | VOA",
+    seoTitle: "IT Virtual Assistant & Technology Support | Virtual Office Angels",
     metaDescription: "Find an IT virtual assistant for WordPress support, website maintenance, troubleshooting, traffic monitoring, and recurring technical tasks.",
     title: "Virtual IT Service & Technology Support",
     lead: "Virtual Office Angels matches businesses with experienced virtual assistants who support website maintenance, WordPress administration, troubleshooting, and recurring technical tasks across your digital systems.",

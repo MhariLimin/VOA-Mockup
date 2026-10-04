@@ -2,8 +2,8 @@
 /**
  * Site footer and document close — Footer.tsx.
  *
- * The bottom line still carries the prototype's verification notice, as the approved build does. It
- * has to be removed, or replaced with real legal links, before launch.
+ * The prototype's verification notice was removed from both builds on 2026-10-04. The privacy policy
+ * and terms links belong in the bottom line once those pages exist.
  *
  * @package voa
  */
@@ -23,7 +23,6 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<div class="container footer-bottom">
 		<span>Virtual Office Angels Pty. Ltd. · ABN 58 155 459 788</span>
-		<span>Prototype content requires final Virtual Office Angels verification.</span>
 	</div>
 </footer>
 <?php wp_footer(); ?>
