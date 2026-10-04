@@ -10,3 +10,6 @@ dist
 # Site backups and plugin logs: private data, never committed.
 wordpress-backups/
 log.*.txt
+
+# The packaged theme, rebuilt with npm run wp:zip.
+wordpress-theme/*.zip

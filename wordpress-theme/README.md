@@ -33,6 +33,7 @@ Nothing visible is retyped. Three scripts in `scripts/wordpress/` tie the theme 
 | `npm run wp:export` | Regenerates `data/*.json` from the React content modules, copies every design image into `assets/media/`, and copies the four stylesheets into `assets/css/` |
 | `npm run wp:reference -- <dir>` | Renders every React route to static HTML in `<dir>` |
 | `npm run wp:compare -- <dir> <wordpress-url>` | Diffs WordPress against those files, tag by tag and word by word |
+| `npm run wp:zip` | Builds `wordpress-theme/virtual-office-angels.zip`, the file you upload — with forward-slash paths a Linux host can unpack |
 
 **After any change to the React content or styles:** run the export, then the comparison, and commit
 the regenerated files with the change.
@@ -109,5 +110,5 @@ interactive part exercised on both sides with the same result; no console errors
 - **Fonts match the prototype by not loading Manrope and Inter** (decision 2026-10-04). The React build
   names them but never loads them, so both show the system font. `VOA_LOAD_FONTS` in
   `inc/enqueue.php` turns them on; do the same in the React build if that happens.
-- **PHP 7.4**, which the live server runs. The theme avoids anything newer, but that stays unproven
-  until staging.
+- **PHP 7.4 — now verified.** The same checks pass on the official PHP 7.4.33, the live server's
+  version: every page matches and the error log stays empty.

@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "wp:export": "node scripts/wordpress/export-content.mjs",
     "wp:reference": "node scripts/wordpress/render-reference.mjs",
-    "wp:compare": "node scripts/wordpress/compare.mjs"
+    "wp:compare": "node scripts/wordpress/compare.mjs",
+    "wp:zip": "node scripts/wordpress/package-theme.mjs"
   },
   "dependencies": {
     "react": "18.3.1",
