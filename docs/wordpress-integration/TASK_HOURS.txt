@@ -1,0 +1,300 @@
+VIRTUAL OFFICE ANGELS - WORDPRESS INTEGRATION
+Task list and hours, 2-4 October 2026
+
+Total: 24.0 hours
+
+==================================================================================================
+SUMMARY
+==================================================================================================
+
+  #     Task                                                                         Hours
+  ----  ---------------------------------------------------------------------------  -----
+  1     Finish the code conversion to PHP (WordPress theme)                            9.5
+  1.1   Review the current live website's WordPress page build structure               1.0
+  2     Research how to import the PHP code into WordPress                             1.0
+  3     Research whether WordPress Divi is still needed                                1.0
+  4     Research HostGator, Crazy Domains and Wordfence                                1.5
+  5     Research whether the Business or Pro plan is better to keep                    1.0
+  6     Check the current WordPress users                                              0.5
+  7     Troubleshoot the HostGator login verification issue + reset credentials        1.0
+  8     Virtual Office Angels backup enforcement                                       1.0
+  9     End-of-month Wordfence scanning                                                3.0
+  10    Scan vulnerability assessment and actions taken                                1.0
+  11    Live website audit and content inventory                                       1.5
+  12    Documentation and progress reporting                                           1.0
+                                                                                     -----
+        TOTAL                                                                         24.0
+
+Hours are estimates of the time each task took, allocated across the work actually done.
+
+==================================================================================================
+1. FINISH THE CODE CONVERSION TO PHP - 9.5 h
+==================================================================================================
+
+The approved React mockup (Layout 1) converted into a custom WordPress theme that reproduces it
+exactly: same pages, headings, text, images, layout, colours, light/dark theme and interactions.
+Folder: wordpress-theme/virtual-office-angels/
+
+1a. Theme foundation and architecture - 2.0 h
+    - Architecture plan: how each mockup page and component maps to WordPress templates, pages,
+      posts, a Service post type, menus and plugins (reference/WORDPRESS_ARCHITECTURE.md).
+    - Theme skeleton: style.css header, functions.php, theme.json (settings only), asset loading.
+    - Ported the mockup's four stylesheets and rewrote its React behaviour as small plain
+      JavaScript modules: header menus (hover, click, Escape, mobile), light/dark toggle, scroll
+      reveals, client-logo carousel, backdrop rotator, the How It Works journey, accordions, FAQ
+      topics, Insights filter and paging.
+    - Templates for the home page, articles, archives, search, standard pages and the 404 page.
+    - Self-hosted the Manrope and Inter fonts; later switched off (decision: match the mockup,
+      which shows the system font). One setting turns them back on.
+
+1b. Local WordPress test environment - 0.5 h
+    - PHP 8.3 installed; a local WordPress 7.1.2 copy (SQLite database, no server software needed)
+      running the theme straight from the repository, seeded with the 30 articles. Used for every
+      test below. Emails are captured to a file instead of being sent.
+
+1c. Exact-copy rebuild - 2.5 h
+    - Scripts that generate the theme's content from the mockup itself, so nothing is retyped:
+        npm run wp:export     copies page text, 59 images and the stylesheets into the theme
+        npm run wp:reference  renders every mockup page to HTML for comparison
+        npm run wp:compare    compares WordPress with the mockup, word by word
+    - A template for every route: home, Services, About, How It Works, Managed Virtual Support,
+      Client Stories, Insights, Videos, FAQs, Contact, Thank You, the ten service pages and the
+      404 page. All SVG icons ported.
+    - "Appearance > Site setup" admin screen: one click creates the 11 pages and 10 service pages,
+      sets the home and posts pages, and seeds the services' Yoast titles and descriptions. It only
+      adds what is missing; it never changes or deletes anything.
+
+1d. Verification - 1.5 h
+    - Markup comparison: 22 of 22 pages match the mockup.
+    - Browser review side by side with the mockup: layout and colours on desktop (light and dark)
+      and phone width, plus every interactive part: theme toggle, menus, hero dots, service hover,
+      journey, article rail, FAQ (one open at a time), accordions, systems diagram, carousel pause,
+      6-second backdrop, Insights filter and paging, FAQ topics. No console errors.
+    - Fixed along the way: a rounding difference on How It Works; WordPress default styles that
+      added link underlines and changed the body text size; emoji scripts removed.
+
+1e. Compatibility, packaging and clean-up - 1.0 h
+    - PHP 7.4 test (the live server's version): all 22 pages match, no PHP errors.
+    - npm run wp:zip builds the upload file virtual-office-angels.zip (133 files, 8.1 MB).
+    - Removed the "prototype" notices from the form and footer in both builds; the ten service SEO
+      titles now end "| Virtual Office Angels"; fixed the "Rezi Finance" logo label; removed unused
+      styles.
+
+1f. Contact form, sending for real - 2.0 h
+    - Sends through Contact Form 7 (already used on live) and looks identical to the mockup:
+      20 of 20 elements measured the same on the Contact page, home page and a service page.
+    - Sends to the address the live forms use (clientcare@virtualofficeangels.com.au); Reply-To is
+      the visitor, so staff can answer with one click (live replies to wordpress@ instead).
+    - Enquiries from Google Ads start "From Google ADS", as on live, worked out from the ad click.
+    - Flamingo keeps a copy of every enquiry in wp-admin, with consent, date, time and IP.
+    - Akismet spam checks; sent enquiries go to Thank You; if Contact Form 7 is ever off, the page
+      says the form is unavailable instead of pretending to send.
+    - Tested in the browser and on PHP 7.4: errors, a full submission, the email, the saved copy.
+
+--------------------------------------------------------------------------------------------------
+1.1. REVIEW THE CURRENT LIVE WEBSITE'S WORDPRESS PAGE BUILD STRUCTURE - 1.0 h
+--------------------------------------------------------------------------------------------------
+
+Read only, from the database backup and the public site. Nothing was changed.
+- Pages: 30 published, all covered by the redirect list; 3 drafts (not public). 27 of the 30 are
+  built with WPBakery.
+- Posts: 98 published + 2 drafts = the 100 shown in wp-admin.
+- Menus: four exist; the header uses "Menu top 2" through Max Mega Menu. Five services appear in
+  no menu on live; the new site lists all ten.
+- Widgets and footer: nothing the new site would lose.
+- Opened the ten old pages with no new equivalent and checked each redirect against its content.
+  Two targets changed. Two pages are empty. One client case study has no home on the new site yet.
+- Contact forms: two live forms, both sending to clientcare@; the Google Ads one is on /contact/.
+
+==================================================================================================
+2. RESEARCH HOW TO IMPORT THE PHP CODE INTO WORDPRESS - 1.0 h
+==================================================================================================
+
+- Route: Appearance > Themes > Add New > Upload Theme with the ZIP, activate, then
+  Appearance > Site setup.
+- What the ZIP carries (design, templates, scripts, images) and what it does not (articles,
+  plugins, menus, SEO settings, redirects); those come from cloning live to staging.
+- Plan: build and test on HostGator staging first, never on live. Staging can run PHP 8 while live
+  stays on PHP 7.4; the theme works on both.
+- Step-by-step migration runbook written (reference/MIGRATION_RUNBOOK.md).
+- Redirect import file for the Redirection plugin prepared: redirects.csv, 26 redirects.
+
+==================================================================================================
+3. RESEARCH WHETHER WORDPRESS DIVI IS STILL NEEDED - 1.0 h
+==================================================================================================
+
+- Divi is not installed and not used. The live site runs the Twenty Sixteen theme with WPBakery
+  Page Builder, Max Mega Menu, Smart Slider 3 and the Customize Twenty Sixteen plugin.
+- The new theme needs no page builder, so Divi is not needed.
+- Still to confirm: where the Divi belief came from, and whether anyone pays for an Elegant Themes
+  (Divi) subscription that could be cancelled.
+
+==================================================================================================
+4. RESEARCH HOSTGATOR, CRAZY DOMAINS AND WORDFENCE - 1.5 h
+==================================================================================================
+
+- Wordfence: scan options, why scans take hours on this site (old site copies in the web folder,
+  214,816 files), excluding folders, recovering a stalled scan, reading the results.
+- HostGator: the staging tool, PHP version per domain/folder, the plan comparison (task 5).
+- Found that a staging copy already exists in the database, plus two old staging folders.
+- Still to do (needs HostGator access): Crazy Domains registrations, renewal dates and login
+  holder; the HostGator email and domain inventory.
+
+==================================================================================================
+5. RESEARCH WHETHER THE BUSINESS OR PRO PLAN IS BETTER TO KEEP - 1.0 h
+==================================================================================================
+
+- On HostGator's current plans, Business and Pro have the same features (staging, SSL, Cloudflare
+  CDN, malware scanning and removal, firewall, phone and chat support). Only the size differs:
+  Business 50 websites / 50 GB / ~200K visits a month; Pro 100 websites / 100 GB / ~400K.
+- Recommendation: keep one plan, most likely Pro (most sites are already on it). Move the few
+  Business sites across, mailboxes included, and let Business lapse at its renewal date.
+- Still to do: each plan's renewal date and renewal price, and the sites, domains, disk use and
+  email accounts on each, from the HostGator billing page.
+
+==================================================================================================
+6. CHECK THE CURRENT WORDPRESS USERS - 0.5 h
+==================================================================================================
+
+- Four users, all Administrators: "admin" (shown as Anne; owns all 98 posts and 30 pages, must
+  never be deleted), "anne", "voa.webdev@gmail.com" (owner unknown) and "Mhari".
+- There is no WordPress account for Joseph.
+
+==================================================================================================
+7. TROUBLESHOOT THE HOSTGATOR LOGIN VERIFICATION ISSUE + RESET CREDENTIALS - 1.0 h
+==================================================================================================
+
+- Verification code retrieved and password reset, but the account is locked after repeated failed
+  logins. The lock also appears on mobile data, so it is on the account, not the network.
+- Cause: the verification email goes to an address that is hard to reach.
+- Next: try once after the 24-hour lock; if still locked, contact HostGator support and change the
+  account's verification email.
+
+==================================================================================================
+8. VIRTUAL OFFICE ANGELS BACKUP ENFORCEMENT - 1.0 h
+==================================================================================================
+
+- First full UpdraftPlus backup failed; its log was read to find why.
+- Database backup taken and downloaded: 29.5 MB, 158 tables, checked intact, stored outside the
+  repository.
+- Found: backups are not reaching Google Drive (the connection was never authorised or has
+  lapsed); the last scheduled backups are from March and May 2025; only the two newest are kept.
+- Still to do: the files backup (after checking disk space), and reconnecting off-site storage.
+
+==================================================================================================
+9. END-OF-MONTH WORDFENCE SCANNING - 3.0 h
+==================================================================================================
+
+- First scan ran for hours, stalled in the malware stage and was stopped. The stages before it
+  were clean (spam, blocklist, server state, file changes).
+- Cause: old copies of the site in the web folder (stagingsite, stagingsite2, staging/1384,
+  OLD_VOA, voa_old, newdirectory, freestrategysession).
+- Second scan with those folders excluded: completed in 40 minutes. It covered 79,663 files,
+  39 plugins, 18 themes, 128 posts and 4 users, and returned 34 results.
+
+==================================================================================================
+10. SCAN VULNERABILITY ASSESSMENT AND ACTIONS TAKEN - 1.0 h
+==================================================================================================
+
+Assessment:
+- Critical: "WP Logo Showcase Responsive Slider and Carousel" contains a known backdoor signature
+  and links to a blocklisted domain. WordPress.org closed it permanently on 7 April 2026 for a
+  security issue, so no fixed version exists. An old copy also sits in a backup folder.
+- Critical updates waiting: Site Kit, UpdraftPlus, WP File Manager, WPBakery, Really Simple
+  Security. Medium: nine more plugins. Two abandoned plugins. WordPress core 7.0.6 (7.1.2 out).
+- The six oddly-named theme folders are clean.
+- Three results ignored earlier were reviewed; Slider Revolution (critical, inactive) should still
+  be removed.
+
+Actions taken:
+- WP Logo Showcase deactivated on live.
+- Checked the effect of deactivating WP File Manager (nothing on the public site changes).
+- Found the side effect of the deactivation: the live home page shows the plugin's code as text
+  under "Who we work with". Fix proposed.
+
+==================================================================================================
+11. LIVE WEBSITE AUDIT AND CONTENT INVENTORY - 1.5 h
+==================================================================================================
+
+- Audit from the site's Site Health report: WordPress 7.0.6 on PHP 7.4 (end of life since 2022),
+  38 plugins (20 active, 18 inactive), a 1.75 GB install with a 376 MB database, WP File Manager
+  active, Yoast publishing http:// addresses, a leftover caching file.
+- URL inventory from the public sitemaps: 30 pages and 98 posts. All 30 articles in the mockup
+  exist on live with the same address, so no article needs a redirect.
+- Content and asset audit of the mockup: every page, article, image, logo, testimonial, FAQ and
+  form, with what still needs the client's approval.
+- Two live posts link to the old staging copy (/stagingsite2/why-us/); fix recorded.
+- First batch of questions for the client asked and answered (redirect all orphan pages, migrate
+  all articles, testimonials and logos approved, videos deferred).
+
+==================================================================================================
+12. DOCUMENTATION AND PROGRESS REPORTING - 1.0 h
+==================================================================================================
+
+- Reorganised the project documentation and created the WordPress integration folder:
+  COMPLETED, PENDING, BLOCKERS, TASKS, REDIRECTS and the reference documents.
+- Recorded every finding as it happened, so the work can be picked up by anyone.
+
+==================================================================================================
+OPEN ITEMS AND RECOMMENDATIONS
+==================================================================================================
+
+Every item below changes the live site or an account, so each needs the client's approval first.
+
+1. Review the plugins: keep, remove or replace
+   The live site has 38 plugins, 18 of them switched off. Recommended:
+   - Keep: Yoast SEO, Redirection, Wordfence, UpdraftPlus, Akismet, Contact Form 7, Imagify.
+     Add with the new site: Flamingo (saved copy of enquiries), WP Mail SMTP (reliable email).
+   - Remove now: WP Logo Showcase (backdoor), the inactive Slider Revolution (critical
+     vulnerability), the old plugin copies in wp-content/updraft/plugins-old/.
+   - WP File Manager: deactivate unless someone uses it. It gives full file access from wp-admin
+     and has a critical update waiting.
+   - Retire at launch (only the old design uses them): WPBakery Page Builder, Templatera, Visual
+     Composer Modal Popups, Customize Twenty Sixteen, Max Mega Menu, Smart Slider 3, WP-PageNavi,
+     Async JavaScript, Duplicate Page, WP Last Modified Info.
+   - Clear up duplicates: four menu plugins, two sliders, two image optimisers, three caching
+     plugins, two video players. Abandoned: Async JavaScript, Customize Twenty Sixteen, Velvet
+     Blues Update URLs.
+   - Until launch: take a plugins backup, then apply the critical security updates to the plugins
+     being kept.
+   - Decide: Testimonials Showcase holds testimonials as their own public pages; keep it or move
+     the testimonials into the new theme.
+
+2. Rotate the passwords of all administrator accounts
+   - The scan found a backdoor signature, so a past break-in cannot be ruled out. All four
+     administrators should get new, strong, unique passwords, stored in a password manager.
+   - "anne" in particular: its password is stored in an old, weak format.
+   - Turn on two-step login for administrators (included free in Wordfence, Login Security).
+   - Also rotate the HostGator, Crazy Domains and email passwords once access is back.
+
+3. Why are there four administrator accounts?
+   - Each administrator can install plugins, delete content and add users, so each is a full way
+     into the site. Ask the client who uses each account:
+       admin (Anne)          owns every post and page; keep, but secure it (two-step login)
+       anne                  owns nothing; likely a duplicate of Anne's; downgrade or remove
+       voa.webdev@gmail.com  owner unknown (Joseph?); confirm, then downgrade or remove
+       Mhari                 current developer; keep
+   - Recommended: one named account per person, Administrator only for those who need it, Editor
+     for content work. Never delete "admin" without moving its content to another user.
+
+4. HostGator access through va4voa@gmail.com, to avoid another lockout
+   - The lockout happened because verification codes go to an email nobody can easily reach.
+   - Recommended: make va4voa@gmail.com the HostGator account's contact/verification email (or
+     add it as an authorised user), so codes always reach the team. Keep the recovery details in
+     the password manager, and set the same for Crazy Domains.
+
+5. Permission to change the Google Drive that receives backups
+   - UpdraftPlus is set to send backups to Google Drive, but the connection is broken, and no
+     scheduled backup has run since May 2025.
+   - Recommended: the client approves reconnecting it to a Google account the team controls (for
+     example va4voa@gmail.com), with a schedule of weekly full backups and daily database backups,
+     keeping more than the current two copies.
+
+6. Also waiting on the client
+   - Approve the redirect list (REDIRECTS.md).
+   - OK to remove the broken plugin code from the live home page.
+   - Where the client case study from /client-case-studies/ should live on the new site.
+   - Whether an Elegant Themes (Divi) subscription is being paid.
+   - Who runs the Google Ads, and whether auto-tagging is on (needed for the "From Google ADS"
+     label).
+   - Approve the contact form's fallback wording.
