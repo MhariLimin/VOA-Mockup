@@ -12,7 +12,7 @@
  *
  * Markup, rendered by PHP:
  *
- *   <div class="hero-backdrop" data-interval="6000">
+ *   <div class="hero-backdrop">            (data-interval optional; 6000 ms by default)
  *     <span data-active="true"  style="background-image:url(…)"></span>
  *     <span data-active="false" style="background-image:url(…)"></span>
  *   </div>

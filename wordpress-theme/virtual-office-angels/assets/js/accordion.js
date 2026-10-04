@@ -1,72 +1,78 @@
 /**
- * Accordions.
+ * Accordions and FAQ lists, one panel open at a time.
  *
- * The vanilla port of the Accordion component in SourcePage.tsx, used by the service pages, About and
- * Why Virtual Office Angels.
+ * Two markups, both from the React build:
  *
- * Native <details>/<summary> was the original plan — less code, keyboard support for free — but the
- * existing CSS targets `.accordion-item button[aria-expanded]` and `.accordion-panel[hidden]`, and a
- * <details> element cannot carry those. Reusing the React markup means 3,011 lines of proven CSS
- * transfer untouched, which is worth more than the few lines saved here.
+ *   .accordion   Accordion in SourcePage.tsx — a button with aria-expanded, a "+" / "−" toggle mark,
+ *                and a panel with the hidden attribute. Service pages, About, /why-voa.
  *
- * One panel open at a time, matching the source document's own behaviour.
- *
- * Markup, rendered by PHP:
- *
- *   <div class="accordion">
- *     <div class="accordion-item">
- *       <button aria-expanded="false" aria-controls="x-0"><span>Heading</span><span>+</span></button>
- *       <p class="accordion-panel" id="x-0" hidden>Body</p>
- *
- * The separate .faq-list on the home page and /faqs DOES use native <details>, and needs nothing from
- * this file.
+ *   .faq-list    native <details>/<summary> — the home page FAQs and /faqs. React keeps only one open
+ *                by intercepting the summary click; this does the same, so opening one closes the rest.
+ *                /faqs rebuilds its list when the topic changes, so the handler is delegated.
  */
 (function () {
 	'use strict';
 
-	function setup(accordion) {
+	function setupAccordion(accordion) {
 		var items = Array.prototype.slice.call(accordion.querySelectorAll('.accordion-item'));
 
-		if (!items.length) {
-			return;
-		}
-
-		function close(item) {
+		function set(item, open) {
 			var button = item.querySelector('button');
-			var panel = item.querySelector('.accordion-panel');
+			var mark = item.querySelector('.accordion-toggle');
 
-			if (button) {
-				button.setAttribute('aria-expanded', 'false');
-			}
+			button.setAttribute('aria-expanded', open ? 'true' : 'false');
+			item.querySelector('.accordion-panel').hidden = !open;
 
-			if (panel) {
-				panel.hidden = true;
+			if (mark) {
+				mark.textContent = open ? '−' : '+';
 			}
 		}
 
 		items.forEach(function (item) {
 			var button = item.querySelector('button');
-			var panel = item.querySelector('.accordion-panel');
 
-			if (!button || !panel) {
+			if (!button || !item.querySelector('.accordion-panel')) {
 				return;
 			}
 
 			button.addEventListener('click', function () {
 				var open = button.getAttribute('aria-expanded') === 'true';
 
-				items.forEach(close);
+				items.forEach(function (other) {
+					set(other, false);
+				});
 
 				if (!open) {
-					button.setAttribute('aria-expanded', 'true');
-					panel.hidden = false;
+					set(item, true);
 				}
 			});
 		});
 	}
 
+	function setupFaqList(list) {
+		list.addEventListener('click', function (event) {
+			var summary = event.target.closest('summary');
+
+			if (!summary || !list.contains(summary)) {
+				return;
+			}
+
+			event.preventDefault();
+
+			var details = summary.parentElement;
+			var opening = !details.open;
+
+			Array.prototype.forEach.call(list.querySelectorAll('details'), function (other) {
+				other.open = false;
+			});
+
+			details.open = opening;
+		});
+	}
+
 	function init() {
-		Array.prototype.forEach.call(document.querySelectorAll('.accordion'), setup);
+		Array.prototype.forEach.call(document.querySelectorAll('.accordion'), setupAccordion);
+		Array.prototype.forEach.call(document.querySelectorAll('.faq-list'), setupFaqList);
 	}
 
 	if (document.readyState === 'loading') {

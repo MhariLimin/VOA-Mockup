@@ -1,18 +1,20 @@
 /**
- * Light and dark theme switch.
+ * Light and dark theme switch — useTheme.ts and ThemeToggle.tsx.
  *
- * The vanilla replacement for the React build's useTheme hook. Same mechanism, so a visitor's choice
- * carries across from the prototype: a data-theme attribute on <html> and a localStorage key named
- * voa-theme.
+ * Same mechanism as the React build, so a visitor's choice carries across: a data-theme attribute on
+ * <html> and a localStorage key named voa-theme. The attribute is applied before first paint by the
+ * inline script in inc/enqueue.php; this module keeps the button and the browser theme colour in step
+ * and handles the click.
  *
- * The attribute is applied before this file runs, by the inline script in inc/enqueue.php — if it
- * waited for this module the page would paint light and then switch, which is a visible flash on
- * every load for anyone using the dark theme. This module only handles the button.
+ * The button offers the theme you are not in: in light mode it reads "Use dark theme" and shows ☾,
+ * in dark mode "Use light theme" and ☀. PHP renders the light state; this corrects it on load when
+ * the stored theme is dark.
  */
 (function () {
 	'use strict';
 
 	var STORAGE_KEY = 'voa-theme';
+	var COLOURS = { light: '#f7f6f2', dark: '#081522' };
 	var root = document.documentElement;
 
 	function current() {
@@ -20,16 +22,25 @@
 	}
 
 	function apply(theme, buttons) {
+		var next = theme === 'dark' ? 'light' : 'dark';
+		var colour = document.querySelector('meta[name="theme-color"]');
+
 		root.setAttribute('data-theme', theme);
 
+		if (colour) {
+			colour.setAttribute('content', COLOURS[theme]);
+		}
+
 		buttons.forEach(function (button) {
-			button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+			var mark = button.querySelector('span');
+			button.setAttribute('aria-label', 'Use ' + next + ' theme');
+			button.setAttribute('title', 'Use ' + next + ' theme');
+			if (mark) {
+				mark.textContent = theme === 'dark' ? '☀' : '☾';
+			}
 		});
 
-		/*
-		 * Private browsing, blocked site data and quota limits all make this throw. The switch still
-		 * works for the current page; only the memory of it is lost.
-		 */
+		/* Private browsing and blocked site data make this throw; the switch still works for the page. */
 		try {
 			localStorage.setItem(STORAGE_KEY, theme);
 		} catch (e) {
@@ -51,32 +62,6 @@
 				apply(current() === 'dark' ? 'light' : 'dark', buttons);
 			});
 		});
-
-		/*
-		 * Follow the system preference only while the visitor has never chosen for themselves. Once
-		 * they have, their choice wins.
-		 */
-		var system = window.matchMedia('(prefers-color-scheme: dark)');
-
-		var onSystemChange = function (event) {
-			var stored = null;
-
-			try {
-				stored = localStorage.getItem(STORAGE_KEY);
-			} catch (e) {
-				/* Treat an unreadable store as "no choice made". */
-			}
-
-			if (!stored) {
-				apply(event.matches ? 'dark' : 'light', buttons);
-			}
-		};
-
-		if (typeof system.addEventListener === 'function') {
-			system.addEventListener('change', onSystemChange);
-		} else if (typeof system.addListener === 'function') {
-			system.addListener(onSystemChange);
-		}
 	}
 
 	if (document.readyState === 'loading') {

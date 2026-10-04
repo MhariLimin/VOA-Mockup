@@ -1,82 +1,31 @@
 <?php
 /**
- * Footer.
+ * Site footer and document close — Footer.tsx.
+ *
+ * The bottom line still carries the prototype's verification notice, as the approved build does. It
+ * has to be removed, or replaced with real legal links, before launch.
  *
  * @package voa
  */
 
 defined( 'ABSPATH' ) || exit;
-
-$voa_phone = voa_option( 'voa_phone' );
-$voa_email = voa_option( 'voa_email' );
-$voa_abn   = voa_option( 'voa_abn' );
 ?>
 </main>
-
 <footer class="site-footer">
 	<div class="container footer-grid">
 		<div class="footer-brand">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: company name. */ __( '%s home', 'voa' ), voa_company_name() ) ); ?>">
-				<img
-					class="footer-logo"
-					src="<?php echo esc_url( get_theme_file_uri( '/assets/images/voa-logo-dark.png' ) ); ?>"
-					width="700"
-					height="127"
-					alt="<?php echo esc_attr( voa_company_name() ); ?>"
-				>
-			</a>
-			<p><?php esc_html_e( 'Specialised virtual assistants with managed support for Australian businesses.', 'voa' ); ?></p>
+			<a aria-label="Virtual Office Angels home" href="<?php echo esc_url( voa_url( '/' ) ); ?>"><img class="footer-logo" src="<?php echo esc_url( voa_media_url( '/assets/voa-logo-dark.png' ) ); ?>" width="700" height="127" alt="Virtual Office Angels"></a>
+			<p>Specialised virtual assistants with managed support for Australian businesses.</p>
 		</div>
-
-		<?php
-		/*
-		 * The two link columns come from the Footer menu. WordPress has no notion of columns, so the
-		 * menu is split in half here rather than asking the client to maintain a nesting depth.
-		 */
-		if ( has_nav_menu( 'footer' ) ) {
-			wp_nav_menu(
-				array(
-					'theme_location' => 'footer',
-					'container'      => 'div',
-					'container_class' => 'footer-links',
-					'menu_class'     => 'footer-menu',
-					'depth'          => 2,
-				)
-			);
-		}
-		?>
-
-		<div class="footer-contact">
-			<strong><?php esc_html_e( 'Contact', 'voa' ); ?></strong>
-			<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $voa_phone ) ); ?>">
-				<?php voa_icon( 'phone' ); ?><?php echo esc_html( $voa_phone ); ?>
-			</a>
-			<a href="mailto:<?php echo esc_attr( $voa_email ); ?>">
-				<?php voa_icon( 'mail' ); ?><?php echo esc_html( $voa_email ); ?>
-			</a>
-			<?php
-			$voa_contact = get_page_by_path( 'contact' );
-			if ( $voa_contact ) :
-				?>
-				<a href="<?php echo esc_url( get_permalink( $voa_contact ) ); ?>"><?php esc_html_e( 'Contact Us', 'voa' ); ?></a>
-			<?php endif; ?>
-		</div>
+		<div><strong>Company</strong><a href="<?php echo esc_url( voa_url( '/about' ) ); ?>">About Us</a><a href="<?php echo esc_url( voa_url( '/why-voa' ) ); ?>">Managed Virtual Support</a><a href="<?php echo esc_url( voa_url( '/how-it-works' ) ); ?>">How It Works</a><a href="<?php echo esc_url( voa_url( '/client-stories' ) ); ?>">Testimonials</a></div>
+		<div><strong>Explore</strong><a href="<?php echo esc_url( voa_url( '/services/mortgage-loans' ) ); ?>">Services</a><a href="<?php echo esc_url( voa_url( '/insights' ) ); ?>">Blog</a><a href="<?php echo esc_url( voa_url( '/videos' ) ); ?>">Videos</a><a href="<?php echo esc_url( voa_url( '/faqs' ) ); ?>">FAQs</a></div>
+		<div class="footer-contact"><strong>Contact</strong><a href="tel:1300737883"><?php voa_icon( 'phone' ); ?>1 300 737 883</a><a href="mailto:clientcare@virtualofficeangels.com.au"><?php voa_icon( 'mail' ); ?>clientcare@virtualofficeangels.com.au</a><a href="<?php echo esc_url( voa_url( '/contact' ) ); ?>">Contact Us</a></div>
 	</div>
-
 	<div class="container footer-bottom">
-		<span>
-			<?php
-			printf(
-				/* translators: 1: company name, 2: ABN. */
-				esc_html__( '%1$s Pty. Ltd. · %2$s', 'voa' ),
-				esc_html( voa_company_name() ),
-				esc_html( $voa_abn )
-			);
-			?>
-		</span>
+		<span>Virtual Office Angels Pty. Ltd. · ABN 58 155 459 788</span>
+		<span>Prototype content requires final Virtual Office Angels verification.</span>
 	</div>
 </footer>
-
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -14,13 +14,41 @@
 			"defaultPalette": false,
 			"defaultGradients": false,
 			"palette": [
-				{ "slug": "background", "color": "#f7f6f2", "name": "Background" },
-				{ "slug": "surface", "color": "#ffffff", "name": "Surface" },
-				{ "slug": "text", "color": "#102235", "name": "Text" },
-				{ "slug": "muted", "color": "#526173", "name": "Muted text" },
-				{ "slug": "accent", "color": "#075fae", "name": "Accent blue" },
-				{ "slug": "action", "color": "#ee7d16", "name": "Action orange" },
-				{ "slug": "heading-accent", "color": "#dc4f1e", "name": "Heading accent" }
+				{
+					"slug": "background",
+					"color": "#f7f6f2",
+					"name": "Background"
+				},
+				{
+					"slug": "surface",
+					"color": "#ffffff",
+					"name": "Surface"
+				},
+				{
+					"slug": "text",
+					"color": "#102235",
+					"name": "Text"
+				},
+				{
+					"slug": "muted",
+					"color": "#526173",
+					"name": "Muted text"
+				},
+				{
+					"slug": "accent",
+					"color": "#075fae",
+					"name": "Accent blue"
+				},
+				{
+					"slug": "action",
+					"color": "#ee7d16",
+					"name": "Action orange"
+				},
+				{
+					"slug": "heading-accent",
+					"color": "#dc4f1e",
+					"name": "Heading accent"
+				}
 			]
 		},
 		"typography": {
@@ -30,81 +58,105 @@
 				{
 					"slug": "display",
 					"name": "Manrope",
-					"fontFamily": "'Manrope', system-ui, sans-serif",
-					"fontFace": [
-						{
-							"fontFamily": "Manrope",
-							"fontWeight": "200 800",
-							"fontStyle": "normal",
-							"fontDisplay": "swap",
-							"src": [ "file:./assets/fonts/manrope-variable.woff2" ]
-						}
-					]
+					"fontFamily": "'Manrope', system-ui, sans-serif"
 				},
 				{
 					"slug": "body",
 					"name": "Inter",
-					"fontFamily": "'Inter', system-ui, sans-serif",
-					"fontFace": [
-						{
-							"fontFamily": "Inter",
-							"fontWeight": "100 900",
-							"fontStyle": "normal",
-							"fontDisplay": "swap",
-							"src": [ "file:./assets/fonts/inter-variable.woff2" ]
-						}
-					]
+					"fontFamily": "'Inter', system-ui, sans-serif"
 				}
 			],
 			"fontSizes": [
-				{ "slug": "small", "name": "Small", "size": "0.875rem", "fluid": false },
-				{ "slug": "medium", "name": "Body", "size": "1rem", "fluid": { "min": "1rem", "max": "1.125rem" } },
-				{ "slug": "large", "name": "Lead", "size": "1.125rem", "fluid": { "min": "1.125rem", "max": "1.25rem" } },
-				{ "slug": "x-large", "name": "Heading", "size": "1.75rem", "fluid": { "min": "1.5rem", "max": "2.25rem" } },
-				{ "slug": "xx-large", "name": "Display", "size": "2.5rem", "fluid": { "min": "2.5rem", "max": "4rem" } }
+				{
+					"slug": "small",
+					"name": "Small",
+					"size": "0.875rem",
+					"fluid": false
+				},
+				{
+					"slug": "medium",
+					"name": "Body",
+					"size": "1rem",
+					"fluid": {
+						"min": "1rem",
+						"max": "1.125rem"
+					}
+				},
+				{
+					"slug": "large",
+					"name": "Lead",
+					"size": "1.125rem",
+					"fluid": {
+						"min": "1.125rem",
+						"max": "1.25rem"
+					}
+				},
+				{
+					"slug": "x-large",
+					"name": "Heading",
+					"size": "1.75rem",
+					"fluid": {
+						"min": "1.5rem",
+						"max": "2.25rem"
+					}
+				},
+				{
+					"slug": "xx-large",
+					"name": "Display",
+					"size": "2.5rem",
+					"fluid": {
+						"min": "2.5rem",
+						"max": "4rem"
+					}
+				}
 			]
 		},
 		"spacing": {
-			"units": [ "px", "em", "rem", "vh", "vw", "%" ],
+			"units": [
+				"px",
+				"em",
+				"rem",
+				"vh",
+				"vw",
+				"%"
+			],
 			"spacingSizes": [
-				{ "slug": "20", "name": "Tight", "size": "0.75rem" },
-				{ "slug": "30", "name": "Small", "size": "1.25rem" },
-				{ "slug": "40", "name": "Medium", "size": "2rem" },
-				{ "slug": "50", "name": "Large", "size": "3.5rem" },
-				{ "slug": "60", "name": "Section", "size": "clamp(3.5rem, 7vw, 7rem)" }
+				{
+					"slug": "20",
+					"name": "Tight",
+					"size": "0.75rem"
+				},
+				{
+					"slug": "30",
+					"name": "Small",
+					"size": "1.25rem"
+				},
+				{
+					"slug": "40",
+					"name": "Medium",
+					"size": "2rem"
+				},
+				{
+					"slug": "50",
+					"name": "Large",
+					"size": "3.5rem"
+				},
+				{
+					"slug": "60",
+					"name": "Section",
+					"size": "clamp(3.5rem, 7vw, 7rem)"
+				}
 			]
 		},
-		"border": { "radius": true, "color": true, "style": true, "width": true },
-		"shadow": { "defaultPresets": false }
-	},
-	"styles": {
-		"color": {
-			"background": "var(--background)",
-			"text": "var(--text)"
+		"border": {
+			"radius": true,
+			"color": true,
+			"style": true,
+			"width": true
 		},
-		"typography": {
-			"fontFamily": "var(--font-body)",
-			"fontSize": "var(--wp--preset--font-size--medium)",
-			"lineHeight": "1.6"
-		},
-		"elements": {
-			"heading": {
-				"typography": {
-					"fontFamily": "var(--font-display)",
-					"lineHeight": "1.1"
-				},
-				"color": { "text": "var(--text)" }
-			},
-			"link": {
-				"color": { "text": "var(--accent)" },
-				":hover": { "typography": { "textDecoration": "underline" } }
-			}
+		"shadow": {
+			"defaultPresets": false
 		}
 	},
-	"customTemplates": [
-		{ "name": "page-services", "title": "Services index", "postTypes": [ "page" ] },
-		{ "name": "page-contact", "title": "Contact", "postTypes": [ "page" ] },
-		{ "name": "page-faqs", "title": "FAQs", "postTypes": [ "page" ] }
-	],
-	"_comment": "The palette here is the LIGHT theme only, because theme.json has no concept of a runtime theme switch. The dark theme lives in assets/css/themes.css under [data-theme='dark'], along with the tokens theme.json cannot express at all: the hero scrim gradient, the glass surfaces, and the --service-wash / --section-wash opacity scalars. Styles above reference var(--...) so a theme switch flows through the editor too."
+	"_comment": "Settings only: the editor's palette, type and spacing choices. There is deliberately no \"styles\" section. WordPress prints theme.json styles on every front-end page — a body font size, heading line height, link colour and an underline on hover — and the React build has none of them, so they made pages differ from the approved design. All front-end styling comes from assets/css, regenerated from the React stylesheets. The palette is the light theme only; the dark theme lives in assets/css/themes.css under [data-theme='dark']. The fonts are declared once, in assets/css/fonts.css."
 }

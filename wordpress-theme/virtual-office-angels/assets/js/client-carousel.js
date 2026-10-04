@@ -19,8 +19,7 @@
  *       <div class="client-carousel-track">
  *         <div class="client-slide">…</div>   (count + 5 of these)
  *
- * PHP renders the duplicated slides and marks them data-clone="true", so this file never has to
- * build DOM.
+ * PHP renders the duplicated slides, so this file never has to build DOM.
  */
 (function () {
 	'use strict';

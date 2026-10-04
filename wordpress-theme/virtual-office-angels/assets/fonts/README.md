@@ -1,5 +1,9 @@
 # Fonts
 
+> **Not loaded (decision 2026-10-04).** The approved mockup never loads these faces, so it shows the
+> system font, and the theme now does the same to match it exactly. Set `VOA_LOAD_FONTS` to `true` in
+> `inc/enqueue.php` to use them — and load them in the React build too, so the two stay identical.
+
 Self-hosted, per the decision of 2026-10-03. Loading these from Google would add a third-party request
 to every page and send visitor IP addresses to Google; both faces are open-licensed, so hosting them
 here costs nothing.

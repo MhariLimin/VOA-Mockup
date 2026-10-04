@@ -1,0 +1,27 @@
+/* Self-hosted variable fonts. Decision 2026-10-03: both faces ship with the theme rather than loading
+   from Google — no third-party request, no visitor IPs leaving the site, and both are open-licensed
+   so there is no cost. `font-display: swap` shows the fallback immediately rather than blocking text.
+
+   The React build names these faces in tokens.css but never loads them, so it renders in the system
+   fallback (Segoe UI on Windows) unless the visitor happens to have them installed. This theme does
+   load them, so its text is the intended Manrope and Inter — and therefore not pixel-identical to the
+   prototype. See assets/fonts/README.md.
+
+   NOT LOADED as of 2026-10-04: VOA_LOAD_FONTS in inc/enqueue.php is false, so the theme matches the
+   approved mockup exactly. */
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../fonts/manrope-variable.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

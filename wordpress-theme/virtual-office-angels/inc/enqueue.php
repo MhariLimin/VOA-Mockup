@@ -8,7 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The stylesheets, in cascade order — the same four the React build loads, in the same sequence.
+ * The stylesheets, in cascade order: the fonts, then the same four the React build loads in the same
+ * sequence (regenerated from it by scripts/wordpress/export-content.mjs), then the few WordPress-only
+ * rules.
  *
  * global.css is deliberately NOT split into base/layout/components/sections. Its order is
  * load-bearing: several rules sit where they do so they override an earlier one, and a few say so in
@@ -16,13 +18,25 @@ defined( 'ABSPATH' ) || exit;
  * above"). Reordering 3,011 lines across five files to look tidier would risk breakage that is hard
  * to see and harder to trace. The section comments already make it navigable.
  */
-const VOA_STYLES = array( 'tokens', 'themes', 'typography', 'global' );
+const VOA_STYLES = array( 'fonts', 'tokens', 'themes', 'typography', 'global', 'wordpress' );
+
+/**
+ * Whether to load the self-hosted Manrope and Inter.
+ *
+ * Off, by decision of 2026-10-04. The approved React mockup names these faces but never loads them,
+ * so it renders in the visitor's system font (Segoe UI on Windows) — and that is the design the client
+ * approved. Loading them here made the theme the one thing that looked different. The files stay in
+ * assets/fonts/; turning this on is the whole change if the design fonts are wanted later, and should
+ * be done in the React build at the same time so the two stay identical.
+ */
+const VOA_LOAD_FONTS = false;
 
 /**
  * The behaviour modules. Each replaces a React hook or component; see section 5 of
- * docs/wordpress-integration/reference/WORDPRESS_ARCHITECTURE.md for the mapping. All are plain modules — no framework, no build step.
+ * docs/wordpress-integration/reference/WORDPRESS_ARCHITECTURE.md for the mapping. All are plain
+ * modules — no framework, no build step.
  */
-const VOA_SCRIPTS = array( 'motion', 'theme-toggle', 'nav', 'reveal', 'backdrop-rotator', 'client-carousel', 'journey', 'accordion' );
+const VOA_SCRIPTS = array( 'motion', 'theme-toggle', 'nav', 'reveal', 'backdrop-rotator', 'client-carousel', 'journey', 'accordion', 'interactions' );
 
 /**
  * File modification time as the cache-busting version, so a changed file is never served stale and an
@@ -37,14 +51,16 @@ function voa_asset_version( $relative_path ) {
  * Front-end styles and scripts.
  */
 function voa_enqueue_assets() {
-	foreach ( VOA_STYLES as $index => $handle ) {
+	$styles = VOA_LOAD_FONTS ? VOA_STYLES : array_values( array_diff( VOA_STYLES, array( 'fonts' ) ) );
+
+	foreach ( $styles as $index => $handle ) {
 		$path = '/assets/css/' . $handle . '.css';
 
 		wp_enqueue_style(
 			'voa-' . $handle,
 			get_theme_file_uri( $path ),
 			// Each sheet depends on the one before it, which is what keeps the cascade order fixed.
-			$index > 0 ? array( 'voa-' . VOA_STYLES[ $index - 1 ] ) : array(),
+			$index > 0 ? array( 'voa-' . $styles[ $index - 1 ] ) : array(),
 			voa_asset_version( $path )
 		);
 	}
@@ -80,6 +96,10 @@ add_action( 'wp_enqueue_scripts', 'voa_enqueue_assets' );
  * compete with the hero image for bandwidth.
  */
 function voa_preload_fonts() {
+	if ( ! VOA_LOAD_FONTS ) {
+		return;
+	}
+
 	$fonts = array(
 		'/assets/fonts/manrope-variable.woff2',
 		'/assets/fonts/inter-variable.woff2',

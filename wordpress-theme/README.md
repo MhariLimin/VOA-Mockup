@@ -1,7 +1,7 @@
 # Virtual Office Angels — WordPress theme
 
-The production target: a custom hybrid theme reproducing the approved Mock Layout 1 design, which
-lives in this repository as the React app in `src/`.
+The production target: a custom theme that is an **exact copy** of the approved Mock Layout 1 design,
+which lives in this repository as the React app in `src/`.
 
 The React build stays the visual and behavioural reference until this theme is approved. **Do not
 destabilise it to make progress here.**
@@ -9,70 +9,105 @@ destabilise it to make progress here.**
 Status, tasks and blockers: `docs/wordpress-integration/` · Plan, steps and live-site facts:
 `docs/wordpress-integration/reference/`
 
-## State: build steps 1–5 and 8 complete
+## State: every page built and matching the React build
 
 | | Step | Status |
 | --- | --- | --- |
-| 1 | Skeleton — activates cleanly, renders header and footer | **Done** |
-| 2 | CSS port, 3,011 lines from `src/styles/global.css` | **Done** |
-| 3 | JS modules | **Done** — 8 modules |
-| 4 | Post types, nav walker, icons | **Done** |
-| 5 | `front-page.php` and its nine section parts | **Done** |
-| 6 | `single-voa_service.php` + custom blocks | Next |
-| 7 | Remaining page templates (About, How It Works, Why, Client Stories, Videos, FAQs, Contact, Thank you, Services index) | |
-| 8 | `home.php`, `single.php`, `archive.php`, `search.php`, `page.php`, `404.php` | **Done** |
-| 9 | Patterns for client-editable sections | |
+| 1 | Skeleton | **Done** |
+| 2 | Stylesheets — generated from `src/styles/` | **Done** |
+| 3 | Behaviour scripts | **Done** — 9 modules |
+| 4 | Services post type, icons | **Done** |
+| 5 | Home page | **Done** |
+| 6 | Service pages | **Done** — from data, not blocks |
+| 7 | Services index, About, How It Works, Managed Virtual Support, Client Stories, Videos, FAQs, Contact, Thank you | **Done** |
+| 8 | Insights, article, archive, search, generic page, 404 | **Done** |
+| 9 | Block patterns | Deferred — see the architecture refinement of 2026-10-04 |
 | 10 | Content, forms, Yoast, redirects | Needs staging |
 
-Steps 1–9 need no server access.
+## How the theme stays an exact copy
+
+Nothing visible is retyped. Three scripts in `scripts/wordpress/` tie the theme to the React build:
+
+| Command | Does |
+| --- | --- |
+| `npm run wp:export` | Regenerates `data/*.json` from the React content modules, copies every design image into `assets/media/`, and copies the four stylesheets into `assets/css/` |
+| `npm run wp:reference -- <dir>` | Renders every React route to static HTML in `<dir>` |
+| `npm run wp:compare -- <dir> <wordpress-url>` | Diffs WordPress against those files, tag by tag and word by word |
+
+**After any change to the React content or styles:** run the export, then the comparison, and commit
+the regenerated files with the change.
+
+`tokens.css`, `themes.css`, `typography.css` and `global.css` are generated — never edit them here.
+WordPress-only rules go in `assets/css/wordpress.css`; the fonts are declared in `assets/css/fonts.css`.
+
+On Git Bash, set `MSYS_NO_PATHCONV=1` when passing a route such as `/` to the comparison, or Git Bash
+rewrites it into a Windows path.
+
+## What the theme contains
+
+| Folder | Contents |
+| --- | --- |
+| `data/` | The copy, exported from React: site, home, pages, services, process, managed, faqs, testimonials, clients, articles, accent phrases |
+| `assets/media/` | 59 design images, 7.8 MB |
+| `assets/css/`, `assets/js/`, `assets/fonts/`, `assets/images/` | Styles, behaviour, the two self-hosted fonts, the logo |
+| `inc/` | `data.php` (reads the data), `icons.php` (every SVG), `post-types.php` (Services), `install.php` (site setup), `setup.php`, `enqueue.php` |
+| `template-parts/layout/` | The shared pieces: closing section, contact form, accordion, carousel, image hero, article card, pagination |
+| Templates | `front-page.php`, `page-{slug}.php` for each design page, `single-voa_service.php`, `home.php` (Insights), `single.php`, `archive.php`, `search.php`, `page.php`, `404.php` |
+
+## Installing on a site
+
+1. Upload the theme ZIP and activate it — runbook step 7.
+2. **Appearance → Site setup → Create what is missing.** It adds any of the eleven pages and ten
+   services that do not exist yet, and sets the home and posts pages. It never edits or deletes
+   anything, and running it twice is harmless.
+3. Articles need nothing: the theme renders the posts already in WordPress.
 
 ## Running it locally
 
-There is no local WordPress in this repository — it is built and tested against a throwaway install in
-the session scratchpad, so nothing heavy lands on the project drive.
+There is no local WordPress in this repository. It is built and tested against a throwaway install in
+the session scratchpad: WordPress core, the official **SQLite database integration** plugin and PHP's
+built-in server — about 100 MB, no MySQL, no Docker.
 
-**Requirements:** PHP 8.3 (`winget install PHP.PHP.8.3`). No MySQL, no Docker, no installer.
+**Requirements:** PHP 8.3 (`winget install PHP.PHP.8.3`).
 
-The install uses the official **SQLite database integration** plugin, so the whole environment is
-WordPress core plus one plugin plus a `.sqlite` file — about 100 MB.
+The theme folder is **linked** into `wp-content/themes/` with a directory junction, which needs no
+elevation on Windows (`New-Item -ItemType Junction`), so edits show on the next request.
 
-Three things that are easy to trip over, recorded so they are not rediscovered:
+Things that are easy to trip over:
 
-1. **The winget PHP ships no `php.ini` at all**, so none of its bundled extensions load. One has to be
-   written, pointing `extension_dir` at the package's `ext/` folder and enabling at least `mbstring`,
-   `sqlite3`, `pdo_sqlite`, `gd`, `curl`, `openssl`, `zip` and `fileinfo`.
+1. **The winget PHP ships no `php.ini`**, so none of its extensions load. Write one pointing
+   `extension_dir` at the package's `ext/` folder and enabling at least `mbstring`, `sqlite3`,
+   `pdo_sqlite`, `gd`, `curl`, `openssl`, `zip`, `fileinfo` and `exif`.
 2. **The SQLite plugin's `db.copy` drop-in references `WP_PLUGIN_DIR` before WordPress defines it.**
-   It has to be guarded with `defined()`, or every request dies with a fatal error. The line below it
-   already has a working `realpath()` fallback.
-3. **Activating the theme and inspecting it must be two separate requests.** `switch_theme()` runs
-   after `init` has already fired, so the theme's post types will read as missing in the same request
-   that activates it. They are fine on the next one.
+   Guard it with `defined()`; the next line already has a `realpath()` fallback.
+3. **Activate the theme and inspect it in two separate requests.** `switch_theme()` runs after `init`,
+   so the Services post type reads as missing in the request that activates it.
+4. **Extract the whole WordPress archive.** A partial extraction runs until something needs a missing
+   class — the image editor, on the first media upload.
 
-The theme is **copied** into `wp-content/themes/`, not symlinked — Windows symlinks need elevation.
-Re-copy after editing.
+## Verification
 
-## Verification at step 1
+Run on 2026-10-04 against PHP 8.3.33 and WordPress 7.1.2, with `WP_DEBUG` on and the 30 real articles
+loaded.
 
-Run against PHP 8.3.33 and WordPress 7.1.2, with `WP_DEBUG` on.
+- **All 22 React routes match** the WordPress output in the comparison — header, page and footer
+- Every route returns the right status: 200 for the pages, an article, search and a category archive;
+  404 for a missing page and a missing service
+- 102 stylesheets, scripts, fonts and images referenced by five pages all serve 200, and both CSS
+  background images resolve
+- `debug.log` empty; `php -l` clean on every PHP file; `node --check` clean on every script
+- React project: lint, both TypeScript configs and a production build all pass
 
-- `php -l` — all 10 PHP files pass
-- Theme activates with **no errors** and **nothing in `debug.log`**: no fatals, warnings or notices
-- `voa_service` registered, public, `rewrite => services`, REST enabled
-- `voa_testimonial` and `voa_client` registered, non-public — so no single pages, no archive and **no
-  sitemap entry**, which is what removes the stray public `ttshowcase` sitemap
-- Both menu locations registered; all five image sizes registered
-- `theme.json` parses, and its seven palette slugs reach `wp_get_global_settings()`
-- Home page HTTP 200; a nonsense URL returns a genuine 404
-- All eight stylesheets enqueue **in cascade order**; all seven scripts load
-- Both fonts preload and serve as `font/woff2`
-- Logos, stylesheets and images all serve 200
+**Browser review, same day:** every element's position, size, colours and text size measured in both
+builds and compared — identical on all 22 pages at 1536, 1280 and 390 px wide, light and dark. Every
+interactive part exercised on both sides with the same result; no console errors. Details in
+`docs/wordpress-integration/COMPLETED.md`.
 
-**Not verified:** anything visual. There is no CSS yet — step 2. The live site runs WordPress 7.0.6
-against 7.1.2 here, and **PHP 7.4 against 8.3 here**, which is the larger gap: the theme is written to
-run on both, but that remains unproven until it is on staging.
+**Not verified:**
 
-## Fonts
-
-`assets/fonts/` — Manrope and Inter, self-hosted. Subset and converted to WOFF2, cutting them 85% and
-88% to 23 KB and 103 KB. See the README there, including what happens if copy ever needs a character
-outside the subset.
+- **Touch devices.** Behaviour was driven by mouse and scripted clicks on a desktop browser.
+- **Fonts match the prototype by not loading Manrope and Inter** (decision 2026-10-04). The React build
+  names them but never loads them, so both show the system font. `VOA_LOAD_FONTS` in
+  `inc/enqueue.php` turns them on; do the same in the React build if that happens.
+- **PHP 7.4**, which the live server runs. The theme avoids anything newer, but that stays unproven
+  until staging.
