@@ -78,8 +78,50 @@ also consume the account's disk space, and UpdraftPlus does not back them up. **
 deleted** until the scan has been read, a full backup exists, and the client agrees which copies
 still matter.
 
-Also visible in the same screenshot: Wordfence lists **3 ignored results** from an earlier scan, and
-wp-admin shows **14 plugin updates** pending.
+Also visible in the same screenshot: wp-admin shows **14 plugin updates** pending.
+
+**The scan of 2026-10-04 failed** partway through the malware stage — no status update for over 16
+minutes, stopped by the user. Before it stalled, five stages finished with **no issues**: spamvertising,
+spam, blocklist, server state and **file changes** (core, theme and plugin files compared with the
+official originals). The malware scan of file contents did not complete. The plan is to re-run it with
+the old copies excluded (`stagingsite/*`, `stagingsite2/*`, `staging/*`, `OLD_VOA/*`, `voa_old/*`,
+`newdirectory/*`, `freestrategysession/*`) — a live Wordfence setting, made by the user.
+
+**The second scan completed** the same day, after the old copies were excluded: 79,663 files, 39
+plugins, 18 themes, 128 posts, 21 comments, 82,232 URLs, 4 users, in 40 minutes. **34 results.**
+(One more copy, `voa/`, was still scanned; add `voa/*` to the exclusions next time.)
+
+| Area | Result |
+| --- | --- |
+| **The six oddly-named theme folders (Q10)** | **No malware found** in any of the 18 themes. Q10 answered |
+| File changes, password strength, users and options, spam, blocklist | Clean |
+| **WP Logo Showcase Responsive Slider and Carousel** | **Critical.** One file matches a known backdoor signature (`Backdoor:PHP/anylcadmin`, in `wpos-analytics/includes/class-anylc-admin.php`), and nine more link to `essentialplugin.com`, which is on Wordfence's domain blocklist. The same files also sit in an old copy at `wp-content/updraft/plugins-old/`. **wordpress.org closed this plugin permanently on 2026-04-07 for a security issue** (checked against the wordpress.org plugin API on 2026-10-04), so no fixed version exists |
+| Plugins with security fixes waiting (Critical) | Site Kit by Google, UpdraftPlus, WP File Manager, WPBakery Page Builder, Really Simple Security |
+| Plugins with updates waiting (Medium) | Redirection, Responsive Menu, Smush, WP-PageNavi, Yoast SEO, HTML5 Video Player, Imagify, MailPoet, Max Mega Menu |
+| Abandoned plugins (Medium) | Async JavaScript, Customize Twenty Sixteen |
+| WordPress core (Low) | 7.0.6, with 7.1.2 available |
+| Old plugin copies | `wp-content/updraft/plugins-old/` also holds an old Slider Revolution (`revslider_old-prev`), the plugin with the critical vulnerability |
+
+**Recommended response — every step is a live-site change, so each needs the client's approval:**
+
+1. **Now:** deactivate and delete *WP Logo Showcase*. The old site's logo carousel disappears; the
+   new theme does not use the plugin. Then re-scan, and have each of the 4 users change their password,
+   since a backdoor signature cannot be ruled out as a real compromise from here.
+2. Delete the stale copies in `wp-content/updraft/plugins-old/`, and the inactive Slider Revolution.
+3. Take a **plugins-and-themes** backup in UpdraftPlus (no uploads, so it is small), then apply the
+   security updates to the plugins the site keeps using until cutover: UpdraftPlus, Really Simple
+   Security, Site Kit, Yoast SEO, Redirection, Imagify, WPBakery.
+4. Deactivate and delete **WP File Manager** rather than updating it, unless someone actively uses it.
+5. Plugins on the retire list that are inactive: delete rather than update.
+6. WordPress core: update on staging first.
+
+**Three results had been marked "ignored" by someone earlier:**
+
+| Finding | Severity | Found | Recommendation |
+| --- | --- | --- | --- |
+| **Slider Revolution has a security vulnerability** | **Critical** | 2024-12-04 | Inactive, but its files are on the server, and it is among the most attacked plugins. **Remove** — it is already on the retire list. Needs client approval |
+| Velvet Blues Update URLs appears abandoned (last updated 2020) | Medium | 2023-05-02 | A one-off URL tool, not needed day to day. Retire |
+| 50 paths skipped for the malware scan by scan settings | Low | 2023-02-24 | An existing exclusion list; review what it skips |
 
 ### 3.2 PHP 7.4.33 — end of life
 
@@ -119,6 +161,38 @@ are still `http`. It affects canonical URLs and is worth fixing regardless of th
 `advanced-cache.php` is present as a drop-in while `WP_CACHE` is `false`, and three caching plugins
 are installed (Async JavaScript active; LiteSpeed Cache and WP Rocket inactive). Harmless, but it is
 dead weight and can confuse later debugging.
+
+### 3.7 Contact Form 7 — two forms, read 2026-10-04
+
+Read from each form's Mail tab by the user; nothing saved.
+
+| | Contact form (2016) | Contact form_Ads (2024) |
+| --- | --- | --- |
+| Shortcode id | `e2c7adb` | `32bf865` |
+| **To** | `clientcare@virtualofficeangels.com.au` | same |
+| From | `[EnterFirstName] <wordpress@virtualofficeangels.com.au>` | same |
+| Subject | Virtual Contact Form | same |
+| Additional headers | `Reply-To: <wordpress@virtualofficeangels.com.au>` | same |
+| Body | First name, last name, email, phone, message | Same, headed "From Google ADS" |
+| Mail (2), the visitor's copy | Off | Off |
+
+- **Reply-To points at `wordpress@`, not the visitor.** Pressing Reply on an enquiry does not answer the
+  visitor; staff have to copy the address from the body. The new form sets Reply-To to the visitor.
+- The Ads form differs only by the "From Google ADS" line in the body, so it is how Google Ads
+  enquiries are told apart.
+- **Where each form is used** (from the database backup, published pages only):
+  - **Contact form_Ads** (post 1890): only on the page **Contact, `/contact/`** (page 1887, created
+    2024-02-05, two weeks after the form). That page is the Google Ads landing page.
+  - **Contact form** (post 100): About Us and eight service pages.
+  - An unused Templatera template, "Contacr Us", points at a form 696 that no longer exists. Harmless.
+- **Clash at cutover:** the new site's main Contact page also lives at `/contact/`, reached from the
+  menu. A fixed "From Google ADS" label there would mislabel every ordinary enquiry. The label has to
+  come from the visit instead (Google's ad-click marker in the address), which depends on how the ads
+  are set up: unknown, no Ads access.
+- The footer says the mail came from "Design", the site's title when the form was made in 2016.
+- The red **1** on the Contact menu: the backup holds **no recorded configuration errors** for either
+  form, so it most likely counts the "Validate Contact Form 7 Configuration" notice itself, a check that
+  has not been run since the plugin was updated.
 
 ## 4. Plugins: 20 active, 18 inactive
 
@@ -247,7 +321,7 @@ Answered by the user on 2026-10-03.
 | --- | --- | --- |
 | Q1 | Where did the Divi belief come from — is there a second WordPress install? | **Open** |
 | Q5 | Does hosting stay on HostGator? | **Open** |
-| Q6 | Contact Form 7 recipient | **Being retrieved** from Contact → Contact Forms → Mail tab |
+| Q6 | Contact Form 7 recipient | **Resolved 2026-10-04:** `clientcare@virtualofficeangels.com.au`. See 3.7 |
 | Q7 | Analytics / Search Console | **No access** (2026-10-03). Orphan-page decisions are made without traffic data |
 | Q8 | Posts have no categories or tags; at least one has no featured image. Fix during migration, or accept? | **Open** |
 | Q10 | Do the six odd theme directories appear in the Wordfence scan? | **Awaiting scan** |

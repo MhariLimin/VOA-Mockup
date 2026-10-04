@@ -39,7 +39,7 @@ Read only. Change nothing, and when leaving any editor, **close without updating
       section 5.2, and flag any page missing from it.
 - [ ] **Appearance → Menus**, and **Mega Menu** in the sidebar: screenshot the menu structure.
 - [ ] **Appearance → Widgets:** note anything in the footer or sidebar the new site would lose.
-- [ ] **Contact → Contact Forms:** record the forms that exist and, while there, the **Mail → To**
+- [x] **Contact → Contact Forms:** record the forms that exist and, while there, the **Mail → To**
       recipient (Q6).
 - [ ] **Posts:** compare the *All*, *Published* and *Draft* counts (Q12).
 
@@ -208,7 +208,7 @@ After task 8, in cPanel:
 
 | # | Task | Status | Why |
 | --- | --- | --- | --- |
-| A1 | Read the contact-form recipient (Q6). Contact → Contact Forms → Mail → To | 🔓 10 min | Needed for the forms step; no HostGator needed |
+| A1 | Read the contact-form recipient (Q6). Contact → Contact Forms → Mail → To | ✅ 2026-10-04: `clientcare@virtualofficeangels.com.au` | Needed for the forms step; no HostGator needed |
 | A2 | Approve the redirect map (status doc 5.2) and the URLs for the three renamed services and `/why-voa` | 🔓 | Needed before redirects and cutover |
 | A3 | Create staging, then lock it down (runbook steps 2–3). **First check wp-admin → HostGator → Staging**: the backup shows a staging copy already exists | 🔓 backup done; scan first (task 11) | Unlocks theme step 10 and real PHP testing |
 | A4 | Fix the three `stagingsite2` links in the captured article bodies, and check whether the live posts carry them too | 🔓 | They point at the old staging copy, not the real site |

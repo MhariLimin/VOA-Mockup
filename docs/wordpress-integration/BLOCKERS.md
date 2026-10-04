@@ -47,14 +47,24 @@ Worst first. Each entry says what it blocks and what clears it.
   security. The old site's plugins need to survive it, or be retired first.
 - **Clears by:** setting PHP 8 in cPanel → MultiPHP Manager (waits on blocker 1), staging first.
 
-## 4. Security unknowns on live
+## 4. A compromised plugin on live — found 2026-10-04
 
-- **State:**
-  - Six randomly-named theme folders with no readable metadata are awaiting the Wordfence scan (Q10).
-  - WP File Manager, a plugin with a history of serious vulnerabilities, is active.
-- **Blocks:** cloning to staging.
-- **Clears by:** a Wordfence scan **with results read and nothing deleted**. The database backup now
-  exists, so the scan can run.
+- **State:** the completed Wordfence scan found a **backdoor signature** in *WP Logo Showcase Responsive
+  Slider and Carousel*, a plugin **wordpress.org closed permanently on 2026-04-07 for a security
+  issue**. Five other plugins have security updates waiting. The six odd theme folders came back
+  **clean**. Full results and the recommended response: `reference/WORDPRESS_LIVE_SITE_STATUS.md`,
+  section 3.1a.
+- **Blocks:** cloning to staging (a compromise should not be copied forward), and confidence in the
+  live site generally.
+- **Clears by:** the client approving the removal of that plugin, then a clean re-scan. Every step is a
+  live-site change.
+- **Decision pending (2026-10-04):** the user has no permission to change live. Recommended interim
+  step, put to the client: **deactivate** the plugin (one click, reversible, nothing deleted; the old
+  site's logo carousel stops showing). Whatever the client decides, the plugin is **deleted on staging
+  immediately after the clone**, and if it stays active on live, Wordfence runs weekly until cutover.
+- **Deactivated on live (2026-10-04)** by the user. The files are still on disk, including the copy in
+  `wp-content/updraft/plugins-old/`, so a re-scan will still flag them; deletion remains the fix.
+  Next live step recommended: deactivate **WP File Manager** if nobody uses it.
 
 ## 5. Backups are not going off-site automatically
 
@@ -69,7 +79,6 @@ Worst first. Each entry says what it blocks and what clears it.
 
 | Item | Blocks |
 | --- | --- |
-| Contact-form recipient. **Retrievable now** in wp-admin | Forms |
 | Email-sending (SMTP) access | Reliable form delivery |
 | Approval of the redirect map and the renamed-service URLs | Redirects, cutover |
 | Privacy policy, terms and cookie consent | Cutover |

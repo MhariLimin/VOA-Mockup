@@ -13,3 +13,6 @@ log.*.txt
 
 # The packaged theme, rebuilt with npm run wp:zip.
 wordpress-theme/*.zip
+
+# Directory for documentation purposes
+docs/wordpress-integration/etc
