@@ -33,24 +33,28 @@ These come straight from the draft redirect map: each old page has an obvious ne
 Pages whose address does not change need no redirect: `/`, `/services/`, `/how-it-works/`, `/videos/`
 and `/contact/`. Articles keep their addresses, so none of them need one either.
 
-## Proposed targets — please check (10)
+## Proposed targets — checked against each page's content (10)
 
-You decided all ten old pages with no equivalent should redirect (Q11). **Where they go is my
-proposal, chosen from each page's address only — I have not seen their content.** Open each on the
-live site and check the target fits.
+You decided all ten old pages with no equivalent should redirect (Q11). **Each page was read on the
+live site on 2026-10-04** (read only), and two targets changed as a result.
 
-| Old address | Proposed target | Why — and what to check |
+| Old address | Target | What the page actually contains |
 | --- | --- | --- |
-| `/specialised-recruitment/` | `/services/` | Recruitment of specialists is what the services index covers |
-| `/specialised-recruitment-services/` | `/services/` | Near-duplicate of the one above |
-| `/businesses-these-days/` | `/` | Reads like a general marketing page |
-| `/client-case-studies/` | `/client-stories/` | Closest match |
-| `/simply-too-busy/` | `/` | Reads like a general marketing page |
-| `/we-do-what-other-company-dont/` | `/why-voa/` | A "why choose us" page |
-| `/work-with-us/` | `/contact/` | **Check this one.** If it is a careers page for virtual assistants rather than for clients, it needs a different home |
-| `/how-we-help/` | `/how-it-works/` | Closest match |
-| `/home-old/` | `/` | A stale copy of the home page |
-| `/yes-want-book-no-obligation-appointment/` | `/contact/` | A booking page; the contact form replaces it |
+| `/specialised-recruitment/` | `/services/` | 2017 pitch for skilled, pre-qualified, managed assistants |
+| `/specialised-recruitment-services/` | `/services/` | Summaries of four services (mortgage, real estate, financial planning, accounting) |
+| `/businesses-these-days/` | **`/why-voa/`** *(was `/`)* | Two paragraphs on Virtual Office Angels managing the VA for you: the Managed Virtual Support message |
+| `/client-case-studies/` | `/client-stories/` | **One full case study** (an Epping business consultancy). The new site has no equivalent; see below |
+| `/simply-too-busy/` | **`/services/`** *(was `/`)* | One sentence introducing "a few of our services" |
+| `/we-do-what-other-company-dont/` | `/why-voa/` | **Empty**, title only |
+| `/work-with-us/` | `/contact/` | **Empty**, title only. Not a careers page, so the worry about it is settled |
+| `/how-we-help/` | `/how-it-works/` | Six benefits and a five-step hiring process |
+| `/home-old/` | `/` | An old copy of the home page. It shows two broken plugin codes as text, and is indexable today |
+| `/yes-want-book-no-obligation-appointment/` | `/contact/` | A sales letter ending in a SurveyMonkey booking link; the contact form replaces it |
+
+**Content with no home on the new site:** the client case study on `/client-case-studies/`. It names no
+client, only "a Business Consultancy and Management Services Company based in Epping, NSW". Ask the
+client whether it should become an Insights article or a section of Client Stories; until then the
+redirect sends visitors to Client Stories, which carries testimonials but not this story.
 
 ## One pattern rule — please check
 

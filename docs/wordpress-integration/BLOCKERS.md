@@ -65,6 +65,8 @@ Worst first. Each entry says what it blocks and what clears it.
 - **Deactivated on live (2026-10-04)** by the user. The files are still on disk, including the copy in
   `wp-content/updraft/plugins-old/`, so a re-scan will still flag them; deletion remains the fix.
   Next live step recommended: deactivate **WP File Manager** if nobody uses it.
+- **Side effect:** the live home page now shows the plugin's code as text under "Who we work with".
+  Fix, with the client's OK: remove that text block from the Home page (revisions keep the old version).
 
 ## 5. Backups are not going off-site automatically
 

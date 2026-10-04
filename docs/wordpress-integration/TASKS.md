@@ -34,16 +34,19 @@ differences from React.
 ### 1.1 Review the live site's WordPress page structure — **1 h** 🔓
 
 Read only. Change nothing, and when leaving any editor, **close without updating**.
-- [ ] **Pages → All Pages:** count the pages and note which ones show a *WPBakery / Backend Editor*
+- [x] **Pages → All Pages:** count the pages and note which ones show a *WPBakery / Backend Editor*
       button. Check them against the redirect map in `reference/WORDPRESS_LIVE_SITE_STATUS.md`
       section 5.2, and flag any page missing from it.
-- [ ] **Appearance → Menus**, and **Mega Menu** in the sidebar: screenshot the menu structure.
-- [ ] **Appearance → Widgets:** note anything in the footer or sidebar the new site would lose.
+- [x] **Appearance → Menus**, and **Mega Menu** in the sidebar: screenshot the menu structure.
+- [x] **Appearance → Widgets:** note anything in the footer or sidebar the new site would lose.
 - [x] **Contact → Contact Forms:** record the forms that exist and, while there, the **Mail → To**
       recipient (Q6).
-- [ ] **Posts:** compare the *All*, *Published* and *Draft* counts (Q12).
+- [x] **Posts:** compare the *All*, *Published* and *Draft* counts (Q12). Read from the backup: 98 + 2 drafts.
 
 **Deliverable:** your notes appended to the status doc, or sent to Claude to add.
+
+**Done 2026-10-04** from the database backup and a read-only browser pass: status doc 3.8, and the
+ten orphan pages checked against their content in REDIRECTS.md.
 
 ## 2. Research how to import the code into WordPress — **1 h** 🔓
 
@@ -113,9 +116,27 @@ Depends on tasks 8 and 13. Compare the two on what this site **actually uses**:
 
 **Deliverable:** a recommendation with the comparison table. The decision is the client's.
 
+**Research, 2026-10-04** (HostGator's public plan page, hostgator.com/web-hosting):
+- On HostGator's **current** plans, Business and Pro have **the same features**: staging, SSL, Cloudflare
+  CDN, malware scanning and removal, firewall, phone and chat support, SSH. They differ only in size:
+  Business 50 websites, 50 GB, ~200K visits a month; Pro 100 websites, 100 GB, ~400K.
+- Prices are not shown on the public page. Third-party reviews (2026) put Business at about US$22 a
+  month on renewal; Pro is dearer. **Use the renewal prices on the account's own billing page.**
+- The account's subscriptions may be older versions of these plans with different terms; the billing
+  page is the authority.
+- **Recommendation:** keep one plan. Most sites are on Pro, so keep Pro and move the few Business
+  sites into it, then let Business lapse at its renewal date. Moving a site with mailboxes moves its
+  email too, so each move is planned. Exception: if, after the old site copies are removed, everything
+  fits within 50 sites and 50 GB, Business alone is the cheaper choice.
+
 ## 7. Check WordPress users and whether Joseph's access can be removed — 🔓 *(est. 0.5 h)*
 
 **Confirm with the client before removing anyone.**
+
+**2026-10-04, from the backup: there is no WordPress account named Joseph.** The four users are
+listed in `reference/WORDPRESS_LIVE_SITE_STATUS.md` 3.8. Ask whose `voa.webdev@gmail.com` is; if it
+is Joseph's, that is the account to review. His other access (below) still needs checking.
+
 - [ ] **Users → All Users:** note Joseph's role and the number in his **Posts** column.
 - [ ] **Safest order:** change his role to *Subscriber*, or reset his password, first. Delete later,
       once nothing breaks.

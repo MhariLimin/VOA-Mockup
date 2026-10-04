@@ -194,6 +194,58 @@ Read from each form's Mail tab by the user; nothing saved.
   form, so it most likely counts the "Validate Contact Form 7 Configuration" notice itself, a check that
   has not been run since the plugin was updated.
 
+### 3.8 Users, pages, menus and widgets — read from the backup, 2026-10-04
+
+Read from the database backup of 2026-10-04 06:10, not from wp-admin. Emails and passwords are not
+recorded here.
+
+**Users: four, all administrators. There is no account for Joseph.**
+
+| ID | Login | Shown as | Since | Owns | Note |
+| --- | --- | --- | --- | --- | --- |
+| 4 | `admin` | Anne | 2017 | **all 98 published posts, both drafts and all 30 pages** | Never delete without reassigning its content. A login named `admin` is the first one attackers guess: strong password and two-factor login recommended |
+| 5 | `anne` | anne | 2019 | nothing | Its password is stored in an old, weak format, which happens when it is set directly in the database and never used since. A password reset is recommended |
+| 22 | `voa.webdev@gmail.com` | the same | Feb 2025 | nothing | **Whose is it?** Possibly a previous developer's; if so, this is the access to review |
+| 23 | `Mhari` | Mhari | Sep 2026 | nothing | The user's own |
+
+Permissions are also stored for a user 2 that no longer exists. Harmless leftovers.
+
+**Posts (Q12):** 98 published + 2 drafts = the 100 wp-admin shows. The sitemap's 98 is right.
+
+**Pages:** 30 published, **every one already in the redirect map** (20 mapped in 5.2, 10 in 5.3). Three
+drafts, not public, need nothing: "Meet the Team", "Opt In/Lead Magnet", and an untitled one from 2016.
+27 of the 30 are built with WPBakery; the plain ones are mostly the 2017 orphans.
+
+**Menus:** four exist; **the header uses "Menu top 2"** (through Max Mega Menu). The other three
+("Primary Menu", "New Menu", "Test Menu") are not shown anywhere.
+
+```
+Home              → About Us · Testimonials · FAQ
+Services          → How it works · Why Us
+Specialised Recruitment (no link) → the four older services: mortgage, real estate,
+                    financial planning, accounting
+Resources (/blog/) · Videos · Contact Us (/contact-us/)
+```
+
+Five live services (back office, digital marketing, sales, copywriting, IT) are in no shown menu;
+the new site lists all ten.
+
+**Widgets:** nothing would be lost. The sidebar holds one empty block, and the mega-menu area only
+the shortcode that draws the menu. Older text widgets (a 2017 copyright line, an old address, an
+`info@voa.com` address) are saved but shown nowhere. **The footer is not a widget**, so it was not
+read here; compare it on the live site.
+
+**Active theme:** Twenty Sixteen, styled through the Customize Twenty Sixteen plugin.
+
+**Footer (read on the live site, 2026-10-04):** only the site title, "Call Us 1 300 737 883", "Proudly
+powered by WordPress" and "Customized by BoldThemes". Nothing the new footer needs to carry over.
+
+**Side effect of deactivating WP Logo Showcase (seen 2026-10-04):** the plugin drew the client-logo
+carousel, so the pages that used it now show its code as text. On the live **home page**, under "Who
+we work with", visitors see `[logoshowcase center_mode="true" slides_column="3"]` (dark text on the
+dark blue band). `/home-old/` shows the same, and also a Slider Revolution code. Only those two pages
+use it. Fixing it means editing the Home page on live, so it needs the client's OK.
+
 ## 4. Plugins: 20 active, 18 inactive
 
 ### Keep through the migration
@@ -326,7 +378,7 @@ Answered by the user on 2026-10-03.
 | Q8 | Posts have no categories or tags; at least one has no featured image. Fix during migration, or accept? | **Open** |
 | Q10 | Do the six odd theme directories appear in the Wordfence scan? | **Awaiting scan** |
 | Q11 | Ten orphan pages: redirect or 410? | **Resolved 2026-10-03: redirect all ten.** No Search Console access, so we do not guess — a redirect keeps any inbound link value, a 410 discards it |
-| Q12 | Exact published post count: wp-admin says 100, the sitemap lists 98 | **Open** |
+| Q12 | Exact published post count: wp-admin says 100, the sitemap lists 98 | **Resolved 2026-10-04:** 98 published + 2 drafts. See 3.8 |
 
 ### Q9 — backup: DONE (database only), 2026-10-04
 

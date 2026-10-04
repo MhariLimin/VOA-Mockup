@@ -16,9 +16,9 @@ source,target,regex,code
 /contact-us/,/contact/,0,301
 /specialised-recruitment/,/services/,0,301
 /specialised-recruitment-services/,/services/,0,301
-/businesses-these-days/,/,0,301
+/businesses-these-days/,/why-voa/,0,301
 /client-case-studies/,/client-stories/,0,301
-/simply-too-busy/,/,0,301
+/simply-too-busy/,/services/,0,301
 /we-do-what-other-company-dont/,/why-voa/,0,301
 /work-with-us/,/contact/,0,301
 /how-we-help/,/how-it-works/,0,301

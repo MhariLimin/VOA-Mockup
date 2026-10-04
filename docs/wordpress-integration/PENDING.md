@@ -18,7 +18,6 @@ Work not yet done that is **not** stuck. Anything stuck is in [BLOCKERS.md](BLOC
 | **Review the redirect list**, especially the ten proposed targets | [REDIRECTS.md](REDIRECTS.md) |
 | Look for an existing staging site. The backup shows one exists | wp-admin → **HostGator → Staging** |
 | Run a Wordfence scan: read the results only, **delete nothing** (Q10) | wp-admin → **Wordfence → Scan → Start New Scan** |
-| Confirm the post count: wp-admin says 100, the sitemap 98 (Q12) | wp-admin → **Posts**: compare *All*, *Published* and *Draft* |
 
 ## Open questions — answers wanted, nothing stuck on them yet
 
