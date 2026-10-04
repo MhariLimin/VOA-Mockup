@@ -2657,7 +2657,7 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: url('/assets/source/sister/virtualfinancialsupport-s03-consulting.jpg');
+  background-image: url('../media/source/sister/virtualfinancialsupport-s03-consulting.jpg');
   background-position: center 35%;
   background-size: cover;
   /* Lower than --service-wash: the medallions carry no card background, so the summaries and chips
@@ -2965,7 +2965,7 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: url('/assets/source/sister/virtualloansassistant-client-meeting.jpg');
+  background-image: url('../media/source/sister/virtualloansassistant-client-meeting.jpg');
   background-position: center 30%;
   background-size: cover;
   /* Lower than --service-wash: the client logos are line art on white and lose their edges against

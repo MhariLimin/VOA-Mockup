@@ -1,0 +1,275 @@
+{
+	"/services": {
+		"path": "/services",
+		"eyebrow": "Specialised virtual assistant services",
+		"title": "Specialised Virtual Assistant Services for Australian Businesses",
+		"summary": "Virtual Office Angels provides experienced virtual assistants for Australian businesses across finance, property, administration, marketing, technology and content.",
+		"image": "/assets/source/staging/images/7e3d82f785-2148908840.jpg",
+		"imageAlt": "A business owner meeting a remote team by video call",
+		"template": "services"
+	},
+	"/about": {
+		"path": "/about",
+		"eyebrow": "About us",
+		"title": "About Virtual Office Angels",
+		"summary": "We work with Australian businesses that need capable, experienced virtual assistants who can contribute from day one. Whether the role is specialised or operational, we focus on finding support that fits the work and how your business runs.",
+		"image": "/assets/client/anne-villavieja.jpg",
+		"imageAlt": "Anne Villavieja, founder of Virtual Office Angels",
+		"template": "about"
+	},
+	"/services/mortgage-loans": {
+		"path": "/services/mortgage-loans",
+		"eyebrow": "Specialist service",
+		"title": "Mortgage and loans processing support",
+		"summary": "Accurate, process-focused assistance for mortgage brokers—from application preparation through to settlement.",
+		"tasks": [
+			"CRM data entry and file setup",
+			"Serviceability calculations and lender research",
+			"Document collection and compliance checks",
+			"Valuations, lodgement, and settlement follow-up",
+			"Borrower and broker progress updates"
+		],
+		"detail": [
+			"Mortgage processing demands accuracy, focus, and consistent follow-through.",
+			"A matched lending specialist can take on repetitive administration so brokers have more time for client relationships and business development."
+		],
+		"template": "service",
+		"source": "staging",
+		"image": "/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg",
+		"imageAlt": "Mortgage and loans processing support workspace"
+	},
+	"/services/financial-planning": {
+		"path": "/services/financial-planning",
+		"eyebrow": "Specialist service",
+		"title": "Financial planning assistance and administration",
+		"summary": "Experienced operational support for financial planning practices and their recurring client workflows.",
+		"tasks": [
+			"Application and document preparation",
+			"Meeting and client administration",
+			"CRM and database maintenance",
+			"Implementation follow-up",
+			"Recurring back-office processes"
+		],
+		"detail": [
+			"Time spent on routine administration can pull advisers away from client strategy and relationship building.",
+			"Virtual Office Angels matches support professionals to the practice, its systems, and the work that needs to be completed consistently."
+		],
+		"template": "service",
+		"source": "staging",
+		"image": "/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg",
+		"imageAlt": "Financial planning assistance and administration workspace"
+	},
+	"/services/accounting-bookkeeping": {
+		"path": "/services/accounting-bookkeeping",
+		"eyebrow": "Specialist service",
+		"title": "Accounting and bookkeeping assistance",
+		"summary": "Recurring finance support from professionals familiar with common Australian accounting workflows.",
+		"tasks": [
+			"Invoicing and payroll assistance",
+			"Accounts receivable and payable",
+			"Bank reconciliation",
+			"Balance sheet preparation support",
+			"Xero, Saasu, and MYOB workflows"
+		],
+		"detail": [
+			"Accurate records and regular processing are essential to sound financial operations.",
+			"Matched assistants can support established processes and preferred accounting software under your business direction."
+		],
+		"template": "service",
+		"source": "staging",
+		"image": "/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg",
+		"imageAlt": "Accounting and bookkeeping assistance workspace"
+	},
+	"/services/insurance-processing": {
+		"path": "/services/insurance-processing",
+		"eyebrow": "Specialist service",
+		"title": "Insurance Processing Virtual Support",
+		"summary": "Virtual Office Angels matches insurance businesses with experienced virtual assistants who support policy administration, renewals, claims processing, and client records within your systems and documented procedures.",
+		"tasks": [],
+		"detail": [],
+		"template": "service",
+		"source": "staging",
+		"image": "/assets/source/staging/images/58c3c928d3-2147694521.jpg",
+		"imageAlt": "Insurance Processing Virtual Support workspace"
+	},
+	"/services/real-estate-conveyancing": {
+		"path": "/services/real-estate-conveyancing",
+		"eyebrow": "Specialist service",
+		"title": "Real estate and administration support",
+		"summary": "Reliable assistance for property professionals balancing clients, listings, documents, and a busy schedule.",
+		"tasks": [
+			"CRM data entry and maintenance",
+			"Lead generation and follow-up",
+			"Email and calendar management",
+			"Property and transaction documentation",
+			"General back-office administration"
+		],
+		"detail": [
+			"Property professionals create the most value when they can focus on people, opportunities, and transactions.",
+			"Experienced support can keep recurring administration moving while respecting the accuracy and confidentiality the industry requires."
+		],
+		"template": "service",
+		"source": "staging",
+		"image": "/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg",
+		"imageAlt": "Real estate and administration support workspace"
+	},
+	"/services/back-office-admin": {
+		"path": "/services/back-office-admin",
+		"eyebrow": "Specialist service",
+		"title": "Business back office and admin support",
+		"summary": "Dependable day-to-day administration that protects your team’s time and keeps operations organised.",
+		"tasks": [
+			"Executive and personal assistance",
+			"Client calls and customer support",
+			"Email, diary, and calendar management",
+			"Travel and event coordination",
+			"Data research and transcription",
+			"Insurance processing support"
+		],
+		"detail": [
+			"Every growing business needs dependable operational support.",
+			"Virtual Office Angels recruits around your particular responsibilities, systems, hours, and working style."
+		],
+		"template": "service",
+		"source": "staging",
+		"image": "/assets/source/staging/images/6f63e14c16-2149013955.jpg",
+		"imageAlt": "Business back office and admin support workspace"
+	},
+	"/services/digital-marketing": {
+		"path": "/services/digital-marketing",
+		"eyebrow": "Specialist service",
+		"title": "Digital marketing support and services",
+		"summary": "Execution support that helps your brand publish consistently and keep campaigns organised.",
+		"tasks": [
+			"Content and campaign coordination",
+			"Social media administration",
+			"Asset and publishing workflows",
+			"Reporting assistance",
+			"Database and marketing operations"
+		],
+		"detail": [
+			"Good marketing depends on consistent execution as much as strategy.",
+			"A specialist assistant can support the recurring work behind campaigns while your internal team retains direction and approval."
+		],
+		"template": "service",
+		"source": "staging",
+		"image": "/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg",
+		"imageAlt": "Digital marketing support and services workspace"
+	},
+	"/services/sales-marketing": {
+		"path": "/services/sales-marketing",
+		"eyebrow": "Specialist service",
+		"title": "Sales and marketing support",
+		"summary": "Practical assistance for lead generation, customer communication, and sales administration.",
+		"tasks": [
+			"Lead generation and research",
+			"Inbound and outbound support",
+			"CRM administration",
+			"Customer follow-up",
+			"Order and sales coordination"
+		],
+		"detail": [
+			"This category appears on the production website and is retained for content parity.",
+			"Final scope and imagery should be confirmed before WordPress migration."
+		],
+		"template": "service",
+		"source": "production",
+		"image": "/assets/client/extra/team-celebrating-agreement.jpg",
+		"imageAlt": "Sales and marketing support workspace"
+	},
+	"/services/it-technology": {
+		"path": "/services/it-technology",
+		"eyebrow": "Specialist service",
+		"title": "IT services and technology",
+		"summary": "Technical administration and systems support for technology-enabled business processes.",
+		"tasks": [
+			"Website administration",
+			"Systems and account support",
+			"Technical documentation",
+			"Data and workflow maintenance",
+			"General technology assistance"
+		],
+		"detail": [
+			"This category appears on the production website and is retained for content parity.",
+			"The precise technical scope, access controls, and service boundaries should be confirmed before launch."
+		],
+		"template": "service",
+		"source": "production",
+		"image": "/assets/client/extra/team-project-laptop.jpg",
+		"imageAlt": "IT services and technology workspace"
+	},
+	"/services/creative-copywriting": {
+		"path": "/services/creative-copywriting",
+		"eyebrow": "Specialist service",
+		"title": "Creative writing assistance",
+		"summary": "Writing and publishing support for websites, campaigns, and recurring business content.",
+		"tasks": [
+			"Website and campaign copy",
+			"Content preparation",
+			"Proofreading and editing support",
+			"Publishing assistance",
+			"Content library organisation"
+		],
+		"detail": [
+			"This category appears on the production website and is retained for content parity.",
+			"Any published copy remains subject to the client’s subject-matter review and approval."
+		],
+		"template": "service",
+		"source": "production",
+		"image": "/assets/source/staging/images/9f1d7f532d-2150994380.jpg",
+		"imageAlt": "Creative writing assistance workspace"
+	},
+	"/how-it-works": {
+		"path": "/how-it-works",
+		"eyebrow": "How it works",
+		"title": "A clear path from role brief to managed support.",
+		"summary": "Virtual Office Angels handles recruitment and matching, then stays involved through onboarding and the ongoing working relationship.",
+		"template": "process"
+	},
+	"/why-voa": {
+		"path": "/why-voa",
+		"eyebrow": "Managed virtual support",
+		"title": "HR-Managed Virtual Support for Australian Businesses",
+		"summary": "Build a specialised virtual assistant role around the work your business needs. Virtual Office Angels manages recruitment, onboarding, employment administration, payroll, and ongoing people support, while you manage day-to-day operations.",
+		"image": "/assets/source/staging/images/13e3afc0dd-2796.jpg",
+		"imageAlt": "A virtual assistant working at a desk",
+		"template": "why"
+	},
+	"/client-stories": {
+		"path": "/client-stories",
+		"eyebrow": "Our clients",
+		"title": "Client stories and testimonials.",
+		"summary": "From boutique firms to growing enterprises, clients trust Virtual Office Angels to provide specialised virtual assistants who integrate into their teams.",
+		"template": "stories"
+	},
+	"/insights": {
+		"path": "/insights",
+		"eyebrow": "Insights",
+		"title": "Practical thinking for building better remote support.",
+		"summary": "",
+		"template": "insights",
+		"image": "/assets/client/extra/team-laptop-review.jpg",
+		"imageAlt": "A team reviewing work together on a laptop"
+	},
+	"/videos": {
+		"path": "/videos",
+		"eyebrow": "Videos and resources",
+		"title": "Useful guidance, in a format that is easy to watch.",
+		"summary": "",
+		"template": "videos"
+	},
+	"/faqs": {
+		"path": "/faqs",
+		"eyebrow": "Frequently asked questions",
+		"title": "Straight answers before you get started.",
+		"summary": "",
+		"template": "faqs"
+	},
+	"/contact": {
+		"path": "/contact",
+		"eyebrow": "Contact us",
+		"title": "Tell us what the right support would change for your business.",
+		"summary": "Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the next step.",
+		"template": "contact"
+	}
+}
