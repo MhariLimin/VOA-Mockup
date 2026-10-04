@@ -67,6 +67,20 @@ with no metadata are also a known hiding place for injected files.
 **Action:** run a full Wordfence scan **before** cloning to staging, so a problem is not copied
 forward. Do not delete them until there is a verified backup and the scan result has been read.
 
+### 3.1a Old site copies in the public web folder — found 2026-10-04
+
+The Wordfence scan log shows it reading files from several other WordPress installs beside the live
+site: `stagingsite/`, `stagingsite2/`, `staging/1384/`, `OLD_VOA/`, `voa_old/`, `newdirectory/` and
+`freestrategysession/`. That is why the scan covers 214,816 files and takes hours.
+
+They are publicly reachable, probably carry outdated plugins, and are a common way into a site; they
+also consume the account's disk space, and UpdraftPlus does not back them up. **Nothing is to be
+deleted** until the scan has been read, a full backup exists, and the client agrees which copies
+still matter.
+
+Also visible in the same screenshot: Wordfence lists **3 ignored results** from an earlier scan, and
+wp-admin shows **14 plugin updates** pending.
+
 ### 3.2 PHP 7.4.33 — end of life
 
 `php_version: 7.4.33`. PHP 7.4 stopped receiving security patches in November 2022. A new theme
@@ -255,6 +269,10 @@ intact and its header names the live site, WordPress 7.0.6, PHP 7.4.33 and MySQL
   Reconnecting it needs a decision on *whose* Google account backups belong in (task 9).
 - **A staging copy already exists in the same database:** 158 tables prefixed `staging_`. Check
   wp-admin → HostGator → Staging before creating another.
+- **There are two staging copies on the server, not one.** Wordfence's file list in the backup names
+  files under both `/stagingsite/` and `/stagingsite2/`. The first has Elementor, Jetpack and Twenty
+  Twenty-Five installed — a different setup from the live site, and possibly where the belief that the
+  site uses a page builder other than WPBakery came from (Q1).
 - **UpdraftPlus keeps only the two newest database backups** (`retain_db=2`), and pruned the March 2025
   one during this run.
 

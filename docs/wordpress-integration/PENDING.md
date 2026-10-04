@@ -41,9 +41,15 @@ Runbook steps 2–11:
 
 Step 12, cutover, needs the client's authorisation.
 
-## React prototype — small leftovers
+## Two live posts link to the old staging copy
 
-- Three article links still point to the old `stagingsite2` site.
-- The Week 3 changes have never been checked at mobile width.
-- `Rezi Finance (1)` needs cleaning in the client-logo names.
-- Dead `.role-fit` CSS remains.
+Found in the database backup on 2026-10-04. Each published post links once to
+`https://virtualofficeangels.com.au/stagingsite2/why-us/`:
+
+- "How to Find and Hire the Right VA (Virtual Assistant) Match"
+- "2026: Why the start of the year is the best time to hire a VA"
+
+**Fix:** in each post, change the link to `https://virtualofficeangels.com.au/why-us/`. That works
+today, and the redirect list sends it on to `/why-voa/` after cutover. It is a live-site edit, so it is
+yours to make, or to make on staging after the clone. Two older saved revisions of these posts carry the
+same link, but revisions never show on the site.

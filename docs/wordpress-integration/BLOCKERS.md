@@ -26,8 +26,9 @@ Worst first. Each entry says what it blocks and what clears it.
 
 - **State:**
   - **The database backup is done (2026-10-04), so this is no longer waiting on that.**
-  - The backup shows a staging copy already exists in the database: 158 tables prefixed `staging_`.
-    Check wp-admin → HostGator → Staging before creating a new one.
+  - The backup shows a staging copy already exists in the database: 158 tables prefixed `staging_`,
+    and files under two folders, `/stagingsite/` and `/stagingsite2/`. Check wp-admin → HostGator →
+    Staging before creating a new one.
 - **Blocks:**
   - Installing the theme on a real copy of the site
   - Forms, Yoast and redirects

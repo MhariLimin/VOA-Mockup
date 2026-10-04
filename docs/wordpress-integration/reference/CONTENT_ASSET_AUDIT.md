@@ -61,10 +61,12 @@ breaks or misroutes unless rewritten or covered by a redirect.
 | `/services/` | 3 |
 | `/real-estate-administration-support/` | 3 |
 | `/accounting-bookkeeping-assistance/` | 3 |
-| **`/stagingsite2/...`** | **3** |
+| ~~`/stagingsite2/...`~~ | ~~3~~ — **corrected 2026-10-04: 0** |
 
-**The three `stagingsite2` links are defects**, not redirects to write: article bodies link to the
-staging site. They must be corrected during migration.
+**Correction, 2026-10-04:** the 30 article bodies in this build contain **no** `stagingsite2` links;
+the only such references are each article's `sourceUrl` field, which records where it was captured from
+and is never rendered. The defect is real but lives on the **live** site: the database backup shows two
+newer published posts, not in this build, each linking to `/stagingsite2/why-us/`. See PENDING.md.
 
 External destinations cited in articles: `statista.com`, `mfaa.com.au`, `investopedia.com`,
 `abs.gov.au`, `smartasset.com`, `freepik.com`, `xero.com`, `savvy.com.au`, `redsearch.com.au`,
@@ -217,12 +219,12 @@ rather than being rebuilt per page:
 | 10 | Page-level SEO — `index.html` carries one generic prototype title and description for all 52 routes | **Not implemented** |
 | 11 | Privacy policy, terms, cookie consent | **Not built** |
 | 12 | The 68 live articles not in this build | **Resolved 2026-10-03 — migrate all** |
-| 13 | `Rezi Finance (1)` client name artefact | **Needs cleaning** |
-| 14 | Three `stagingsite2` links inside article bodies | **Needs correcting** |
+| 13 | `Rezi Finance (1)` client name artefact | **Fixed 2026-10-04** — now "Rezi Finance" |
+| 14 | `stagingsite2` links inside article bodies | **None in this build.** Two live posts carry one each — see PENDING.md |
 
 ## 12. Known dead code
 
-- `.role-fit` CSS in `global.css` — nothing renders it since the fit section became `.fit-flow`.
+- ~~`.role-fit` CSS in `global.css`~~ — removed 2026-10-04.
 - `.legacy-home-founder` markup on the home page — hidden by CSS, kept pending a parity check.
 - `FinalCta` is a historical function name; it renders a contact form. Judge by behaviour, not name.
 
