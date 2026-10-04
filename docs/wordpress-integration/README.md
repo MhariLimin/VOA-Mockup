@@ -5,10 +5,11 @@ custom theme. Last updated **2026-10-04**.
 
 ## Where things stand
 
-- **Theme build: 6 of 10 steps done.** Home page, articles, Insights, search, pages and 404 all render
-  on a local WordPress with no errors.
-- **Nothing has touched the live site.** No backup has been taken and no staging site exists yet.
-- **Main blocker: the HostGator account is locked.** See [BLOCKERS.md](BLOCKERS.md).
+- **The theme is built:** all 22 pages, each matching the React build exactly — checked by script and
+  in the browser, in light and dark, at desktop and phone width, including every interactive part.
+- **The database is backed up** and downloaded (2026-10-04). Nothing on the live site has been changed.
+- **Main blockers:** the HostGator account is locked, and there is no staging site to install the
+  theme on. See [BLOCKERS.md](BLOCKERS.md).
 
 ## Files
 

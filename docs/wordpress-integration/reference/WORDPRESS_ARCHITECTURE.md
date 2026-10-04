@@ -65,6 +65,46 @@ So the home page is **template parts**, and the content inside them comes from:
 This is not a retreat from the governing principle. Nothing is locked in a plugin's private format;
 every word is either a post, a theme mod, or translatable text in a file under version control.
 
+### Refinement, 2026-10-04: an exact copy, generated from the React build
+
+The user asked for the theme to be **an exact copy of the approved mockup**. Checking the first
+templates against the React build found the hand-written copy had already drifted: a different hero
+eyebrow, a blank hero description, founder text that was not the approved text, and a missing line in
+the feedback section. Retyping copy is how that happens, so the theme stopped doing it.
+
+**How the theme gets its words and pictures now:**
+
+| What | Where it comes from |
+| --- | --- |
+| All page copy — services, process, managed support, FAQs, testimonials, client logos, navigation, hero, figures | `data/*.json`, **generated** from the React content modules by `scripts/wordpress/export-content.mjs` |
+| The few strings React writes inline in its page components | the matching PHP template, copied, then machine-checked (below) |
+| Every design image | `assets/media/`, copied by the export from `public/assets/` |
+| The four stylesheets | copied by the export from `src/styles/`, unchanged except image URLs |
+| Articles | WordPress posts — the real content, unchanged |
+
+**How "exact" is proven:** `scripts/wordpress/render-reference.mjs` renders every React route to HTML,
+and `scripts/wordpress/compare.mjs` diffs it against the WordPress output, tag by tag and word by word.
+All 22 routes match. The only normalisations are platform facts — URLs, where an article image is
+stored, attribute order — listed at the top of the script.
+
+**What that changed in this document:**
+
+| Was | Now | Why |
+| --- | --- | --- |
+| Service pages built from custom blocks (`voa/service-hero`, `voa/fit-flow`, …) | `single-voa_service.php` renders the service from `data/services.json` by slug. The post keeps the URL, the Yoast fields and the admin entry | Blocks could not reproduce the approved markup exactly, and nobody restructures a service page |
+| Testimonials and client logos as post types (2.4, A6) | Rendered from `data/testimonials.json` and `data/clients.json`; the post types are gone | This is what "move them into the theme" (Q4) amounts to, and it is exactly how React renders them |
+| Header from a WordPress menu with a walker (2.6) | Rendered from `data/site.json`, the export of `navigation.ts` | A menu has no fields for the mega panel's column labels and summary card |
+| Home hero text in the Customizer | From the data, like every other string | The Customizer defaults were where the hero drifted |
+| `theme.json` sets front-end styles | `theme.json` holds editor settings only | WordPress printed a body font size, link colour and hover underline the React build does not have |
+| Patterns for client-editable sections (step 9) | Deferred | The design pages are fixed compositions; patterns only matter for new generic pages, which `page.php` already renders in the house style |
+
+**The trade-off, stated plainly:** changing copy on a design page is now an edit to the React content
+file, then `npm run wp:export`, then a theme update — not a click in wp-admin. That is accepted
+because the client has approved the design and expects only slight changes, while the React build
+remains the reference until the WordPress version is approved. Articles, the content that changes
+monthly, stay fully editable in WordPress. If the client later needs to edit page copy themselves, the
+data files are the natural input for a fields screen; nothing here forecloses it.
+
 ---
 
 ## 2. Content model
@@ -352,10 +392,10 @@ Each step is testable before the next begins.
 | 3 | JS modules | 1 |
 | 4 | Post types, nav walker, icon functions | 1 |
 | 5 | `front-page.php` — the hardest page, and it proves the pattern system | 2, 3, 4 |
-| 6 | `single-voa_service.php` + the custom blocks | 5 |
+| 6 | `single-voa_service.php` — rendered from data, not blocks (refinement 2026-10-04) | 5 |
 | 7 | Remaining page templates | 5 |
 | 8 | `home.php`, `single.php`, `archive.php`, `404.php` | 5 |
-| 9 | Patterns for client-editable sections | 6, 7 |
+| 9 | Patterns for client-editable sections — deferred (refinement 2026-10-04) | 6, 7 |
 | 10 | Content entry, forms, Yoast, redirects | all |
 
 **Steps 1–9 need no server access.** They can be written now and delivered as a .zip the moment
@@ -384,5 +424,7 @@ staging exists.
   compatible with 7.4, so this does not block the build.
 - **Video content** — three placeholders. Deferred by the client on 2026-10-03; not a blocker.
 - **Fonts** — **resolved 2026-10-03: self-host Manrope and Inter in the theme.** Both are open-licensed,
-  so there is no cost and no third-party request.
+  so there is no cost and no third-party request. **Revised 2026-10-04:** the files ship but are not
+  loaded (`VOA_LOAD_FONTS = false`), because the approved mockup never loads them and renders in the
+  system font; loading them was the only visible difference between the two.
 - **Privacy policy, terms, cookie consent** — not built, not specified.

@@ -240,14 +240,26 @@ Answered by the user on 2026-10-03.
 | Q11 | Ten orphan pages: redirect or 410? | **Resolved 2026-10-03: redirect all ten.** No Search Console access, so we do not guess — a redirect keeps any inbound link value, a 410 discards it |
 | Q12 | Exact published post count: wp-admin says 100, the sitemap lists 98 | **Open** |
 
-### Q9 — backup: NOT CONFIRMED
+### Q9 — backup: DONE (database only), 2026-10-04
 
-The user did **not** confirm that a current UpdraftPlus backup exists and has been downloaded off the
-server.
+A database-only UpdraftPlus backup was taken on 2026-10-04 and downloaded off the server:
+`backup_2026-10-04-0610_…-db.gz`, 29.5 MB, 158 tables. It was checked locally: the archive is
+intact and its header names the live site, WordPress 7.0.6, PHP 7.4.33 and MySQL 5.7.44. It is kept in
+`wordpress-backups/`, which is git-ignored — it holds user accounts and must never reach GitHub.
 
-**This blocks everything.** No clone, no PHP change, no plugin change and no scan-driven deletion
-happens until a verified backup has been taken *and downloaded*. A backup that only exists on the same
-server is not a backup.
+**Three things the backup log revealed:**
+
+- **The Google Drive connection does not work.** UpdraftPlus lists Google Drive as remote storage, but
+  the upload failed with `no_refresh_token` — it was never authorised, or the authorisation lapsed.
+  Backups have therefore not been reaching Drive; the last ones in the history are May and March 2025.
+  Reconnecting it needs a decision on *whose* Google account backups belong in (task 9).
+- **A staging copy already exists in the same database:** 158 tables prefixed `staging_`. Check
+  wp-admin → HostGator → Staging before creating another.
+- **UpdraftPlus keeps only the two newest database backups** (`retain_db=2`), and pruned the March 2025
+  one during this run.
+
+Still outstanding: a **files** backup (uploads, themes, plugins), which waits on a disk-space check —
+see runbook step 1b.
 
 ## 7. Standing constraints
 

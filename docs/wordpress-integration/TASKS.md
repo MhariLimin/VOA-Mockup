@@ -20,12 +20,12 @@ Task 8 goes first because HostGator access gates 4, 6, 9 (full backup), 13 and t
 
 ## 1. Finish the code conversion to PHP — 🔓 *(est. 6 h of review and checks across both weeks)*
 
-Theme steps 6, 7 and 9 need no server access. Claude builds them; your time goes on reviewing them.
-- [ ] Step 6: the service page template and its custom blocks
-- [ ] Step 7: the nine remaining page templates
-- [ ] Step 9: block patterns for the client-editable sections
+Claude builds; your time goes on reviewing.
+- [x] Service pages, the nine remaining page templates, Insights and articles — all 22 pages match the
+      React build exactly (2026-10-04)
+- [ ] ~~Block patterns~~ — deferred; see the architecture refinement of 2026-10-04
 - [ ] **First browser review**: desktop and mobile, light and dark, compared side by side with the
-      React site
+      React site, including every interactive part
 - [ ] Zip the theme ready for staging (runbook step 7)
 
 **Deliverable:** a complete theme that renders every route locally, with a list of the visual
@@ -143,8 +143,10 @@ Depends on tasks 8 and 13. Compare the two on what this site **actually uses**:
 
 ## 9. Enforce backups for Virtual Office Angels — 🔓 database · 🔒 full *(est. 1.5 h the first time)*
 
-- [ ] **Now:** take a database-only backup through UpdraftPlus and **download** it (runbook step 1a).
-      This clears blocker 2.
+- [x] **Done 2026-10-04:** database-only backup through UpdraftPlus, downloaded and checked
+      (29.5 MB, 158 tables). Kept in `wordpress-backups/`, which git ignores.
+- [ ] **Google Drive is not actually connected** (`no_refresh_token` in the log). Decide whose Google
+      account backups belong in, then reconnect it under Settings → UpdraftPlus → Settings.
 - [ ] After task 8: check disk space, then take a full backup (step 1b).
 - [ ] Check whether UpdraftPlus already sends backups off-server, under Settings → remote storage.
       A backup kept only on the same server is not a backup.
@@ -208,6 +210,6 @@ After task 8, in cPanel:
 | --- | --- | --- | --- |
 | A1 | Read the contact-form recipient (Q6). Contact → Contact Forms → Mail → To | 🔓 10 min | Needed for the forms step; no HostGator needed |
 | A2 | Approve the redirect map (status doc 5.2) and the URLs for the three renamed services and `/why-voa` | 🔓 | Needed before redirects and cutover |
-| A3 | Create staging, then lock it down (runbook steps 2–3) | 🔒 needs task 9 | Unlocks theme step 10 and real PHP testing |
+| A3 | Create staging, then lock it down (runbook steps 2–3). **First check wp-admin → HostGator → Staging**: the backup shows a staging copy already exists | 🔓 backup done; scan first (task 11) | Unlocks theme step 10 and real PHP testing |
 | A4 | Fix the three `stagingsite2` links in the captured article bodies, and check whether the live posts carry them too | 🔓 | They point at the old staging copy, not the real site |
 | A5 | Ask the client for privacy policy, terms and cookie-consent requirements | 🔓 | Needed before cutover |
