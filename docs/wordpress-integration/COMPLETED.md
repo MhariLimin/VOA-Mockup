@@ -101,6 +101,34 @@ Done in Chrome against the React build running side by side, with the user's per
 - **One deliberate difference:** the WordPress slideshows pause while the browser tab is hidden;
   React's keep running. Visitors never see it.
 
+## PHP 7.4 — the live server's version (2026-10-04)
+
+The official PHP 7.4.33 for Windows, checksum-verified, was run against the same local site.
+
+- Every theme file passes PHP 7.4's syntax check.
+- **All 22 pages match React** in the comparison, served by PHP 7.4.
+- Search, a category page, an article and the 404 respond correctly, the setup screen and its
+  installer run, and the error log stays empty.
+- One test-only adjustment: PHP 7.4's bundled SQLite (3.31) is older than the local database layer
+  needs (3.37), so the test copy uses the newer SQLite library from PHP 8.3. The live site runs MySQL,
+  so this has no bearing on it.
+
+**The theme therefore does not depend on the PHP upgrade.** It can be installed on staging whichever
+version staging runs.
+
+## Ready for staging
+
+- **Theme ZIP:** `npm run wp:zip` builds `wordpress-theme/virtual-office-angels.zip` — 131 files,
+  8.1 MB, checked: every file's checksum valid, standard forward-slash paths, contents identical to
+  the theme folder. Git-ignored; rebuild it whenever the theme changes.
+- **Redirect import file:** [`redirects.csv`](redirects.csv), 26 redirects, **awaiting your review** —
+  see [REDIRECTS.md](REDIRECTS.md).
+
+## Changes made on request (2026-10-04)
+
+- The two "prototype" notices — the form's small print and the footer line — removed from both
+  builds.
+- The ten service SEO titles end "| Virtual Office Angels" instead of "| VOA".
+
 **Not verified:**
-- **Nothing has been run on PHP 7.4.** Staging can run PHP 8; see BLOCKERS.md.
 - **Touch devices.** Behaviour was driven by mouse and scripted clicks on a desktop browser.

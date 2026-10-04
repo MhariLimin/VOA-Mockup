@@ -19,6 +19,7 @@ custom theme. Last updated **2026-10-04**.
 | [PENDING.md](PENDING.md) | What is left that can be worked on now |
 | [BLOCKERS.md](BLOCKERS.md) | What is stuck, what it blocks, and how to clear it |
 | [TASKS.md](TASKS.md) | The task list for the weeks of 5 and 12 October 2026 |
+| [REDIRECTS.md](REDIRECTS.md) | The old-to-new address list for review, and [redirects.csv](redirects.csv) to import it |
 | [reference/WORDPRESS_LIVE_SITE_STATUS.md](reference/WORDPRESS_LIVE_SITE_STATUS.md) | What the live site actually is, its concerns, and every open question — the backtrack point |
 | [reference/CONTENT_ASSET_AUDIT.md](reference/CONTENT_ASSET_AUDIT.md) | Inventory of routes, articles, images, logos, testimonials, FAQs and forms |
 | [reference/WORDPRESS_ARCHITECTURE.md](reference/WORDPRESS_ARCHITECTURE.md) | How the React site maps to WordPress templates, post types and blocks |

@@ -7,13 +7,12 @@ Work not yet done that is **not** stuck. Anything stuck is in [BLOCKERS.md](BLOC
 | Item | Notes |
 | --- | --- |
 | Check on a phone | Layout was measured at phone width and matches, but nothing was tried on a real touch screen |
-| Zip the theme for staging | Runbook step 7 |
-| Remove the prototype notices before launch | Two lines in the theme still say "prototype": the form's small print and the footer's verification note. They are there because React has them |
 
 ## On your side — available now
 
 | Item | Where |
 | --- | --- |
+| **Review the redirect list**, especially the ten proposed targets | [REDIRECTS.md](REDIRECTS.md) |
 | Look for an existing staging site. The backup shows one exists | wp-admin → **HostGator → Staging** |
 | Find where contact-form emails go (Q6) | wp-admin → **Contact → Contact Forms** → the form → **Mail** tab → **To** |
 | Run a Wordfence scan: read the results only, **delete nothing** (Q10) | wp-admin → **Wordfence → Scan → Start New Scan** |

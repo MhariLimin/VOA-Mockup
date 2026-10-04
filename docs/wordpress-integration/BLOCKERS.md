@@ -31,21 +31,20 @@ Worst first. Each entry says what it blocks and what clears it.
 - **Blocks:**
   - Installing the theme on a real copy of the site
   - Forms, Yoast and redirects
-  - Testing on PHP 7.4
   - QA
 - **Also wanted before cloning:** the Wordfence scan (blocker 4), so a problem is not copied forward.
 
-## 3. PHP 7.4 on the live server
+## 3. PHP 7.4 on the live server — no longer blocks the theme
 
-- **State:** PHP 7.4 has been end of life since November 2022. The theme avoids newer PHP syntax, but
-  it has only been tested on 8.3.
-- **Blocks:** confidence that the theme runs on the live server.
-- **Plan (proposed 2026-10-04):** run staging on PHP 8.x while live stays on 7.4 with the old site.
-  HostGator sets PHP per domain or folder, so the two can differ. **When the new site goes live, live
-  must move to PHP 8 too**, because it will run the same theme — so the live upgrade is a cutover step,
-  and the old site's plugins need to survive it, or be retired first.
-- **Clears by:** setting staging's PHP version (cPanel → MultiPHP Manager, so it waits on blocker 1,
-  unless HostGator's staging tool offers it), then testing the theme there.
+- **State:** PHP 7.4 has been end of life since November 2022. **The theme itself is now proven on
+  7.4** (2026-10-04: every page matches, no errors), so this no longer blocks installing it.
+- **Blocks:** nothing in the theme. It remains a security risk for the live site, and the upgrade is
+  still wanted before or at cutover.
+- **Plan (proposed 2026-10-04):** staging can run PHP 8.x while live stays on 7.4 with the old site;
+  HostGator sets PHP per domain or folder. The theme works on either, so the live upgrade is no
+  longer forced by the new site — but it is still strongly recommended at or before cutover, for
+  security. The old site's plugins need to survive it, or be retired first.
+- **Clears by:** setting PHP 8 in cPanel → MultiPHP Manager (waits on blocker 1), staging first.
 
 ## 4. Security unknowns on live
 
