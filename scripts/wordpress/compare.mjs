@@ -12,6 +12,10 @@
    - Attribute order, and valueless boolean attributes ("hidden" and hidden="").
    - WordPress-only plumbing: attributes named data-voa-* (data a behaviour module reads, where React
      kept it in component state) and <script> elements. Neither renders anything.
+   - The enquiry form. WordPress renders it through Contact Form 7, which wraps it and adds its own
+     classes, spans and hidden fields, so both forms are reduced to what a visitor meets: the text, and
+     each visible control's type, autocomplete hint, rows and whether it is required, in order. Its
+     look is checked in the browser instead.
 
    Usage: node scripts/wordpress/compare.mjs <reference-directory> <wordpress-base-url> [route ...]
    With no routes, compares every reference file. Exits non-zero when anything differs. */
@@ -95,6 +99,33 @@ function tokens(html) {
   return out;
 }
 
+/* The enquiry form as a visitor meets it; see the header. In Contact Form 7, required is
+   aria-required, and the consent box is required by the form's acceptance-as-validation setting. */
+function formSignature(form) {
+  const acceptanceRequired = /wpcf7-acceptance-as-validation/.test(form);
+  const lines = [];
+  for (const [part] of form.matchAll(/<[^>]+>|[^<]+/g)) {
+    if (part[0] !== '<') {
+      const text = decode(part).replace(/\s+/g, ' ').trim();
+      if (text) lines.push(text);
+      continue;
+    }
+    const name = /^<(\w+)/.exec(part)?.[1].toLowerCase();
+    if (!['input', 'select', 'textarea', 'button'].includes(name)) continue;
+    const attr = (key) => new RegExp(String.raw`\s${key}(?:\s*=\s*["']([^"']*)["'])?`, 'i').exec(part);
+    const type = attr('type')?.[1] ?? (name === 'input' ? 'text' : '');
+    if (type === 'hidden') continue;
+    const required = Boolean(attr('required')) || attr('aria-required')?.[1] === 'true' || (type === 'checkbox' && acceptanceRequired);
+    const autocomplete = attr('autocomplete')?.[1];
+    const rows = attr('rows')?.[1];
+    lines.push(`[${name}${type ? ` type=${type}` : ''}${autocomplete ? ` autocomplete=${autocomplete}` : ''}${rows ? ` rows=${rows}` : ''}${required ? ' required' : ''}]`);
+  }
+  return `<div class="enquiry-form">${lines.map((line) => `<i>${line.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</i>`).join('')}</div>`;
+}
+
+const FORMS = /<div class="wpcf7[\s\S]*?<\/form>\s*<\/div>|<form class="contact-form"[\s\S]*?<\/form>/g;
+const withFormSignatures = (html) => html.replace(FORMS, formSignature);
+
 /* The page between the skip link and the end of the footer: the part both platforms render. */
 function region(html) {
   const start = html.indexOf('<a class="skip-link"');
@@ -148,7 +179,7 @@ for (const route of routes) {
   const page = region(await response.text());
   if (!page) { console.log(`✗ ${route}  (HTTP ${response.status}) no skip-link…</footer> region found`); failures++; continue; }
 
-  const ops = diff(tokens(reference), tokens(page));
+  const ops = diff(tokens(withFormSignatures(reference)), tokens(withFormSignatures(page)));
   const changed = ops.filter(([op]) => op !== ' ').length;
   if (!changed) { console.log(`✓ ${route}`); continue; }
   failures++;

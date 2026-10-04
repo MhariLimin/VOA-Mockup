@@ -17,7 +17,7 @@ define( 'VOA_URI', get_template_directory_uri() );
 /**
  * Load an include, or fail loudly in development rather than silently rendering a broken page.
  */
-foreach ( array( 'setup', 'enqueue', 'data', 'icons', 'post-types', 'install' ) as $voa_include ) {
+foreach ( array( 'setup', 'enqueue', 'data', 'icons', 'post-types', 'forms', 'install' ) as $voa_include ) {
 	$voa_file = VOA_DIR . '/inc/' . $voa_include . '.php';
 
 	if ( file_exists( $voa_file ) ) {

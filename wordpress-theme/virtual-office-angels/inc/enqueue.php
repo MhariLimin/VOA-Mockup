@@ -36,7 +36,7 @@ const VOA_LOAD_FONTS = false;
  * docs/wordpress-integration/reference/WORDPRESS_ARCHITECTURE.md for the mapping. All are plain
  * modules — no framework, no build step.
  */
-const VOA_SCRIPTS = array( 'motion', 'theme-toggle', 'nav', 'reveal', 'backdrop-rotator', 'client-carousel', 'journey', 'accordion', 'interactions' );
+const VOA_SCRIPTS = array( 'motion', 'theme-toggle', 'nav', 'reveal', 'backdrop-rotator', 'client-carousel', 'journey', 'accordion', 'interactions', 'contact-form' );
 
 /**
  * File modification time as the cache-busting version, so a changed file is never served stale and an

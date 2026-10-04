@@ -29,3 +29,33 @@
 .article-content .wp-block-image img,
 .article-content img { max-width: 100%; height: auto; }
 .screen-reader-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* The enquiry form, rendered by Contact Form 7 (inc/forms.php). Contact Form 7 wraps it in
+   <div class="wpcf7">, which simply takes the grid cell the mockup's <form> takes, so the page layout
+   and the homepage's slide-in are unchanged. The rules below cover only what Contact Form 7 adds. */
+
+/* Contact Form 7 puts each control inside a <span>. In the mockup the control is itself the label's
+   grid item, and so a block; inline inside the span it would sit on a text line and add a few pixels
+   below every field. */
+.contact-form .wpcf7-form-control-wrap { display: block; }
+.contact-form .wpcf7-form-control-wrap > :is(input, select, textarea) { display: block; }
+
+/* The consent box: Contact Form 7 nests its own <label> inside the acceptance field, so the
+   mockup's .checkbox-field layout moves onto that label, and the general field-label rule is undone. */
+.contact-form .checkbox-field > .wpcf7-form-control-wrap { flex: 1; }
+.contact-form .checkbox-field .wpcf7-list-item { display: block; margin: 0; }
+.contact-form .checkbox-field label { display: flex; align-items: flex-start; gap: 0.65rem; font-size: inherit; font-weight: inherit; }
+
+/* Errors. Contact Form 7's own colour and wording; only spacing and shape follow the form. */
+.contact-form .wpcf7-not-valid-tip { margin-top: 0.35rem; font-size: 0.78rem; }
+/* An error under one field of a row makes that label taller; keep its neighbour's field level with it
+   instead of letting the stretched label push it down. No effect while neither has an error. */
+.contact-form .field-row > label { align-content: start; }
+.contact-form .wpcf7-not-valid { border-color: #dc3232; }
+.contact-form .wpcf7-response-output { margin: 0; padding: 0.75rem 0.9rem; border-radius: 0.6rem; font-size: 0.82rem; }
+
+/* While sending: one click only. */
+.contact-form.submitting .button { opacity: 0.6; pointer-events: none; }
+
+/* Shown instead of the form when Contact Form 7 or the form is missing (template-parts/layout/contact-form.php). */
+.contact-form-unavailable p { margin: 0; }

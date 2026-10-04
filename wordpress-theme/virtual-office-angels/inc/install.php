@@ -13,6 +13,8 @@
  *   - sets the home page and the posts page (Settings → Reading), if not already set to these
  *   - seeds each new service's Yoast title and description from the React build's SEO fields, only
  *     where Yoast has nothing stored
+ *   - creates the enquiry form in Contact Form 7, when that plugin is active and the form does not
+ *     exist yet (inc/forms.php). Other Contact Form 7 forms are left alone
  *
  * It does not touch articles, menus, plugins, users or permalinks.
  *
@@ -157,6 +159,11 @@ function voa_install_content() {
 		flush_rewrite_rules();
 	}
 
+	$form = voa_create_enquiry_form();
+	if ( $form ) {
+		$log[] = $form;
+	}
+
 	return $log;
 }
 
@@ -178,7 +185,7 @@ function voa_setup_screen() {
 	?>
 	<div class="wrap">
 		<h1>Virtual Office Angels — site setup</h1>
-		<p>Creates the pages and services the theme needs. It only adds what is missing; it never changes or deletes anything that already exists.</p>
+		<p>Creates the pages, services and contact form the theme needs. It only adds what is missing; it never changes or deletes anything that already exists.</p>
 
 		<?php if ( is_array( $log ) ) : ?>
 			<div class="notice notice-success"><p><?php echo $log ? wp_kses_post( implode( '<br>', array_map( 'esc_html', $log ) ) ) : 'Nothing was missing.'; ?></p></div>
@@ -196,6 +203,22 @@ function voa_setup_screen() {
 			<?php foreach ( $status['services'] as $slug => $service ) : ?>
 				<li><code>/services/<?php echo esc_html( $slug ); ?>/</code> — <?php echo $service ? 'exists' : '<strong>missing</strong>'; ?></li>
 			<?php endforeach; ?>
+		</ul>
+
+		<h2>Contact form</h2>
+		<ul>
+			<li>
+				<?php if ( ! function_exists( 'wpcf7_contact_form' ) ) : ?>
+					<strong>Contact Form 7 is not active.</strong> Activate it, then run this again; until then the site shows no form.
+				<?php elseif ( voa_contact_form_id() ) : ?>
+					"Website enquiry" — exists. Its recipient and wording are edited under <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpcf7&post=' . voa_contact_form_id() . '&action=edit' ) ); ?>">Contact → Contact Forms</a>.
+				<?php else : ?>
+					"Website enquiry" — <strong>missing</strong>
+				<?php endif; ?>
+			</li>
+			<?php if ( function_exists( 'wpcf7_contact_form' ) && ! class_exists( 'Flamingo_Inbound_Message' ) ) : ?>
+				<li><strong>Flamingo is not active</strong>, so enquiries are emailed but not saved in wp-admin.</li>
+			<?php endif; ?>
 		</ul>
 
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">

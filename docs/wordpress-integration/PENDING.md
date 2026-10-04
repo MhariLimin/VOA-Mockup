@@ -7,6 +7,9 @@ Work not yet done that is **not** stuck. Anything stuck is in [BLOCKERS.md](BLOC
 | Item | Notes |
 | --- | --- |
 | Check on a phone | Layout was measured at phone width and matches, but nothing was tried on a real touch screen |
+| Approve the form's fallback wording | Shown only if Contact Form 7 is switched off: "The enquiry form is unavailable right now. Please email clientcare@… or call 1 300 737 883." Written by Claude |
+| Consent error wording | Contact Form 7's standard message says "You must accept the terms and conditions…", but the box is a privacy consent. Editable later under the form's **Messages** tab |
+| Google Ads auto-tagging | Ask whoever runs the ads to confirm it is on, or the "From Google ADS" label never appears |
 
 ## On your side — available now
 
@@ -14,7 +17,6 @@ Work not yet done that is **not** stuck. Anything stuck is in [BLOCKERS.md](BLOC
 | --- | --- |
 | **Review the redirect list**, especially the ten proposed targets | [REDIRECTS.md](REDIRECTS.md) |
 | Look for an existing staging site. The backup shows one exists | wp-admin → **HostGator → Staging** |
-| Find where contact-form emails go (Q6) | wp-admin → **Contact → Contact Forms** → the form → **Mail** tab → **To** |
 | Run a Wordfence scan: read the results only, **delete nothing** (Q10) | wp-admin → **Wordfence → Scan → Start New Scan** |
 | Confirm the post count: wp-admin says 100, the sitemap 98 (Q12) | wp-admin → **Posts**: compare *All*, *Published* and *Draft* |
 

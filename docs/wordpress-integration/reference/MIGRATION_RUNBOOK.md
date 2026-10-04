@@ -360,24 +360,40 @@ Pages rebuilt so far · anything in the old content with no home in the new desi
 
 ### Why
 
-The React prototype's form is a mock — it navigates to a thank-you page and does nothing else. Contact
-Form 7 is already installed and already handles the live form.
+The React prototype's form is a mock. **The theme's form is real (built 2026-10-04):** it sends
+through Contact Form 7, which is already installed and runs the live forms. Site setup creates it; the
+details are in `wordpress-theme/virtual-office-angels/inc/forms.php`. What it does:
+
+- Same fields, labels and look as the mockup (measured identical in the browser)
+- Sends to the address the live forms use, picked up automatically from the clone:
+  `clientcare@virtualofficeangels.com.au`. Subject "Virtual Contact Form", as live
+- **Reply-To is the visitor**, unlike live, so pressing Reply answers them
+- Starts the email with **"From Google ADS"** when the visitor arrived from a Google ad (Google's
+  `gclid` marker in the address), as the live Ads form does. Needs auto-tagging on in Google Ads
+- Akismet checks the name, email and message. Contact Form 7's standard error messages
+- Goes to Thank You once the email is sent; stays on the page with an error if it is not
+- **Flamingo** keeps a copy of every enquiry in wp-admin, with the consent, date, time and IP
 
 ### Steps
 
-1. **Contact → Contact Forms** — review the existing form
-2. Match its fields to the new design: first name\*, last name, email\*, phone, business name,
-   industry, message\*, consent checkbox\*
-3. **Set the recipient address.** *Currently unknown — must be confirmed with the client.*
-4. **Install WP Mail SMTP** and configure it. Without this, shared-hosting mail often lands in spam or
-   vanishes
-5. Spam protection: Akismet is active; add CF7's own honeypot or Turnstile
-6. **Send a real test from the public staging URL**, not from the admin preview
-7. Confirm it arrives, and check the spam folder too
+1. **Plugins → Add New → Flamingo** → Install → Activate (free, by the Contact Form 7 author;
+   approved 2026-10-04)
+2. **Appearance → Site setup → Create what is missing.** It reports "Created the contact form
+   'Website enquiry', sending to …". Check that address is `clientcare@`
+3. **Install WP Mail SMTP** and configure it. Without this, shared-hosting mail often lands in spam or
+   vanishes. Needs the mail service's access
+4. **Send a real test from the public staging URL**, not from the admin preview
+5. Confirm it arrives, check the spam folder too, and that it shows under **Flamingo → Inbound
+   Messages**
+6. Test once with `?gclid=test` added to the Contact page address: the email should start "From
+   Google ADS"
+
+The old forms ("Contact form", "Contact form_Ads") are left as they are; nothing on the new site uses
+them. Delete them after cutover if wanted.
 
 ### Report back
 
-Confirmed recipient · a test email that actually arrived
+A test email that actually arrived · the Ads test · the Flamingo copy
 
 ---
 
@@ -491,7 +507,7 @@ fallback — which is exactly why step 1 exists.
 | 6. PHP 8 | **Blocked** | | Needs cPanel |
 | 7. Theme | Not started | | Waiting on architecture + build |
 | 8. Content | Not started | | |
-| 9. Forms | Not started | | Recipient address unknown |
+| 9. Forms | Theme side built | 2026-10-04 | Flamingo, SMTP and a real test remain |
 | 10. SEO | Not started | | |
 | 11. QA | Not started | | |
 | 12. Cutover | Not started | | Needs client authorisation |

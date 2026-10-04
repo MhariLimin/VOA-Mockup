@@ -1,45 +1,29 @@
 <?php
 /**
- * The enquiry form — ContactForm.tsx.
+ * The enquiry form — ContactForm.tsx, sent through Contact Form 7.
  *
- * Still the prototype's form, field for field, and still submitted to /thank-you without being sent
- * anywhere. Wiring it to real delivery, spam protection and a consent record is migration step 9, and
- * needs the recipient address the client has not yet confirmed. The "prototype form only" small print
- * was removed from both builds on 2026-10-04, so nothing on the page says the form is not live — it
- * must be connected before launch.
+ * The form itself is defined in inc/forms.php and created by Appearance → Site setup. Contact Form 7
+ * renders it inside its own <div class="wpcf7">, which wordpress.css makes layout-neutral, so the
+ * <form class="contact-form"> sits in the page exactly where the mockup's does.
  *
- * Industry options follow the "Who we support" list in the client's About Us document.
+ * Without Contact Form 7, or before Site setup has created the form, nothing could be sent. The page
+ * then says so instead of showing a form that goes nowhere, and an administrator sees why.
  *
  * @package voa
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$voa_industries = array(
-	'Mortgage and loans processing',
-	'Financial planning administration',
-	'Accounting and bookkeeping',
-	'Real estate and administration',
-	'Back-office support',
-	'Digital marketing',
-	'Sales and e-commerce',
-	'Creative and business support',
-	'Other',
-);
+$voa_form_id = voa_contact_form_id();
+
+if ( $voa_form_id ) {
+	echo do_shortcode( sprintf( '[contact-form-7 id="%d" html_class="contact-form"]', $voa_form_id ) );
+	return;
+}
 ?>
-<form class="contact-form" action="<?php echo esc_url( voa_url( '/thank-you' ) ); ?>">
-	<div class="field-row"><label>First name *<input name="firstName" autocomplete="given-name" required></label><label>Last name<input name="lastName" autocomplete="family-name"></label></div>
-	<div class="field-row"><label>Email *<input type="email" name="email" autocomplete="email" required></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
-	<label>Business name<input name="businessName" autocomplete="organization"></label>
-	<label>Industry
-		<select name="industry">
-			<option value="" disabled selected>Select your industry</option>
-			<?php foreach ( $voa_industries as $voa_industry ) : ?>
-				<option value="<?php echo esc_attr( $voa_industry ); ?>"><?php echo esc_html( $voa_industry ); ?></option>
-			<?php endforeach; ?>
-		</select>
-	</label>
-	<label>What support do you need? *<textarea name="message" rows="5" required></textarea></label>
-	<label class="checkbox-field"><input type="checkbox" required><span>I agree to the processing of my information for this enquiry.</span></label>
-	<button class="button" type="submit">Submit enquiry</button>
-</form>
+<div class="contact-form contact-form-unavailable">
+	<p>The enquiry form is unavailable right now. Please email <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a> or call <a href="tel:1300737883">1 300 737 883</a>.</p>
+	<?php if ( current_user_can( 'manage_options' ) ) : ?>
+		<p><small>Administrators only: <?php echo function_exists( 'wpcf7_contact_form' ) ? 'run <strong>Appearance → Site setup</strong> to create the form.' : 'activate <strong>Contact Form 7</strong>, then run <strong>Appearance → Site setup</strong>.'; ?></small></p>
+	<?php endif; ?>
+</div>

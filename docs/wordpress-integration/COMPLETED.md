@@ -124,6 +124,23 @@ version staging runs.
 - **Redirect import file:** [`redirects.csv`](redirects.csv), 26 redirects, **awaiting your review** —
   see [REDIRECTS.md](REDIRECTS.md).
 
+## The contact form — built 2026-10-04
+
+- The theme's enquiry form now **really sends**, through Contact Form 7 (already on live). Decisions
+  of 2026-10-04: Contact Form 7, Flamingo for a saved copy of each enquiry, Contact Form 7's standard
+  error messages, and Google Ads enquiries labelled from the ad-click marker.
+- Appearance → Site setup creates it, sending to the address the live forms already use.
+- **Checked locally** (Contact Form 7 6.1.7, the live version, and Flamingo 2.6.4):
+  - The form looks identical to the mockup on the Contact page, the homepage and a service page, in
+    light and dark: 20 of 20 elements measured the same
+  - Every route still matches the mockup: 22/22, on PHP 8.3 and PHP 7.4
+  - An empty submit shows the errors; a complete one goes to Thank You
+  - The email: right fields, blank ones left out, consent recorded, Reply-To the visitor,
+    "From Google ADS" only for ad visitors; Flamingo saved each one
+  - With Contact Form 7 switched off, the page still loads and says the form is unavailable
+- **Not checkable here:** real delivery. Nothing can send email from this machine; the emails were
+  captured instead. That is the staging test.
+
 ## Changes made on request (2026-10-04)
 
 - The two "prototype" notices — the form's small print and the footer line — removed from both
