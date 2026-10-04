@@ -6,3 +6,7 @@ dist
 .env
 .env.*
 !.env.example
+
+# Site backups and plugin logs: private data, never committed.
+wordpress-backups/
+log.*.txt
