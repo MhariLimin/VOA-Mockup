@@ -26,7 +26,6 @@ Work not yet done that is **not** stuck. Anything stuck is in [BLOCKERS.md](BLOC
 | Q1 | Where did the Divi belief come from? Is there a second WordPress install, or a Divi subscription being paid? |
 | Q5 | Does hosting stay on HostGator? |
 | Q8 | Posts have no categories. The theme already shows a category worked out from the title, the same way React does. Assign real categories during migration, or keep that? |
-| — | URLs for the three renamed services and for `/why-voa` |
 | — | Whose Google account should backups go to? The Drive connection in UpdraftPlus does not work |
 | — | Which name shows as article author: the account's display name or its username? The theme uses the display name; React showed the username (`annevillavieja`). Showing usernames publicly helps password guessing |
 
@@ -51,6 +50,6 @@ Found in the database backup on 2026-10-04. Each published post links once to
 - "2026: Why the start of the year is the best time to hire a VA"
 
 **Fix:** in each post, change the link to `https://virtualofficeangels.com.au/why-us/`. That works
-today, and the redirect list sends it on to `/why-voa/` after cutover. It is a live-site edit, so it is
+today, and the redirect list sends it on to `/managed-virtual-support/` after cutover. It is a live-site edit, so it is
 yours to make, or to make on staging after the clone. Two older saved revisions of these posts carry the
 same link, but revisions never show on the site.

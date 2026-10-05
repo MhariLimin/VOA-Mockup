@@ -8,7 +8,7 @@ For the WordPress migration, start at `docs/wordpress-integration/README.md`: it
 
 - The client selected **Mock Layout 1**. The approved implementation lives on `main`.
 - Preserve Layout 1's identity. Do not redesign it into Layout 2, resurrect rejected Bolt concepts, or make broad visual changes without a current user request.
-- The present application is a design prototype deployed on Vercel. The exact production-preview URL is not recorded in the repository and must not be guessed.
+- The present application is a design prototype deployed on Vercel. The deployed address, as given in the client's `VOA_Redirect_Map.xlsx` (2026-10-05), is `https://virtualofficeangels-mockup-1.vercel.app/`.
 - The next intended production direction is a **custom WordPress theme** that closely reproduces Layout 1. WordPress is not expected to redesign the site manually.
 - The React/Vite site remains the visual and behavioral reference until the WordPress version is approved.
 - Original source sites:
@@ -92,29 +92,30 @@ Routes are generated through React Router:
 
 - `/`
 - `/about` with `#story` and `#leadership` sections
-- Ten service routes:
-  - `/services/mortgage-loans`
-  - `/services/financial-planning`
-  - `/services/accounting-bookkeeping`
-  - `/services/insurance-processing`
-  - `/services/real-estate-conveyancing`
-  - `/services/back-office-admin`
-  - `/services/digital-marketing`
-  - `/services/sales-marketing`
-  - `/services/creative-copywriting`
-  - `/services/it-technology`
+- Ten service routes (final addresses supplied by the client on 2026-10-05, `VOA_Redirect_Map.xlsx`;
+  the old ones redirect, see `src/content/renamedRoutes.ts`):
+  - `/services/mortgage-loans-processing-virtual-support`
+  - `/services/virtual-financial-planning-and-admin-assistant`
+  - `/services/accounting-and-bookkeeping-virtual-assistant`
+  - `/services/insurance-processing-virtual-assistance`
+  - `/services/real-estate-virtual-assistant-services`
+  - `/services/executive-and-administrative-virtual-assistance`
+  - `/services/digital-marketing-virtual-assistant-services`
+  - `/services/sales-and-e-commerce-virtual-assistant`
+  - `/services/creative-copywriting-virtual-assistant`
+  - `/services/it-virtual-assistant-services`
 - `/how-it-works`
-- `/why-voa`
+- `/managed-virtual-support` (was `/why-voa`)
 - `/client-stories`
 - `/insights`
-- `/insights/:slug` for 30 local article-detail routes
+- `/insights/:slug` for 30 local article-detail routes. WordPress uses the same `/insights/{article}/` addresses (decision of 2026-10-05)
 - `/videos`
 - `/faqs`
 - `/contact`
 - `/thank-you`
 - Custom not-found route
 
-`/services` is live again: the user reinstated it (revision HP1) and it renders through `ServicesPage` in `SourcePage.tsx`. The Services mega menu shows all ten destinations in two columns of five, using the labels from `SERVICE PAGES_VOA.pdf`. Renamed services keep their original URLs (Executive & Administrative at `/services/back-office-admin`, Sales & E-Commerce at `/services/sales-marketing`, Copywriting at `/services/creative-copywriting`); settle naming with a redirect map at WordPress migration.
+`/services` is live again: the user reinstated it (revision HP1) and it renders through `ServicesPage` in `SourcePage.tsx`. The Services mega menu shows all ten destinations in two columns of five, using the labels from `SERVICE PAGES_VOA.pdf`. Service URLs follow the client's final list of 2026-10-05; the WordPress redirect map is `docs/wordpress-integration/redirects.csv`.
 
 The staging source presented six primary services. The client has since supplied full content for all ten in `SERVICE PAGES_VOA.pdf`, so the earlier "production-only, unconfirmed" flags have been removed. Do not invent scope beyond that document.
 
@@ -185,7 +186,7 @@ Historical duplicate founder markup still exists under `.legacy-home-founder` bu
 - Video cards are placeholders pending approved video URLs, captions, and transcripts. They render a “Coming soon” player-style poster (`VideoPoster`), not a real thumbnail.
 - Testimonial “avatars” are initials, not verified client portraits, and the service-page feedback cards use a generic icon with the document’s own “feedback currently being gathered” placeholder. Do not fabricate photographs or quotes.
 - Source testimonials, logos, founder biography, company details, service scope, and images require final client approval for accuracy, rights, and consent.
-- All ten services now have client-supplied content. What still needs confirmation is the route naming for the renamed services and for `/why-voa`.
+- All ten services now have client-supplied content, and their final URLs were supplied on 2026-10-05.
 - `index.html` has one generic prototype title and description. Route-specific production SEO is not implemented.
 - The SPA depends on the Vercel rewrite for direct route loading.
 - The design tokens name Manrope and Inter, but no webfont loading was found at handoff; browsers may use system fallbacks. Record this in the audit and confirm font licensing/source before production.

@@ -230,7 +230,7 @@ After task 8, in cPanel:
 | # | Task | Status | Why |
 | --- | --- | --- | --- |
 | A1 | Read the contact-form recipient (Q6). Contact → Contact Forms → Mail → To | ✅ 2026-10-04: `clientcare@virtualofficeangels.com.au` | Needed for the forms step; no HostGator needed |
-| A2 | Approve the redirect map (status doc 5.2) and the URLs for the three renamed services and `/why-voa` | 🔓 | Needed before redirects and cutover |
+| A2 | Approve the redirect map (status doc 5.2) and the URLs for the three renamed services and `/why-voa` | ✅ 2026-10-05: the client's `VOA_Redirect_Map.xlsx` supplied both; see REDIRECTS.md | Needed before redirects and cutover |
 | A3 | Create staging, then lock it down (runbook steps 2–3). **First check wp-admin → HostGator → Staging**: the backup shows a staging copy already exists | 🔓 backup done; scan first (task 11) | Unlocks theme step 10 and real PHP testing |
 | A4 | Fix the three `stagingsite2` links in the captured article bodies, and check whether the live posts carry them too | 🔓 | They point at the old staging copy, not the real site |
 | A5 | Ask the client for privacy policy, terms and cookie-consent requirements | 🔓 | Needed before cutover |

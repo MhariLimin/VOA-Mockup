@@ -121,8 +121,9 @@ version staging runs.
 - **Theme ZIP:** `npm run wp:zip` builds `wordpress-theme/virtual-office-angels.zip` — 131 files,
   8.1 MB, checked: every file's checksum valid, standard forward-slash paths, contents identical to
   the theme folder. Git-ignored; rebuild it whenever the theme changes.
-- **Redirect import file:** [`redirects.csv`](redirects.csv), 26 redirects, **awaiting your review** —
-  see [REDIRECTS.md](REDIRECTS.md).
+- **Redirect import file:** [`redirects.csv`](redirects.csv), **151 redirects**, rebuilt on 2026-10-05
+  from the client's `VOA_Redirect_Map.xlsx` and test-imported on the local copy — see
+  [REDIRECTS.md](REDIRECTS.md).
 
 ## The contact form — built 2026-10-04
 
