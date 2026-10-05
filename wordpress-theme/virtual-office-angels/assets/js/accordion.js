@@ -4,7 +4,7 @@
  * Two markups, both from the React build:
  *
  *   .accordion   Accordion in SourcePage.tsx — a button with aria-expanded, a "+" / "−" toggle mark,
- *                and a panel with the hidden attribute. Service pages, About, /why-voa.
+ *                and a panel with the hidden attribute. Service pages, About, /managed-virtual-support.
  *
  *   .faq-list    native <details>/<summary> — the home page FAQs and /faqs. React keeps only one open
  *                by intercepting the summary click; this does the same, so opening one closes the rest.

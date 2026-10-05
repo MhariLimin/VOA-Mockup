@@ -68,7 +68,7 @@ function voa_media_url( $path ) {
  *
  * Routes keep their React paths, with the trailing slash WordPress permalinks use. A hash survives.
  *
- * @param string $route Such as "/services/mortgage-loans" or "#scope".
+ * @param string $route Such as "/services/mortgage-loans-processing-virtual-support" or "#scope".
  * @return string
  */
 function voa_url( $route ) {

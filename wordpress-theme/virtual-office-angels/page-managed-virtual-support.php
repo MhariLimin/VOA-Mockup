@@ -1,6 +1,6 @@
 <?php
 /**
- * /why-voa — WhyPage in SourcePage.tsx: HR-managed virtual support.
+ * /managed-virtual-support — WhyPage in SourcePage.tsx: HR-managed virtual support.
  *
  * Copy is HR-Managed Virtual Support.pdf, from data/managed.json. The two sides of the ownership split
  * face each other across one spine and are deliberately not paired into rows — the items are not
@@ -11,7 +11,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$voa_brief   = voa_page( '/why-voa' );
+$voa_brief   = voa_page( '/managed-virtual-support' );
 $voa_managed = voa_data( 'managed' );
 $voa_page    = $voa_managed['page'];
 

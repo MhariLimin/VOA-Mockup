@@ -3,13 +3,13 @@
  * Page opening with an image — ImageHero in SourcePage.tsx, used by Insights and Videos.
  *
  * With a photograph and no `aside`, the image takes the right half of the section behind a curved
- * cut, as on /why-voa. A caller passing its own aside (Videos passes a player-style poster) keeps the
+ * cut, as on /managed-virtual-support. A caller passing its own aside (Videos passes a player-style poster) keeps the
  * column layout instead.
  *
  * Args:
  *   page       array   the page brief from data/pages.json
- *   primary    array   [ label, href ]
- *   secondary  array   [ label, href ]
+ *   primary    array   optional [ label, href ]
+ *   secondary  array   optional [ label, href ]; with neither, no button row is drawn
  *   aside      string  optional markup for the right column
  *
  * @package voa
@@ -38,7 +38,18 @@ $voa_cta = static function ( $cta, $class ) {
 			<?php if ( ! empty( $voa_brief['summary'] ) ) : ?>
 				<p class="lead"><?php echo esc_html( $voa_brief['summary'] ); ?></p>
 			<?php endif; ?>
-			<div class="button-row"><?php $voa_cta( $args['primary'], 'button' ); ?><?php $voa_cta( $args['secondary'], 'button button-secondary' ); ?></div>
+			<?php if ( ! empty( $args['primary'] ) || ! empty( $args['secondary'] ) ) : ?>
+				<div class="button-row">
+					<?php
+					if ( ! empty( $args['primary'] ) ) {
+						$voa_cta( $args['primary'], 'button' );
+					}
+					if ( ! empty( $args['secondary'] ) ) {
+						$voa_cta( $args['secondary'], 'button button-secondary' );
+					}
+					?>
+				</div>
+			<?php endif; ?>
 		</div>
 		<?php
 		if ( ! $voa_cut ) {

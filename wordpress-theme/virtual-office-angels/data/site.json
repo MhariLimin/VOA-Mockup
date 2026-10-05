@@ -6,12 +6,14 @@
 	"heroBackgrounds": [
 		"/assets/client/hero/hero-tablet-office.jpg",
 		"/assets/client/hero/hero-teamwork-meeting.jpg",
-		"/assets/client/hero/hero-video-call-team.jpg",
+		"/assets/client/hero/hero-team-tablet-desk.jpg",
 		"/assets/source/staging/images/c88686d2b0-1690.jpg",
 		"/assets/source/staging/images/74d91c0837-job-5382501_1280.jpg",
 		"/assets/client/hero/hero-project-analytics.jpg",
-		"/assets/client/hero/hero-pexels-sora-shimazaki-5673503.jpg",
-		"/assets/client/hero/hero-pexels-ivan-s-8117494.jpg"
+		"/assets/client/hero/hero-pexels-huy-phan-2015852.jpg",
+		"/assets/client/hero/hero-pexels-ivan-s-8117494.jpg",
+		"/assets/client/hero/hero-pexels-jakubzerdzicki-36781594.jpg",
+		"/assets/client/hero/hero-office-desk-laptop.jpg"
 	],
 	"contactBackgrounds": [
 		{
@@ -74,23 +76,23 @@
 					"items": [
 						{
 							"label": "Mortgage & Loans Processing",
-							"href": "/services/mortgage-loans"
+							"href": "/services/mortgage-loans-processing-virtual-support"
 						},
 						{
 							"label": "Financial Planning & Admin",
-							"href": "/services/financial-planning"
+							"href": "/services/virtual-financial-planning-and-admin-assistant"
 						},
 						{
 							"label": "Accounting & Bookkeeping",
-							"href": "/services/accounting-bookkeeping"
+							"href": "/services/accounting-and-bookkeeping-virtual-assistant"
 						},
 						{
 							"label": "Insurance Processing",
-							"href": "/services/insurance-processing"
+							"href": "/services/insurance-processing-virtual-assistance"
 						},
 						{
 							"label": "Real Estate & Admin",
-							"href": "/services/real-estate-conveyancing"
+							"href": "/services/real-estate-virtual-assistant-services"
 						}
 					]
 				},
@@ -99,23 +101,23 @@
 					"items": [
 						{
 							"label": "Executive & Administrative",
-							"href": "/services/back-office-admin"
+							"href": "/services/executive-and-administrative-virtual-assistance"
 						},
 						{
 							"label": "Digital Marketing",
-							"href": "/services/digital-marketing"
+							"href": "/services/digital-marketing-virtual-assistant-services"
 						},
 						{
 							"label": "Sales & E-Commerce",
-							"href": "/services/sales-marketing"
+							"href": "/services/sales-and-e-commerce-virtual-assistant"
 						},
 						{
 							"label": "IT Service & Technology",
-							"href": "/services/it-technology"
+							"href": "/services/it-virtual-assistant-services"
 						},
 						{
 							"label": "Copywriting",
-							"href": "/services/creative-copywriting"
+							"href": "/services/creative-copywriting-virtual-assistant"
 						}
 					]
 				}
@@ -138,7 +140,7 @@
 				},
 				{
 					"label": "Managed Virtual Support",
-					"href": "/why-voa"
+					"href": "/managed-virtual-support"
 				}
 			]
 		},

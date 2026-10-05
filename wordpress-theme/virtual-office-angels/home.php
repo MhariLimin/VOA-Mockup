@@ -41,9 +41,8 @@ get_template_part(
 	'template-parts/layout/image-hero',
 	null,
 	array(
-		'page'      => $voa_brief,
-		'primary'   => array( 'Browse articles', '#articles' ),
-		'secondary' => array( 'Watch videos', '/videos' ),
+		// No buttons: the articles start just below (revision of 2026-10-05).
+		'page' => $voa_brief,
 	)
 );
 ?>

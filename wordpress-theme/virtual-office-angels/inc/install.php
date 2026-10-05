@@ -15,8 +15,10 @@
  *     where Yoast has nothing stored
  *   - creates the enquiry form in Contact Form 7, when that plugin is active and the form does not
  *     exist yet (inc/forms.php). Other Contact Form 7 forms are left alone
+ *   - sets article addresses to /insights/{article}/ (inc/permalinks.php). The old /{article}/
+ *     addresses are redirected by the Redirection import, docs/wordpress-integration/redirects.csv
  *
- * It does not touch articles, menus, plugins, users or permalinks.
+ * It does not touch articles, menus, plugins or users.
  *
  * @package voa
  */
@@ -35,7 +37,7 @@ function voa_required_pages() {
 		'services'       => 'Services',
 		'about'          => 'About',
 		'how-it-works'   => 'How It Works',
-		'why-voa'        => 'Managed Virtual Support',
+		'managed-virtual-support' => 'Managed Virtual Support',
 		'client-stories' => 'Client Stories',
 		'insights'       => 'Insights',
 		'videos'         => 'Videos',
@@ -155,7 +157,14 @@ function voa_install_content() {
 		$log[] = 'Set the posts page to "Insights"';
 	}
 
+	$permalinks = voa_set_article_permalinks();
+	if ( $permalinks ) {
+		$log[] = $permalinks;
+	}
+
 	if ( $log ) {
+		// The posts page may have been set just now, after the rule was first registered.
+		voa_insights_paging_rule();
 		flush_rewrite_rules();
 	}
 
@@ -185,7 +194,7 @@ function voa_setup_screen() {
 	?>
 	<div class="wrap">
 		<h1>Virtual Office Angels — site setup</h1>
-		<p>Creates the pages, services and contact form the theme needs. It only adds what is missing; it never changes or deletes anything that already exists.</p>
+		<p>Creates the pages, services and contact form the theme needs, and sets article addresses to /insights/{article}/. It only adds what is missing; it never changes or deletes anything that already exists.</p>
 
 		<?php if ( is_array( $log ) ) : ?>
 			<div class="notice notice-success"><p><?php echo $log ? wp_kses_post( implode( '<br>', array_map( 'esc_html', $log ) ) ) : 'Nothing was missing.'; ?></p></div>

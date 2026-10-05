@@ -38,6 +38,7 @@ try {
   const managed = await load('/src/content/managedContent.ts');
   const faqs = await load('/src/content/faqContent.ts');
   const testimonials = await load('/src/content/testimonials.ts');
+  const caseStudy = await load('/src/content/caseStudy.ts');
   const navigation = await load('/src/content/navigation.ts');
   const blog = await load('/src/content/blogContent.ts');
   const clients = JSON.parse(await readFile(join(root, 'src/content/source/staging/clients.json'), 'utf8')).clients;
@@ -66,6 +67,7 @@ try {
     managed: { page: managed.managedSupportPage, ownership: managed.ownershipSplit },
     faqs: { questions: faqs.sourceFaqs, topics: faqs.faqTopics },
     testimonials: testimonials.testimonials,
+    caseStudy: caseStudy.caseStudy,
     clients: clients.map(({ name, image }) => ({ name, image })),
     articles: blog.blogArticles.map((article) => ({ ...article, category: blog.articleCategory(article) })),
     accent: await accentPhrases(),

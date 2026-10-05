@@ -42,7 +42,7 @@ get_header();
 				<button class="<?php echo VOA_FAQ_INITIAL_TOPIC === $voa_index ? 'active' : ''; ?>" aria-pressed="<?php echo VOA_FAQ_INITIAL_TOPIC === $voa_index ? 'true' : 'false'; ?>" type="button"><span><?php echo esc_html( $voa_topic['label'] ); ?></span><small><?php echo count( $voa_topic['questions'] ); ?></small></button>
 			<?php endforeach; ?>
 		</div>
-		<a class="button button-secondary" href="<?php echo esc_url( voa_url( '/contact' ) ); ?>">Ask another question</a>
+		<a class="button" href="<?php echo esc_url( voa_url( '/contact' ) ); ?>">Ask Us a Question</a>
 	</aside>
 	<div>
 		<div class="faq-list">

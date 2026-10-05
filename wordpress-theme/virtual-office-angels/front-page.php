@@ -131,7 +131,7 @@ get_header();
 			<p class="lead"><?php echo esc_html( $voa_journey['intro'] ); ?></p>
 			<div class="button-row">
 				<a class="button" href="<?php echo esc_url( voa_url( '/how-it-works' ) ); ?>">See how it works</a>
-				<a class="button button-secondary" href="<?php echo esc_url( voa_url( '/why-voa' ) ); ?>">Explore managed virtual support</a>
+				<a class="button button-secondary" href="<?php echo esc_url( voa_url( '/managed-virtual-support' ) ); ?>">Explore managed virtual support</a>
 			</div>
 		</div>
 		<?php

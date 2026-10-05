@@ -187,7 +187,7 @@ function voa_person_glyph() {
 }
 
 /**
- * /why-voa: the two-way arrows at the centre of the ownership split.
+ * /managed-virtual-support: the two-way arrows at the centre of the ownership split.
  *
  * @return string
  */

@@ -2,7 +2,7 @@
 	"specialistServices": [
 		{
 			"title": "Mortgage & Loans",
-			"href": "/services/mortgage-loans",
+			"href": "/services/mortgage-loans-processing-virtual-support",
 			"text": "Loan-processing and broker administration support.",
 			"image": "/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg",
 			"systems": [
@@ -14,7 +14,7 @@
 		},
 		{
 			"title": "Financial Planning",
-			"href": "/services/financial-planning",
+			"href": "/services/virtual-financial-planning-and-admin-assistant",
 			"text": "Application, document, and client administration.",
 			"image": "/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg",
 			"systems": [
@@ -26,7 +26,7 @@
 		},
 		{
 			"title": "Accounting & Bookkeeping",
-			"href": "/services/accounting-bookkeeping",
+			"href": "/services/accounting-and-bookkeeping-virtual-assistant",
 			"text": "Reliable recurring finance and bookkeeping assistance.",
 			"image": "/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg",
 			"systems": [
@@ -38,7 +38,7 @@
 		},
 		{
 			"title": "Real Estate",
-			"href": "/services/real-estate-conveyancing",
+			"href": "/services/real-estate-virtual-assistant-services",
 			"text": "CRM, documentation, scheduling, and back-office support.",
 			"image": "/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg",
 			"systems": [
@@ -48,7 +48,7 @@
 		},
 		{
 			"title": "Executive & Administrative",
-			"href": "/services/back-office-admin",
+			"href": "/services/executive-and-administrative-virtual-assistance",
 			"text": "Everyday operational support that protects your focus.",
 			"image": "/assets/source/staging/images/6f63e14c16-2149013955.jpg",
 			"systems": [
@@ -59,7 +59,7 @@
 		},
 		{
 			"title": "Digital Marketing",
-			"href": "/services/digital-marketing",
+			"href": "/services/digital-marketing-virtual-assistant-services",
 			"text": "Campaign, publishing, reporting, and content coordination.",
 			"image": "/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg",
 			"systems": [
@@ -91,7 +91,7 @@
 			"answer": "Virtual Office Angels first reviews the role, tasks, systems, required experience and working preferences. Candidates are then assessed against those requirements. You meet the shortlisted professional before confirming the match. Read more about",
 			"link": {
 				"label": "how our matching process works",
-				"href": "/why-voa"
+				"href": "/managed-virtual-support"
 			}
 		},
 		{

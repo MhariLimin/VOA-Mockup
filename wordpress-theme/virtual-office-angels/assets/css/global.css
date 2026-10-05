@@ -423,7 +423,7 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .dark-section h2, .dark-section h3 { color: #f8f7f2; }
 .dark-section .lead, .dark-section p { color: #c4d2dd; }
 .dark-section .eyebrow { color: #73c9ff; }
-/* Home Why band: the ownership split, previewing /why-voa. */
+/* Home Why band: the ownership split, previewing /managed-virtual-support. */
 .managed-copy { max-width: 52rem; }
 .managed-copy h2 { margin-top: 0.75rem; }
 .managed-copy .lead { margin-bottom: 1.75rem; }
@@ -2763,7 +2763,7 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
   .stage-medallion-icon, .stage-ring-arc, .stage-chips li { transition: none; }
 }
 
-/* ---- Week 3: /why-voa (Managed Virtual Support) ---- */
+/* ---- Week 3: /managed-virtual-support (Managed Virtual Support) ---- */
 
 /* W3-MVS1: the photograph holds the right half of the hero and bleeds to the viewport edge. The join
    is a large ellipse rather than a straight edge, so the cut reads as deliberate. The copy column is
@@ -2957,3 +2957,9 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
   .insight-section .home-article-image img,
   .insight-section .home-article-card .text-link .icon { transition: none; }
 }
+
+/* ---- Revision E (5 Oct 2026): the client case study on /client-stories ---- */
+.case-study h3 { margin: 2rem 0 0.75rem; font-size: 1.12rem; }
+.case-study .task-panel h3 { margin-top: 0; }
+.case-study-list { display: grid; gap: 0.45rem; margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--muted); }
+.case-study-onboarding { box-shadow: 0 1.5rem 4rem rgb(15 38 61 / 6%); }

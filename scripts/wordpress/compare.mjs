@@ -7,8 +7,6 @@
 
    - URLs: the host, trailing slashes, and where an image is served from. An image is identified by
      its file path below /assets/, which the theme keeps (assets/media/... mirrors /assets/...).
-   - Article links: React serves articles under /insights/{slug}; WordPress keeps the live site's
-     /{slug}, which is decided (architecture A3), so both reduce to /{slug}.
    - Attribute order, and valueless boolean attributes ("hidden" and hidden="").
    - WordPress-only plumbing: attributes named data-voa-* (data a behaviour module reads, where React
      kept it in component state) and <script> elements. Neither renders anything.
@@ -51,7 +49,6 @@ function normaliseUrl(value) {
   if (url.startsWith('/')) {
     const [path, hash = ''] = url.split('#');
     let clean = path.length > 1 ? path.replace(/\/+$/, '') : path;
-    clean = clean.replace(/^\/insights\/([^/]+)$/, '/$1');
     return hash ? `${clean}#${hash}` : clean;
   }
   return url;

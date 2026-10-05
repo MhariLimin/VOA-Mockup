@@ -17,7 +17,7 @@ get_header();
 		<p class="lead">Use the navigation to continue, explore Virtual Office Angels services, or return to the homepage.</p>
 		<div class="button-row">
 			<a class="button" href="<?php echo esc_url( voa_url( '/' ) ); ?>">Return home</a>
-			<a class="button button-secondary" href="<?php echo esc_url( voa_url( '/services/mortgage-loans' ) ); ?>">Explore services</a>
+			<a class="button button-secondary" href="<?php echo esc_url( voa_url( '/services/mortgage-loans-processing-virtual-support' ) ); ?>">Explore services</a>
 		</div>
 	</div>
 </section>
