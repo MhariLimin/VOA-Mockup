@@ -182,8 +182,36 @@ function voa_article_excerpt( $post ) {
  * @return string
  */
 function voa_article_image( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return '';
+	}
+
 	$url = get_the_post_thumbnail_url( $post, 'large' );
-	return $url ? $url : '';
+	if ( $url ) {
+		return $url;
+	}
+
+	/*
+	 * No featured image: use the first picture in the article itself. None of the 98 live posts has a
+	 * featured image set (database backup, 2026-10-05); 89 carry their picture in the body instead. The
+	 * mockup's article images are those same pictures (captured from a copy that had them set as
+	 * featured images), so this is what keeps the cards and article headers matching it. The 9 posts
+	 * with no picture at all keep the tinted fallback block (decision A5).
+	 */
+	if ( ! preg_match( '/<img\b[^>]*>/i', $post->post_content, $img ) ) {
+		return '';
+	}
+
+	// An image inserted from the media library names its attachment; ask for the large size.
+	if ( preg_match( '/\bwp-image-(\d+)\b/', $img[0], $id ) ) {
+		$large = wp_get_attachment_image_url( (int) $id[1], 'large' );
+		if ( $large ) {
+			return $large;
+		}
+	}
+
+	return preg_match( '/\bsrc=["\']([^"\']+)["\']/i', $img[0], $src ) ? $src[1] : '';
 }
 
 /**
