@@ -27,21 +27,21 @@ export const navigation: NavigationItem[] = [
       {
         label: 'Finance & property',
         items: [
-          { label: 'Mortgage & Loans Processing', href: '/services/mortgage-loans' },
-          { label: 'Financial Planning & Admin', href: '/services/financial-planning' },
-          { label: 'Accounting & Bookkeeping', href: '/services/accounting-bookkeeping' },
-          { label: 'Insurance Processing', href: '/services/insurance-processing' },
-          { label: 'Real Estate & Admin', href: '/services/real-estate-conveyancing' },
+          { label: 'Mortgage & Loans Processing', href: '/services/mortgage-loans-processing-virtual-support' },
+          { label: 'Financial Planning & Admin', href: '/services/virtual-financial-planning-and-admin-assistant' },
+          { label: 'Accounting & Bookkeeping', href: '/services/accounting-and-bookkeeping-virtual-assistant' },
+          { label: 'Insurance Processing', href: '/services/insurance-processing-virtual-assistance' },
+          { label: 'Real Estate & Admin', href: '/services/real-estate-virtual-assistant-services' },
         ],
       },
       {
         label: 'Business & growth',
         items: [
-          { label: 'Executive & Administrative', href: '/services/back-office-admin' },
-          { label: 'Digital Marketing', href: '/services/digital-marketing' },
-          { label: 'Sales & E-Commerce', href: '/services/sales-marketing' },
-          { label: 'IT Service & Technology', href: '/services/it-technology' },
-          { label: 'Copywriting', href: '/services/creative-copywriting' },
+          { label: 'Executive & Administrative', href: '/services/executive-and-administrative-virtual-assistance' },
+          { label: 'Digital Marketing', href: '/services/digital-marketing-virtual-assistant-services' },
+          { label: 'Sales & E-Commerce', href: '/services/sales-and-e-commerce-virtual-assistant' },
+          { label: 'IT Service & Technology', href: '/services/it-virtual-assistant-services' },
+          { label: 'Copywriting', href: '/services/creative-copywriting-virtual-assistant' },
         ],
       },
     ],
@@ -58,7 +58,7 @@ export const navigation: NavigationItem[] = [
     href: '/how-it-works',
     children: [
       { label: 'How It Works', href: '/how-it-works' },
-      { label: 'Managed Virtual Support', href: '/why-voa' },
+      { label: 'Managed Virtual Support', href: '/managed-virtual-support' },
     ],
   },
   {

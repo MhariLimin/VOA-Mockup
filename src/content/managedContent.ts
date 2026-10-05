@@ -1,5 +1,5 @@
 /* The managed virtual support page of the Virtual Office Angels content proposal, shared between
-   the home page Why band and the /why-voa page. The four support stages live in processContent.ts,
+   the home page Why band and the /managed-virtual-support page. The four support stages live in processContent.ts,
    on /how-it-works, so the two pages do not repeat each other. */
 export const ownershipSplit = [
   {

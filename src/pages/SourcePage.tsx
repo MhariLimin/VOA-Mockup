@@ -7,6 +7,7 @@ import { managedStepTitles, serviceDetails, serviceRouter } from '../content/ser
 import { processIntro, processStages } from '../content/processContent';
 import { managedSupportPage, ownershipSplit } from '../content/managedContent';
 import { testimonials } from '../content/testimonials';
+import { caseStudy } from '../content/caseStudy';
 import { sisterSites } from '../content/siteContent';
 import { ClientCarousel } from '../components/ui/ClientCarousel';
 import { NextStepSection, PageClosing } from '../components/layout/PageClosing';
@@ -493,6 +494,27 @@ function StoriesPage({ page }: { page: SourcePageBrief }) {
       ))}</div>
     </div></section>
 
+    {/* Revision E (5 Oct 2026): the live site's client case study, so /client-case-studies/ can
+        redirect here. Text in caseStudy.ts; layout from the existing split, panel and check list. */}
+    <section className="section case-study" id="case-study"><div className="container content-split">
+      <div>
+        <p className="eyebrow">Client case study</p>
+        <h2><HeadingAccent text={caseStudy.heading} /></h2>
+        <p className="lead compact">{caseStudy.intro}</p>
+        <h3>{caseStudy.challengesHeading}</h3>
+        <p>{caseStudy.challenges}</p>
+        <p>{caseStudy.hadIntro}</p>
+        <ul className="case-study-list">{caseStudy.had.map((item) => <li key={item}>{item}</li>)}</ul>
+      </div>
+      <div>
+        <div className="task-panel">
+          <h3>{caseStudy.handlingHeading}</h3>
+          <ul className="check-list">{caseStudy.handling.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+        <div className="faq-closing case-study-onboarding">{caseStudy.onboarding.map((text) => <p key={text}>{text}</p>)}</div>
+      </div>
+    </div></section>
+
     <PageClosing />
   </>;
 }
@@ -512,10 +534,10 @@ function Pagination({ label, currentPage, pageCount, onChange }: { label: string
   </nav>;
 }
 
-/* W3-ART1: with a real photograph the hero takes the same half-section curved cut as /why-voa. A
+/* W3-ART1: with a real photograph the hero takes the same half-section curved cut as /managed-virtual-support. A
    caller passing its own `aside` (the Videos page passes a player-style poster) keeps the column
    layout, because clipping that frame with an arc would just look broken. */
-function ImageHero({ page, primary, secondary, aside }: { page: SourcePageBrief; primary: readonly [string, string]; secondary: readonly [string, string]; aside?: ReactNode }) {
+function ImageHero({ page, primary, secondary, aside }: { page: SourcePageBrief; primary?: readonly [string, string]; secondary?: readonly [string, string]; aside?: ReactNode }) {
   const cta = ([label, href]: readonly [string, string], className: string) => href.startsWith('#') ? <a className={className} href={href}>{label}</a> : <Link className={className} to={href}>{label}</Link>;
   const cut = !aside && Boolean(page.image);
 
@@ -530,7 +552,7 @@ function ImageHero({ page, primary, secondary, aside }: { page: SourcePageBrief;
         <p className="eyebrow">{page.eyebrow}</p>
         <h1><HeadingAccent text={page.title} /></h1>
         {page.summary && <p className="lead">{page.summary}</p>}
-        <div className="button-row">{cta(primary, 'button')}{cta(secondary, 'button button-secondary')}</div>
+        {(primary || secondary) && <div className="button-row">{primary && cta(primary, 'button')}{secondary && cta(secondary, 'button button-secondary')}</div>}
       </div>
       {!cut && (aside ?? (page.image && <img className="inner-hero-image" src={page.image} alt={page.imageAlt ?? ''} />))}
     </div>
@@ -549,7 +571,7 @@ function InsightsPage({ page }: { page: SourcePageBrief }) {
   function selectCategory(cat: string) { setActiveCategory(cat); setCurrentPage(1); }
   function goToPage(n: number) { setCurrentPage(n); scrollToSection(listRef.current); }
   return <>
-    <ImageHero page={page} primary={['Browse articles', '#articles']} secondary={['Watch videos', '/videos']} />
+    <ImageHero page={page} />
     <section className="section library-section" id="articles" ref={listRef}><div className="container">
       <div className="section-heading library-heading"><p className="eyebrow">Article library</p><p className="library-count">{visibleArticles.length} {visibleArticles.length === 1 ? 'article' : 'articles'}</p></div>
       <div className="filter-row" aria-label="Article topics">{categories.map((category) => <button className={activeCategory === category ? 'active' : ''} aria-pressed={activeCategory === category} type="button" key={category} onClick={() => selectCategory(category)}>{category}</button>)}</div>
@@ -603,7 +625,7 @@ function FaqPage({ page }: { page: SourcePageBrief }) {
         <h1><HeadingAccent text={page.title} /></h1>
         {page.summary && <p>{page.summary}</p>}
         <div className="faq-topics" role="group" aria-label="Question topics">{topics.map((topic, index) => <button className={activeTopic === index ? 'active' : ''} aria-pressed={activeTopic === index} type="button" key={topic.label} onClick={() => selectTopic(index)}><span>{topic.label}</span><small>{topic.questions.length}</small></button>)}</div>
-        <Link className="button button-secondary" to="/contact">Ask another question</Link>
+        <Link className="button" to="/contact">Ask Us a Question</Link>
       </aside>
       <div>
         <div className="faq-list">{topics[activeTopic].questions.map((i) => { const [question, answer] = sourceFaqs[i]; return <details key={question} open={openFaq === i}><summary onClick={(e) => { e.preventDefault(); setOpenFaq(openFaq === i ? -1 : i); }}>{question}<PlusMark /></summary><p>{answer}</p></details>; })}</div>

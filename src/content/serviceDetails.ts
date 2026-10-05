@@ -35,12 +35,12 @@ export const managedStepTitles = ['Define the role', 'Match the experience', 'On
 /* Task-based shortcuts from the content proposal's services index, for visitors who know the work
    they need covered but not which service it belongs to. */
 export const serviceRouter: readonly (readonly [string, string])[] = [
-  ['Loan files and settlements', '/services/mortgage-loans'],
-  ['Advice administration', '/services/financial-planning'],
-  ['Financial records and reconciliation', '/services/accounting-bookkeeping'],
-  ['Property and CRM administration', '/services/real-estate-conveyancing'],
-  ['Daily business administration', '/services/back-office-admin'],
-  ['Campaign and content execution', '/services/digital-marketing'],
+  ['Loan files and settlements', '/services/mortgage-loans-processing-virtual-support'],
+  ['Advice administration', '/services/virtual-financial-planning-and-admin-assistant'],
+  ['Financial records and reconciliation', '/services/accounting-and-bookkeeping-virtual-assistant'],
+  ['Property and CRM administration', '/services/real-estate-virtual-assistant-services'],
+  ['Daily business administration', '/services/executive-and-administrative-virtual-assistance'],
+  ['Campaign and content execution', '/services/digital-marketing-virtual-assistant-services'],
 ];
 
 /* Service page content, taken from SERVICE PAGES_VOA.pdf (docs/client-content). Deliberate edits: "VOA"
@@ -54,7 +54,7 @@ export const serviceRouter: readonly (readonly [string, string])[] = [
    product recommendations and regulated advice remaining with the authorised professional is no
    longer anywhere on the site. Worth confirming that is intended rather than relocated. */
 export const serviceDetails: Record<string, ServiceDetail> = {
-  "/services/mortgage-loans": {
+  "/services/mortgage-loans-processing-virtual-support": {
     seoTitle: "Mortgage Processing Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an experienced mortgage processing virtual assistant for CRM updates, document coordination, lodgement, and settlement support for Australian businesses.",
     title: "Mortgage & Loans Processing Virtual Support",
@@ -110,7 +110,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Mortgage and Loans Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback currently being gathered.",
   },
-  "/services/financial-planning": {
+  "/services/virtual-financial-planning-and-admin-assistant": {
     seoTitle: "Financial Planning Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find a financial planning virtual assistant for client admin, review preparation, software updates, and implementation support for Australian businesses.",
     title: "Financial Planning & Admin Support",
@@ -166,7 +166,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Financial Planning Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback currently being gathered.",
   },
-  "/services/accounting-bookkeeping": {
+  "/services/accounting-and-bookkeeping-virtual-assistant": {
     seoTitle: "Accounting & Bookkeeping Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an accounting and bookkeeping virtual assistant for invoicing, accounts, payroll administration, reconciliations, and ongoing bookkeeping support.",
     title: "Accounting and Bookkeeping Virtual Support",
@@ -222,7 +222,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Accounting & Bookkeeping Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
-  "/services/insurance-processing": {
+  "/services/insurance-processing-virtual-assistance": {
     seoTitle: "Insurance Processing Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an insurance processing virtual assistant for policy administration, renewals, claims, CRM updates, and broker support for Australian insurance businesses.",
     title: "Insurance Processing Virtual Support",
@@ -278,7 +278,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Insurance Processing Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
-  "/services/real-estate-conveyancing": {
+  "/services/real-estate-virtual-assistant-services": {
     seoTitle: "Real Estate Virtual Assistant & Admin Support | Virtual Office Angels",
     metaDescription: "Find a real estate virtual assistant for CRM administration, property listings, prospect follow-up, appointment coordination, and ongoing agency support.",
     title: "Real Estate & Admin Virtual Support",
@@ -334,7 +334,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Real Estate Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
-  "/services/back-office-admin": {
+  "/services/executive-and-administrative-virtual-assistance": {
     seoTitle: "Executive & Administrative Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find an experienced executive and administrative virtual assistant for inboxes, calendars, customer enquiries, documents, and daily business support.",
     title: "Executive & Administrative Virtual Support",
@@ -390,7 +390,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Executive & Administrative Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
-  "/services/digital-marketing": {
+  "/services/digital-marketing-virtual-assistant-services": {
     seoTitle: "Digital Marketing Virtual Assistant | Virtual Office Angels",
     metaDescription: "Find a digital marketing virtual assistant for campaign coordination, social media publishing, analytics, website updates, and content support.",
     title: "Digital Marketing Virtual Assistance",
@@ -447,7 +447,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Digital Marketing Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
-  "/services/sales-marketing": {
+  "/services/sales-and-e-commerce-virtual-assistant": {
     seoTitle: "Sales & E-Commerce Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find a sales and e-commerce virtual assistant for lead management, Shopify administration, customer enquiries, order processing, and fulfilment support.",
     title: "Sales & E-Commerce Virtual Assistance",
@@ -503,7 +503,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Sales & E-Commerce Virtual Support Clients Say",
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
-  "/services/it-technology": {
+  "/services/it-virtual-assistant-services": {
     seoTitle: "IT Virtual Assistant & Technology Support | Virtual Office Angels",
     metaDescription: "Find an IT virtual assistant for WordPress support, website maintenance, troubleshooting, traffic monitoring, and recurring technical tasks.",
     title: "Virtual IT Service & Technology Support",
@@ -560,7 +560,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     feedbackHeading: "What Our Virtual IT Service & Technology Support Clients Say",
     feedbackPlaceholder: "Feedback is currently being gathered.",
   },
-  "/services/creative-copywriting": {
+  "/services/creative-copywriting-virtual-assistant": {
     seoTitle: "Copywriting Virtual Assistant Support | Virtual Office Angels",
     metaDescription: "Find a copywriting virtual assistant for article writing, website content, proofreading, research, blog management, and ongoing publishing support.",
     title: "Copywriting Virtual Assistant Support",

@@ -1,15 +1,20 @@
 /* Hero background slideshow. Client-supplied photographs in public/assets/client/hero, plus the two
    from the previous set the client asked to keep (the team meeting and the home-office laptop).
-   Replacing them is an edit to this array alone. */
+   Replacing them is an edit to this array alone.
+
+   5 October 2026: the client's new header options replaced slide 3 (video call) and slide 7
+   (laughing group), and the other two new options were added at the end. */
 export const heroBackgrounds = [
   '/assets/client/hero/hero-tablet-office.jpg',
   '/assets/client/hero/hero-teamwork-meeting.jpg',
-  '/assets/client/hero/hero-video-call-team.jpg',
+  '/assets/client/hero/hero-team-tablet-desk.jpg',
   '/assets/source/staging/images/c88686d2b0-1690.jpg',
   '/assets/source/staging/images/74d91c0837-job-5382501_1280.jpg',
   '/assets/client/hero/hero-project-analytics.jpg',
-  '/assets/client/hero/hero-pexels-sora-shimazaki-5673503.jpg',
+  '/assets/client/hero/hero-pexels-huy-phan-2015852.jpg',
   '/assets/client/hero/hero-pexels-ivan-s-8117494.jpg',
+  '/assets/client/hero/hero-pexels-jakubzerdzicki-36781594.jpg',
+  '/assets/client/hero/hero-office-desk-laptop.jpg',
 ] as const;
 
 /* The closing contact sections run their own set: the client's contact photographs plus the
@@ -46,12 +51,12 @@ export const heroStats = [
 /* Card systems lists are trimmed to keep the six cards visually even; each service page carries
    the complete list from the content proposal. */
 export const specialistServices = [
-  { title: 'Mortgage & Loans', href: '/services/mortgage-loans', text: 'Loan-processing and broker administration support.', image: '/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg', systems: ['Mercury Nexus', 'Salestrekker', 'AFG FLEX', 'Infinity'] },
-  { title: 'Financial Planning', href: '/services/financial-planning', text: 'Application, document, and client administration.', image: '/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg', systems: ['Xplan', 'AdviserLogic', 'Midwinter', 'Worksorted'] },
-  { title: 'Accounting & Bookkeeping', href: '/services/accounting-bookkeeping', text: 'Reliable recurring finance and bookkeeping assistance.', image: '/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg', systems: ['Xero', 'MYOB', 'QuickBooks', 'SAP'] },
-  { title: 'Real Estate', href: '/services/real-estate-conveyancing', text: 'CRM, documentation, scheduling, and back-office support.', image: '/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg', systems: ['your property CRM', 'email and administration platforms'] },
-  { title: 'Executive & Administrative', href: '/services/back-office-admin', text: 'Everyday operational support that protects your focus.', image: '/assets/source/staging/images/6f63e14c16-2149013955.jpg', systems: ['Your CRM', 'Microsoft 365 or Google Workspace', 'Task-management tools'] },
-  { title: 'Digital Marketing', href: '/services/digital-marketing', text: 'Campaign, publishing, reporting, and content coordination.', image: '/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg', systems: ['Google Analytics', 'Facebook and Instagram', 'Your CMS'] },
+  { title: 'Mortgage & Loans', href: '/services/mortgage-loans-processing-virtual-support', text: 'Loan-processing and broker administration support.', image: '/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg', systems: ['Mercury Nexus', 'Salestrekker', 'AFG FLEX', 'Infinity'] },
+  { title: 'Financial Planning', href: '/services/virtual-financial-planning-and-admin-assistant', text: 'Application, document, and client administration.', image: '/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg', systems: ['Xplan', 'AdviserLogic', 'Midwinter', 'Worksorted'] },
+  { title: 'Accounting & Bookkeeping', href: '/services/accounting-and-bookkeeping-virtual-assistant', text: 'Reliable recurring finance and bookkeeping assistance.', image: '/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg', systems: ['Xero', 'MYOB', 'QuickBooks', 'SAP'] },
+  { title: 'Real Estate', href: '/services/real-estate-virtual-assistant-services', text: 'CRM, documentation, scheduling, and back-office support.', image: '/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg', systems: ['your property CRM', 'email and administration platforms'] },
+  { title: 'Executive & Administrative', href: '/services/executive-and-administrative-virtual-assistance', text: 'Everyday operational support that protects your focus.', image: '/assets/source/staging/images/6f63e14c16-2149013955.jpg', systems: ['Your CRM', 'Microsoft 365 or Google Workspace', 'Task-management tools'] },
+  { title: 'Digital Marketing', href: '/services/digital-marketing-virtual-assistant-services', text: 'Campaign, publishing, reporting, and content coordination.', image: '/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg', systems: ['Google Analytics', 'Facebook and Instagram', 'Your CMS'] },
 ] as const;
 
 /* Homepage FAQs, verbatim from the VOA Content homepage (saved state). Where an answer ends in a link,
@@ -60,7 +65,7 @@ export const buyerQuestions: readonly { question: string; answer: string; link?:
   { question: 'What can a virtual assistant do for an Australian business?', answer: 'A virtual assistant can support repeatable business processes such as administration, client follow-up, CRM updates, document preparation, bookkeeping support, loan processing administration and marketing execution. The right scope depends on your industry, systems and internal approval requirements. See our', link: { label: 'specialised virtual assistant services', href: '/services' } },
   { question: 'What tasks can I delegate to a virtual assistant?', answer: 'Delegate clearly documented, repeatable tasks with defined inputs, outputs and approval steps. Common examples include inbox and calendar management, data entry, reporting preparation, customer follow-up, file management, CRM administration and sector-specific processing support.' },
   { question: 'Should I hire a general or specialised virtual assistant?', answer: 'Choose a general virtual assistant for broad, lower-complexity administration. Choose a specialised virtual assistant when the role requires industry terminology, specific software, regulated workflows or experience handling technical documents. A specialist can begin with a stronger understanding of how the work fits into your business.' },
-  { question: 'How are virtual assistants matched to a business?', answer: 'Virtual Office Angels first reviews the role, tasks, systems, required experience and working preferences. Candidates are then assessed against those requirements. You meet the shortlisted professional before confirming the match. Read more about', link: { label: 'how our matching process works', href: '/why-voa' } },
+  { question: 'How are virtual assistants matched to a business?', answer: 'Virtual Office Angels first reviews the role, tasks, systems, required experience and working preferences. Candidates are then assessed against those requirements. You meet the shortlisted professional before confirming the match. Read more about', link: { label: 'how our matching process works', href: '/managed-virtual-support' } },
   { question: 'When should a growing business hire a virtual assistant?', answer: 'Consider hiring when recurring work delays client service, revenue-generating activity or important follow-up, and the workload is consistent enough to define as a role. It is also a strong signal when senior employees regularly complete administrative tasks that could be handled by an experienced support professional.' },
 ];
 

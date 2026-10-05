@@ -145,7 +145,7 @@ export function HomePage() {
             <p className="lead">{moreThanRecruitment.intro}</p>
             <div className="button-row">
               <Link className="button" to="/how-it-works">See how it works</Link>
-              <Link className="button button-secondary" to="/why-voa">Explore managed virtual support</Link>
+              <Link className="button button-secondary" to="/managed-virtual-support">Explore managed virtual support</Link>
             </div>
           </div>
           {/* The four stages as milestones on a drawn path. The line carries the section's actual

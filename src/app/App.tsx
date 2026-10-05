@@ -1,5 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { PageShell } from '../components/layout/PageShell';
+import { renamedRoutes } from '../content/renamedRoutes';
 import { sourcePages } from '../content/sourcePages';
 import { HomePage } from '../pages/HomePage';
 import { BlogArticlePage } from '../pages/BlogArticlePage';
@@ -14,6 +15,9 @@ export function App() {
         <Route path="/" element={<HomePage />} />
         {sourcePages.map((page) => (
           <Route key={page.path} path={page.path} element={<SourcePage page={page} />} />
+        ))}
+        {Object.entries(renamedRoutes).map(([from, to]) => (
+          <Route key={from} path={from} element={<Navigate to={to} replace />} />
         ))}
         <Route path="/insights/:slug" element={<BlogArticlePage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
