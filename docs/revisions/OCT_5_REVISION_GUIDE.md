@@ -91,3 +91,25 @@ approved before the next starts.
   labels "The Client:" and "Their Challenges:" lost their colons.
 - **E4** Once the client approves the section, add `/client-case-studies/` → `/client-stories/` to
   `redirects.csv` (it is held back until then).
+
+## F. Fixes found on staging (5 October 2026)
+
+- **F1** The fixed header sat under WordPress's admin bar for logged-in users (logo cut off, an empty
+  strip below the header). Visitors were not affected. `wordpress.css` now moves the header, the
+  phone menu and the sticky side panels down by the bar's height when it is shown.
+- **F2** Article cards and article headers showed the tinted fallback block instead of a picture. None
+  of the 98 live posts has a featured image set; 89 carry their picture in the article text (the
+  local test copy had featured images, which hid this). `voa_article_image()` now falls back to the
+  first picture in the article, at its large size when it came from the media library. The 9 posts
+  with no picture keep the fallback block. As in the mockup, an article whose text opens with its
+  picture shows it at the top and again in the text.
+- **F3** On staging the header was 107px tall instead of 74px. Cause, measured on staging: the old
+  design's **Customize Twenty Sixteen** plugin styles `.site-header` (the old theme used the same
+  class name) with 1em of padding top and bottom. WPBakery and WP-PageNavi also add their stylesheets
+  and Max Mega Menu a script. Fix: deactivate the old design's plugins on staging, which the plan
+  retires at launch anyway; no theme change.
+- **F4** With the old plugins off, a gap remained under the header on staging, for logged-in users.
+  Cause: The HostGator Plugin adds a "Site Preview - This site is NOT LIVE" bar (`.nfd-site-preview-
+  warning`) while coming-soon mode is on; it sat hidden behind the fixed header and pushed the page
+  down. `wordpress.css` hides it; the admin bar already shows "Coming soon". Previewed on staging in
+  the browser before the change: the hero then starts directly under the header.

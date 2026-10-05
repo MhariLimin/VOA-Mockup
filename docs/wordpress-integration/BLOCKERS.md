@@ -2,7 +2,11 @@
 
 Worst first. Each entry says what it blocks and what clears it.
 
-## 1. HostGator account lockout
+## 1. HostGator account lockout — CLEARED 2026-10-05
+
+**Access regained on 2026-10-05.** Kept below for the record. Still to do: change the account's
+verification email to va4voa@gmail.com (TASK_HOURS.md, recommendation 2), so this cannot recur.
+
 
 - **State:**
   - The account is locked after repeated failed logins.
@@ -22,7 +26,12 @@ Worst first. Each entry says what it blocks and what clears it.
 - **Root cause to fix afterwards:** the verification email went to an address nobody can reach.
   Update the account's contact email (task 8).
 
-## 2. No staging site yet
+## 2. No staging site yet — a copy exists, but is out of date
+
+**2026-10-05:** wp-admin → HostGator → Staging shows a staging copy at `/staging/1384`, created
+2026-09-22. It predates the plugin deletion and the password resets, so it still carries both. Refresh it
+with **Clone to staging** before building on it. Never use **Deploy all changes** before launch.
+
 
 - **State:**
   - **The database backup is done (2026-10-04), so this is no longer waiting on that.**
@@ -47,7 +56,12 @@ Worst first. Each entry says what it blocks and what clears it.
   security. The old site's plugins need to survive it, or be retired first.
 - **Clears by:** setting PHP 8 in cPanel → MultiPHP Manager (waits on blocker 1), staging first.
 
-## 4. A compromised plugin on live — found 2026-10-04
+## 4. A compromised plugin on live — found 2026-10-04, DELETED 2026-10-05
+
+**2026-10-05:** the user deleted WP Logo Showcase, then reset every administrator password and demoted
+`voa.webdev@gmail.com` to Contributor. Still to do: delete the old copy in
+`wp-content/updraft/plugins-old/`, re-scan with Wordfence, and refresh the staging copy (blocker 2).
+
 
 - **State:** the completed Wordfence scan found a **backdoor signature** in *WP Logo Showcase Responsive
   Slider and Carousel*, a plugin **wordpress.org closed permanently on 2026-04-07 for a security
