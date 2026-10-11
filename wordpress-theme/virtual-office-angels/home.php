@@ -48,7 +48,7 @@ get_template_part(
 ?>
 
 <section class="section library-section" id="articles"><div class="container">
-	<div class="section-heading library-heading"><p class="eyebrow">Article library</p><p class="library-count"><?php echo esc_html( $voa_total . ' ' . ( 1 === $voa_total ? 'article' : 'articles' ) ); ?></p></div>
+	<div class="section-heading library-heading"><p class="eyebrow"><?php echo voa_content_copy( 'insights', 'library_eyebrow' ); ?></p><p class="library-count"><?php echo esc_html( $voa_total . ' ' . ( 1 === $voa_total ? 'article' : 'articles' ) ); ?></p></div>
 	<div class="filter-row" aria-label="Article topics">
 		<?php foreach ( $voa_topics as $voa_index => $voa_topic ) : ?>
 			<button class="<?php echo 0 === $voa_index ? 'active' : ''; ?>" aria-pressed="<?php echo 0 === $voa_index ? 'true' : 'false'; ?>" type="button"><?php echo esc_html( $voa_topic ); ?></button>

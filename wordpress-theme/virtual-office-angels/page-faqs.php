@@ -50,7 +50,7 @@ get_header();
 				<details><summary><?php echo esc_html( $voa_faqs['questions'][ $voa_question ][0] ); ?><?php voa_icon( 'plus' ); ?></summary><p><?php echo esc_html( $voa_faqs['questions'][ $voa_question ][1] ); ?></p></details>
 			<?php endforeach; ?>
 		</div>
-		<div class="faq-closing"><p>We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.</p><p>If you need any other clarification, call Virtual Office Angels or email <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a>.</p></div>
+		<div class="faq-closing"><p><?php echo voa_content_copy( 'faqs', 'closing_intro' ); ?></p><p><?php echo voa_content_copy( 'faqs', 'closing_text' ); ?> <a href="mailto:clientcare@virtualofficeangels.com.au">clientcare@virtualofficeangels.com.au</a>.</p></div>
 	</div>
 	<script type="application/json" class="voa-faq-data"><?php echo wp_json_encode( array( 'questions' => $voa_faqs['questions'], 'topics' => $voa_topics ) ); ?></script>
 </div></section>

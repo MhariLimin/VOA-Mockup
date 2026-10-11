@@ -24,7 +24,7 @@ get_header();
 	</div>
 </section>
 
-<section class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow">Choose a service</p><h2>Start with the workflow that needs <em>experienced support</em>.</h2></div></div><div class="service-directory">
+<section class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow"><?php echo voa_content_copy( 'services', 'directory_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'services', 'directory_heading' ); ?></h2></div></div><div class="service-directory">
 	<?php
 	$voa_number = 0;
 	foreach ( voa_data( 'pages' ) as $voa_path => $voa_service ) :
@@ -46,7 +46,7 @@ get_header();
 	<?php endforeach; ?>
 </div></div></section>
 
-<section class="section muted-section"><div class="container"><div class="section-heading"><div><p class="eyebrow">Start from the work</p><h2>Not sure which service <em>fits the work</em>?</h2></div></div><div class="service-router">
+<section class="section muted-section"><div class="container"><div class="section-heading"><div><p class="eyebrow"><?php echo voa_content_copy( 'services', 'router_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'services', 'router_heading' ); ?></h2></div></div><div class="service-router">
 	<?php foreach ( $voa_services['router'] as $voa_route ) : ?>
 		<a href="<?php echo esc_url( voa_url( $voa_route[1] ) ); ?>"><?php echo esc_html( $voa_route[0] ); ?> <?php voa_icon( 'arrow-right' ); ?></a>
 	<?php endforeach; ?>

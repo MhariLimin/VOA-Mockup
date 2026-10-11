@@ -27,7 +27,7 @@ get_header();
 </div></section>
 
 <section class="section muted-section" id="testimonials"><div class="container">
-	<div class="section-heading"><div><p class="eyebrow">Client testimonials</p><h2>In their words.</h2><p class="lead compact">Whether they are in accounting, legal, real estate, or finance, the tailored approach is intended to provide the right support every time.</p></div></div>
+	<div class="section-heading"><div><p class="eyebrow"><?php echo voa_content_copy( 'client-stories', 'testimonials_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'client-stories', 'testimonials_heading' ); ?></h2><p class="lead compact"><?php echo voa_content_copy( 'client-stories', 'testimonials_intro' ); ?></p></div></div>
 	<div class="testimonial-grid">
 		<?php foreach ( voa_data( 'testimonials' ) as $voa_quote ) : ?>
 			<figure>
@@ -49,7 +49,7 @@ $voa_timing_parts  = explode( $voa_timing_phrase, $voa_case['onboarding'][1], 2 
 <section class="section case-study" id="case-study"><div class="container">
 	<div class="case-study-intro">
 		<div>
-			<p class="eyebrow">Client case study</p>
+			<p class="eyebrow"><?php echo voa_content_copy( 'client-stories', 'case_eyebrow' ); ?></p>
 			<h2><?php echo voa_accent( $voa_case['heading'] ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?></h2>
 		</div>
 		<p class="lead compact"><?php echo esc_html( $voa_case['intro'] ); ?></p>

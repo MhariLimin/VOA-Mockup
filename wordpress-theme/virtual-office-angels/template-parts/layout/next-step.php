@@ -16,6 +16,16 @@ $voa_copy  = ! empty( $args['copy'] ) ? $args['copy'] : array(
 	'heading' => 'Tell us what the right support would change for your business.',
 	'text'    => 'Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the right match.',
 );
+$voa_entity = voa_content_current_entity();
+if ( $voa_entity ) {
+	$voa_overrides = voa_content_overrides( $voa_entity );
+	foreach ( array( 'eyebrow', 'heading', 'text' ) as $voa_part ) {
+		$voa_key = 'closing_' . $voa_part;
+		if ( array_key_exists( 'copy|' . $voa_key, $voa_overrides ) ) {
+			$voa_copy[ $voa_part ] = voa_content_plain( $voa_entity, $voa_key );
+		}
+	}
+}
 $voa_class = ! empty( $args['class'] ) ? ' ' . $args['class'] : '';
 ?>
 <section class="section contact-section page-contact-section has-section-backdrop<?php echo esc_attr( $voa_class ); ?>">

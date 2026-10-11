@@ -24,9 +24,11 @@ Status, tasks and blockers: `docs/wordpress-integration/` · Plan, steps and liv
 | 9 | Block patterns | Deferred — see the architecture refinement of 2026-10-04 |
 | 10 | Content, forms, Yoast, redirects | Needs staging |
 
-## How the theme stays an exact copy
+## How the theme keeps its approved layout
 
-Nothing visible is retyped. Three scripts in `scripts/wordpress/` tie the theme to the React build:
+Exported copy and images are the defaults. Authorized WordPress editors can override page copy and
+images without changing the fixed layout; see [CONTENT_EDITING.md](CONTENT_EDITING.md).
+Three scripts in scripts/wordpress/ tie the defaults to the React build:
 
 | Command | Does |
 | --- | --- |
@@ -51,7 +53,7 @@ rewrites it into a Windows path.
 | `data/` | The copy, exported from React: site, home, pages, services, process, managed, faqs, testimonials, clients, articles, accent phrases |
 | `assets/media/` | 59 design images, 7.8 MB |
 | `assets/css/`, `assets/js/`, `assets/fonts/`, `assets/images/` | Styles, behaviour, the two self-hosted fonts, the logo |
-| `inc/` | `data.php` (reads the data), `icons.php` (every SVG), `post-types.php` (Services), `install.php` (site setup), `setup.php`, `enqueue.php` |
+| inc/ | Data helpers, restricted content editor, icons, Services, site setup, and asset loading |
 | `template-parts/layout/` | The shared pieces: closing section, contact form, accordion, carousel, image hero, article card, pagination |
 | Templates | `front-page.php`, `page-{slug}.php` for each design page, `single-voa_service.php`, `home.php` (Insights), `single.php`, `archive.php`, `search.php`, `page.php`, `404.php` |
 

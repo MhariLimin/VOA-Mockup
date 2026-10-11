@@ -30,9 +30,9 @@ get_header();
 			</div>
 		</div>
 		<div class="match-visual process-match" aria-label="Illustration of Virtual Office Angels matching a client with a managed specialist">
-			<div class="match-card match-brief"><span>Client brief</span><strong>Mortgage operations</strong><small>Applications · CRM · follow-up</small></div>
+			<div class="match-card match-brief"><span><?php echo voa_content_copy( 'how-it-works', 'match_client' ); ?></span><strong><?php echo voa_content_copy( 'how-it-works', 'match_client_role' ); ?></strong><small><?php echo voa_content_copy( 'how-it-works', 'match_client_tasks' ); ?></small></div>
 			<div class="connector" aria-hidden="true"><span></span></div>
-			<div class="match-card match-profile"><span>Specialist match</span><strong>Experienced lending support</strong><small>Screened for role and workflow fit</small><em>Virtual Office Angels managed</em></div>
+			<div class="match-card match-profile"><span><?php echo voa_content_copy( 'how-it-works', 'match_specialist' ); ?></span><strong><?php echo voa_content_copy( 'how-it-works', 'match_specialist_role' ); ?></strong><small><?php echo voa_content_copy( 'how-it-works', 'match_specialist_text' ); ?></small><em>Virtual Office Angels managed</em></div>
 		</div>
 	</div>
 </section>

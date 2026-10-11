@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *                     faqs, testimonials, clients, articles, accent.
  * @return array
  */
-function voa_data( $name ) {
+function voa_data_raw( $name ) {
 	static $cache = array();
 
 	if ( ! isset( $cache[ $name ] ) ) {
@@ -35,6 +35,16 @@ function voa_data( $name ) {
 		$cache[ $name ] = is_array( $json ) ? $json : array();
 	}
 
+	return $cache[ $name ];
+}
+
+/** Return exported defaults with approved wp-admin copy and media overrides applied. */
+function voa_data( $name ) {
+	static $cache = array();
+	if ( ! isset( $cache[ $name ] ) ) {
+		$data = voa_data_raw( $name );
+		$cache[ $name ] = function_exists( 'voa_content_apply_data' ) ? voa_content_apply_data( $name, $data ) : $data;
+	}
 	return $cache[ $name ];
 }
 
@@ -56,6 +66,14 @@ function voa_page( $path ) {
  * @return string
  */
 function voa_media_url( $path ) {
+	if ( is_numeric( $path ) && (int) $path > 0 ) {
+		return wp_get_attachment_image_url( (int) $path, 'full' ) ?: '';
+	}
+
+	if ( ! is_string( $path ) || 0 !== strpos( $path, '/assets/' ) ) {
+		return '';
+	}
+
 	if ( 0 === strpos( $path, '/assets/voa-logo' ) ) {
 		return get_theme_file_uri( 'assets/images/' . substr( $path, strlen( '/assets/' ) ) );
 	}

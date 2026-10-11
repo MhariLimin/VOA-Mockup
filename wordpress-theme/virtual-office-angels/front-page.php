@@ -48,7 +48,7 @@ get_header();
 	<div class="container hero-grid">
 		<div class="hero-copy">
 			<p class="eyebrow"><?php echo esc_html( $voa_site['hero']['eyebrow'] ); ?></p>
-			<h1>Get <em>Specialised</em> &amp; <em>HR Managed</em> Virtual Support!</h1>
+			<h1><?php echo voa_content_copy( 'home', 'hero_heading' ); ?></h1>
 			<p class="lead"><?php echo esc_html( $voa_site['hero']['description'] ); ?></p>
 			<div class="button-row">
 				<a class="button" href="<?php echo esc_url( voa_url( '/contact' ) ); ?>">Find the Right Fit</a>
@@ -73,9 +73,9 @@ get_header();
 <section class="section home-client-proof" data-home-reveal="clients">
 	<div class="container home-client-layout">
 		<header>
-			<p class="eyebrow">Our clients</p>
-			<h2>Trusted by leading <em>Australian businesses</em>.</h2>
-			<p>Supporting Australian businesses with dependable, carefully matched professionals.</p>
+			<p class="eyebrow"><?php echo voa_content_copy( 'home', 'clients_eyebrow' ); ?></p>
+			<h2><?php echo voa_content_copy( 'home', 'clients_heading' ); ?></h2>
+			<p><?php echo voa_content_copy( 'home', 'clients_intro' ); ?></p>
 		</header>
 		<?php get_template_part( 'template-parts/layout/client-carousel' ); ?>
 	</div>
@@ -90,9 +90,9 @@ get_header();
 	<div class="container">
 		<div class="section-heading">
 			<div>
-				<p class="eyebrow">Specialised virtual assistant services</p>
-				<h2>Virtual support tailored around your <em>industry</em>, <em>systems</em> and <em>standards</em>.</h2>
-				<p class="lead compact">Our professional virtual assistant services go beyond general administration. We match businesses with professionals who understand the terminology, documentation and workflows common to their field.</p>
+				<p class="eyebrow"><?php echo voa_content_copy( 'home', 'services_eyebrow' ); ?></p>
+				<h2><?php echo voa_content_copy( 'home', 'services_heading' ); ?></h2>
+				<p class="lead compact"><?php echo voa_content_copy( 'home', 'services_intro' ); ?></p>
 			</div>
 			<a class="button button-secondary" href="<?php echo esc_url( voa_url( '/services' ) ); ?>">Explore services</a>
 		</div>
@@ -126,8 +126,8 @@ get_header();
 <section class="section dark-section home-managed" data-home-reveal="dark">
 	<div class="container">
 		<div class="managed-copy">
-			<p class="eyebrow">More than recruitment</p>
-			<h2>What is an <em>HR Managed Virtual Support</em> Solution?</h2>
+			<p class="eyebrow"><?php echo voa_content_copy( 'home', 'managed_eyebrow' ); ?></p>
+			<h2><?php echo voa_content_copy( 'home', 'managed_heading' ); ?></h2>
 			<p class="lead"><?php echo esc_html( $voa_journey['intro'] ); ?></p>
 			<div class="button-row">
 				<a class="button" href="<?php echo esc_url( voa_url( '/how-it-works' ) ); ?>">See how it works</a>
@@ -185,12 +185,12 @@ get_header();
 
 <section class="section home-founder-section" data-home-reveal="split">
 	<div class="container split-grid story-grid">
-		<div class="source-image founder-home-image"><img src="<?php echo esc_url( voa_media_url( '/assets/client/anne-villavieja.jpg' ) ); ?>" alt="Anne Villavieja, founder of Virtual Office Angels" loading="lazy"></div>
+		<div class="source-image founder-home-image"><img src="<?php echo esc_url( voa_media_url( voa_content_image( 'home', 'founder_image' ) ) ); ?>" alt="Anne Villavieja, founder of Virtual Office Angels" loading="lazy"></div>
 		<div>
-			<p class="eyebrow">Australian-led, people-first outsourcing company</p>
-			<h2>Built on <em>HR expertise</em> and first-hand <em>market experience</em>.</h2>
-			<p class="lead">Virtual Office Angels was established by Anne Villavieja, whose two decades of HR experience with Australian companies shape our practical approach to recruitment and long-term virtual support.</p>
-			<p>Based in Australia and originally from the Philippines, Anne brings together an understanding of the country’s professional talent with the expectations of Australian businesses. That perspective helps Virtual Office Angels build working relationships designed for confidence, continuity, and long-term value.</p>
+			<p class="eyebrow"><?php echo voa_content_copy( 'home', 'founder_eyebrow' ); ?></p>
+			<h2><?php echo voa_content_copy( 'home', 'founder_heading' ); ?></h2>
+			<p class="lead"><?php echo voa_content_copy( 'home', 'founder_intro' ); ?></p>
+			<p><?php echo voa_content_copy( 'home', 'founder_text' ); ?></p>
 			<a class="text-link" href="<?php echo esc_url( voa_url( '/about' ) ); ?>">Learn more about us <?php voa_icon( 'arrow-right' ); ?></a>
 		</div>
 	</div>
@@ -198,7 +198,7 @@ get_header();
 
 <section class="section insight-section" data-home-reveal="compact">
 	<div class="container">
-		<div class="section-heading"><div><p class="eyebrow">Insights and resources</p><h2>Learn more about <em>delegation</em> and <em>virtual staffing</em>.</h2><p class="lead compact">Explore current guidance on building capacity, choosing the right virtual assistant, and getting more value from a remote team.</p></div><a class="button button-secondary" href="<?php echo esc_url( voa_url( '/insights' ) ); ?>">Browse articles</a></div>
+		<div class="section-heading"><div><p class="eyebrow"><?php echo voa_content_copy( 'home', 'insights_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'home', 'insights_heading' ); ?></h2><p class="lead compact"><?php echo voa_content_copy( 'home', 'insights_intro' ); ?></p></div><a class="button button-secondary" href="<?php echo esc_url( voa_url( '/insights' ) ); ?>">Browse articles</a></div>
 		<div class="article-rail" tabindex="0" role="group" aria-label="Latest articles">
 			<?php foreach ( voa_articles( VOA_HOME_RAIL_ARTICLES ) as $voa_article ) : ?>
 				<a class="home-article-card" href="<?php echo esc_url( get_permalink( $voa_article ) ); ?>"><span class="home-article-image"><?php voa_article_image_tag( $voa_article ); ?></span><small><?php echo esc_html( voa_article_date( $voa_article ) ); ?> · <?php echo esc_html( voa_article_category( $voa_article ) ); ?></small><h3><?php echo esc_html( get_the_title( $voa_article ) ); ?></h3><span class="text-link">Read article <?php voa_icon( 'arrow-right' ); ?></span></a>
@@ -214,12 +214,12 @@ get_header();
 <section class="section home-testimonial-section" data-home-reveal="media">
 	<div class="container split-grid story-grid home-testimonial-intro">
 		<div class="source-image">
-			<img src="<?php echo esc_url( voa_media_url( '/assets/client/contact/contact-team-laptop.jpg' ) ); ?>" alt="A group of business people talking around a laptop" loading="lazy">
+			<img src="<?php echo esc_url( voa_media_url( voa_content_image( 'home', 'testimonials_image' ) ) ); ?>" alt="A group of business people talking around a laptop" loading="lazy">
 		</div>
 		<div>
-			<p class="eyebrow">Client feedback</p>
-			<h2>What Australian businesses say about <em>working with Virtual Office Angels</em>.</h2>
-			<p class="lead">Real feedback on matching, service quality, and the day-to-day value of dependable virtual support.</p>
+			<p class="eyebrow"><?php echo voa_content_copy( 'home', 'testimonials_eyebrow' ); ?></p>
+			<h2><?php echo voa_content_copy( 'home', 'testimonials_heading' ); ?></h2>
+			<p class="lead"><?php echo voa_content_copy( 'home', 'testimonials_intro' ); ?></p>
 			<a class="text-link" href="<?php echo esc_url( voa_url( '/client-stories' ) ); ?>">Read all testimonials <?php voa_icon( 'arrow-right' ); ?></a>
 		</div>
 	</div>
@@ -233,9 +233,9 @@ get_header();
 <section class="section faq-section" data-home-reveal="faq">
 	<div class="container faq-grid">
 		<div>
-			<p class="eyebrow">Frequently asked questions</p>
-			<h2>Before you delegate and <em>get started</em>.</h2>
-			<p class="lead compact">Here are direct answers to the questions Australian businesses ask when considering fully managed virtual support.</p>
+			<p class="eyebrow"><?php echo voa_content_copy( 'home', 'faq_eyebrow' ); ?></p>
+			<h2><?php echo voa_content_copy( 'home', 'faq_heading' ); ?></h2>
+			<p class="lead compact"><?php echo voa_content_copy( 'home', 'faq_intro' ); ?></p>
 		</div>
 		<div class="faq-list">
 			<?php foreach ( $voa_home['buyerQuestions'] as $voa_faq ) : ?>
@@ -249,7 +249,7 @@ get_header();
 	</div>
 </section>
 
-<section class="section contact-section page-contact-section has-section-backdrop" data-home-reveal="contact"><?php get_template_part( 'template-parts/layout/section-backdrop' ); ?><div class="container contact-grid"><aside><p class="eyebrow">Let’s talk</p><h2>Tell us where your business needs virtual support.</h2><p class="lead compact">Share the work that is taking time away from clients, revenue or delivery. We’ll help clarify the remote role and the experience it needs.</p><p class="contact-direct"><a href="tel:1300737883"><?php voa_icon( 'phone' ); ?>1 300 737 883</a><a href="mailto:clientcare@virtualofficeangels.com.au"><?php voa_icon( 'mail' ); ?>clientcare@virtualofficeangels.com.au</a></p></aside><?php get_template_part( 'template-parts/layout/contact-form' ); ?></div></section>
+<section class="section contact-section page-contact-section has-section-backdrop" data-home-reveal="contact"><?php get_template_part( 'template-parts/layout/section-backdrop' ); ?><div class="container contact-grid"><aside><p class="eyebrow"><?php echo voa_content_copy( 'home', 'contact_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'home', 'contact_heading' ); ?></h2><p class="lead compact"><?php echo voa_content_copy( 'home', 'contact_intro' ); ?></p><p class="contact-direct"><a href="tel:1300737883"><?php voa_icon( 'phone' ); ?>1 300 737 883</a><a href="mailto:clientcare@virtualofficeangels.com.au"><?php voa_icon( 'mail' ); ?>clientcare@virtualofficeangels.com.au</a></p></aside><?php get_template_part( 'template-parts/layout/contact-form' ); ?></div></section>
 
 <?php
 get_footer();

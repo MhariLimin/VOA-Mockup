@@ -12,9 +12,9 @@ get_header();
 
 <section class="section utility-page">
 	<div class="container narrow">
-		<p class="eyebrow">Enquiry received</p>
-		<h1>Thank you for contacting Virtual Office Angels.</h1>
-		<p class="lead">Your form has been submitted.</p>
+		<p class="eyebrow"><?php echo voa_content_copy( 'thank-you', 'eyebrow' ); ?></p>
+		<h1><?php echo voa_content_copy( 'thank-you', 'heading' ); ?></h1>
+		<p class="lead"><?php echo voa_content_copy( 'thank-you', 'description' ); ?></p>
 		<a class="button" href="<?php echo esc_url( voa_url( '/' ) ); ?>">Return home</a>
 	</div>
 </section>

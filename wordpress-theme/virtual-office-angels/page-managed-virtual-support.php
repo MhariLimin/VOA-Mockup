@@ -39,8 +39,8 @@ get_header();
 
 <section class="section"><div class="container content-split">
 	<div>
-		<p class="eyebrow">More than recruitment</p>
-		<h2>What is an <em>HR-managed virtual support</em> solution?</h2>
+		<p class="eyebrow"><?php echo voa_content_copy( 'managed-virtual-support', 'definition_eyebrow' ); ?></p>
+		<h2><?php echo voa_content_copy( 'managed-virtual-support', 'definition_heading' ); ?></h2>
 		<?php foreach ( $voa_page['definition'] as $voa_text ) : ?>
 			<p class="lead compact"><?php echo esc_html( $voa_text ); ?></p>
 		<?php endforeach; ?>
@@ -56,7 +56,7 @@ get_header();
 </div></section>
 
 <section class="section muted-section"><div class="container">
-	<div class="section-heading"><div><p class="eyebrow">Shared responsibilities</p><h2><em>Clear ownership</em> keeps the role effective.</h2><p class="lead compact"><?php echo esc_html( $voa_page['ownershipIntro'] ); ?></p></div></div>
+	<div class="section-heading"><div><p class="eyebrow"><?php echo voa_content_copy( 'managed-virtual-support', 'ownership_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'managed-virtual-support', 'ownership_heading' ); ?></h2><p class="lead compact"><?php echo esc_html( $voa_page['ownershipIntro'] ); ?></p></div></div>
 	<div class="ownership-diagram">
 		<?php foreach ( $voa_managed['ownership'] as $voa_index => $voa_column ) : ?>
 			<div class="ownership-side" data-side="<?php echo 0 === $voa_index ? 'start' : 'end'; ?>">
@@ -78,8 +78,8 @@ get_header();
 
 <section class="section"><div class="container faq-page-grid">
 	<aside>
-		<p class="eyebrow">HR-managed virtual support FAQs</p>
-		<h2>What to know <em>before hiring</em>.</h2>
+		<p class="eyebrow"><?php echo voa_content_copy( 'managed-virtual-support', 'faq_eyebrow' ); ?></p>
+		<h2><?php echo voa_content_copy( 'managed-virtual-support', 'faq_heading' ); ?></h2>
 		<p class="lead compact"><?php echo esc_html( $voa_page['questionsIntro'] ); ?></p>
 	</aside>
 	<?php get_template_part( 'template-parts/layout/accordion', null, array( 'items' => $voa_page['questions'], 'id_prefix' => 'managed-faq' ) ); ?>

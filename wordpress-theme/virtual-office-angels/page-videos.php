@@ -12,7 +12,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $voa_brief  = voa_page( '/videos' );
-$voa_videos = array( 'Choosing the right virtual assistant', 'Preparing your business to delegate', 'Building a strong remote working rhythm' );
+$voa_videos = array( voa_content_plain( 'videos', 'video_1' ), voa_content_plain( 'videos', 'video_2' ), voa_content_plain( 'videos', 'video_3' ) );
 
 /**
  * The stand-in artwork: a player-style frame marked as coming soon.
@@ -47,10 +47,10 @@ get_template_part(
 ?>
 
 <section class="section library-section" id="videos"><div class="container">
-	<div class="section-heading library-heading"><p class="eyebrow">Video library</p><p class="library-count"><?php echo count( $voa_videos ); ?> videos</p></div>
+	<div class="section-heading library-heading"><p class="eyebrow"><?php echo voa_content_copy( 'videos', 'library_eyebrow' ); ?></p><p class="library-count"><?php echo count( $voa_videos ); ?> videos</p></div>
 	<div class="media-grid">
 		<?php foreach ( $voa_videos as $voa_index => $voa_title ) : ?>
-			<article class="video-card"><?php echo $voa_poster( 'Video 0' . ( $voa_index + 1 ), $voa_title ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?><p class="eyebrow">Video resource</p><h2><?php echo esc_html( $voa_title ); ?></h2><p>Reserved for an existing, client-approved video with captions and a written transcript.</p></article>
+			<article class="video-card"><?php echo $voa_poster( 'Video 0' . ( $voa_index + 1 ), $voa_title ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?><p class="eyebrow">Video resource</p><h2><?php echo esc_html( $voa_title ); ?></h2><p><?php echo voa_content_copy( 'videos', 'video_description' ); ?></p></article>
 		<?php endforeach; ?>
 	</div>
 	<?php
