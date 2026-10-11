@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="footer-contact"><strong>Contact</strong><a href="tel:1300737883"><?php voa_icon( 'phone' ); ?>1 300 737 883</a><a href="mailto:clientcare@virtualofficeangels.com.au"><?php voa_icon( 'mail' ); ?>clientcare@virtualofficeangels.com.au</a><a href="<?php echo esc_url( voa_url( '/contact' ) ); ?>">Contact Us</a></div>
 	</div>
 	<div class="container footer-bottom">
-		<span>Virtual Office Angels Pty. Ltd. · ABN 58 155 459 788</span>
+		<span>Virtual Office Angels Pty. Ltd. 2010-2026 · ABN 58 155 459 788</span>
 	</div>
 </footer>
 <?php wp_footer(); ?>

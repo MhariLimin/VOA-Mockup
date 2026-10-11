@@ -16,7 +16,7 @@ export function Footer() {
         <div className="footer-contact"><strong>Contact</strong><a href="tel:1300737883"><PhoneIcon />1 300 737 883</a><a href="mailto:clientcare@virtualofficeangels.com.au"><MailIcon />clientcare@virtualofficeangels.com.au</a><Link to="/contact">Contact Us</Link></div>
       </div>
       <div className="container footer-bottom">
-        <span>Virtual Office Angels Pty. Ltd. · ABN 58 155 459 788</span>
+        <span>Virtual Office Angels Pty. Ltd. 2010-2026 · ABN 58 155 459 788</span>
       </div>
     </footer>
   );

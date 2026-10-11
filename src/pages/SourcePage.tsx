@@ -494,29 +494,69 @@ function StoriesPage({ page }: { page: SourcePageBrief }) {
       ))}</div>
     </div></section>
 
-    {/* Revision E (5 Oct 2026): the live site's client case study, so /client-case-studies/ can
-        redirect here. Text in caseStudy.ts; layout from the existing split, panel and check list. */}
-    <section className="section case-study" id="case-study"><div className="container content-split">
-      <div>
-        <p className="eyebrow">Client case study</p>
-        <h2><HeadingAccent text={caseStudy.heading} /></h2>
+    {/* The approved live-site copy is presented as one compact challenge-to-support map. The rails,
+        central transfer line and onboarding marker carry the hierarchy without another card grid. */}
+    <section className="section case-study" id="case-study"><div className="container">
+      <div className="case-study-intro">
+        <div>
+          <p className="eyebrow">Client case study</p>
+          <h2><HeadingAccent text={caseStudy.heading} /></h2>
+        </div>
         <p className="lead compact">{caseStudy.intro}</p>
+      </div>
+
+      <div className="case-study-context">
         <h3>{caseStudy.challengesHeading}</h3>
         <p>{caseStudy.challenges}</p>
-        <p>{caseStudy.hadIntro}</p>
-        <ul className="case-study-list">{caseStudy.had.map((item) => <li key={item}>{item}</li>)}</ul>
       </div>
-      <div>
-        <div className="task-panel">
-          <h3>{caseStudy.handlingHeading}</h3>
-          <ul className="check-list">{caseStudy.handling.map((item) => <li key={item}>{item}</li>)}</ul>
+
+      <div className="case-study-flow">
+        <div className="case-study-lane" data-side="challenge">
+          <p className="case-study-label">
+            <span className="case-study-label-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3.8 21 19H3Z" /><path d="M12 9v4.2" /><circle cx="12" cy="16.4" r="0.75" fill="currentColor" stroke="none" /></svg>
+            </span>
+            <span>{caseStudy.hadIntro}</span>
+          </p>
+          <ul>{caseStudy.had.map((item) => <li key={item}>{item}</li>)}</ul>
         </div>
-        <div className="faq-closing case-study-onboarding">{caseStudy.onboarding.map((text) => <p key={text}>{text}</p>)}</div>
+
+        <div className="case-study-transfer" aria-hidden="true">
+          <span className="case-study-transfer-node"><RoleGlyph /></span>
+          <svg viewBox="0 0 80 220" preserveAspectRatio="none">
+            <path d="M4 18 C 44 18, 33 70, 40 110 C 47 150, 36 202, 76 202" vectorEffect="non-scaling-stroke" />
+          </svg>
+        </div>
+
+        <div className="case-study-lane" data-side="support">
+          <p className="case-study-label">
+            <span className="case-study-label-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="8.5" /><path d="m8.3 12.2 2.45 2.5 5-5.35" /></svg>
+            </span>
+            <span>{caseStudy.handlingHeading}</span>
+          </p>
+          <ul>{caseStudy.handling.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+      </div>
+
+      <div className="case-study-onboarding">
+        <span className="case-study-onboarding-mark" aria-hidden="true"><i /><i /><i /></span>
+        <div>
+          <h3>{caseStudy.onboarding[0]}</h3>
+          <p>{emphasizeCaseStudyTiming(caseStudy.onboarding[1])}</p>
+        </div>
       </div>
     </div></section>
 
     <PageClosing />
   </>;
+}
+
+function emphasizeCaseStudyTiming(text: string) {
+  const phrase = 'two (2) DAYS';
+  const [before, after] = text.split(phrase);
+  if (after === undefined) return text;
+  return <>{before}<strong className="case-study-timing">{phrase}</strong>{after}</>;
 }
 
 function scrollToSection(section: HTMLElement | null) {

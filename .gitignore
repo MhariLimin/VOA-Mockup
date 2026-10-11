@@ -16,3 +16,9 @@ wordpress-theme/*.zip
 
 # Directory for documentation purposes
 docs/wordpress-integration/etc
+
+# Local handoff notes, internal task reports, and unused image candidates.
+docs/project/SESSION_CONTINUITY_*.md
+docs/wordpress-integration/TASK.md
+docs/wordpress-integration/TASK.txt
+public/new/
