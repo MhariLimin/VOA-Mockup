@@ -22,3 +22,14 @@ docs/project/SESSION_CONTINUITY_*.md
 docs/wordpress-integration/TASK.md
 docs/wordpress-integration/TASK.txt
 public/new/
+
+# Local access register; may contain credentials after it is filled in.
+local-credentials/
+
+# Local working files: article drafts for the WordPress posts, exported copies of documents kept
+# here in Markdown or published elsewhere, and feedback screenshots.
+/*Article_*.docx
+docs/project/*.docx
+docs/project/*.pdf
+/image*.png
+docs/wordpress-integration/image*.png
