@@ -3224,3 +3224,10 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 }
 
 @keyframes case-study-current { to { stroke-dashoffset: -11; } }
+
+/* State landing pages (mockup, src/pages/StatePage.tsx). Each state has a different number of client
+   logos: on wide screens the wall takes one column per logo up to six, so a short list does not leave
+   empty grey cells (18 logos fill three rows of six). Narrower screens keep the shared columns. */
+@media (min-width: 52.01rem) {
+  .state-logo-wall { grid-template-columns: repeat(var(--logo-columns), minmax(0, 1fr)); max-width: calc(var(--logo-columns) * 13rem); }
+}
