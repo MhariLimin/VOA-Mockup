@@ -73,7 +73,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ],
     systemsHeading: "Match the role to the tools you use.",
     systemsIntro: "Our virtual mortgage and loan processing support starts with the outcomes, recurring work, and systems that need coverage. We then define the role around tasks you can document, review, and integrate into your existing team.",
-    systems: ["Mercury Nexus", "Salestrekker", "AFG FLEX", "Infinity", "MyCRM", "BrokerEngine"],
+    systems: ["Mercury Nexus", "Salestrekker", "AFG FLEX", "Infynity", "MyCRM", "BrokerEngine"],
     fitEyebrow: "When to hire a virtual loans assistant",
     fitHeading: "Choose specialised support when loan processing needs more than general admin.",
     fits: [

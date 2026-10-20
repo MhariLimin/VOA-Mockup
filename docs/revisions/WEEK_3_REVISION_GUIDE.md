@@ -610,7 +610,7 @@ transcribed from `SERVICE PAGES_VOA.pdf`** for these three services; the other s
 
 | Service | Systems |
 | --- | --- |
-| Mortgage & Loans | Mercury Nexus, Salestrekker, AFG FLEX, Infinity, MyCRM, BrokerEngine |
+| Mortgage & Loans | Mercury Nexus, Salestrekker, AFG FLEX, Infynity, MyCRM, BrokerEngine |
 | Financial Planning | Xplan, AdviserLogic, Midwinter, Worksorted, Practifi |
 | Accounting & Bookkeeping | Xero, MYOB, QuickBooks, SAP, Airwallex, Stripe |
 
