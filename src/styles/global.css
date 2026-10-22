@@ -3225,9 +3225,18 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 
 @keyframes case-study-current { to { stroke-dashoffset: -11; } }
 
-/* State landing pages (mockup, src/pages/StatePage.tsx). Each state has a different number of client
-   logos: on wide screens the wall takes one column per logo up to six, so a short list does not leave
-   empty grey cells (18 logos fill three rows of six). Narrower screens keep the shared columns. */
-@media (min-width: 52.01rem) {
-  .state-logo-wall { grid-template-columns: repeat(var(--logo-columns), minmax(0, 1fr)); max-width: calc(var(--logo-columns) * 13rem); }
+/* City landing pages (mockup, src/pages/LocationPage.tsx). Each city has a different number of
+   clients, so the wall takes one column per client, up to seven on wide screens (Sydney's seven fit
+   one row) and the shared three and two below that, so a short list leaves no empty grey cells; a
+   lone last tile spans its row. A client without a logo shows its name. */
+.location-logo-wall { grid-template-columns: repeat(var(--logo-columns), minmax(0, 1fr)); max-width: calc(var(--logo-columns) * 13rem); }
+.location-logo-wall strong { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.25; text-align: center; }
+@media (max-width: 52rem) {
+  .location-logo-wall { grid-template-columns: repeat(var(--logo-columns-md), minmax(0, 1fr)); }
+  .location-logo-wall div:last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
+}
+@media (max-width: 38rem) {
+  .location-logo-wall { grid-template-columns: repeat(var(--logo-columns-sm), minmax(0, 1fr)); }
+  .location-logo-wall div:last-child:nth-child(3n + 1) { grid-column: auto; }
+  .location-logo-wall div:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }

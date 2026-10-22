@@ -6,8 +6,8 @@ import { HomePage } from '../pages/HomePage';
 import { BlogArticlePage } from '../pages/BlogArticlePage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { SourcePage } from '../pages/SourcePage';
-import { StatePage } from '../pages/StatePage';
-import { statePages } from '../content/statePages';
+import { LocationPage } from '../pages/LocationPage';
+import { locationPages } from '../content/locationPages';
 import { ThankYouPage } from '../pages/ThankYouPage';
 
 export function App() {
@@ -21,8 +21,8 @@ export function App() {
         {Object.entries(renamedRoutes).map(([from, to]) => (
           <Route key={from} path={from} element={<Navigate to={to} replace />} />
         ))}
-        {statePages.map((state) => (
-          <Route key={state.slug} path={`/virtual-assistants/${state.slug}`} element={<StatePage state={state} />} />
+        {locationPages.map((page) => (
+          <Route key={page.slug} path={`/virtual-assistants/${page.slug}`} element={<LocationPage page={page} />} />
         ))}
         <Route path="/insights/:slug" element={<BlogArticlePage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
