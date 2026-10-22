@@ -13,14 +13,14 @@ city. The layout below is a starting point: change it if the content works bette
 Three pages exist as a mockup in the React design prototype. None is live, and none is linked from
 the website menu yet.
 
-| City | Planned address on the live site | Clients | VAs placed |
-| --- | --- | --- | --- |
-| Sydney | virtualofficeangels.com.au/virtual-assistants/sydney/ | 7 | 10 |
-| Brisbane and the Gold Coast | virtualofficeangels.com.au/virtual-assistants/brisbane/ | 2 | 2 |
-| Melbourne | virtualofficeangels.com.au/virtual-assistants/melbourne/ | 1 | 1 |
+| City | Planned address on the live site | Clients | VAs placed | Current mockup |
+| --- | --- | --- | --- | --- |
+| Sydney | virtualofficeangels.com.au/virtual-assistants/sydney/ | 7 | 10 | https://virtualofficeangels-mockup-1.vercel.app/virtual-assistants/sydney |
+| Brisbane and the Gold Coast | virtualofficeangels.com.au/virtual-assistants/brisbane/ | 2 | 2 | https://virtualofficeangels-mockup-1.vercel.app/virtual-assistants/brisbane |
+| Melbourne | virtualofficeangels.com.au/virtual-assistants/melbourne/ | 1 | 1 | https://virtualofficeangels-mockup-1.vercel.app/virtual-assistants/melbourne |
 
-The mockup runs only on Mhari's computer for now, so use the screenshots in the online copy. Ask
-Mhari if you need to click through the pages.
+Click through the mockup at the links in the last column. It is a design prototype, so its contact
+form does not send anything.
 
 ## Why these cities
 

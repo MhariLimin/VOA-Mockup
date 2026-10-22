@@ -33,3 +33,6 @@ docs/project/*.docx
 docs/project/*.pdf
 /image*.png
 docs/wordpress-integration/image*.png
+
+# Google Business Profile screenshots: they show managers' email addresses.
+google-my-business/
