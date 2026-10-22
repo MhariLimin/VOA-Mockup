@@ -1,8 +1,7 @@
 # Go-live checklist: VOA staging to the live website
 
 Prepared 23 October 2026. Everything below must be done, or deliberately waived by the client, before
-the staging site replaces the live site. Items marked *(added)* were not on the original list. The
-detailed steps are in `reference/MIGRATION_RUNBOOK.md`; the redirect map is `redirects.csv`.
+the staging site replaces the live site. Items marked *(added)* were not on the original list.
 
 ## 1. Content
 
