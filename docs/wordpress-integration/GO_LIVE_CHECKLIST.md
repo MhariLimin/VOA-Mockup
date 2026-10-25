@@ -1,7 +1,9 @@
 # Go-live checklist: VOA staging to the live website
 
-Prepared 23 October 2026. Everything below must be done, or deliberately waived by the client, before
-the staging site replaces the live site. Items marked *(added)* were not on the original list.
+Prepared 23 October 2026, updated 25 October. Everything below must be done, or deliberately waived by
+the client, before the staging site replaces the live site. Items marked *(added)* were not on the
+original list. Hosting and security work for all three websites is tracked in
+[`../hosting/README.md`](../hosting/README.md).
 
 ## 1. Content
 
@@ -17,6 +19,10 @@ the staging site replaces the live site. Items marked *(added)* were not on the 
 - [ ] Logo, favicon and fonts: high-resolution logo, a favicon, licensed fonts *(added)*
 - [ ] Articles published on live after staging was cloned, copied to staging (e.g. the September 2026 articles) *(added)*
 - [ ] The two live posts that link to the old `/stagingsite2/why-us/` page, fixed *(added)*
+- [ ] Post categories decided: the posts have none, and the theme currently works one out from the
+  title *(added)*
+- [ ] The article author name decided: display name (the theme) or username (`annevillavieja`, as in
+  React). Usernames shown publicly help password guessing *(added)*
 
 ## 2. SEO
 
@@ -45,11 +51,24 @@ the staging site replaces the live site. Items marked *(added)* were not on the 
 - [ ] WP Mail SMTP set up, so enquiries don't land in spam
 - [ ] A real test enquiry sent from every page with a form; it arrives and is saved in Flamingo
 - [ ] The Google Ads test (`?gclid=test`) marks the email "From Google ADS"
+- [ ] Email routing fixed: the Business plan holds a copy of the Virtual Office Angels domains, so some
+  mail sent from there never reaches the real mailbox. Needs approval
+- [ ] The form's fallback message (shown only if Contact Form 7 is off) approved; it was written by
+  Claude. The consent error says "terms and conditions" but the box is a privacy consent: reword it
+  under the form's **Messages** tab
+- [ ] DMARC set up for `virtualofficeangels.com.au` (WP Mail SMTP warns about it). Needs approval
 
 ## 5. Security and server
 
-- [ ] **PHP upgraded** (7.4 is out of support) to a patched PHP 8 version, staging first; every plugin still works
-- [ ] **PHP2Shell vulnerability** (CVE-2026-109618 and CVE-2026-109619): HostGator confirms the server is patched *(added)*
+- [x] **PHP upgraded** to 8.3.36 on 23 October 2026. Staging shares the live site's PHP setting, so it
+  moved too. Live pages, the WPBakery editor and the contact form were checked; see
+  [`../hosting/`](../hosting/README.md)
+- [ ] The staging site itself checked on 8.3.36: pages, the contact form and the Website Content editor.
+  Not recorded as tested on 23 October *(added)*
+- [x] **PHP2Shell vulnerability** (CVE-2026-109618 and CVE-2026-109619): fixed by moving to PHP 8.3.36,
+  a fixed release, confirmed in Site Health *(added)*
+- [ ] The 2023 leftover infection files removed from live after a backup, and staging (cloned from live)
+  checked for the same files *(added)*
 - [ ] Unused and risky plugins removed (e.g. WP File Manager), the rest updated *(added)*
 - [ ] The old WP Logo Showcase copy deleted from `wp-content/updraft/plugins-old/`; a clean Wordfence scan of staging *(added)*
 - [ ] Admin users reviewed (old staff removed), two-factor login for every admin *(added)*

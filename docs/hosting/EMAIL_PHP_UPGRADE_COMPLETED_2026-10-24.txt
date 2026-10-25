@@ -1,0 +1,27 @@
+Subject: Update: our 3 websites are now on the secured PHP version
+
+Hi team,
+
+Following my earlier announcement about the critical PHP security flaw, here is an update on what was done last night.
+
+DONE: ALL 3 LIVE WEBSITES ARE UPGRADED
+Our three active websites now run PHP 8.3.36, the fixed version that closes the security flaw:
+
+  - https://virtualofficeangels.com.au/
+  - https://virtualloansassistant.com.au/
+  - https://virtualfinancialsupport.com.au/
+
+Before each change, I made a full backup of the website. After each change, I checked every main page, the page editor and the contact form. All three websites are working normally.
+
+WHAT HAPPENED ALONG THE WAY
+  - Virtual Financial Support was unreachable for about 35 minutes (around 1:15 to 1:50 AM PH time). This was a problem on HostGator's server, not on our website, and it recovered on its own.
+  - Virtual Office Angels was down for about 5 minutes (around 2:45 AM PH time). One old plugin, the one that shows testimonials, was not compatible with the new version. I switched the site back right away, fixed the plugin, and then upgraded it successfully.
+
+WHAT'S NEXT
+  1. Inactive websites: I will list all the unused websites under our two HostGator plans. If you still need any of them, please tell me before they are taken offline. HostGator has also patched its servers, so these sites are protected from this specific flaw while we review them.
+  2. Password changes: I will change the passwords one at a time so nothing stops working. If a password you use changes, I'll let you know directly.
+  3. A security scan of all three websites, and removal of some old leftover files I found on the Virtual Office Angels website.
+
+Please reach out if you notice anything unusual on any of our websites or email.
+
+- VA Mhari

@@ -2,7 +2,7 @@
 
 This file is the authoritative handoff for AI-assisted work in this repository. Read it before inspecting or changing code, then read `docs/project/SESSION_HANDOFF.md`, which carries the current page-by-page state, the working method the user expects, and the open client items. Where the two disagree on what is built today, the session handoff is newer. The older Bolt prompts and rebuild brief are historical artifacts only; they are not current instructions.
 
-For the WordPress migration, start at `docs/wordpress-integration/README.md`: it indexes what is completed, pending and blocked, the current task list, and the reference documents. `docs/README.md` maps the rest of the documentation.
+For the WordPress migration, start at `docs/wordpress-integration/README.md`: it points to the go-live checklist (everything left before launch) and the reference documents. Hosting, PHP, security and email work for all three websites is in `docs/hosting/README.md`. `docs/README.md` maps the rest of the documentation.
 
 ## Current outcome and direction
 

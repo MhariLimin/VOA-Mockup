@@ -66,7 +66,7 @@ breaks or misroutes unless rewritten or covered by a redirect.
 **Correction, 2026-10-04:** the 30 article bodies in this build contain **no** `stagingsite2` links;
 the only such references are each article's `sourceUrl` field, which records where it was captured from
 and is never rendered. The defect is real but lives on the **live** site: the database backup shows two
-newer published posts, not in this build, each linking to `/stagingsite2/why-us/`. See PENDING.md.
+newer published posts, not in this build, each linking to `/stagingsite2/why-us/`. See `../GO_LIVE_CHECKLIST.md`.
 
 External destinations cited in articles: `statista.com`, `mfaa.com.au`, `investopedia.com`,
 `abs.gov.au`, `smartasset.com`, `freepik.com`, `xero.com`, `savvy.com.au`, `redsearch.com.au`,
@@ -220,7 +220,7 @@ rather than being rebuilt per page:
 | 11 | Privacy policy, terms, cookie consent | **Not built** |
 | 12 | The 68 live articles not in this build | **Resolved 2026-10-03 — migrate all** |
 | 13 | `Rezi Finance (1)` client name artefact | **Fixed 2026-10-04** — now "Rezi Finance" |
-| 14 | `stagingsite2` links inside article bodies | **None in this build.** Two live posts carry one each — see PENDING.md |
+| 14 | `stagingsite2` links inside article bodies | **None in this build.** Two live posts carry one each — see `../GO_LIVE_CHECKLIST.md` |
 
 ## 12. Known dead code
 
