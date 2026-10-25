@@ -67,10 +67,12 @@ original list. Hosting and security work for all three websites is tracked in
   Not recorded as tested on 23 October *(added)*
 - [x] **PHP2Shell vulnerability** (CVE-2026-109618 and CVE-2026-109619): fixed by moving to PHP 8.3.36,
   a fixed release, confirmed in Site Health *(added)*
-- [ ] The 2023 leftover infection files removed from live after a backup, and staging (cloned from live)
-  checked for the same files *(added)*
+- [x] The 2023 leftover infection files removed from live and from staging (which had the same files), after
+  backups, on 25 October. Both sites checked afterwards *(added)*
 - [ ] Unused and risky plugins removed (e.g. WP File Manager), the rest updated *(added)*
-- [ ] The old WP Logo Showcase copy deleted from `wp-content/updraft/plugins-old/`; a clean Wordfence scan of staging *(added)*
+- [x] The old WP Logo Showcase copy deleted from live's `wp-content/updraft/plugins-old/` on 25 October;
+  staging has no such folder *(added)*
+- [ ] A clean Wordfence scan of staging *(added)*
 - [ ] Admin users reviewed (old staff removed), two-factor login for every admin *(added)*
 - [ ] Website Content editor role tested on staging *(added)*
 

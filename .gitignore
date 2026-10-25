@@ -39,3 +39,7 @@ google-my-business/
 
 # PHP upgrade working files: .htaccess copies, server error log, cPanel screenshots, patched plugin files.
 wordpress-upgrade/
+
+# Wordfence scan results and the hosted-website inventory: they map weaknesses on live servers.
+wordpress-security/
+docs/hosting/WEBSITE_INVENTORY_*

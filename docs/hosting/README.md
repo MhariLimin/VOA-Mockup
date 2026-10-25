@@ -33,11 +33,17 @@ This is the live list. Tick and date each item when it is done.
   Gmail arrives on Pro; a few days later, remove the domain and its mailbox from Business
 - [ ] Virtual Office Angels' copy on the Business plan: remove it during the move, or set its Email
   Routing there to Remote so mail from that server reaches the real mailbox on Pro
-- [ ] Wordfence scan on all three sites. Read the results only, delete nothing
+- [x] Wordfence scan on all three sites, 25 October. No active malware. Virtual Financial Support: 9 plugins with
+  security fixes to install. Virtual Office Angels: 16 Critical (6 were the old WP Logo Showcase copy, now
+  deleted; 3 plugins with holes that have no fix yet). Virtual Loans
+  Assistant: 1 result, an abandoned plugin. Plugin names and details are in `wordpress-security/`, kept outside Git
+- [ ] Install the plugin updates on Virtual Financial Support and Virtual Office Angels, after a backup; remove
+  unused or abandoned plugins on all three (named in the scan results in
+  `wordpress-security/`)
 - [ ] Change passwords one at a time, once the scans are clean: starting with the most exposed ones,
   then the website database, email-sending and hosting passwords. Turn on two-step login
   for the hosting and WordPress admins
-- [ ] Remove the 2023 leftover files from the Virtual Office Angels live site, after a backup (exact paths in
+- [x] Remove the 2023 leftover files from the Virtual Office Angels live and staging sites: deleted 25 October, after backups (exact paths in
   `wordpress-upgrade/PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23_FULL.md`, kept outside Git)
 - [ ] Check the Wordfence firewall level on the upgraded sites; re-optimise if it fell back to Basic
 - [ ] Open Elementor once on Virtual Financial Support to confirm the page editor works
