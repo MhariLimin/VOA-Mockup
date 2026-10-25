@@ -23,10 +23,16 @@ This is the live list. Tick and date each item when it is done.
 
 ### From the PHP upgrade, worst first
 
-- [ ] Check the duplicate `clientcare@virtualfinancialsupport.com.au` mailbox on the Pro plan for
-  missed Virtual Financial Support enquiries, and pass any on
-- [ ] Get approval for the email routing fix, then apply it: Email Routing → Remote Mail Exchanger for
-  each duplicate domain (Virtual Financial Support on Pro; Virtual Office Angels on Business)
+- [ ] **Two `clientcare@virtualfinancialsupport.com.au` mailboxes** (checked 25 October). The team
+  leader works from the **Pro** one, which also receives the website form emails. Email from outside
+  goes to the **Business** one (the domain's MX record points there): 817 emails in its inbox, no
+  forwarders. Until the move to Pro, the team leader should check the Business mailbox too.
+  **Do not** set Pro's Email Routing to Remote: that would send form enquiries to the unread mailbox
+- [ ] When Virtual Financial Support moves to Pro: back up the Business mailbox; point the domain's
+  website and mail DNS to Pro (needs approval); set Pro's Email Routing to Local; confirm a test from
+  Gmail arrives on Pro; a few days later, remove the domain and its mailbox from Business
+- [ ] Virtual Office Angels' copy on the Business plan: remove it during the move, or set its Email
+  Routing there to Remote so mail from that server reaches the real mailbox on Pro
 - [ ] Wordfence scan on all three sites. Read the results only, delete nothing
 - [ ] Change passwords one at a time, once the scans are clean: starting with the most exposed ones,
   then the website database, email-sending and hosting passwords. Turn on two-step login
