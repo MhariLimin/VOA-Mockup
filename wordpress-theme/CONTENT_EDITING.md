@@ -13,7 +13,8 @@ This role can read wp-admin and upload media. It cannot edit the theme, menus, p
 
 ## Scope and behavior
 
-- The 11 designed pages and 10 service pages appear in **Website Content**. Their field list is based on the theme's exported defaults plus template-local copy.
+- The 11 designed pages, 10 service pages and 3 city pages (**City page: Sydney**, **Brisbane**, **Melbourne**) appear in **Website Content**. Their field list is based on the theme's exported defaults plus template-local copy.
+- City page copy keeps two marks, shown under each field that uses them: `[link text](address)` makes a link and `*word*` highlights a word. Each client on a city page has a logo field; a client without a logo shows its name until one is chosen. The city pages' Yoast title and description are set once by **Appearance → Site setup** and are then edited in Yoast, not here.
 - Header, footer, logo, navigation, link destinations, layout, icons, and fixed UI labels are intentionally not editable here.
 - The client's logo carousel and testimonials are edited under **Client Stories**. Those changes also appear in their homepage previews.
 - The hero statistics are edited under **Home** and reused in closing strips on other pages.

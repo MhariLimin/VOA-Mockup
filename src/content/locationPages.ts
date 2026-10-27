@@ -1,38 +1,39 @@
 /* City landing pages: a mockup for the SEO campaign, built for review. They are not linked from the
    navigation and have no WordPress equivalent yet.
 
-   The owner asked for areas smaller than a state, so each page covers one city. The three cities, and
-   every client below, come only from the current placements in the "VA & Client Info" sheet of
-   260922-VOA Action Items Tracker.xlsx (sent 21 October 2026); Virtual Office Angels' own staff are
-   left out. The reasoning is in docs/seo/LOCATION_LANDING_PAGES.md. Naming a client, or showing its
-   logo, on a public page needs that client's permission first.
+   The copy, section order, page addresses, SEO titles and descriptions come from the content writer's
+   documents of 27 October 2026, "VOA_<City>_Service Page Area Page_On-Page SEO Optimized.docx". Their
+   links pointed at preview sites; here they point at the mockup's own pages. The clients come from the
+   current placements in 260922-VOA Action Items Tracker.xlsx; client logo permission is confirmed.
+   Background: docs/seo/LOCATION_LANDING_PAGES.md.
 
-   Copy written for the mockup, not supplied by the client: the section headings, the client-count
-   sentence, the hours panel items and the Brisbane and Melbourne placeholders. Everything else reuses
-   existing site content. */
-import { servicePages } from './sourcePages';
-
-/* One VA placement: the client, and the service page that matches the VA's role. */
-export interface Placement {
+   Text conventions: [label](/path) is a link (an external address opens in a new tab) and *word* is a
+   highlighted heading word. The highlighted words, the closing section and the city names on clients
+   without a logo were not in the documents. */
+export interface LocationClient {
   client: string;
-  suburb: string;
-  industry: string;
-  role: string;
-  servicePath: string;
-  /* A logo from the website's client library, where one exists. */
+  location: string;
+  /* A logo from the website's client library, where one exists; otherwise the name shows. */
   image?: string;
+}
+
+export interface LocationService {
+  title: string;
+  text: string;
+  path: string;
 }
 
 export interface LocationPage {
   slug: string;
+  path: string;
   name: string;
-  /* The area the client list covers, when it is wider than the city itself. */
-  area?: string;
-  state: string;
-  hours: readonly string[];
-  placements: readonly Placement[];
-  /* Local proof: the client case study is a consultancy in Epping, Sydney. Only Sydney has one. */
-  caseStudy?: boolean;
+  seo: { title: string; description: string };
+  hero: { eyebrow: string; title: string; intro: string };
+  clients: { eyebrow: string; heading: string; intro: string; wall: readonly LocationClient[] };
+  hours: { eyebrow: string; heading: string; body: string; panel: string; items: readonly string[] };
+  services: { eyebrow: string; heading: string; cards: readonly LocationService[] };
+  story: { eyebrow: string; heading: string; body: string; panel: string; items: readonly string[] };
+  faqs: { eyebrow: string; heading: string; items: readonly (readonly [string, string])[] };
 }
 
 const logo = (file: string) => `/assets/source/staging/images/${file}`;
@@ -48,68 +49,187 @@ const services = {
 export const locationPages: readonly LocationPage[] = [
   {
     slug: 'sydney',
+    path: '/virtual-assistants-sydney',
     name: 'Sydney',
-    state: 'New South Wales',
-    hours: [
-      'Monday to Friday, 9am–5pm AEST: the same clock as your office',
-      'Extra hours on weekends or holidays by prior arrangement',
-      'An Australian-led team, with our office in Chatswood',
-    ],
-    placements: [
-      { client: 'Road Surgeons', suburb: 'Botany', industry: 'Maintenance and repair', role: 'Admin Manager', servicePath: services.admin, image: logo('3c4a18231a-6.png') },
-      { client: 'Industrias Services Group', suburb: 'Alexandria', industry: 'Facilities services', role: 'Operations Support', servicePath: services.admin },
-      { client: 'Industrias Services Group', suburb: 'Alexandria', industry: 'Facilities services', role: 'Accountant/Bookkeeper', servicePath: services.accounting },
-      { client: 'RedP Marketing', suburb: 'Revesby', industry: 'Marketing and advertising', role: 'Bing and Google Analyst', servicePath: services.marketing },
-      { client: 'RedP Marketing', suburb: 'Revesby', industry: 'Marketing and advertising', role: 'Video Editor/Motion Graphic Artist', servicePath: services.marketing },
-      { client: 'RedP Marketing', suburb: 'Revesby', industry: 'Marketing and advertising', role: 'Social Media & Community Management Assistant', servicePath: services.marketing },
-      /* The library's "SureServ" logo is very likely this business: to confirm. */
-      { client: 'Sureserve Financial Services', suburb: 'Woollahra', industry: 'Insurance services', role: 'Virtual Financial Planning Admin Assistant', servicePath: services.planning, image: logo('043e55e484-5.png') },
-      /* The library's "Integra Consultancy" logo is very likely this business: to confirm. */
-      { client: 'Integra Consulting', suburb: 'Eastwood', industry: 'Education work health and safety', role: 'Executive Administrative Assistant', servicePath: services.admin, image: logo('71d6f17985-3.png') },
-      { client: 'Pool Aide', suburb: 'Lindfield', industry: 'Repair and maintenance', role: 'Admin and Accounts Specialist', servicePath: services.accounting, image: logo('ad6e09ce08-7.jpeg') },
-      { client: 'Ressfin Total Lending Solution', suburb: 'Bondi Junction', industry: 'Mortgage broking', role: 'Loan Processor', servicePath: services.mortgage, image: logo('ff435dfa3f-9.png') },
-    ],
-    caseStudy: true,
+    seo: {
+      title: 'Virtual Assistants for Sydney Businesses | Virtual Office Angels',
+      description: 'Find specialised virtual assistants for your Sydney business. Virtual Office Angels supports recruitment and ongoing staff management. Discuss your needs today!',
+    },
+    hero: {
+      eyebrow: 'Virtual assistants · Sydney, New South Wales',
+      title: 'Virtual Assistants for Businesses in *Sydney*.',
+      intro: 'The right skills can make a real difference to how your business operates. [Virtual Office Angels](/) matches Sydney businesses with virtual assistants who bring relevant experience and skills to their assigned roles, from everyday business functions to specialised industry processes. You assign the daily tasks they’ll handle, while our Australian-led team handles recruitment, HR, payroll, and ongoing staff support.',
+    },
+    clients: {
+      eyebrow: 'Local clientele and expertise',
+      heading: 'HR-Managed Virtual Support Across *Sydney*, New South Wales',
+      intro: 'We have worked with clients across a range of industries, including digital marketing, facilities services, maintenance, consulting, insurance, financial planning, and mortgage broking. Our first-hand experience in providing HR-managed outsourcing services shows how specialised virtual support fits different business operations.',
+      wall: [
+        { client: 'Road Surgeons', location: 'Botany', image: logo('3c4a18231a-6.png') },
+        { client: 'Industrias Services Group', location: 'Alexandria' },
+        { client: 'RedP Marketing', location: 'Revesby' },
+        /* The library's "SureServ" logo is very likely this business: to confirm. */
+        { client: 'Sureserve Financial Services', location: 'Woollahra', image: logo('043e55e484-5.png') },
+        /* The library's "Integra Consultancy" logo is very likely this business: to confirm. */
+        { client: 'Integra Consulting', location: 'Eastwood', image: logo('71d6f17985-3.png') },
+        { client: 'Pool Aide', location: 'Lindfield', image: logo('ad6e09ce08-7.jpeg') },
+        { client: 'Ressfin Total Lending Solution', location: 'Bondi Junction', image: logo('ff435dfa3f-9.png') },
+      ],
+    },
+    hours: {
+      eyebrow: 'How we work',
+      heading: 'Do Virtual Assistants Work *Sydney* Business Hours?',
+      body: 'Yes. Tell us the business hours, meeting requirements, and deadlines you need covered by your virtual assistant. When managing remote staff, our team leaders align their schedules with AEST (Australian Eastern Standard Time) and AEDT (Australian Eastern Daylight Time).',
+      panel: 'Your virtual support staff follows Sydney’s time zone',
+      items: [
+        'Agree on the [Sydney, NSW](https://www.nsw.gov.au/) hours your business requires',
+        'Account for AEST (UTC+10) and AEDT (UTC+11) when scheduling',
+        'Discuss extra hours or weekend coverage in advance',
+      ],
+    },
+    services: {
+      eyebrow: 'What we do',
+      heading: 'Virtual assistant services for *Sydney* businesses',
+      cards: [
+        { title: 'Executive & Administrative Virtual Support', path: services.admin, text: 'Inbox and calendar coordination, recurring follow-ups, business records, and operational administration. Discuss the responsibilities your leadership team needs covered to improve day-to-day operations.' },
+        { title: 'Digital Marketing Virtual Assistance', path: services.marketing, text: 'Our digital marketing virtual assistants can assist Sydney businesses through media asset creation, video editing, motion graphics, social media posting and community management, and campaign monitoring and reporting. Define the platforms, production requirements, and approval process for your role.' },
+        { title: 'Accounting and Bookkeeping Virtual Support', path: services.accounting, text: 'Experienced virtual assistants can support invoicing, accounts payable and receivable, reconciliations, and report preparation within your existing procedures. Identify the accounting software and review the responsibilities the role requires.' },
+        { title: 'Financial Planning & Admin Support', path: services.planning, text: 'Virtual financial support can handle client record updates, meeting preparation, and review administration under an adviser’s direction and standards. Financial advice and professional approvals stay with your authorised team.' },
+        { title: 'Mortgage & Loans Processing Virtual Support', path: services.mortgage, text: 'Our specialised virtual loans assistants support brokers with loan documentation, serviceability calculator preparation, lender research, valuation orders, application lodgement, and settlement follow-ups. They work within your brokerage’s established procedures, while authorized professionals and lenders handle credit recommendations and lending approvals, respectively.' },
+      ],
+    },
+    story: {
+      eyebrow: 'Client story',
+      heading: 'Specialised marketing support for a *Sydney* agency',
+      body: 'A Sydney-based marketing agency works with three Virtual Office Angels virtual assistants across different areas of digital marketing. Their responsibilities cover Google and Bing analysis, video editing and motion graphics, and social media and community management.',
+      panel: 'Services we offer',
+      items: ['Social Media Asset Creation', 'Facebook and Instagram Support', 'Online Community Moderation', 'Advertising Spend Tracking', 'Google, GA4, and Bing Reporting'],
+    },
+    faqs: {
+      eyebrow: 'What you need to know',
+      heading: 'Hiring a virtual assistant in *Sydney*',
+      items: [
+        ['Are your virtual assistants based in Sydney?', 'Our virtual assistants work remotely from the Philippines, while our Australian office is in Chatswood. The Sydney locations on this page identify the businesses we support. See [how our service works](/how-it-works) for the recruitment and onboarding process.'],
+        ['How do I hire a virtual assistant for my Sydney business?', 'Start by identifying the work you need completed, the experience required, and the hours you need covered. Virtual Office Angels uses these requirements to recruit suitable candidates and support the hiring process. Our Sydney assignments span administration, accounts, marketing and finance.'],
+        ['Can you support our teams in other cities?', 'Yes. Explore our [Brisbane and Gold Coast](/virtual-assistants-brisbane), and [Melbourne](/virtual-assistants-melbourne) service area pages to learn more about our services. You can also [contact our team](/contact) to discuss further about the needed virtual support across your business.'],
+        ['Can a virtual assistant work alongside my existing Sydney team?', 'Yes. A virtual assistant can take responsibility for defined remote tasks within your team’s workflow. During the consulting and role-planning stage of our HR-managed virtual support recruitment, we agree on who assigns work, reviews completed tasks, and handles questions that require a manager’s decision.'],
+      ],
+    },
   },
   {
     slug: 'brisbane',
+    path: '/virtual-assistants-brisbane',
     name: 'Brisbane',
-    area: 'Brisbane and the Gold Coast',
-    state: 'Queensland',
-    hours: [
-      'Monday to Friday, 9am–5pm AEST, Brisbane time',
-      '[To confirm: hours while New South Wales is on daylight saving]',
-      'Extra hours on weekends or holidays by prior arrangement',
-    ],
-    placements: [
-      { client: 'Seet Advisory', suburb: 'Toowong', industry: 'Financial services', role: 'Virtual Financial Planner Support', servicePath: services.planning },
-      { client: 'Coastal Financial Consultants', suburb: 'Helensvale, Gold Coast', industry: 'Mortgage broking', role: 'Virtual Loans Assistant/Mortgage Support', servicePath: services.mortgage },
-    ],
+    seo: {
+      title: 'Virtual Assistants Brisbane and Gold Coast | Virtual Office Angels',
+      description: 'Find a virtual assistant with the skills your Brisbane business needs. Discuss your role, systems, and experience requirements with Virtual Office Angels.',
+    },
+    hero: {
+      eyebrow: 'Virtual assistants · Brisbane and the Gold Coast, Queensland',
+      title: 'Virtual Assistants for *Brisbane and Gold Coast* Businesses',
+      intro: 'Keep client administration moving while your financial advisers and brokers focus on client work and new business. [Virtual Office Angels](/) recruits virtual assistants for Brisbane and Gold Coast businesses, with specialised hiring expertise in financial planning and mortgage support. You assign the daily tasks they’ll handle, while our Australian-led team handles recruitment, HR, payroll, and ongoing staff support.',
+    },
+    clients: {
+      eyebrow: 'Local clientele and expertise',
+      heading: 'HR-Managed Virtual Support Across *Brisbane and the Gold Coast*',
+      intro: 'Our experience across Australian industries includes specialised support for financial planning and mortgage broking businesses. In Brisbane and on the Gold Coast, we provide HR-managed virtual assistants to clients in Toowong and Helensvale, with roles focused on financial planner support and loan administration.',
+      wall: [
+        { client: 'Seet Advisory', location: 'Toowong, Brisbane' },
+        { client: 'Coastal Financial Consultants', location: 'Helensvale, Gold Coast' },
+      ],
+    },
+    hours: {
+      eyebrow: 'How we work',
+      heading: 'Do Virtual Assistants Work *Brisbane* Business Hours?',
+      body: 'Your required [Brisbane](https://www.brisbane.qld.gov.au/) or [Gold Coast](https://www.goldcoast.qld.gov.au/Home) working hours are agreed upon during the sourcing and candidate matching. After onboarding, our team leaders make sure that your remote staff’s work schedules are aligned with AEST (Australian Eastern Standard Time).',
+      panel: 'Your virtual support staff follows the local time zone',
+      items: [
+        'Agree on the Brisbane and Gold Coast hours your business requires',
+        'Account for AEST (UTC+10) when scheduling',
+        'Discuss extra hours or weekend coverage in advance',
+      ],
+    },
+    services: {
+      eyebrow: 'What we do',
+      heading: 'Virtual Assistant Services for *Brisbane and Gold Coast* Businesses',
+      cards: [
+        { title: 'Financial Planning and Administration Support', path: services.planning, text: 'Our specialised virtual financial assistants support fact-find preparation, risk profiling documentation, SOA drafting assistance, XPlan updates, insurance review tracking, and provider follow-ups. All work follows your practice’s procedures, with authorised advisers retaining financial advice and approvals.' },
+        { title: 'Mortgage and Loans Processing Support', path: services.mortgage, text: 'Our specialised virtual loans assistants support loan documentation, serviceability calculator preparation, lender research, valuation orders, application lodgement through ApplyOnline, and settlement follow-ups. They work within your brokerage’s procedures, while authorized professionals and lenders handle credit recommendations and lending approvals, respectively.' },
+      ],
+    },
+    story: {
+      eyebrow: 'Client story',
+      heading: 'Virtual Financial Planning Support in *Queensland*',
+      body: 'A financial planning business in Toowong, Queensland, works with Virtual Office Angels. The arrangement provides support for client meeting preparation, fact-find documentation, SOA drafting assistance, and financial planning administration, with advice and approvals remaining with authorised advisers.',
+      panel: 'Services we offer',
+      items: ['Client meeting pack preparation', 'Fact-find and risk profile documentation', 'SOA drafting assistance', 'Financial planning software support', 'Client review administration'],
+    },
+    faqs: {
+      eyebrow: 'What you need to know',
+      heading: 'Hiring a Virtual Assistant in *Brisbane*',
+      items: [
+        ['What virtual assistant services do you offer Brisbane businesses?', 'Our services include administration, digital marketing, sales support, accounting and bookkeeping, creative work and IT support. We also recruit for specialised roles in financial planning, mortgage broking and real estate administration. Browse our [virtual assistant services](/services) to find the support relevant to your business.'],
+        ['How do I hire a virtual assistant for my Brisbane business?', 'Start by identifying the responsibilities, experience, software, and working hours the position requires. Our team uses this information to assess the role and recruit suitable candidates. Read [how our service works](/how-it-works) or contact us to begin discussing your requirements.'],
+        ['Are your virtual assistants based in Brisbane?', 'Our virtual assistants work remotely from the Philippines. They support your Brisbane or Gold Coast business through agreed systems, communication channels and working arrangements.'],
+        ['How much does it cost to hire a virtual assistant for a Brisbane business?', '[Contact our team](/contact) for pricing based on the responsibilities, experience, and working hours your role requires. A clear job scope gives you a useful basis for assessing the service against your business priorities.'],
+        ['Do you provide virtual assistant services outside Brisbane?', 'Yes. In addition to Brisbane and the Gold Coast, Virtual Office Angels supports businesses in [Sydney](/virtual-assistants-sydney) and [Melbourne](/virtual-assistants-melbourne). We match virtual assistants to your role requirements, industry, and systems. Visit our other service area pages for local client examples and details about working with our team.'],
+      ],
+    },
   },
   {
     slug: 'melbourne',
+    path: '/virtual-assistants-melbourne',
     name: 'Melbourne',
-    state: 'Victoria',
-    hours: [
-      'Monday to Friday, 9am–5pm AEST, Melbourne time',
-      'Victoria and New South Wales change to daylight saving together, so the hours stay the same',
-      'Extra hours on weekends or holidays by prior arrangement',
-    ],
-    placements: [
-      { client: 'Velar Finance', suburb: 'Doncaster East', industry: 'Mortgage broking', role: 'Loan Processor', servicePath: services.mortgage },
-    ],
+    seo: {
+      title: 'Virtual Assistants for Melbourne Businesses | Virtual Office Angels',
+      description: 'Discover virtual assistant services for Melbourne businesses across a range of functions. Discuss your staffing needs with Virtual Office Angels today!',
+    },
+    hero: {
+      eyebrow: 'Virtual assistants · Melbourne, Victoria',
+      title: 'Virtual Assistants for Businesses in *Melbourne*',
+      intro: 'Find the right virtual assistant for your Melbourne business. [Virtual Office Angels](/) connects Melbourne businesses with virtual assistants for specialised industry roles, matching candidates to your required skills, systems, and experience. While you assign their daily work, our Australian-led team manages recruitment, HR, payroll, and ongoing staff support.',
+    },
+    clients: {
+      eyebrow: 'Local clientele and expertise',
+      heading: 'HR-Managed Virtual Support Across *Melbourne*',
+      intro: 'We bring experience across a range of Australian industries to our virtual assistant recruitment and staff management. Our Melbourne clientele includes a mortgage brokerage in Doncaster East, where we provide specialised loan-processing support within the business’s established working arrangements.',
+      wall: [{ client: 'Velar Finance', location: 'Doncaster East, Melbourne' }],
+    },
+    hours: {
+      eyebrow: 'How we work',
+      heading: 'Do Virtual Assistants Work *Melbourne* Business Hours?',
+      body: 'Yes. Your required [Melbourne](https://www.melbourne.vic.gov.au/) working hours are agreed upon during sourcing and candidate matching. After onboarding, our team leaders align your virtual assistant’s schedule with AEST (Australian Eastern Standard Time) and AEDT (Australian Eastern Daylight Time).',
+      panel: 'Your virtual support staff follows Melbourne’s time zone',
+      items: [
+        'Agree on the Melbourne business hours your business requires',
+        'Account for AEST (UTC+10) and AEDT (UTC+11) when scheduling',
+        'Discuss extra hours or weekend coverage in advance',
+      ],
+    },
+    services: {
+      eyebrow: 'What we do',
+      heading: 'Virtual Assistant Services for *Melbourne* Businesses',
+      cards: [
+        { title: 'Mortgage and Loans Processing Support', path: services.mortgage, text: 'Our specialised virtual loans assistants for Melbourne businesses support loan documentation, serviceability calculator preparation, lender research, valuation orders, application lodgement, and settlement follow-ups. Define the tasks and platforms your brokerage needs covered. They work within your procedures.' },
+      ],
+    },
+    story: {
+      eyebrow: 'Client story',
+      heading: 'Virtual Loan Processing Support in *Melbourne*',
+      body: 'A mortgage broking business in Doncaster East works with a virtual assistant from Virtual Office Angels in a loan processor support role. Their tasks include supporting the brokerage’s loan processing workflow, while authorised staff retain credit advice and final decisions.',
+      panel: 'Services we offer',
+      items: ['Loan file and document preparation', 'CRM updates and application tracking', 'Serviceability calculator preparation', 'Valuation and application administration', 'Lender and settlement follow-ups'],
+    },
+    faqs: {
+      eyebrow: 'What you need to know',
+      heading: 'Hiring a Virtual Assistant in *Melbourne*',
+      items: [
+        ['What virtual assistant services do you offer Melbourne businesses?', 'Our services include executive administration, digital marketing, mortgage and loans support, financial planning assistance, e-commerce support, accounting and bookkeeping, creative work and IT support. Browse our [virtual assistant services](/services) to find the specialised support your business needs.'],
+        ['How do I hire a virtual assistant for my Melbourne business?', 'Start by defining the responsibilities, experience, software, and working hours the role requires. Our team uses these details to recruit suitable candidates and support the hiring process. Read [how our service works](/how-it-works) or [contact our team](/contact) to discuss your requirements.'],
+        ['Are your virtual assistants based in Melbourne?', 'Our virtual assistants work remotely from the Philippines and support Melbourne businesses through agreed systems, tools, communication channels, and working hours. The Melbourne location on this page identifies a client business. Find out more about our [HR-managed virtual support](/managed-virtual-support) and working arrangements.'],
+        ['How much does it cost to hire a virtual assistant for a Melbourne business?', '[Contact our team](/contact) for pricing based on the responsibilities, experience, and working hours your role requires. Defining the scope gives you a clear basis for assessing the service against your business priorities and the work your team needs covered in Melbourne.'],
+        ['Do you provide virtual assistant services outside Melbourne?', 'Yes. Virtual Office Angels supports businesses in Melbourne and other Australian locations, including [Sydney](/virtual-assistants-sydney) and [Brisbane](/virtual-assistants-brisbane). We recruit for administrative and specialised roles based on your business requirements. Visit the relevant service area page to read about our local client experience and working arrangements.'],
+      ],
+    },
   },
 ];
-
-/* Each client once, in sheet order, with its logo if any. */
-export const locationClients = (page: LocationPage) =>
-  page.placements.filter((placement, index) => page.placements.findIndex((other) => other.client === placement.client) === index);
-
-/* The services this city's clients use, most VAs first; ties keep sheet order. */
-export function locationServices(page: LocationPage) {
-  const counts = new Map<string, number>();
-  for (const { servicePath } of page.placements) counts.set(servicePath, (counts.get(servicePath) ?? 0) + 1);
-  return [...counts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .flatMap(([path]) => servicePages.filter((service) => service.path === path));
-}

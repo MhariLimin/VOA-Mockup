@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * Read one data file, decoded to arrays. Cached for the request.
  *
  * @param string $name File name without extension: site, home, pages, services, process, managed,
- *                     faqs, testimonials, clients, articles, accent.
+ *                     faqs, testimonials, clients, articles, accent, locations.
  * @return array
  */
 function voa_data_raw( $name ) {

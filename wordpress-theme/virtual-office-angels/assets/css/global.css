@@ -800,7 +800,9 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 .accordion-item { border-bottom: 1px solid var(--border); }
 .accordion-item:last-child { border-bottom: 0; }
 
-.accordion-item > button {
+.accordion-heading { margin: 0; font: inherit; }
+.accordion-item > button,
+.accordion-heading > button {
   width: 100%;
   display: flex;
   align-items: center;
@@ -816,8 +818,8 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
   transition: color var(--motion-fast) ease;
 }
 
-.accordion-item > button:hover { color: var(--accent); }
-.accordion-item > button[aria-expanded='true'] { color: var(--accent); }
+.accordion-item > button:hover, .accordion-heading > button:hover { color: var(--accent); }
+.accordion-item > button[aria-expanded='true'], .accordion-heading > button[aria-expanded='true'] { color: var(--accent); }
 .accordion-toggle { flex: none; color: var(--accent); font-size: 1.15rem; }
 .accordion-panel { margin: 0 0 1.1rem; color: var(--muted); font-size: 0.88rem; line-height: 1.6; animation: accordion-open 300ms var(--ease-standard) both; }
 
@@ -3224,3 +3226,26 @@ main h1 em { color: var(--heading-accent); font-style: normal; }
 }
 
 @keyframes case-study-current { to { stroke-dashoffset: -11; } }
+
+/* City landing pages (mockup, src/pages/LocationPage.tsx). Each city has a different number of
+   clients, so the wall takes one column per client, up to seven on wide screens (Sydney's seven fit
+   one row) and the shared three and two below that, so a short list leaves no empty grey cells; a
+   lone last tile spans its row. A client without a logo shows its name. */
+.location-logo-wall { grid-template-columns: repeat(var(--logo-columns), minmax(0, 1fr)); max-width: calc(var(--logo-columns) * 13rem); }
+.location-logo-wall strong { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.25; text-align: center; }
+@media (max-width: 52rem) {
+  .location-logo-wall { grid-template-columns: repeat(var(--logo-columns-md), minmax(0, 1fr)); }
+  .location-logo-wall div:last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
+}
+@media (max-width: 38rem) {
+  .location-logo-wall { grid-template-columns: repeat(var(--logo-columns-sm), minmax(0, 1fr)); }
+  .location-logo-wall div:last-child:nth-child(3n + 1) { grid-column: auto; }
+  .location-logo-wall div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+/* The city pages' service cards use h3 headings (the copy asks for them), styled like the shared h2. */
+.location-directory .directory-card h3 { font-size: clamp(1.05rem, 2vw, 1.45rem); line-height: 1.25; transition: color var(--motion-fast) ease; }
+.location-directory .directory-card:focus-visible h3 { color: var(--accent); }
+@media (hover: hover) {
+  .location-directory .directory-card:hover h3 { color: var(--accent); }
+}

@@ -8,7 +8,8 @@
  * harmless.
  *
  * What it does:
- *   - creates any missing page among the eleven the design needs, by slug
+ *   - creates any missing page among the eleven the design needs and the three city pages, by slug,
+ *     seeding a new city page's Yoast title and description from the content writer's copy
  *   - creates any missing service among the ten, by slug, as a voa_service post
  *   - sets the home page and the posts page (Settings → Reading), if not already set to these
  *   - seeds each new service's Yoast title and description from the React build's SEO fields, only
@@ -44,7 +45,21 @@ function voa_required_pages() {
 		'faqs'           => 'FAQs',
 		'contact'        => 'Contact',
 		'thank-you'      => 'Thank You',
-	);
+	) + voa_required_location_pages();
+}
+
+/**
+ * The city landing pages: slug => title, from data/locations.json. The title is the page's heading
+ * without its highlight mark.
+ *
+ * @return array
+ */
+function voa_required_location_pages() {
+	$pages = array();
+	foreach ( voa_data_raw( 'locations' ) as $page ) {
+		$pages[ trim( $page['path'], '/' ) ] = str_replace( '*', '', rtrim( $page['hero']['title'], '.' ) );
+	}
+	return $pages;
 }
 
 /**
@@ -102,7 +117,7 @@ function voa_install_content() {
 			continue;
 		}
 
-		wp_insert_post(
+		$id = wp_insert_post(
 			array(
 				'post_type'   => 'page',
 				'post_status' => 'publish',
@@ -110,6 +125,18 @@ function voa_install_content() {
 				'post_name'   => $slug,
 			)
 		);
+
+		// A city page starts with the content writer's Yoast title and description.
+		$city = voa_location_for_slug( $slug );
+		if ( $city && $id && ! is_wp_error( $id ) ) {
+			$seo = voa_data_raw( 'locations' )[ $city ]['seo'];
+			if ( ! get_post_meta( $id, '_yoast_wpseo_title', true ) ) {
+				update_post_meta( $id, '_yoast_wpseo_title', $seo['title'] );
+			}
+			if ( ! get_post_meta( $id, '_yoast_wpseo_metadesc', true ) ) {
+				update_post_meta( $id, '_yoast_wpseo_metadesc', $seo['description'] );
+			}
+		}
 		$log[] = sprintf( 'Created page /%s/', $slug );
 	}
 

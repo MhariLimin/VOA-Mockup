@@ -41,6 +41,7 @@ try {
   const caseStudy = await load('/src/content/caseStudy.ts');
   const navigation = await load('/src/content/navigation.ts');
   const blog = await load('/src/content/blogContent.ts');
+  const locations = await load('/src/content/locationPages.ts');
   const clients = JSON.parse(await readFile(join(root, 'src/content/source/staging/clients.json'), 'utf8')).clients;
 
   const data = {
@@ -70,6 +71,12 @@ try {
     caseStudy: caseStudy.caseStudy,
     clients: clients.map(({ name, image }) => ({ name, image })),
     articles: blog.blogArticles.map((article) => ({ ...article, category: blog.articleCategory(article) })),
+    /* Keyed by city. A client without a logo gets an empty image, so Website Content offers it a
+       logo field; the page shows the name until one is chosen. */
+    locations: Object.fromEntries(locations.locationPages.map((page) => [page.slug, {
+      ...page,
+      clients: { ...page.clients, wall: page.clients.wall.map((client) => ({ ...client, image: client.image ?? '' })) },
+    }])),
     accent: await accentPhrases(),
   };
 

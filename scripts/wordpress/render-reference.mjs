@@ -31,8 +31,9 @@ const vite = await createServer({ server: { middlewareMode: true }, appType: 'cu
 try {
   const { App } = await vite.ssrLoadModule('/src/app/App.tsx');
   const { sourcePages } = await vite.ssrLoadModule('/src/content/sourcePages.ts');
+  const { locationPages } = await vite.ssrLoadModule('/src/content/locationPages.ts');
 
-  const routes = ['/', ...sourcePages.map((page) => page.path), '/thank-you', '/no-such-page'];
+  const routes = ['/', ...sourcePages.map((page) => page.path), ...locationPages.map((page) => page.path), '/thank-you', '/no-such-page'];
 
   await mkdir(outDir, { recursive: true });
 

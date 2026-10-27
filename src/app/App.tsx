@@ -22,7 +22,11 @@ export function App() {
           <Route key={from} path={from} element={<Navigate to={to} replace />} />
         ))}
         {locationPages.map((page) => (
-          <Route key={page.slug} path={`/virtual-assistants/${page.slug}`} element={<LocationPage page={page} />} />
+          <Route key={page.slug} path={page.path} element={<LocationPage page={page} />} />
+        ))}
+        {/* The city pages' first mockup addresses, already shared for review, until 27 October 2026. */}
+        {locationPages.map((page) => (
+          <Route key={`old-${page.slug}`} path={`/virtual-assistants/${page.slug}`} element={<Navigate to={page.path} replace />} />
         ))}
         <Route path="/insights/:slug" element={<BlogArticlePage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />

@@ -8,6 +8,8 @@ export interface BlogArticleSummary {
   excerpt: string;
   featuredImage: string;
   sourceUrl: string;
+  /* The category the article has on the live site, where it has one. */
+  category?: string;
 }
 
 export interface BlogArticle extends BlogArticleSummary {
@@ -35,7 +37,10 @@ export const loadBlogArticle = async (slug: string) => {
   return { ...article, featuredImage: savedImage(article.featuredImage), images: article.images.map(savedImage), content: withSavedImages(article.content) };
 };
 
+/* The live site's category where the article has one; otherwise one worked out from its words, since
+   the older articles have none. */
 export const articleCategory = (article: BlogArticleSummary) => {
+  if (article.category) return article.category;
   const text = `${article.title} ${article.excerpt}`.toLowerCase();
   if (/mortgage|loan|broker/.test(text)) return 'Mortgage & loans';
   if (/financial plan|bookkeep|accounting|finances/.test(text)) return 'Finance';

@@ -21,6 +21,7 @@ Status, tasks and blockers: `docs/wordpress-integration/` · Plan, steps and liv
 | 6 | Service pages | **Done** — from data, not blocks |
 | 7 | Services index, About, How It Works, Managed Virtual Support, Client Stories, Videos, FAQs, Contact, Thank you | **Done** |
 | 8 | Insights, article, archive, search, generic page, 404 | **Done** |
+| 8a | City landing pages: Sydney, Brisbane, Melbourne (`page-location.php`, `inc/locations.php`) | **Done** 2026-10-27, matching the React build |
 | 9 | Block patterns | Deferred — see the architecture refinement of 2026-10-04 |
 | 10 | Content, forms, Yoast, redirects | Needs staging |
 

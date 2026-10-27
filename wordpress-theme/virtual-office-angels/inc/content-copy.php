@@ -133,7 +133,8 @@ function voa_content_other_defaults( $entity ) {
 		),
 		'faqs' => array(
 			'closing_intro' => array( 'Closing / Introduction', 'We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.' ),
-			'closing_text' => array( 'Closing / Description', 'If you need any other clarification, call Virtual Office Angels or email' ),
+			// Not "closing_text": that key belongs to the contact section below, whose copy would replace this.
+			'closing_note' => array( 'Closing / Description', 'If you need any other clarification, call Virtual Office Angels or email' ),
 		),
 	);
 	return isset( $copy[ $entity ] ) ? $copy[ $entity ] : array();
@@ -178,6 +179,15 @@ function voa_content_closing_defaults( $entity ) {
 	}
 	if ( 0 === strpos( $entity, 'service:' ) ) {
 		return array( 'closing_eyebrow' => array( 'Contact section / Eyebrow', 'Find the right specialised virtual assistant for your business' ) );
+	}
+	if ( 0 === strpos( $entity, 'location:' ) ) {
+		$locations = voa_data_raw( 'locations' );
+		$city      = substr( $entity, strlen( 'location:' ) );
+		$name      = isset( $locations[ $city ]['name'] ) ? $locations[ $city ]['name'] : '';
+		return array(
+			'closing_eyebrow' => array( 'Contact section / Eyebrow', 'Let’s talk' ),
+			'closing_heading' => array( 'Contact section / Heading', 'Looking for virtual support in ' . $name . '?' ),
+		);
 	}
 	if ( 'about' === $entity ) {
 		$copy = array( 'Let’s talk', 'Looking for the right virtual support?', 'Share the work that is taking time away from clients, revenue, or delivery. We’ll help clarify the virtual support role and the experience it requires.' );

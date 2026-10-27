@@ -75,7 +75,7 @@ $voa_timing_parts  = explode( $voa_timing_phrase, $voa_case['onboarding'][1], 2 
 
 		<div class="case-study-transfer" aria-hidden="true">
 			<span class="case-study-transfer-node">
-				<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="10.4" r="4.2"></circle><path d="M6.2 22.6c1.3-4 4.3-6.1 7.8-6.1s6.5 2.1 7.8 6.1"></path><path d="M21.4 6.2 23.9 8.7 21.4 11.2" opacity="0.55"></path><path d="M6.6 6.2 4.1 8.7l2.5 2.5" opacity="0.55"></path></svg>
+				<svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="10.4" r="4.2"></circle><path d="M6.2 22.6c1.3-4 4.3-6.1 7.8-6.1s6.5 2.1 7.8 6.1"></path><path d="M21.4 6.2 23.9 8.7 21.4 11.2" opacity="0.55"></path><path d="M6.6 6.2 4.1 8.7l2.5 2.5" opacity="0.55"></path></svg>
 			</span>
 			<svg viewBox="0 0 80 220" preserveAspectRatio="none"><path d="M4 18 C 44 18, 33 70, 40 110 C 47 150, 36 202, 76 202" vector-effect="non-scaling-stroke"></path></svg>
 		</div>

@@ -53,6 +53,10 @@ function voa_content_entities() {
 		}
 	}
 
+	foreach ( voa_data_raw( 'locations' ) as $city => $page ) {
+		$entities[ 'location:' . $city ] = 'City page: ' . $page['name'];
+	}
+
 	return $entities;
 }
 
@@ -63,6 +67,9 @@ function voa_content_current_entity() {
 		return '';
 	}
 	$entity = 'voa_service' === $post->post_type ? 'service:' . $post->post_name : $post->post_name;
+	if ( 'page' === $post->post_type && function_exists( 'voa_location_for_slug' ) && voa_location_for_slug( $post->post_name ) ) {
+		$entity = 'location:' . voa_location_for_slug( $post->post_name );
+	}
 	$entities = voa_content_entities();
 	return isset( $entities[ $entity ] ) ? $entity : '';
 }
@@ -74,6 +81,18 @@ function voa_content_groups( $entity ) {
 		return array(
 			array( 'Page introduction', 'pages', array( $path ) ),
 			array( 'Service sections', 'services', array( 'details', $path ) ),
+		);
+	}
+
+	if ( 0 === strpos( $entity, 'location:' ) ) {
+		$city = substr( $entity, strlen( 'location:' ) );
+		return array(
+			array( 'Hero', 'locations', array( $city, 'hero' ) ),
+			array( 'Local clients', 'locations', array( $city, 'clients' ) ),
+			array( 'Working hours', 'locations', array( $city, 'hours' ) ),
+			array( 'Services', 'locations', array( $city, 'services' ) ),
+			array( 'Client story', 'locations', array( $city, 'story' ) ),
+			array( 'FAQs', 'locations', array( $city, 'faqs' ) ),
 		);
 	}
 
@@ -354,6 +373,8 @@ function voa_content_admin_screen() {
 		}
 		if ( 'rich' === $field['type'] ) {
 			echo '<p class="description">Use &lt;em&gt;word&lt;/em&gt; to retain highlighted words.</p>';
+		} elseif ( 'text' === $field['type'] && preg_match( '/\]\(|\*[^*]+\*/', $field['default'] ) ) {
+			echo '<p class="description">Keep the marks: [link text](address) makes a link, and *word* highlights a word.</p>';
 		}
 		echo '</div>';
 	}

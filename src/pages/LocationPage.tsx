@@ -1,30 +1,55 @@
-import type { CSSProperties } from 'react';
+import { useEffect, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { caseStudy } from '../content/caseStudy';
-import { sourceFaqs } from '../content/faqContent';
-import { serviceDetails } from '../content/serviceDetails';
 import { heroBackgrounds, heroStats } from '../content/homeContent';
-import { siteContent } from '../content/siteContent';
-import { locationClients, locationServices, type LocationPage as LocationPageData } from '../content/locationPages';
+import { servicePages } from '../content/sourcePages';
+import type { LocationPage as LocationPageData } from '../content/locationPages';
 import { NextStepSection } from '../components/layout/PageClosing';
-import { ArrowRight, ArrowUpRight, HeroStatIcon } from '../components/ui/Icons';
+import { ArrowUpRight, HeroStatIcon } from '../components/ui/Icons';
 import { useImageRotator } from '../hooks/useImageRotator';
 import { Accordion } from './SourcePage';
 
-/* The FAQs a business weighing up a local page is most likely to ask, verbatim from the source:
-   operating hours, weekend work, communication, privacy. */
-const LOCAL_FAQS = [6, 7, 8, 9].map((index) => sourceFaqs[index]);
+/* The copy's two marks (see content/locationPages.ts): [label](address) becomes a link, an external
+   one opening in a new tab, and *word* a highlighted heading word. */
+function inline(text: string): ReactNode[] {
+  const parts: ReactNode[] = [];
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*([^*]+)\*/g;
+  let last = 0;
+  for (const match of text.matchAll(pattern)) {
+    const index = match.index ?? 0;
+    if (index > last) parts.push(text.slice(last, index));
+    const [, label, href, highlight] = match;
+    if (highlight) parts.push(<em key={index}>{highlight}</em>);
+    else if (href.startsWith('/')) parts.push(<Link key={index} to={href}>{label}</Link>);
+    else parts.push(<a key={index} href={href} target="_blank" rel="noopener noreferrer">{label}</a>);
+    last = index + match[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
 
-/* A city landing page, mockup only (see content/locationPages.ts). Built from existing sections: the
-   homepage hero (same rotating photographs, figures and dots), the logo wall, content split, service
-   directory and FAQ. It closes with the contact section alone, since the hero already carries the
-   four figures that PageClosing would repeat. */
+/* The page's own title and description while it is open; the site's defaults return afterwards. */
+function usePageSeo({ title, description }: LocationPageData['seo']) {
+  useEffect(() => {
+    const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const previous = { title: document.title, description: meta?.content };
+    document.title = title;
+    if (meta) meta.content = description;
+    return () => {
+      document.title = previous.title;
+      if (meta && previous.description !== undefined) meta.content = previous.description;
+    };
+  }, [title, description]);
+}
+
+/* A city landing page, mockup only. Built from existing sections: the homepage hero (same rotating
+   photographs, figures and dots), the logo wall, content split, service directory and FAQ. It closes
+   with the contact section alone, since the hero already carries the four figures that PageClosing
+   would repeat. */
 export function LocationPage({ page }: { page: LocationPageData }) {
-  const clients = locationClients(page);
-  const services = locationServices(page);
-  const area = page.area ?? page.name;
-  const columns = (most: number) => Math.min(clients.length, most);
+  const { hero, clients, hours, services, story, faqs } = page;
+  const columns = (most: number) => Math.min(clients.wall.length, most);
   const { active: heroImage, select: selectHeroImage } = useImageRotator(heroBackgrounds.length, 6000);
+  usePageSeo(page.seo);
 
   return <>
     <section className="section home-hero">
@@ -35,9 +60,9 @@ export function LocationPage({ page }: { page: LocationPageData }) {
       </div>
       <div className="container hero-grid">
         <div className="hero-copy">
-          <p className="eyebrow">Virtual assistants · {page.name}, {page.state}</p>
-          <h1>Virtual assistants for <em>{page.name}</em> businesses.</h1>
-          <p className="lead">{siteContent.hero.description}</p>
+          <p className="eyebrow">{hero.eyebrow}</p>
+          <h1>{inline(hero.title)}</h1>
+          <p className="lead">{inline(hero.intro)}</p>
           <div className="button-row">
             <Link className="button" to="/contact">Find the Right Fit</Link>
             <a className="button button-secondary" href="#local-clients">See local clients</a>
@@ -68,72 +93,69 @@ export function LocationPage({ page }: { page: LocationPageData }) {
 
     <section className="section" id="local-clients"><div className="container">
       <div className="section-heading"><div>
-        <p className="eyebrow">Local clients</p>
-        <h2>Trusted by businesses across <em>{area}</em>.</h2>
-        <p className="lead compact">{clients.length === 1 ? `1 business in ${area} currently works` : `${clients.length} businesses in ${area} currently work`} with {page.placements.length === 1 ? 'one of our virtual assistants' : `${page.placements.length} of our virtual assistants`}.</p>
+        <p className="eyebrow">{clients.eyebrow}</p>
+        <h2>{inline(clients.heading)}</h2>
+        <p className="lead compact">{clients.intro}</p>
       </div></div>
       <div
         className="logo-wall location-logo-wall"
         style={{ '--logo-columns': columns(7), '--logo-columns-md': columns(3), '--logo-columns-sm': columns(2) } as CSSProperties}
-      >{clients.map(({ client, suburb, image }) => (
+      >{clients.wall.map(({ client, location, image }) => (
         <div key={client}>
           {image ? <img src={image} alt={client} loading="lazy" /> : <strong>{client}</strong>}
-          <span>{image ? `${client} · ${suburb}` : suburb}</span>
+          <span>{image ? `${client} · ${location}` : location}</span>
         </div>
       ))}</div>
     </div></section>
 
     <section className="section muted-section"><div className="container content-split">
       <div>
-        <p className="eyebrow">Working hours</p>
-        <h2>Support that works <em>your hours</em>.</h2>
-        <p className="lead compact">{sourceFaqs[6][1]}</p>
+        <p className="eyebrow">{hours.eyebrow}</p>
+        <h2>{inline(hours.heading)}</h2>
+        <p className="lead compact">{inline(hours.body)}</p>
       </div>
       <div className="task-panel">
-        <span className="card-index">Your hours, {page.name} time</span>
-        <ul className="check-list">{page.hours.map((item) => <li key={item}>{item}</li>)}</ul>
+        <span className="card-index">{hours.panel}</span>
+        <ul className="check-list">{hours.items.map((item) => <li key={item}>{inline(item)}</li>)}</ul>
       </div>
     </div></section>
 
     <section className="section"><div className="container">
       <div className="section-heading"><div>
-        <p className="eyebrow">Services</p>
-        <h2>The support {page.name} clients <em>use</em>.</h2>
+        <p className="eyebrow">{services.eyebrow}</p>
+        <h2>{inline(services.heading)}</h2>
       </div><Link className="button button-secondary" to="/services">All services</Link></div>
-      <div className="service-directory">{services.map((service, index) => {
-        const detail = serviceDetails[service.path];
-        return <Link to={service.path} className="directory-card" key={service.path}>
+      <div className="service-directory location-directory">{services.cards.map((card, index) => (
+        <Link to={card.path} className="directory-card" key={card.path}>
           <span>{String(index + 1).padStart(2, '0')}</span>
           <div>
-            <h2>{detail?.title ?? service.title}</h2>
-            <p><span>{detail?.lead ?? service.summary}</span></p>
+            <h3>{card.title}</h3>
+            <p><span>{card.text}</span></p>
           </div>
-          <img src={service.image} alt="" loading="lazy" />
+          <img src={servicePages.find((service) => service.path === card.path)?.image} alt="" loading="lazy" />
           <ArrowUpRight />
-        </Link>;
-      })}</div>
+        </Link>
+      ))}</div>
     </div></section>
 
     <section className="section muted-section"><div className="container content-split">
       <div>
-        <p className="eyebrow">Client story</p>
-        {page.caseStudy
-          ? <><h2>{caseStudy.heading}</h2><p className="lead compact">{caseStudy.intro}</p><Link className="text-link" to="/client-stories#case-study">Read the case study <ArrowRight /></Link></>
-          : <><h2>A {page.name} client story.</h2><p className="lead compact">[Placeholder: a story from a {page.name} client, added only with their permission.]</p></>}
+        <p className="eyebrow">{story.eyebrow}</p>
+        <h2>{inline(story.heading)}</h2>
+        <p className="lead compact">{story.body}</p>
       </div>
       <div className="task-panel">
-        {page.caseStudy
-          ? <><span className="card-index">{caseStudy.hadIntro}</span><ul className="check-list">{caseStudy.had.map((item) => <li key={item}>{item}</li>)}</ul></>
-          : <><span className="card-index">Local proof</span><p className="lead compact">[Placeholder: what the client needed, and the support that was put in place.]</p></>}
+        <span className="card-index">{story.panel}</span>
+        <ul className="check-list">{story.items.map((item) => <li key={item}>{item}</li>)}</ul>
       </div>
     </div></section>
 
     <section className="section"><div className="container faq-page-grid">
       <aside>
-        <p className="eyebrow">Questions</p>
-        <h2>What {page.name} businesses <em>ask us</em>.</h2>
+        <p className="eyebrow">{faqs.eyebrow}</p>
+        <h2>{inline(faqs.heading)}</h2>
       </aside>
-      <Accordion items={LOCAL_FAQS} idPrefix={`${page.slug}-faq`} />
+      <Accordion items={faqs.items.map(([question, answer]) => [question, inline(answer)] as const)} idPrefix={`${page.slug}-faq`} headed />
     </div></section>
 
     <NextStepSection copy={{ eyebrow: 'Let’s talk', heading: `Looking for virtual support in ${page.name}?` }} />

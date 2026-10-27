@@ -24,14 +24,16 @@ function Hero({ page, aside }: { page: SourcePageBrief; aside?: ReactNode }) {
   return <section className={`section inner-hero${expressive ? '' : ' compact-inner-hero'}`}><div className="container inner-hero-grid"><div><p className="eyebrow">{page.eyebrow}</p><h1><HeadingAccent text={page.title} /></h1><p className="lead">{page.summary}</p>{page.template === 'about' && <div className="button-row"><Link className="button" to="/services">View Our Services</Link><Link className="button button-secondary" to="/contact">Get in Touch</Link></div>}</div>{expressive && (aside ?? <div className="hero-orbit" aria-hidden="true"><span>Role brief</span><strong>Right-fit support</strong><i>Managed relationship</i></div>)}</div></section>;
 }
 
-export function Accordion({ items, idPrefix }: { items: readonly (readonly [string, string])[]; idPrefix: string }) {
+/* `headed` wraps each question's button in an h3, for pages whose copy asks for question headings. */
+export function Accordion({ items, idPrefix, headed = false }: { items: readonly (readonly [string, ReactNode])[]; idPrefix: string; headed?: boolean }) {
   const [open, setOpen] = useState(-1);
   return <div className="accordion">{items.map(([heading, body], index) => {
     const expanded = open === index;
+    const button = <button type="button" aria-expanded={expanded} aria-controls={`${idPrefix}-${index}`} onClick={() => setOpen(expanded ? -1 : index)}>
+      <span>{heading}</span><span className="accordion-toggle" aria-hidden="true">{expanded ? '−' : '+'}</span>
+    </button>;
     return <div className="accordion-item" key={heading}>
-      <button type="button" aria-expanded={expanded} aria-controls={`${idPrefix}-${index}`} onClick={() => setOpen(expanded ? -1 : index)}>
-        <span>{heading}</span><span className="accordion-toggle" aria-hidden="true">{expanded ? '−' : '+'}</span>
-      </button>
+      {headed ? <h3 className="accordion-heading">{button}</h3> : button}
       <p className="accordion-panel" id={`${idPrefix}-${index}`} hidden={!expanded}>{body}</p>
     </div>;
   })}</div>;
@@ -273,7 +275,7 @@ function AboutPage({ page }: { page: SourcePageBrief }) {
         <div>
           <p className="eyebrow">Who we support</p>
           <h2>Different businesses need <em>different expertise</em>.</h2>
-          <p className="lead compact">Some roles need strong administration skills. Others require someone who already understands an industry's terminology, systems, and day-to-day processes.</p>
+          <p className="lead compact">Some roles need strong administration skills. Others require someone who already understands an industry’s terminology, systems, and day-to-day processes.</p>
           <p className="lead compact">That is why Virtual Office Angels works across a range of business functions, including:</p>
           <Link className="button button-secondary" to="/services">View our services</Link>
         </div>

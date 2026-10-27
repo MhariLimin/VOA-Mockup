@@ -1,15 +1,26 @@
 # City landing pages (mockup)
 
-Status: **mockup for review**, React build only, not linked from the navigation, no WordPress
-version. Updated 22 October 2026; replaces the New South Wales and Queensland state mockups of
-18 October.
+Status: **built in the React mockup and the WordPress theme**, not linked from the navigation. Updated
+27 October 2026 with the content writer's copy; replaces the New South Wales and Queensland state
+mockups of 18 October.
 
-- `/virtual-assistants/sydney`
-- `/virtual-assistants/brisbane` (covers Brisbane and the Gold Coast)
-- `/virtual-assistants/melbourne`
+**WordPress (27 October 2026):** the theme renders the three pages with `page-location.php` from
+`data/locations.json`, exported from `locationPages.ts` by `npm run wp:export`. **Appearance → Site
+setup** creates the pages and seeds each new page's Yoast title and description. Their copy and client
+logos are editable under **Website Content** (`wordpress-theme/CONTENT_EDITING.md`). Tested on a local
+WordPress 7.1.3 / PHP 8.3: the comparison script reports all three pages identical to the React build,
+a test edit and logo showed on Sydney only and restored cleanly, and the error log stayed empty. Not yet
+installed on VOA staging.
+
+- `/virtual-assistants-sydney`
+- `/virtual-assistants-brisbane` (covers Brisbane and the Gold Coast)
+- `/virtual-assistants-melbourne`
+
+The first mockup addresses (`/virtual-assistants/sydney` and so on) redirect to these.
 
 Code: `src/content/locationPages.ts` (data), `src/pages/LocationPage.tsx` (layout), routes in
-`src/app/App.tsx`, one style block at the end of `src/styles/global.css` (the client wall's columns).
+`src/app/App.tsx`, two style blocks at the end of `src/styles/global.css` (the client wall's columns,
+and the service cards' h3 headings).
 
 ## Why cities, not states
 
@@ -49,29 +60,41 @@ placements only.
 
 ## What the pages contain
 
-Built from existing sections: the homepage hero (same rotating photographs, four figures and dots,
-with a heading for the city), the city's clients, working hours, the services its clients use (most
-VAs first), a client story, four FAQs, and the contact section.
+**Copy source (27 October 2026):** the content writer's three documents,
+`VOA_<City>_Service Page Area Page_On-Page SEO Optimized.docx`. They set each page's address, SEO title
+and meta description, and the copy and order of every section: hero, local clients, working hours,
+services, client story and FAQs. The layout, the four hero figures and the closing contact section
+are unchanged.
 
+- **SEO title and description:** set on each page while it is open, so the mockup shows them in the
+  browser tab. WordPress will need them in Yoast.
 - **Clients:** a logo where the website's library has one, otherwise the business name, with the
-  suburb. Logos used: Road Surgeons, Pool Aide, Ressfin, and two to confirm: the "SureServ" logo for
-  Sureserve Financial Services and the "Integra Consultancy" logo for Integra Consulting. Industrias,
-  RedP, Seet Advisory, Coastal Financial and Velar Finance have no logo in the library.
-- **Client story:** Sydney uses the existing case study (a consultancy in Epping, Sydney). Brisbane
-  and Melbourne have placeholders.
+  location. Logos used: Road Surgeons, Pool Aide, Ressfin, and two to confirm: the "SureServ" logo for
+  Sureserve Financial Services and the "Integra Consultancy" logo for Integra Consulting. The writer
+  asked for logos for Industrias, RedP, Seet Advisory and Coastal Financial, which the library does not
+  have: their names show until the logos are supplied. Velar Finance shows its name, as asked.
+- **Services:** the writer's own cards and wording: five for Sydney, two for Brisbane, one for
+  Melbourne, with h3 headings. As on every service list, a card's description appears on hover (always
+  on phones) and is cut at three lines, so the longer descriptions are shortened there.
+- **Client story:** each city has the writer's story and a "Services we offer" list. Sydney's replaces
+  the Epping case study link.
+- **FAQs:** only the writer's questions (Sydney four, Brisbane and Melbourne five each), with h3
+  question headings. They replace the four general FAQs.
 
-Reused content, unchanged: the homepage hero description, the FAQ answers (operating hours, weekend
-work, communication, privacy), the service titles and summaries, and the case study.
+The writer's links pointed at preview sites (chatgpt.site, the Vercel mockup); here they point at the
+mockup's own pages. Links to government websites open in a new tab.
 
-Written for the mockup (not client copy): the headings ("Virtual assistants for … businesses.",
-"Trusted by businesses across ….", "Support that works your hours.", "The support … clients use.",
-"What … businesses ask us.", "Looking for virtual support in …?"), the client-count sentence, the
-hours panel items, and the Brisbane and Melbourne placeholders.
+Not from the writer: the highlighted heading words (the city or area), the closing section heading
+("Looking for virtual support in …?"), and two panel labels without their colon.
 
 ## Before any of this goes live
 
-- Each client's permission to be named, or to have its logo shown, on a public page.
+- Logos for Industrias Services Group, RedP Marketing, Seet Advisory and Coastal Financial
+  Consultants.
+- The writer's spelling "authorized" in the Sydney and Brisbane mortgage cards; the rest of the copy
+  uses "authorised".
 - Keyword Planner volumes for the three cities, to confirm the order (and Brisbane versus Melbourne).
-- Answers still open from the deck: Brisbane's hours during daylight saving; 5pm or 5:30pm (Google
-  Business Profile says 5:30, the website says 5).
-- A WordPress page template, once the client approves the approach.
+- An answer still open: 5pm or 5:30pm (Google Business Profile says 5:30, the website says 5). The
+  writer's copy no longer states the hours.
+- On VOA staging: upload the new theme ZIP (after a database backup), run **Appearance → Site setup**
+  once, then check the three pages and their Yoast fields.
