@@ -224,7 +224,8 @@ get_header();
 		</div>
 	</div>
 	<div class="container"><div class="home-testimonial-grid">
-		<?php foreach ( array_slice( $voa_quotes, 0, 3 ) as $voa_quote ) : ?>
+		<?php /* The first four testimonials are the tracker's; the previews keep the three source-site ones, as homeTestimonials does. */ ?>
+		<?php foreach ( array_slice( $voa_quotes, 4, 3 ) as $voa_quote ) : ?>
 			<figure><blockquote><?php echo esc_html( rtrim( mb_substr( $voa_quote['quote'], 0, 145 ) ) . '...' ); ?></blockquote><figcaption><span class="testimonial-avatar" aria-hidden="true"><?php echo esc_html( $voa_quote['initials'] ); ?></span><span><strong><?php echo esc_html( $voa_quote['name'] ); ?></strong><small><?php echo esc_html( $voa_quote['role'] ); ?></small></span></figcaption></figure>
 		<?php endforeach; ?>
 	</div></div>

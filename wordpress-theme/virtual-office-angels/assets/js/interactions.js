@@ -6,9 +6,10 @@
  *   article rail         HomePage scrollRail — the arrows scroll the rail by 80% of its width
  *   systems diagram      SystemsDiagram active — hovering a chip lights its spoke back to the core
  *   article library      InsightsPage — topic filter and ten-a-page paging, in place
+ *   testimonial pages    StoriesPage — four-a-page paging of the testimonials, in place
  *   FAQ topics           FaqPage activeTopic — the topic buttons swap the question list
  *
- * The library and the FAQ page carry their full data as JSON beside the markup; the first view is
+ * The library, the testimonials and the FAQ page carry their full data as JSON beside the markup; the first view is
  * rendered by PHP, and the builders here produce the same markup for every later one.
  */
 (function () {
@@ -203,6 +204,48 @@
 		});
 	}
 
+	/* --- Testimonial pages ------------------------------------------------------------------ */
+
+	function testimonialPages() {
+		var section = document.getElementById('testimonials');
+		var data = section && readJson(section, '.voa-testimonial-data');
+
+		if (!data) {
+			return;
+		}
+
+		var grid = section.querySelector('.testimonial-grid-paged');
+		var pages = Math.ceil(data.items.length / data.perPage);
+		var page = 1;
+
+		function render() {
+			grid.innerHTML = data.items.slice((page - 1) * data.perPage, page * data.perPage).map(function (quote) {
+				return '<figure><blockquote>“' + escape(quote.quote) + '”</blockquote><figcaption>' +
+					'<span class="testimonial-avatar" aria-hidden="true">' + escape(quote.initials) + '</span>' +
+					'<span><strong>' + escape(quote.name) + '</strong><small>' + escape(quote.role) + '</small></span>' +
+					'</figcaption></figure>';
+			}).join('');
+
+			var nav = section.querySelector('.pagination');
+			if (nav) {
+				nav.parentNode.removeChild(nav);
+			}
+			grid.insertAdjacentHTML('afterend', pagination('Testimonial pages', page, pages));
+		}
+
+		section.addEventListener('click', function (event) {
+			var button = event.target.closest('.pagination button');
+			if (!button || button.disabled) {
+				return;
+			}
+			var buttons = Array.prototype.slice.call(button.parentNode.children);
+			var index = buttons.indexOf(button);
+			page = index === 0 ? page - 1 : index === buttons.length - 1 ? page + 1 : Number(button.textContent);
+			render();
+			scrollToSection(section);
+		});
+	}
+
 	/* --- FAQ topics ------------------------------------------------------------------------- */
 
 	function faqTopics() {
@@ -235,6 +278,7 @@
 		articleRail();
 		systemsDiagram();
 		articleLibrary();
+		testimonialPages();
 		faqTopics();
 	}
 

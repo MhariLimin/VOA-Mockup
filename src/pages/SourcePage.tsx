@@ -104,11 +104,25 @@ function SystemsDiagram({ systems }: { systems: readonly string[] }) {
   );
 }
 
-
+/* Where the client's document groups the tools (Digital Marketing), each group is a small card of
+   chips instead of the hub diagram, which only reads with up to eight single tools. */
+function SystemsGroups({ groups }: { groups: NonNullable<(typeof serviceDetails)[string]['systemGroups']> }) {
+  return (
+    <div className="systems-groups">
+      {groups.map((group) => (
+        <article key={group.title}>
+          <h3><span className="systems-group-icon" aria-hidden="true"><StackGlyph /></span>{group.title}</h3>
+          <ul>{group.items.map((item) => <li key={item}><span className="systems-chip"><ModuleGlyph />{item}</span></li>)}</ul>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 function ServicePage({ page }: { page: SourcePageBrief }) {
   const detail = serviceDetails[page.path];
   const heroAside = page.image ? <img className="inner-hero-image" src={page.image} alt={page.imageAlt ?? ''} /> : undefined;
+  const feedback = testimonials.filter((testimonial) => testimonial.servicePaths?.includes(page.path));
 
   if (!detail) {
     return <><Hero page={page} aside={heroAside} />
@@ -135,7 +149,7 @@ function ServicePage({ page }: { page: SourcePageBrief }) {
 
     <section className="section muted-section systems-section"><div className="container">
       <div className="systems-intro"><p className="eyebrow">Systems experience &amp; requirements</p><h2><HeadingAccent text={detail.systemsHeading} /></h2><p className="lead compact">{detail.systemsIntro}</p></div>
-      <SystemsDiagram systems={detail.systems} />
+      {detail.systemGroups ? <SystemsGroups groups={detail.systemGroups} /> : <SystemsDiagram systems={detail.systems ?? []} />}
     </div></section>
 
     <section className="section"><div className="container">
@@ -187,7 +201,17 @@ function ServicePage({ page }: { page: SourcePageBrief }) {
 
     <section className="section muted-section service-feedback"><div className="container">
       <div className="section-heading"><div><p className="eyebrow">Client feedback</p><h2><HeadingAccent text={detail.feedbackHeading} /></h2></div></div>
-      <div className="testimonial-grid testimonial-grid-3">{[1, 2, 3].map((slot) => (
+      {/* Real testimonials for this service where the client has supplied them; otherwise the
+          document's three placeholder cards. */}
+      <div className="testimonial-grid testimonial-grid-3" data-count={feedback.length || 3}>{feedback.length > 0 ? feedback.map((testimonial) => (
+        <figure key={testimonial.name}>
+          <blockquote>“{testimonial.quote}”</blockquote>
+          <figcaption>
+            <span className="testimonial-avatar" aria-hidden="true">{testimonial.initials}</span>
+            <span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span>
+          </figcaption>
+        </figure>
+      )) : [1, 2, 3].map((slot) => (
         <figure key={slot}>
           <blockquote>“{detail.feedbackPlaceholder}”</blockquote>
           <figcaption>
@@ -471,6 +495,13 @@ function WhyPage({ page }: { page: SourcePageBrief }) {
 }
 
 function StoriesPage({ page }: { page: SourcePageBrief }) {
+  /* Four testimonials a page, two by two, so a long quote no longer sets the height of every card. */
+  const PER_PAGE = 4;
+  const listRef = useRef<HTMLElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageCount = Math.ceil(testimonials.length / PER_PAGE);
+  const pageTestimonials = testimonials.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+  function goToPage(n: number) { setCurrentPage(n); scrollToSection(listRef.current); }
   return <>
     {/* W3-CST1: this page has no hero section, so the opening block gains one — a low-opacity
         photograph behind the introduction and the client carousel. */}
@@ -483,9 +514,9 @@ function StoriesPage({ page }: { page: SourcePageBrief }) {
       <ClientCarousel />
     </div></section>
 
-    <section className="section muted-section" id="testimonials"><div className="container">
+    <section className="section muted-section" id="testimonials" ref={listRef}><div className="container">
       <div className="section-heading"><div><p className="eyebrow">Client testimonials</p><h2>In their words.</h2><p className="lead compact">Whether they are in accounting, legal, real estate, or finance, the tailored approach is intended to provide the right support every time.</p></div></div>
-      <div className="testimonial-grid">{testimonials.map((testimonial) => (
+      <div className="testimonial-grid testimonial-grid-paged">{pageTestimonials.map((testimonial) => (
         <figure key={testimonial.name}>
           <blockquote>“{testimonial.quote}”</blockquote>
           <figcaption>
@@ -494,6 +525,7 @@ function StoriesPage({ page }: { page: SourcePageBrief }) {
           </figcaption>
         </figure>
       ))}</div>
+      <Pagination label="Testimonial pages" currentPage={currentPage} pageCount={pageCount} onChange={goToPage} />
     </div></section>
 
     {/* The approved live-site copy is presented as one compact challenge-to-support map. The rails,

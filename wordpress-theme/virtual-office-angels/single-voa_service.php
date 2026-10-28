@@ -31,9 +31,21 @@ endif;
 
 /*
  * Systems as a hub-and-spoke constellation: chip positions on an ellipse, so the layout stays even
- * for any count between four and eight.
+ * for any count between four and eight. A service whose tools come in named groups (Digital
+ * Marketing) shows one card per group instead.
  */
-$voa_systems = $voa_detail['systems'];
+$voa_groups  = isset( $voa_detail['systemGroups'] ) ? $voa_detail['systemGroups'] : array();
+$voa_systems = isset( $voa_detail['systems'] ) ? $voa_detail['systems'] : array();
+
+/* Real testimonials for this service where the client has supplied them; otherwise the document's three placeholder cards. */
+$voa_feedback = array_values(
+	array_filter(
+		voa_data( 'testimonials' ),
+		function ( $voa_quote ) use ( $voa_path ) {
+			return isset( $voa_quote['servicePaths'] ) && in_array( $voa_path, $voa_quote['servicePaths'], true );
+		}
+	)
+);
 $voa_points  = array();
 foreach ( $voa_systems as $voa_index => $voa_system ) {
 	$voa_angle    = deg2rad( -90 + ( 360 / count( $voa_systems ) ) * $voa_index );
@@ -67,6 +79,20 @@ foreach ( $voa_systems as $voa_index => $voa_system ) {
 
 <section class="section muted-section systems-section"><div class="container">
 	<div class="systems-intro"><p class="eyebrow">Systems experience &amp; requirements</p><h2><?php echo voa_accent( $voa_detail['systemsHeading'] ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?></h2><p class="lead compact"><?php echo esc_html( $voa_detail['systemsIntro'] ); ?></p></div>
+	<?php if ( $voa_groups ) : ?>
+	<div class="systems-groups">
+		<?php foreach ( $voa_groups as $voa_group ) : ?>
+			<article>
+				<h3><span class="systems-group-icon" aria-hidden="true"><?php echo voa_stack_glyph(); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- static markup. ?></span><?php echo esc_html( $voa_group['title'] ); ?></h3>
+				<ul>
+					<?php foreach ( $voa_group['items'] as $voa_item ) : ?>
+						<li><span class="systems-chip"><?php echo voa_module_glyph(); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- static markup. ?><?php echo esc_html( $voa_item ); ?></span></li>
+					<?php endforeach; ?>
+				</ul>
+			</article>
+		<?php endforeach; ?>
+	</div>
+	<?php else : ?>
 	<div class="systems-diagram" data-count="<?php echo count( $voa_systems ); ?>" data-linked="false">
 		<svg class="systems-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
 			<?php foreach ( $voa_points as $voa_point ) : ?>
@@ -82,6 +108,7 @@ foreach ( $voa_systems as $voa_index => $voa_system ) {
 			<?php endforeach; ?>
 		</ul>
 	</div>
+	<?php endif; ?>
 </div></section>
 
 <section class="section"><div class="container">
@@ -129,8 +156,17 @@ foreach ( $voa_systems as $voa_index => $voa_system ) {
 
 <section class="section muted-section service-feedback"><div class="container">
 	<div class="section-heading"><div><p class="eyebrow">Client feedback</p><h2><?php echo voa_accent( $voa_detail['feedbackHeading'] ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?></h2></div></div>
-	<div class="testimonial-grid testimonial-grid-3">
-		<?php for ( $voa_slot = 0; $voa_slot < 3; $voa_slot++ ) : ?>
+	<div class="testimonial-grid testimonial-grid-3" data-count="<?php echo $voa_feedback ? count( $voa_feedback ) : 3; ?>">
+		<?php foreach ( $voa_feedback as $voa_quote ) : ?>
+			<figure>
+				<blockquote>“<?php echo esc_html( $voa_quote['quote'] ); ?>”</blockquote>
+				<figcaption>
+					<span class="testimonial-avatar" aria-hidden="true"><?php echo esc_html( $voa_quote['initials'] ); ?></span>
+					<span><strong><?php echo esc_html( $voa_quote['name'] ); ?></strong><small><?php echo esc_html( $voa_quote['role'] ); ?></small></span>
+				</figcaption>
+			</figure>
+		<?php endforeach; ?>
+		<?php for ( $voa_slot = 0; ! $voa_feedback && $voa_slot < 3; $voa_slot++ ) : ?>
 			<figure>
 				<blockquote>“<?php echo esc_html( $voa_detail['feedbackPlaceholder'] ); ?>”</blockquote>
 				<figcaption>

@@ -66,7 +66,7 @@ export const locationPages: readonly LocationPage[] = [
       intro: 'We have worked with clients across a range of industries, including digital marketing, facilities services, maintenance, consulting, insurance, financial planning, and mortgage broking. Our first-hand experience in providing HR-managed outsourcing services shows how specialised virtual support fits different business operations.',
       wall: [
         { client: 'Road Surgeons', location: 'Botany', image: logo('3c4a18231a-6.png') },
-        { client: 'Industrias Services Group', location: 'Alexandria' },
+        { client: 'Industrias Service Group', location: 'Alexandria' },
         { client: 'RedP Marketing', location: 'Revesby' },
         /* The library's "SureServ" logo is very likely this business: to confirm. */
         { client: 'Sureserve Financial Services', location: 'Woollahra', image: logo('043e55e484-5.png') },

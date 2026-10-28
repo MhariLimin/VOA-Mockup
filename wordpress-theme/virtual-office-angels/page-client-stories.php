@@ -3,6 +3,9 @@
  * /client-stories — StoriesPage in SourcePage.tsx: the client carousel, every testimonial in full, then
  * the client case study from the live site's /client-case-studies/ page (data/caseStudy.json).
  *
+ * Testimonials page four at a time, as StoriesPage does: PHP renders the first page, and
+ * interactions.js rebuilds the grid from the JSON beside it for the others.
+ *
  * Avatars are initials, not photographs. No verified client portraits exist, and none may be
  * generated or assigned. The client has confirmed permission to publish these named testimonials and
  * the logos (2026-10-03).
@@ -12,7 +15,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$voa_brief = voa_page( '/client-stories' );
+$voa_brief    = voa_page( '/client-stories' );
+$voa_quotes   = voa_data( 'testimonials' );
+$voa_per_page = 4;
 
 get_header();
 ?>
@@ -28,8 +33,8 @@ get_header();
 
 <section class="section muted-section" id="testimonials"><div class="container">
 	<div class="section-heading"><div><p class="eyebrow"><?php echo voa_content_copy( 'client-stories', 'testimonials_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'client-stories', 'testimonials_heading' ); ?></h2><p class="lead compact"><?php echo voa_content_copy( 'client-stories', 'testimonials_intro' ); ?></p></div></div>
-	<div class="testimonial-grid">
-		<?php foreach ( voa_data( 'testimonials' ) as $voa_quote ) : ?>
+	<div class="testimonial-grid testimonial-grid-paged">
+		<?php foreach ( array_slice( $voa_quotes, 0, $voa_per_page ) as $voa_quote ) : ?>
 			<figure>
 				<blockquote>“<?php echo esc_html( $voa_quote['quote'] ); ?>”</blockquote>
 				<figcaption>
@@ -39,6 +44,8 @@ get_header();
 			</figure>
 		<?php endforeach; ?>
 	</div>
+	<?php get_template_part( 'template-parts/layout/pagination', null, array( 'label' => 'Testimonial pages', 'pages' => (int) ceil( count( $voa_quotes ) / $voa_per_page ) ) ); ?>
+	<script type="application/json" class="voa-testimonial-data"><?php echo wp_json_encode( array( 'items' => $voa_quotes, 'perPage' => $voa_per_page ) ); ?></script>
 </div></section>
 
 <?php

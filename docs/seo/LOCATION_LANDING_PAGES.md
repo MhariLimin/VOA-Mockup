@@ -38,7 +38,7 @@ carousel are **not** used as data; past clients and logo-only businesses are lef
 
 | City | Clients | VAs | Clients (suburb) and the services their VAs provide |
 | --- | --- | --- | --- |
-| **Sydney** | **7** | **10** | Road Surgeons (Botany): admin. Industrias Services Group (Alexandria): admin, bookkeeping. RedP Marketing (Revesby): 3 digital marketing. Sureserve Financial Services (Woollahra): financial planning admin. Integra Consulting (Eastwood): executive admin. Pool Aide (Lindfield): admin and accounts. Ressfin Total Lending Solution (Bondi Junction): loan processing |
+| **Sydney** | **7** | **10** | Road Surgeons (Botany): admin. Industrias Service Group (Alexandria): admin, bookkeeping. RedP Marketing (Revesby): 3 digital marketing. Sureserve Financial Services (Woollahra): financial planning admin. Integra Consulting (Eastwood): executive admin. Pool Aide (Lindfield): admin and accounts. Ressfin Total Lending Solution (Bondi Junction): loan processing |
 | **Brisbane & Gold Coast** | **2** | **2** | Seet Advisory (Toowong): financial planning. Coastal Financial Consultants (Helensvale, Gold Coast): mortgage support |
 | **Melbourne** | **1** | **1** | Velar Finance (Doncaster East): loan processing |
 | Wollongong | 1 | 1 | Hokus E-bikes (Corrimal): Shopify and social media. No page yet |
@@ -89,7 +89,7 @@ Not from the writer: the highlighted heading words (the city or area), the closi
 
 ## Before any of this goes live
 
-- Logos for Industrias Services Group, RedP Marketing, Seet Advisory and Coastal Financial
+- Logos for Industrias Service Group, RedP Marketing, Seet Advisory and Coastal Financial
   Consultants.
 - The writer's spelling "authorized" in the Sydney and Brisbane mortgage cards; the rest of the copy
   uses "authorised".

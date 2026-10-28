@@ -1,5 +1,38 @@
 [
 	{
+		"name": "Kathryn",
+		"role": "Industrias Service Group",
+		"initials": "K",
+		"quote": "An outstanding addition to our team! Their thoroughness and keen attention to detail have streamlined our day-to-day operation. Overall, their specialised virtual support has brought tremendous value to our business. Their flexibility, punctuality, and sound judgment give us complete confidence in the support we receive every day."
+	},
+	{
+		"name": "Rocky",
+		"role": "Velar Finance",
+		"initials": "R",
+		"servicePaths": [
+			"/services/mortgage-loans-processing-virtual-support"
+		],
+		"quote": "The virtual support services we’ve received have been incredibly valuable to our business. From managing day-to-day administrative tasks to reducing our workload, their assistance has allowed us to save valuable time and focus more on client relationships and business development. As virtual loans assistants, their willingness to help, positive attitude, and responsiveness, along with the team’s excellent communication, have made the overall experience truly enjoyable."
+	},
+	{
+		"name": "Greg",
+		"role": "Sureserve Financial Services",
+		"initials": "G",
+		"servicePaths": [
+			"/services/virtual-financial-planning-and-admin-assistant"
+		],
+		"quote": "For eight years, the consistent and reliable virtual financial support we’ve received has been invaluable in helping us scale our business. Having that level of stability has allowed our local team to continue growing, making our virtual assistant a truly valuable member of our team."
+	},
+	{
+		"name": "Steven",
+		"role": "RessFin Total Lending Solutions",
+		"initials": "S",
+		"servicePaths": [
+			"/services/mortgage-loans-processing-virtual-support"
+		],
+		"quote": "We’ve been with Virtual Office Angels for 10 years, and the quality of their remote support for mortgage and loans processing has been excellent. Our long-standing relationship reflects the value of the services they provide."
+	},
+	{
 		"name": "Paul Godden",
 		"role": "Managing Director, Vision Quest Video Productions",
 		"initials": "PG",

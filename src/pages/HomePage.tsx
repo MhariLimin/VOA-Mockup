@@ -2,7 +2,7 @@ import { Fragment, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { buyerQuestions, contactBackgrounds, heroBackgrounds, heroStats, moreThanRecruitment, specialistServices } from '../content/homeContent';
 import { blogArticles, articleCategory, formatArticleDate } from '../content/blogContent';
-import { testimonials } from '../content/testimonials';
+import { homeTestimonials } from '../content/testimonials';
 import { siteContent } from '../content/siteContent';
 import { ClientCarousel } from '../components/ui/ClientCarousel';
 import { ContactForm } from '../components/ui/ContactForm';
@@ -242,7 +242,7 @@ export function HomePage() {
             <Link className="text-link" to="/client-stories">Read all testimonials <ArrowRight /></Link>
           </div>
         </div>
-        <div className="container"><div className="home-testimonial-grid">{testimonials.slice(0, 3).map((testimonial) => <figure key={testimonial.name}><blockquote>{`${testimonial.quote.slice(0, 145).trimEnd()}...`}</blockquote><figcaption><span className="testimonial-avatar" aria-hidden="true">{testimonial.initials}</span><span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span></figcaption></figure>)}</div></div>
+        <div className="container"><div className="home-testimonial-grid">{homeTestimonials.map((testimonial) => <figure key={testimonial.name}><blockquote>{`${testimonial.quote.slice(0, 145).trimEnd()}...`}</blockquote><figcaption><span className="testimonial-avatar" aria-hidden="true">{testimonial.initials}</span><span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span></figcaption></figure>)}</div></div>
       </section>
 
       <section className="section faq-section" data-home-reveal="faq">

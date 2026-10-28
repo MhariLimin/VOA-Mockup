@@ -134,7 +134,7 @@ function voa_content_groups( $entity ) {
 function voa_content_is_locked_key( $key ) {
 	return in_array(
 		(string) $key,
-		array( 'path', 'template', 'source', 'href', 'url', 'domain', 'seoTitle', 'metaDescription', 'number' ),
+		array( 'path', 'template', 'source', 'href', 'url', 'domain', 'seoTitle', 'metaDescription', 'number', 'servicePaths' ),
 		true
 	);
 }

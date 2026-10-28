@@ -11,11 +11,8 @@ for all three websites is tracked in [`../hosting/README.md`](../hosting/README.
 - [ ] **Team leaders' reviews and revisions** implemented (the "Staging site comments" tab), then approved
 - [ ] **Facts made consistent everywhere** *(added)*:
   - the office address (website says Level 13, Suite 1A; the tracker says Ground Floor)
-  - business hours (website 9am–5pm; Google Business Profile 9am–5:30pm) 
-
-  ```
-  9AM - 6PM Correct
-  ```
+  - business hours: **9am–6pm** confirmed. The website's FAQ answer was changed on 28 October;
+    the Google Business Profile (9am–5:30pm) still needs updating
 
   - phone numbers
 - [ ] The article author name decided: display name (the theme) or username (`annevillavieja`, as in
@@ -30,7 +27,13 @@ Need Author Bio Section in every article
 - [ ] **Home page SEO**
 - [ ] **Service pages SEO** (10 pages)
 - [ ] **Other pages SEO** (About, How It Works, Managed Virtual Support, Client Stories, Insights, Videos, FAQs, Contact)
-- [ ] **Redirects** for the 30 page addresses that change, entered in the Redirection plugin and each one tested *(added)*
+- [ ] **Redirects**: the 153 old addresses (53 pages and archives, 100 articles), tested on staging with
+  `redirects-staging-1384.csv`, then imported on live at launch with `redirects.csv`. See
+  `REDIRECTS_STAGING_GUIDE.txt` *(added)*
+  - [x] Tested on staging, 28 October: all 153 answer with one 301 to the right address, and all
+    117 landing pages load
+  - [ ] Before launch: delete the staging test redirects (guide step 9)
+  - [ ] Launch day: import `redirects.csv` on live and test again (guide step 10)
 - [ ] Duplicates removed: `/home-old/` and the second contact page (`/contact/` and `/contact-us/`) *(added)*
 - [ ] The sitemap: `https://` addresses only; the old testimonials sitemap removed *(added)*
 - [ ] Search engine visibility: **on** for live, **off** for staging (Settings → Reading) *(added)*
@@ -80,8 +83,8 @@ Need Author Bio Section in every article
 - [ ] Post categories decided: the posts have none, and the theme currently works one out from the
   title *(added)*
 - [ ] **Old articles:** SEO title, meta description and focus keyphrase in Yoast for each of the 98 posts
-- [ ] **SEO campaign pages** (Sydney, Brisbane, Melbourne): content from VA Paola,
-  Yoast SEO, and built in WordPress (they exist only in the React mockup today)
+- [x] **SEO campaign pages** (Sydney, Brisbane, Melbourne): the writer's content, Yoast SEO title and
+  description, built in the theme and checked on staging, 27 October
 - [ ] Email routing fixed: the Business plan holds a copy of the Virtual Office Angels domains, so some
   mail sent from there never reaches the real mailbox. Needs approval *(added)*
 - [ ] PageSpeed Insights run on mobile and desktop on the live site, and problems fixed *(added)*

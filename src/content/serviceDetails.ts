@@ -10,7 +10,10 @@ export interface ServiceDetail {
   scope: readonly (readonly [string, string])[];
   systemsHeading: string;
   systemsIntro: string;
-  systems: readonly string[];
+  /* A flat list for the hub diagram, or named groups of tools where the client's document groups
+     them (Digital Marketing, 2026-10-28). A service has one or the other. */
+  systems?: readonly string[];
+  systemGroups?: readonly { title: string; items: readonly string[] }[];
   fitEyebrow: string;
   fitHeading: string;
   fits: readonly string[];
@@ -52,7 +55,11 @@ export const serviceRouter: readonly (readonly [string, string])[] = [
    for mortgage, financial planning and accounting come from the same document and supersede the
    PDF's. Note the document drops the boundary caveat entirely — the text about credit decisions,
    product recommendations and regulated advice remaining with the authorised professional is no
-   longer anywhere on the site. Worth confirming that is intended rather than relocated. */
+   longer anywhere on the site. Worth confirming that is intended rather than relocated.
+
+   Digital Marketing's lead, tags, scope heading, ten scope items and grouped systems come from
+   VOA_Digital_Marketing Service Page_Updated_Content.docx (2026-10-28); its other sections are
+   unchanged. */
 export const serviceDetails: Record<string, ServiceDetail> = {
   "/services/mortgage-loans-processing-virtual-support": {
     seoTitle: "Mortgage Processing Virtual Assistant Support | Virtual Office Angels",
@@ -394,22 +401,33 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     seoTitle: "Digital Marketing Virtual Assistant | Virtual Office Angels",
     metaDescription: "Find a digital marketing virtual assistant for campaign coordination, social media publishing, analytics, website updates, and content support.",
     title: "Digital Marketing Virtual Assistance",
-    lead: "Virtual Office Angels matches businesses with experienced virtual assistants who support day-to-day digital marketing execution, from content publishing and strategy development to campaign coordination, reporting, and website updates.",
-    tags: ["Campaign Coordination", "Social Media Publishing", "Analytics Reporting"],
+    lead: "Virtual Office Angels matches businesses with experienced virtual assistants for digital marketing tasks, including social media asset creation, platform publishing, comment moderation, advertising spend tracking, and Google and Bing performance reporting.",
+    tags: ["Social Media Asset Creation", "Social Media Publishing", "Advertising & Analytics Reporting"],
     scopeEyebrow: "Digital marketing virtual assistant role scope",
-    scopeHeading: "Keep marketing campaigns moving from brief to execution.",
+    scopeHeading: "Keep your marketing campaigns moving from brief to execution.",
     scopeIntro: "Build the role around the marketing work already defined by your strategy. We match the channels, systems, and production requirements to a virtual assistant with relevant digital marketing experience.",
     scope: [
-      ["Content production support", "Prepare approved graphics, videos, and campaign assets from supplied briefs, templates, and brand guidelines."],
-      ["Social media publishing", "Schedule and publish approved content across the social platforms selected by your business."],
-      ["Campaign coordination", "Maintain campaign calendars, asset status, links, approvals, and publishing requirements across active campaigns."],
-      ["Analytics reporting", "Compile traffic, engagement, and campaign data into recurring reports for your marketing team to review."],
-      ["Website updates", "Upload approved pages, articles, images, and other content through your website CMS."],
-      ["Search marketing support", "Assist with approved SEO, search advertising and optimisation tasks under your marketing plan."],
+      ["Social Media Asset Creation", "Create and edit social graphics, banner ads, carousel images, and short videos using your brand guidelines. Resize and adapt assets for organic posts, boosted content, social advertising, and search marketing campaigns."],
+      ["Facebook and Instagram Support", "Prepare captions, upload approved assets, and schedule posts, Stories, and Reels. Maintain publishing calendars, check links and tags, and collect content performance figures through Meta Business Suite and platform insights."],
+      ["TikTok Support", "Edit supplied footage into TikTok videos. Add subtitles, text overlays, and cover images, prepare captions, publish approved content, and compile viewing and engagement figures."],
+      ["YouTube Support", "Prepare video uploads and YouTube Shorts. Edit supplied footage, create thumbnails, add titles, descriptions, and subtitles, and organise approved videos into playlists. Compile channel and video performance reports through YouTube Studio."],
+      ["X/Twitter Support", "Adapt approved content into X posts and threads. Prepare accompanying graphics or video, schedule posts, monitor mentions and replies, and maintain publishing and engagement records."],
+      ["LinkedIn Support", "Prepare company page updates, document posts, and campaign graphics. Schedule approved content, monitor comments and enquiries, and compile page and post performance figures."],
+      ["Comment and Message Moderation", "Monitor comments and inbox enquiries across agreed channels. Respond using approved guidance, manage spam, record recurring questions, and refer complaints or sensitive enquiries to the appropriate person."],
+      ["Advertising Support and Spend Tracking", "Prepare campaign assets and upload approved materials. Retrieve advertising costs from Meta Ads Manager, Google Ads, Microsoft Advertising, and other agreed platforms. Maintain spend trackers and compile figures such as clicks, cost per click, and cost per result."],
+      ["Google, GA4, and Bing Reporting", "Compile website traffic, engagement, and configured conversion reports in Google Analytics. Retrieve Google and Bing search performance data through Google Search Console and Bing Webmaster Tools, alongside paid campaign reports from Google Ads and Microsoft Advertising."],
+      ["Campaign and Website Coordination", "Track briefs, asset revisions, approvals, and publishing deadlines. Upload approved website content, update campaign images and links, and coordinate outstanding requirements with your marketing team."],
     ],
     systemsHeading: "Match the role to your digital marketing channels and systems.",
     systemsIntro: "Tell us which platforms, reporting tools, and content systems form part of your marketing workflow. Relevant practical experience is considered when candidates are matched to the role.",
-    systems: ["Google Analytics", "Facebook & Instagram", "TikTok", "YouTube", "Meta Business Suite", "Approved Design Tools"],
+    systemGroups: [
+      { title: "Social Media Platforms", items: ["Facebook", "Instagram", "TikTok", "X", "LinkedIn", "YouTube"] },
+      { title: "Publishing and Advertising", items: ["Meta Business Suite", "Meta Ads Manager", "TikTok Ads Manager", "YouTube Studio", "Google Ads", "Microsoft Advertising"] },
+      { title: "Analytics and Search Reporting", items: ["Google Analytics 4", "Google Search Console", "Bing Webmaster Tools", "Looker Studio"] },
+      { title: "Graphic Design", items: ["Adobe Photoshop", "Canva", "Adobe Illustrator", "Adobe Express"] },
+      { title: "Video Editing", items: ["CapCut", "Adobe Premiere", "Adobe After Effects"] },
+      { title: "Content and Reporting", items: ["WordPress", "Microsoft Excel", "Google Sheets"] },
+    ],
     fitEyebrow: "When to hire a digital marketing virtual assistant",
     fitHeading: "Choose specialised support when marketing starts falling behind the business plan.",
     fits: [

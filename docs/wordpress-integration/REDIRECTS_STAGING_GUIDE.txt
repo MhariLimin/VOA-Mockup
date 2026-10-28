@@ -1,0 +1,120 @@
+REDIRECT SETUP AND TESTING ON VOA STAGING
+Prepared 28 October 2026
+
+Staging:  https://virtualofficeangels.com.au/staging/1384/
+Plugin:   Redirection (already installed; staging is a copy of live)
+Time:     about 45 minutes
+
+
+WHAT THIS DOES
+--------------
+The new website changes many addresses: old pages, old service pages, tag and category pages, and
+every article (which moves under /insights/). A redirect sends anyone using an old address, from
+Google or an old link, to the new page instead of a "page not found".
+
+There are 153 redirects, not 30:
+  - 53 old pages, testimonial pages, tag and category pages
+  - 100 articles (the 98 in the redirect map, plus the 15 and 26 October articles)
+
+
+TWO FILES, AND WHY
+------------------
+1. redirects-staging-1384.csv   USE THIS ONE ON STAGING
+   Every address starts with /staging/1384/. Redirection matches the full address, so the normal
+   file would match nothing on staging, and its targets would point at the live site.
+
+2. redirects.csv                ONLY FOR LIVE, ON LAUNCH DAY
+   The real redirects, without the staging folder. Do not import it on staging.
+
+Both are in docs/wordpress-integration/.
+
+IMPORTANT: the staging test redirects must be deleted before launch (step 9). If staging is
+deployed to live with them still in place, live would get 153 broken redirects.
+
+
+BEFORE YOU START
+----------------
+[ ] Site setup has been run on staging (done yesterday).
+[ ] Open any article on staging. Its address should be
+    https://virtualofficeangels.com.au/staging/1384/insights/{article-name}/
+    If it has no /insights/, stop and tell me: the article redirects depend on it.
+
+
+STEPS
+-----
+1. Back up staging: UpdraftPlus > Backup Now (database only is enough).
+
+2. Make a group for the test redirects, so they can be deleted in one go later:
+   Tools > Redirection > Groups > Add new group
+   Name: Staging test     Module: WordPress     > Add
+
+3. Import the file:
+   Tools > Redirection > Import/Export > Import
+   - If it asks for a group, choose "Staging test".
+   - Choose file: redirects-staging-1384.csv > Upload > OK/Import.
+
+4. Check the count it reports: 153. If it is any other number, stop and send me a screenshot.
+   The Redirects list may show a few more than 153 in total (155 on 28 October): those are
+   redirects staging already had, copied from live. Leave them alone.
+
+5. Tools > Redirection > Redirects: the list should show addresses starting with /staging/1384/.
+   If you could not choose a group in step 3, tick all 153 rows (Select all) >
+   Bulk actions > Move to group (or similar) > Staging test.
+
+6. Clear the cache: in the admin bar, Caching > Purge All. This is HostGator's cache, the only
+   one staging has.
+
+7. Test in a NEW TAB of the browser you are logged in with. Staging is in "Coming soon" mode, so
+   a private window (logged out) only shows the Coming Soon page. Paste each address, then check
+   where you land and that the page loads. Add this in front of each one:
+   https://virtualofficeangels.com.au/staging/1384
+
+   Old address                                       Should land on
+   ----------------------------------------------    --------------------------------------------
+   /about-us/                                         /about/
+   /why-us/                                           /managed-virtual-support/
+   /contact-us/                                       /contact/
+   /home-old/                                         the home page
+   /digital-marketing-assistance/                     /services/digital-marketing-virtual-assistant-services/
+   /mortgage-loans-processing-support/                /services/mortgage-loans-processing-virtual-support/
+   /testimonials/                                     /client-stories/
+   /testimonial/paul-godden/                          /client-stories/
+   /blog/                                             /insights/
+   /tag/outsourcing/                                  /insights/
+   /category/blog/page/2/                             /insights/
+   /7-signs-youre-ready-for-a-virtual-assistant/      /insights/7-signs-youre-ready-for-a-virtual-assistant/
+   /niche-virtual-assistant-roles/                    /insights/niche-virtual-assistant-roles/
+   //yes-want-book-no-obligation-appointment/         /contact/   (note the two slashes)
+
+   Every landing address must still start with /staging/1384/. If one takes you to the live site
+   (no /staging/1384/), stop and tell me.
+
+   An article that was published on live after staging was copied may land on "page not found".
+   That is expected on staging; it is fixed on live.
+
+8. Tell me when the import is done. I can then check all 153 from here and send you a list of any
+   that fail. Write down anything that failed in step 7: the old address and where it landed.
+
+9. BEFORE LAUNCH (not today): delete the test redirects.
+   Tools > Redirection > Groups > Staging test > Delete. The group's redirects go with it.
+   Then check Tools > Redirection > Redirects is empty, or holds only redirects that were there
+   before today.
+
+10. ON LAUNCH DAY, on live, after the new site is in place:
+    Tools > Redirection > Import/Export > Import > redirects.csv. Count: 153.
+    Test the same list as step 7, without /staging/1384.
+
+
+IF SOMETHING GOES WRONG
+-----------------------
+- A redirect loops ("too many redirects"): note the address. In Tools > Redirection > Redirects,
+  search for it and disable it (hover > Disable). Tell me.
+- Many pages break: Tools > Redirection > Groups > Staging test > Disable. Everything goes back to
+  how it was before the import.
+
+
+HELD BACK ON PURPOSE (not in either file)
+-----------------------------------------
+- /client-case-studies/: added once the client approves the case study on Client Stories.
+- /voa/yes-want-book-no-obligation-appointment/: the booking flow needs confirming first.
+- /services (no slash): WordPress adds the slash itself; a rule could loop.
