@@ -37,6 +37,8 @@ export interface LocationPage {
 }
 
 const logo = (file: string) => `/assets/source/staging/images/${file}`;
+/* Logos the client supplied on 1 November 2026, for clients the library did not have. */
+const clientLogo = (file: string) => `/assets/client/logos/${file}`;
 
 const services = {
   admin: '/services/executive-and-administrative-virtual-assistance',
@@ -66,11 +68,11 @@ export const locationPages: readonly LocationPage[] = [
       intro: 'We have worked with clients across a range of industries, including digital marketing, facilities services, maintenance, consulting, insurance, financial planning, and mortgage broking. Our first-hand experience in providing HR-managed outsourcing services shows how specialised virtual support fits different business operations.',
       wall: [
         { client: 'Road Surgeons', location: 'Botany', image: logo('3c4a18231a-6.png') },
-        { client: 'Industrias Service Group', location: 'Alexandria' },
+        { client: 'Industrias Service Group', location: 'Alexandria', image: clientLogo('industrias-service-group.png') },
         { client: 'RedP Marketing', location: 'Revesby' },
-        /* The library's "SureServ" logo is very likely this business: to confirm. */
-        { client: 'Sureserve Financial Services', location: 'Woollahra', image: logo('043e55e484-5.png') },
-        /* The library's "Integra Consultancy" logo is very likely this business: to confirm. */
+        /* Not the library's "SureServ" logo, which belongs to a different business. */
+        { client: 'Sureserve Financial Services', location: 'Woollahra', image: clientLogo('sureserve-financial-services.png') },
+        /* The library's "Integra Consultancy" logo, confirmed by the client on 1 November 2026. */
         { client: 'Integra Consulting', location: 'Eastwood', image: logo('71d6f17985-3.png') },
         { client: 'Pool Aide', location: 'Lindfield', image: logo('ad6e09ce08-7.jpeg') },
         { client: 'Ressfin Total Lending Solution', location: 'Bondi Junction', image: logo('ff435dfa3f-9.png') },
@@ -134,7 +136,7 @@ export const locationPages: readonly LocationPage[] = [
       heading: 'HR-Managed Virtual Support Across *Brisbane and the Gold Coast*',
       intro: 'Our experience across Australian industries includes specialised support for financial planning and mortgage broking businesses. In Brisbane and on the Gold Coast, we provide HR-managed virtual assistants to clients in Toowong and Helensvale, with roles focused on financial planner support and loan administration.',
       wall: [
-        { client: 'Seet Advisory', location: 'Toowong, Brisbane' },
+        { client: 'Seet Advisory', location: 'Toowong, Brisbane', image: clientLogo('seet-advisory.png') },
         { client: 'Coastal Financial Consultants', location: 'Helensvale, Gold Coast' },
       ],
     },
@@ -193,7 +195,7 @@ export const locationPages: readonly LocationPage[] = [
       eyebrow: 'Local clientele and expertise',
       heading: 'HR-Managed Virtual Support Across *Melbourne*',
       intro: 'We bring experience across a range of Australian industries to our virtual assistant recruitment and staff management. Our Melbourne clientele includes a mortgage brokerage in Doncaster East, where we provide specialised loan-processing support within the business’s established working arrangements.',
-      wall: [{ client: 'Velar Finance', location: 'Doncaster East, Melbourne' }],
+      wall: [{ client: 'Velar Finance', location: 'Doncaster East, Melbourne', image: clientLogo('velar-finance.png') }],
     },
     hours: {
       eyebrow: 'How we work',

@@ -667,12 +667,14 @@ h3 { margin: 0; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1.2; }
 [data-home-reveal='contact'][data-motion-ready='true'] .contact-grid > :last-child,
 [data-home-reveal='compact'][data-motion-ready='true'] .section-heading > :last-child { translate: 2.75rem 0; }
 [data-home-reveal='dark'][data-motion-ready='true'] .managed-copy > * { translate: -2.25rem 0; }
-[data-home-reveal='split'][data-visible='true'] .split-grid > *,
-[data-home-reveal='media'][data-visible='true'] .story-grid > *,
-[data-home-reveal='clients'][data-visible='true'] .home-client-layout > *,
-[data-home-reveal='contact'][data-visible='true'] .contact-grid > *,
-[data-home-reveal='dark'][data-visible='true'] .managed-copy > *,
-[data-home-reveal='compact'][data-visible='true'] .section-heading > * { opacity: 1; translate: 0; }
+/* The ready state is repeated so these outrank the :first-child and :last-child offsets above;
+   without it the first and last items stayed 2.75rem off-centre after the reveal. */
+[data-home-reveal='split'][data-motion-ready='true'][data-visible='true'] .split-grid > *,
+[data-home-reveal='media'][data-motion-ready='true'][data-visible='true'] .story-grid > *,
+[data-home-reveal='clients'][data-motion-ready='true'][data-visible='true'] .home-client-layout > *,
+[data-home-reveal='contact'][data-motion-ready='true'][data-visible='true'] .contact-grid > *,
+[data-home-reveal='dark'][data-motion-ready='true'][data-visible='true'] .managed-copy > *,
+[data-home-reveal='compact'][data-motion-ready='true'][data-visible='true'] .section-heading > * { opacity: 1; translate: 0; }
 [data-home-reveal='split'] .split-grid > :last-child,
 [data-home-reveal='media'] .story-grid > :last-child,
 [data-home-reveal='clients'] .home-client-layout > :last-child,

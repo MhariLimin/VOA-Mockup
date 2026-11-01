@@ -69,10 +69,11 @@ are unchanged.
 - **SEO title and description:** set on each page while it is open, so the mockup shows them in the
   browser tab. WordPress will need them in Yoast.
 - **Clients:** a logo where the website's library has one, otherwise the business name, with the
-  location. Logos used: Road Surgeons, Pool Aide, Ressfin, and two to confirm: the "SureServ" logo for
-  Sureserve Financial Services and the "Integra Consultancy" logo for Integra Consulting. The writer
-  asked for logos for Industrias, RedP, Seet Advisory and Coastal Financial, which the library does not
-  have: their names show until the logos are supplied. Velar Finance shows its name, as asked.
+  location. Logos from the library: Road Surgeons, Pool Aide, Ressfin, and Integra Consultancy
+  (confirmed 1 November). Logos the client supplied on 1 November, in `public/assets/client/logos/`:
+  Industrias Service Group, Seet Advisory, Velar Finance, and Sureserve Financial Services, which
+  replaces the library's "SureServ" logo (a different business). RedP Marketing and Coastal Financial
+  show their names until their logos are supplied.
 - **Services:** the writer's own cards and wording: five for Sydney, two for Brisbane, one for
   Melbourne, with h3 headings. As on every service list, a card's description appears on hover (always
   on phones) and is cut at three lines, so the longer descriptions are shortened there.
@@ -89,8 +90,8 @@ Not from the writer: the highlighted heading words (the city or area), the closi
 
 ## Before any of this goes live
 
-- Logos for Industrias Service Group, RedP Marketing, Seet Advisory and Coastal Financial
-  Consultants.
+- Logos for RedP Marketing and Coastal Financial Consultants (the others were supplied on
+  1 November).
 - The writer's spelling "authorized" in the Sydney and Brisbane mortgage cards; the rest of the copy
   uses "authorised".
 - Keyword Planner volumes for the three cities, to confirm the order (and Brisbane versus Melbourne).

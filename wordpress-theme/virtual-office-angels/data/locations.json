@@ -25,7 +25,7 @@
 				{
 					"client": "Industrias Service Group",
 					"location": "Alexandria",
-					"image": ""
+					"image": "/assets/client/logos/industrias-service-group.png"
 				},
 				{
 					"client": "RedP Marketing",
@@ -35,7 +35,7 @@
 				{
 					"client": "Sureserve Financial Services",
 					"location": "Woollahra",
-					"image": "/assets/source/staging/images/043e55e484-5.png"
+					"image": "/assets/client/logos/sureserve-financial-services.png"
 				},
 				{
 					"client": "Integra Consulting",
@@ -153,7 +153,7 @@
 				{
 					"client": "Seet Advisory",
 					"location": "Toowong, Brisbane",
-					"image": ""
+					"image": "/assets/client/logos/seet-advisory.png"
 				},
 				{
 					"client": "Coastal Financial Consultants",
@@ -250,7 +250,7 @@
 				{
 					"client": "Velar Finance",
 					"location": "Doncaster East, Melbourne",
-					"image": ""
+					"image": "/assets/client/logos/velar-finance.png"
 				}
 			]
 		},
