@@ -17,7 +17,9 @@ custom theme. Last updated **2026-10-25**.
 | --- | --- |
 | [GO_LIVE_CHECKLIST.md](GO_LIVE_CHECKLIST.md) | **Start here.** Everything still needed before the staging site replaces the live site |
 | [COMPLETED.md](COMPLETED.md) | How the theme was built and verified (a record as of 2026-10-04) |
+| [LAUNCH_AND_ROLLBACK_PLAN.md](LAUNCH_AND_ROLLBACK_PLAN.md) | The launch-day sequence, when to roll back, and how |
 | [REDIRECTS.md](REDIRECTS.md) | The old-to-new address list for review, and [redirects.csv](redirects.csv) to import it |
+| [SITEMAP_CLEANUP_STAGING_GUIDE.txt](SITEMAP_CLEANUP_STAGING_GUIDE.txt) | Trashing the 24 old pages on staging and hiding Thank You from search |
 | [reference/WORDPRESS_LIVE_SITE_STATUS.md](reference/WORDPRESS_LIVE_SITE_STATUS.md) | What the live site is, its concerns, and its open questions (snapshot of early October) |
 | [reference/CONTENT_ASSET_AUDIT.md](reference/CONTENT_ASSET_AUDIT.md) | Inventory of routes, articles, images, logos, testimonials, FAQs and forms |
 | [reference/WORDPRESS_ARCHITECTURE.md](reference/WORDPRESS_ARCHITECTURE.md) | How the React site maps to WordPress templates, post types and blocks |

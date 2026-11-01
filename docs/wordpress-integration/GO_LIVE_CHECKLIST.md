@@ -34,8 +34,11 @@ Need Author Bio Section in every article
     117 landing pages load
   - [ ] Before launch: delete the staging test redirects (guide step 9)
   - [ ] Launch day: import `redirects.csv` on live and test again (guide step 10)
-- [ ] Duplicates removed: `/home-old/` and the second contact page (`/contact/` and `/contact-us/`) *(added)*
-- [ ] The sitemap: `https://` addresses only; the old testimonials sitemap removed *(added)*
+- [x] Duplicates removed, 1 November: the 24 old pages, `/home-old/` and `/contact-us/` among them,
+  are in staging's Trash, and Thank You is hidden from search. The page sitemap now lists 13 pages;
+  all 153 staging redirects checked afterwards. See `SITEMAP_CLEANUP_STAGING_GUIDE.txt` *(added)*
+- [ ] The sitemap: `https://` addresses only (set on launch day, `LAUNCH_AND_ROLLBACK_PLAN.md` step 8).
+  The old testimonials sitemap is already gone on staging (checked 30 October) *(added)*
 - [ ] Search engine visibility: **on** for live, **off** for staging (Settings → Reading) *(added)*
 
 ## 3. Tracking
@@ -55,7 +58,11 @@ Need Author Bio Section in every article
   backups, on 25 October. Both sites checked afterwards *(added)*
 - [x] The old WP Logo Showcase copy deleted from live's `wp-content/updraft/plugins-old/` on 25 October;
   staging has no such folder *(added)*
-- [ ] A clean Wordfence scan of staging *(added)*
+- [ ] A clean Wordfence scan of staging *(added)*. On 30 October staging's scan failed: it still had
+  live's licence key from the copy. Live's key, which is **Premium**, is in the password manager, and
+  staging was reset to a free licence. Live's Premium key must be put back after launch
+  (`LAUNCH_AND_ROLLBACK_PLAN.md` step 12). Scanned the same day: 6 results, none Critical, no
+  malware; clean once its 4 plugin updates, WordPress 7.1.4 and the theme-file Repair are done
 
 ## 5. Legal *(added)*
 
@@ -70,11 +77,16 @@ Need Author Bio Section in every article
 
 ## 7. Launch day *(added)*
 
+The full sequence, with the rollback, is [`LAUNCH_AND_ROLLBACK_PLAN.md`](LAUNCH_AND_ROLLBACK_PLAN.md)
+(updated 1 November). **Launch: Tuesday 3 November 2026**, before the meeting; VA Mhari launches it,
+no sign-off needed.
+
 - [ ] A fresh full backup of live, downloaded off the server; working off-server backups going forward
-- [ ] An agreed launch method. HostGator's "Deploy all changes" overwrites live completely, including
-  anything published there since the clone
-- [ ] A rollback plan, with someone available to run it
-- [ ] A low-traffic launch window, not a Friday afternoon
+- [x] The launch method confirmed, 2 November: staging's HostGator → Manage WordPress → Staging →
+  "Deploy all changes". It overwrites live completely, including anything published there since
+  the clone (none on 1 November)
+- [x] A rollback plan, with someone available to run it: VA Mhari, 1 November
+- [x] A low-traffic launch window: the morning of Tuesday 3 November
 
 ## 8. After launch *(not blocking)*
 

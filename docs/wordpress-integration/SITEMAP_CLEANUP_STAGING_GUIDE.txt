@@ -1,0 +1,122 @@
+SITEMAP CLEANUP ON VOA STAGING: OLD PAGES TO THE TRASH, THANK YOU HIDDEN FROM SEARCH
+Prepared 30 October 2026
+
+Staging:  https://virtualofficeangels.com.au/staging/1384/
+Time:     about 20 minutes
+
+
+WHAT THIS DOES
+--------------
+Staging's page sitemap (the list Google reads) still lists 24 pages from the old website, such as
+About Us, Contact Us, FAQ and Home-old. Each one already redirects to its new page, so visitors never
+see them, but Google would keep being told they exist. They also make duplicates: About Us and About,
+Contact Us and Contact, FAQ and FAQs.
+
+  - The 24 old pages go to the Trash. Nothing is lost: every one has a redirect (checked against
+    redirects.csv on 30 October), and the Trash keeps them for 30 days.
+  - The Thank You page (shown after the contact form) is hidden from search, so it leaves the sitemap.
+
+The menus are built by the theme, not from these pages, so trashing them does not change any menu.
+
+
+BEFORE YOU START
+----------------
+[ ] Back up staging: UpdraftPlus > Backup Now (database only is enough).
+[ ] Settings > Reading. It must show:
+      Your homepage displays:  A static page
+      Homepage:                Home
+      Posts page:              Insights
+    If the Posts page says Blog, stop and tell me: Blog is on the list below.
+
+
+STEP 1: TRASH THE 24 OLD PAGES
+------------------------------
+1. Pages > All Pages.
+2. Screen Options (top right) > Number of items per page: 50 > Apply. All 39 pages now fit on one
+   screen.
+3. Tick the 24 pages below. The ID is a check: hover over a title, and the address shown at the
+   bottom of the browser ends in post=ID.
+
+   Several new pages have nearly the same name. Tick only the title in the left column.
+
+     ID    Title to tick                                           Keep the similar one
+     ----  ------------------------------------------------------  ---------------------
+     516   About Us                                                About
+     10    Contact Us                                              Contact
+     270   FAQ                                                     FAQs
+     375   Home-old                                                Home
+     290   Blog                                                    Insights
+     171   Testimonials                                            Client Stories
+     905   Why Us                                                  Managed Virtual Support
+     8     Work With Us
+     19    BUSINESSES THESE DAYS
+     22    Simply too busy?
+     90    How we can help
+     110   Specialised Recruitment
+     113   We Do What Other Company Don't
+     356   YES, I want to book for a NO Obligation appointment!
+     644   SPECIALISED RECRUITMENT SERVICES
+     518   MORTGAGE AND LOANS PROCESSING SUPPORT
+     520   REAL ESTATE AND ADMINISTRATION SUPPORT
+     522   ACCOUNTING AND BOOKKEEPING ASSISTANCE
+     1246  FINANCIAL PLANNING ASSISTANCE AND ADMINISTRATION
+     1490  BUSINESS BACK OFFICE & ADMIN SUPPORT
+     1497  DIGITAL MARKETING ASSISTANCE
+     1502  SALES & MARKETING SUPPORT
+     1505  CREATIVE WRITING / COPYWRITING ASSISTANCE
+     1509  IT SERVICES AND TECHNOLOGY
+
+4. Bulk actions > Move to Trash > Apply.
+5. Check the top of the list: Trash (24). Do NOT empty the Trash.
+
+DO NOT TRASH these, which stay (15):
+   Home, About, Services, How it works, Managed Virtual Support, Client Stories, Insights,
+   Videos And Resources, FAQs, Contact, Thank You, Client Case Studies, and the three
+   "Virtual Assistants for ..." city pages.
+   Client Case Studies stays on purpose: its redirect waits for the client to approve the case study.
+
+
+STEP 2: HIDE THE THANK YOU PAGE FROM SEARCH
+-------------------------------------------
+1. Pages > Thank You > Edit.
+2. In the Yoast SEO box (below the content, or the Yoast icon on the right): Advanced.
+3. "Allow search engines to show this Page in search results?" > No.
+4. Update.
+
+
+STEP 3: CHECK REDIRECTION DID NOT ADD ANYTHING
+----------------------------------------------
+Redirection can add a redirect by itself when a page's address changes, and trashing a page changes
+its address (WordPress adds __trashed to the end).
+
+1. Tools > Redirection > Redirects. Type __trashed in the search box > Search.
+2. If any rows appear: tick them > Bulk actions > Delete > Apply. Tell me how many there were.
+3. Clear the search. The total should be the same as before (155).
+
+
+STEP 4: CLEAR THE CACHE
+-----------------------
+Admin bar > Caching > Purge All.
+
+
+STEP 5: TELL ME
+---------------
+Tell me when you're done. I then check from here:
+  - the page sitemap lists 13 pages: the home page, About, Services, How It Works, Managed Virtual
+    Support, Client Stories, Videos, FAQs, Contact, Client Case Studies and the three city pages
+    (Insights is listed in the post sitemap, as the articles page)
+  - the Thank You page is out of the sitemap and tells search engines not to list it
+  - the 24 old addresses still redirect to their new pages
+
+
+IF SOMETHING GOES WRONG
+-----------------------
+- A page you need went to the Trash: Pages > Trash > hover over it > Restore.
+- Something else breaks: restore the backup from the start (UpdraftPlus > Existing backups >
+  Restore > Database).
+
+
+ON LAUNCH DAY
+-------------
+Nothing extra: launch copies staging to live, so live gets the cleaned-up pages and sitemap too.
+Live's own old pages are replaced in the same step.

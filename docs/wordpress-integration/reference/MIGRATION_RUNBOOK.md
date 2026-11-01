@@ -460,6 +460,10 @@ Work through this on staging before anyone discusses cutover.
 
 ## Step 12 — Cutover
 
+> **Superseded (2026-10-30):** the exact sequence and the rollback are now in
+> [`../LAUNCH_AND_ROLLBACK_PLAN.md`](../LAUNCH_AND_ROLLBACK_PLAN.md). Steps 12 and 13 below are kept
+> as the original outline.
+
 ### Prerequisites — all of them
 
 - [ ] Step 11 fully complete
