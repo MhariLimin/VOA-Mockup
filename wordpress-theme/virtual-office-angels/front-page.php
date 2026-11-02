@@ -191,7 +191,7 @@ get_header();
 			<h2><?php echo voa_content_copy( 'home', 'founder_heading' ); ?></h2>
 			<p class="lead"><?php echo voa_content_copy( 'home', 'founder_intro' ); ?></p>
 			<p><?php echo voa_content_copy( 'home', 'founder_text' ); ?></p>
-			<a class="text-link" href="<?php echo esc_url( voa_url( '/about' ) ); ?>">Learn more about us <?php voa_icon( 'arrow-right' ); ?></a>
+			<a class="text-link" href="<?php echo esc_url( voa_url( '/about-us' ) ); ?>">Learn more about us <?php voa_icon( 'arrow-right' ); ?></a>
 		</div>
 	</div>
 </section>

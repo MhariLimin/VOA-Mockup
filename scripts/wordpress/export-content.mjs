@@ -57,6 +57,7 @@ try {
       specialistServices: home.specialistServices,
       buyerQuestions: home.buyerQuestions,
       moreThanRecruitment: home.moreThanRecruitment,
+      seo: home.homeSeo,
     },
     pages: Object.fromEntries(pages.sourcePages.map((page) => [page.path, page])),
     services: {

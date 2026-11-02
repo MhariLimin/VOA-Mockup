@@ -41,8 +41,8 @@ const logo = (file: string) => `/assets/source/staging/images/${file}`;
 const clientLogo = (file: string) => `/assets/client/logos/${file}`;
 
 const services = {
-  admin: '/services/executive-and-administrative-virtual-assistance',
-  marketing: '/services/digital-marketing-virtual-assistant-services',
+  admin: '/services/executive-virtual-assistant-admin-support',
+  marketing: '/services/digital-marketing-virtual-assistant-support',
   accounting: '/services/accounting-and-bookkeeping-virtual-assistant',
   planning: '/services/virtual-financial-planning-and-admin-assistant',
   mortgage: '/services/mortgage-loans-processing-virtual-support',

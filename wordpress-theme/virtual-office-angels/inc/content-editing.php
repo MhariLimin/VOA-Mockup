@@ -67,6 +67,10 @@ function voa_content_current_entity() {
 		return '';
 	}
 	$entity = 'voa_service' === $post->post_type ? 'service:' . $post->post_name : $post->post_name;
+	// About moved to /about-us/ on 2 November 2026; its edits stay stored under "about".
+	if ( 'about-us' === $entity ) {
+		$entity = 'about';
+	}
 	if ( 'page' === $post->post_type && function_exists( 'voa_location_for_slug' ) && voa_location_for_slug( $post->post_name ) ) {
 		$entity = 'location:' . voa_location_for_slug( $post->post_name );
 	}
@@ -98,7 +102,7 @@ function voa_content_groups( $entity ) {
 
 	$groups = array();
 	if ( 'home' !== $entity && 'thank-you' !== $entity ) {
-		$groups[] = array( 'Page introduction', 'pages', array( '/' . $entity ) );
+		$groups[] = array( 'Page introduction', 'pages', array( 'about' === $entity ? '/about-us' : '/' . $entity ) );
 	}
 
 	switch ( $entity ) {
@@ -134,7 +138,7 @@ function voa_content_groups( $entity ) {
 function voa_content_is_locked_key( $key ) {
 	return in_array(
 		(string) $key,
-		array( 'path', 'template', 'source', 'href', 'url', 'domain', 'seoTitle', 'metaDescription', 'number', 'servicePaths' ),
+		array( 'path', 'template', 'source', 'href', 'url', 'domain', 'seo', 'seoTitle', 'metaDescription', 'number', 'servicePaths' ),
 		true
 	);
 }

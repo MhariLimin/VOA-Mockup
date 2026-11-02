@@ -1,6 +1,8 @@
 {
 	"/services": {
 		"path": "/services",
+		"seoTitle": "Specialised Virtual Assistant Services | Virtual Office Angels",
+		"metaDescription": "Explore virtual assistant services for Australian businesses. Find specialised support for mortgage loan processing, financial planning, accounting and bookkeeping, digital marketing, and more.",
 		"eyebrow": "Specialised virtual assistant services",
 		"title": "Specialised Virtual Assistant Services for Australian Businesses",
 		"summary": "Virtual Office Angels provides experienced virtual assistants for Australian businesses across finance, property, administration, marketing, technology and content.",
@@ -8,8 +10,10 @@
 		"imageAlt": "A business owner meeting a remote team by video call",
 		"template": "services"
 	},
-	"/about": {
-		"path": "/about",
+	"/about-us": {
+		"path": "/about-us",
+		"seoTitle": "About Virtual Office Angels | Australian Virtual Assistant Support",
+		"metaDescription": "Learn about Virtual Office Angels, an Australian-led company connecting businesses with skilled virtual assistants, backed by HR expertise and managed support.",
 		"eyebrow": "About us",
 		"title": "About Virtual Office Angels",
 		"summary": "We work with Australian businesses that need capable, experienced virtual assistants who can contribute from day one. Whether the role is specialised or operational, we focus on finding support that fits the work and how your business runs.",
@@ -80,8 +84,8 @@
 		"image": "/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg",
 		"imageAlt": "Accounting and bookkeeping assistance workspace"
 	},
-	"/services/insurance-processing-virtual-assistance": {
-		"path": "/services/insurance-processing-virtual-assistance",
+	"/services/insurance-processing-virtual-assistant-support": {
+		"path": "/services/insurance-processing-virtual-assistant-support",
 		"eyebrow": "Specialist service",
 		"title": "Insurance Processing Virtual Support",
 		"summary": "Virtual Office Angels matches insurance businesses with experienced virtual assistants who support policy administration, renewals, claims processing, and client records within your systems and documented procedures.",
@@ -92,8 +96,8 @@
 		"image": "/assets/source/staging/images/58c3c928d3-2147694521.jpg",
 		"imageAlt": "Insurance Processing Virtual Support workspace"
 	},
-	"/services/real-estate-virtual-assistant-services": {
-		"path": "/services/real-estate-virtual-assistant-services",
+	"/services/real-estate-virtual-assistant-admin-support": {
+		"path": "/services/real-estate-virtual-assistant-admin-support",
 		"eyebrow": "Specialist service",
 		"title": "Real estate and administration support",
 		"summary": "Reliable assistance for property professionals balancing clients, listings, documents, and a busy schedule.",
@@ -113,8 +117,8 @@
 		"image": "/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg",
 		"imageAlt": "Real estate and administration support workspace"
 	},
-	"/services/executive-and-administrative-virtual-assistance": {
-		"path": "/services/executive-and-administrative-virtual-assistance",
+	"/services/executive-virtual-assistant-admin-support": {
+		"path": "/services/executive-virtual-assistant-admin-support",
 		"eyebrow": "Specialist service",
 		"title": "Business back office and admin support",
 		"summary": "Dependable day-to-day administration that protects your team’s time and keeps operations organised.",
@@ -135,8 +139,8 @@
 		"image": "/assets/source/staging/images/6f63e14c16-2149013955.jpg",
 		"imageAlt": "Business back office and admin support workspace"
 	},
-	"/services/digital-marketing-virtual-assistant-services": {
-		"path": "/services/digital-marketing-virtual-assistant-services",
+	"/services/digital-marketing-virtual-assistant-support": {
+		"path": "/services/digital-marketing-virtual-assistant-support",
 		"eyebrow": "Specialist service",
 		"title": "Digital marketing support and services",
 		"summary": "Execution support that helps your brand publish consistently and keep campaigns organised.",
@@ -156,8 +160,8 @@
 		"image": "/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg",
 		"imageAlt": "Digital marketing support and services workspace"
 	},
-	"/services/sales-and-e-commerce-virtual-assistant": {
-		"path": "/services/sales-and-e-commerce-virtual-assistant",
+	"/services/sales-and-e-commerce-virtual-assistant-support": {
+		"path": "/services/sales-and-e-commerce-virtual-assistant-support",
 		"eyebrow": "Specialist service",
 		"title": "Sales and marketing support",
 		"summary": "Practical assistance for lead generation, customer communication, and sales administration.",
@@ -177,8 +181,8 @@
 		"image": "/assets/client/extra/team-celebrating-agreement.jpg",
 		"imageAlt": "Sales and marketing support workspace"
 	},
-	"/services/it-virtual-assistant-services": {
-		"path": "/services/it-virtual-assistant-services",
+	"/services/it-virtual-assistant-and-tech-support": {
+		"path": "/services/it-virtual-assistant-and-tech-support",
 		"eyebrow": "Specialist service",
 		"title": "IT services and technology",
 		"summary": "Technical administration and systems support for technology-enabled business processes.",
@@ -198,8 +202,8 @@
 		"image": "/assets/client/extra/team-project-laptop.jpg",
 		"imageAlt": "IT services and technology workspace"
 	},
-	"/services/creative-copywriting-virtual-assistant": {
-		"path": "/services/creative-copywriting-virtual-assistant",
+	"/services/copywriting-virtual-assistant-support": {
+		"path": "/services/copywriting-virtual-assistant-support",
 		"eyebrow": "Specialist service",
 		"title": "Creative writing assistance",
 		"summary": "Writing and publishing support for websites, campaigns, and recurring business content.",
@@ -228,6 +232,8 @@
 	},
 	"/managed-virtual-support": {
 		"path": "/managed-virtual-support",
+		"seoTitle": "HR-Managed Virtual Support Services Australia | VOA",
+		"metaDescription": "Build an HR-managed virtual support role with specialised matching, onboarding, payroll, HR and ongoing support for Australian businesses.",
 		"eyebrow": "Managed virtual support",
 		"title": "HR-Managed Virtual Support for Australian Businesses",
 		"summary": "Build a specialised virtual assistant role around the work your business needs. Virtual Office Angels manages recruitment, onboarding, employment administration, payroll, and ongoing people support, while you manage day-to-day operations.",
@@ -237,6 +243,8 @@
 	},
 	"/client-stories": {
 		"path": "/client-stories",
+		"seoTitle": "Client Stories & Testimonials | Virtual Office Angels",
+		"metaDescription": "Find out what clients say about Virtual Office Angels, from matching the right virtual assistant to supporting daily work and building long-term growth",
 		"eyebrow": "Our clients",
 		"title": "Client stories and testimonials.",
 		"summary": "From boutique firms to growing enterprises, clients trust Virtual Office Angels to provide specialised virtual assistants who integrate into their teams.",
@@ -260,6 +268,8 @@
 	},
 	"/faqs": {
 		"path": "/faqs",
+		"seoTitle": "Virtual Assistant FAQs Australia | Virtual Office Angels",
+		"metaDescription": "Know what to expect from Virtual Office Angels. Read the FAQs on delegating work, staying in touch, payment options, and managing your virtual assistant.",
 		"eyebrow": "Frequently asked questions",
 		"title": "What to know before working with us.",
 		"summary": "",
@@ -267,6 +277,8 @@
 	},
 	"/contact": {
 		"path": "/contact",
+		"seoTitle": "Contact Us | Virtual Office Angels",
+		"metaDescription": "Ready to hire a virtual assistant? Get in touch with Virtual Office Angels to discuss your industry, daily tasks, systems, and the support your business needs.",
 		"eyebrow": "Contact us",
 		"title": "Tell us what the right support would change for your business.",
 		"summary": "Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the next step.",

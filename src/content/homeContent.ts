@@ -54,9 +54,9 @@ export const specialistServices = [
   { title: 'Mortgage & Loans', href: '/services/mortgage-loans-processing-virtual-support', text: 'Loan-processing and broker administration support.', image: '/assets/source/staging/images/450ffd4688-Virtual-Mortgage-and-Loans-Processing-Support.jpg', systems: ['Mercury Nexus', 'Salestrekker', 'AFG FLEX', 'Infynity'] },
   { title: 'Financial Planning', href: '/services/virtual-financial-planning-and-admin-assistant', text: 'Application, document, and client administration.', image: '/assets/source/staging/images/07e6930800-Financial-Planning-Assistance-and-Administration.jpg', systems: ['Xplan', 'AdviserLogic', 'Midwinter', 'Worksorted'] },
   { title: 'Accounting & Bookkeeping', href: '/services/accounting-and-bookkeeping-virtual-assistant', text: 'Reliable recurring finance and bookkeeping assistance.', image: '/assets/source/staging/images/35b7d60f62-man-working-his-laptop-with-infographics-indoors-1024x599.jpg', systems: ['Xero', 'MYOB', 'QuickBooks', 'SAP'] },
-  { title: 'Real Estate', href: '/services/real-estate-virtual-assistant-services', text: 'CRM, documentation, scheduling, and back-office support.', image: '/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg', systems: ['your property CRM', 'email and administration platforms'] },
-  { title: 'Executive & Administrative', href: '/services/executive-and-administrative-virtual-assistance', text: 'Everyday operational support that protects your focus.', image: '/assets/source/staging/images/6f63e14c16-2149013955.jpg', systems: ['Your CRM', 'Microsoft 365 or Google Workspace', 'Task-management tools'] },
-  { title: 'Digital Marketing', href: '/services/digital-marketing-virtual-assistant-services', text: 'Campaign, publishing, reporting, and content coordination.', image: '/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg', systems: ['Google Analytics', 'Facebook and Instagram', 'Your CMS'] },
+  { title: 'Real Estate', href: '/services/real-estate-virtual-assistant-admin-support', text: 'CRM, documentation, scheduling, and back-office support.', image: '/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg', systems: ['your property CRM', 'email and administration platforms'] },
+  { title: 'Executive & Administrative', href: '/services/executive-virtual-assistant-admin-support', text: 'Everyday operational support that protects your focus.', image: '/assets/source/staging/images/6f63e14c16-2149013955.jpg', systems: ['Your CRM', 'Microsoft 365 or Google Workspace', 'Task-management tools'] },
+  { title: 'Digital Marketing', href: '/services/digital-marketing-virtual-assistant-support', text: 'Campaign, publishing, reporting, and content coordination.', image: '/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg', systems: ['Google Analytics', 'Facebook and Instagram', 'Your CMS'] },
 ] as const;
 
 /* Homepage FAQs, verbatim from the VOA Content homepage (saved state). Where an answer ends in a link,
@@ -82,3 +82,6 @@ export const moreThanRecruitment = {
     { name: 'Ongoing Delivery & Support', heading: 'Keep performance and communication on track.', text: 'A dedicated support structure helps address feedback, availability, and performance matters throughout the engagement.' },
   ],
 } as const;
+
+/* The content writer's Yoast title and meta description for the home page (2 November 2026). */
+export const homeSeo = { title: "Specialised & HR Managed Virtual Support | Virtual Office Angels", description: "Find a virtual assistant with the skills your business needs. Virtual Office Angels handles recruitment, onboarding, and daily HR matters for Australian businesses." } as const;

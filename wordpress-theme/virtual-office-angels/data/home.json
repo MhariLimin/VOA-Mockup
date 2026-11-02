@@ -38,7 +38,7 @@
 		},
 		{
 			"title": "Real Estate",
-			"href": "/services/real-estate-virtual-assistant-services",
+			"href": "/services/real-estate-virtual-assistant-admin-support",
 			"text": "CRM, documentation, scheduling, and back-office support.",
 			"image": "/assets/source/staging/images/c01de0662c-Real-Estate-And-Administration-Support.jpg",
 			"systems": [
@@ -48,7 +48,7 @@
 		},
 		{
 			"title": "Executive & Administrative",
-			"href": "/services/executive-and-administrative-virtual-assistance",
+			"href": "/services/executive-virtual-assistant-admin-support",
 			"text": "Everyday operational support that protects your focus.",
 			"image": "/assets/source/staging/images/6f63e14c16-2149013955.jpg",
 			"systems": [
@@ -59,7 +59,7 @@
 		},
 		{
 			"title": "Digital Marketing",
-			"href": "/services/digital-marketing-virtual-assistant-services",
+			"href": "/services/digital-marketing-virtual-assistant-support",
 			"text": "Campaign, publishing, reporting, and content coordination.",
 			"image": "/assets/source/staging/images/a42c53bde4-2147924352-1024x683.jpg",
 			"systems": [
@@ -123,5 +123,9 @@
 				"text": "A dedicated support structure helps address feedback, availability, and performance matters throughout the engagement."
 			}
 		]
+	},
+	"seo": {
+		"title": "Specialised & HR Managed Virtual Support | Virtual Office Angels",
+		"description": "Find a virtual assistant with the skills your business needs. Virtual Office Angels handles recruitment, onboarding, and daily HR matters for Australian businesses."
 	}
 }

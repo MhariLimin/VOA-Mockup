@@ -91,19 +91,19 @@ Baseline verification performed while preparing this handoff:
 Routes are generated through React Router:
 
 - `/`
-- `/about` with `#story` and `#leadership` sections
-- Ten service routes (final addresses supplied by the client on 2026-10-05, `VOA_Redirect_Map.xlsx`;
+- `/about-us` with `#story` and `#leadership` sections (was `/about` until 2 November 2026)
+- Ten service routes (addresses supplied by the client on 2026-10-05, `VOA_Redirect_Map.xlsx`; seven renamed on 2026-11-02 to the content writer's SEO slugs;
   the old ones redirect, see `src/content/renamedRoutes.ts`):
   - `/services/mortgage-loans-processing-virtual-support`
   - `/services/virtual-financial-planning-and-admin-assistant`
   - `/services/accounting-and-bookkeeping-virtual-assistant`
-  - `/services/insurance-processing-virtual-assistance`
-  - `/services/real-estate-virtual-assistant-services`
-  - `/services/executive-and-administrative-virtual-assistance`
-  - `/services/digital-marketing-virtual-assistant-services`
-  - `/services/sales-and-e-commerce-virtual-assistant`
-  - `/services/creative-copywriting-virtual-assistant`
-  - `/services/it-virtual-assistant-services`
+  - `/services/insurance-processing-virtual-assistant-support`
+  - `/services/real-estate-virtual-assistant-admin-support`
+  - `/services/executive-virtual-assistant-admin-support`
+  - `/services/digital-marketing-virtual-assistant-support`
+  - `/services/sales-and-e-commerce-virtual-assistant-support`
+  - `/services/copywriting-virtual-assistant-support`
+  - `/services/it-virtual-assistant-and-tech-support`
 - `/how-it-works`
 - `/managed-virtual-support` (was `/why-voa`)
 - `/client-stories`

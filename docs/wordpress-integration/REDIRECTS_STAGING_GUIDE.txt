@@ -101,7 +101,7 @@ STEPS
    before today.
 
 10. ON LAUNCH DAY, on live, after the new site is in place:
-    Tools > Redirection > Import/Export > Import > redirects.csv. Count: 153.
+    Tools > Redirection > Import/Export > Import > redirects.csv. Count: 154 (since 2 November).
     Test the same list as step 7, without /staging/1384.
 
 

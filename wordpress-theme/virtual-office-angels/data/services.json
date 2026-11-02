@@ -1,7 +1,7 @@
 {
 	"details": {
 		"/services/mortgage-loans-processing-virtual-support": {
-			"seoTitle": "Mortgage Processing Virtual Assistant Support | Virtual Office Angels",
+			"seoTitle": "Mortgage Processing Virtual Assistant Support | VOA",
 			"metaDescription": "Find an experienced mortgage processing virtual assistant for CRM updates, document coordination, lodgement, and settlement support for Australian businesses.",
 			"title": "Mortgage & Loans Processing Virtual Support",
 			"lead": "Virtual Office Angels matches mortgage businesses with experienced virtual assistants who support loan administration from application through to settlement, working within your systems and approved procedures.",
@@ -95,7 +95,7 @@
 			"feedbackPlaceholder": "Feedback currently being gathered."
 		},
 		"/services/virtual-financial-planning-and-admin-assistant": {
-			"seoTitle": "Financial Planning Virtual Assistant Support | Virtual Office Angels",
+			"seoTitle": "Financial Planning Virtual Assistant Support | VOA",
 			"metaDescription": "Find a financial planning virtual assistant for client admin, review preparation, software updates, and implementation support for Australian businesses.",
 			"title": "Financial Planning & Admin Support",
 			"lead": "Virtual Office Angels matches financial planning businesses with experienced virtual assistants who support client administration, review preparation, and implementation tasks within your systems and documented processes.",
@@ -188,7 +188,7 @@
 			"feedbackPlaceholder": "Feedback currently being gathered."
 		},
 		"/services/accounting-and-bookkeeping-virtual-assistant": {
-			"seoTitle": "Accounting & Bookkeeping Virtual Assistant Support | Virtual Office Angels",
+			"seoTitle": "Accounting & Bookkeeping Virtual Assistant Support | VOA",
 			"metaDescription": "Find an accounting and bookkeeping virtual assistant for invoicing, accounts, payroll administration, reconciliations, and ongoing bookkeeping support.",
 			"title": "Accounting and Bookkeeping Virtual Support",
 			"lead": "Virtual Office Angels matches businesses and accounting practices with experienced virtual assistants who support day-to-day bookkeeping, transaction processing, and financial administration within your existing systems and procedures.",
@@ -281,8 +281,8 @@
 			"feedbackHeading": "What Our Accounting & Bookkeeping Virtual Support Clients Say",
 			"feedbackPlaceholder": "Feedback is currently being gathered."
 		},
-		"/services/insurance-processing-virtual-assistance": {
-			"seoTitle": "Insurance Processing Virtual Assistant Support | Virtual Office Angels",
+		"/services/insurance-processing-virtual-assistant-support": {
+			"seoTitle": "Insurance Processing Virtual Assistant Support | VOA",
 			"metaDescription": "Find an insurance processing virtual assistant for policy administration, renewals, claims, CRM updates, and broker support for Australian insurance businesses.",
 			"title": "Insurance Processing Virtual Support",
 			"lead": "Virtual Office Angels matches insurance businesses with experienced virtual assistants who support policy administration, renewals, claims processing, and client records within your systems and documented procedures.",
@@ -374,8 +374,8 @@
 			"feedbackHeading": "What Our Insurance Processing Virtual Support Clients Say",
 			"feedbackPlaceholder": "Feedback is currently being gathered."
 		},
-		"/services/real-estate-virtual-assistant-services": {
-			"seoTitle": "Real Estate Virtual Assistant & Admin Support | Virtual Office Angels",
+		"/services/real-estate-virtual-assistant-admin-support": {
+			"seoTitle": "Real Estate Virtual Assistant & Admin Support | VOA",
 			"metaDescription": "Find a real estate virtual assistant for CRM administration, property listings, prospect follow-up, appointment coordination, and ongoing agency support.",
 			"title": "Real Estate & Admin Virtual Support",
 			"lead": "Virtual Office Angels matches real estate businesses with experienced virtual assistants who support property administration, CRM management, prospect follow-up, and day-to-day agency workflows.",
@@ -466,8 +466,8 @@
 			"feedbackHeading": "What Our Real Estate Virtual Support Clients Say",
 			"feedbackPlaceholder": "Feedback is currently being gathered."
 		},
-		"/services/executive-and-administrative-virtual-assistance": {
-			"seoTitle": "Executive & Administrative Virtual Assistant Support | Virtual Office Angels",
+		"/services/executive-virtual-assistant-admin-support": {
+			"seoTitle": "Executive & Administrative Virtual Assistant Support | VOA",
 			"metaDescription": "Find an experienced executive and administrative virtual assistant for inboxes, calendars, customer enquiries, documents, and daily business support.",
 			"title": "Executive & Administrative Virtual Support",
 			"lead": "Virtual Office Angels matches business owners and leadership teams with experienced virtual assistants who manage recurring administration, executive coordination, and day-to-day business support.",
@@ -562,7 +562,7 @@
 			"feedbackHeading": "What Our Executive & Administrative Virtual Support Clients Say",
 			"feedbackPlaceholder": "Feedback is currently being gathered."
 		},
-		"/services/digital-marketing-virtual-assistant-services": {
+		"/services/digital-marketing-virtual-assistant-support": {
 			"seoTitle": "Digital Marketing Virtual Assistant | Virtual Office Angels",
 			"metaDescription": "Find a digital marketing virtual assistant for campaign coordination, social media publishing, analytics, website updates, and content support.",
 			"title": "Digital Marketing Virtual Assistance",
@@ -726,8 +726,8 @@
 			"feedbackHeading": "What Our Digital Marketing Virtual Support Clients Say",
 			"feedbackPlaceholder": "Feedback is currently being gathered."
 		},
-		"/services/sales-and-e-commerce-virtual-assistant": {
-			"seoTitle": "Sales & E-Commerce Virtual Assistant Support | Virtual Office Angels",
+		"/services/sales-and-e-commerce-virtual-assistant-support": {
+			"seoTitle": "Sales & E-Commerce Virtual Assistant Support | VOA",
 			"metaDescription": "Find a sales and e-commerce virtual assistant for lead management, Shopify administration, customer enquiries, order processing, and fulfilment support.",
 			"title": "Sales & E-Commerce Virtual Assistance",
 			"lead": "Virtual Office Angels matches businesses with experienced virtual assistants who support lead management, customer enquiries, Shopify administration, order processing, and day-to-day sales activity.",
@@ -819,8 +819,8 @@
 			"feedbackHeading": "What Our Sales & E-Commerce Virtual Support Clients Say",
 			"feedbackPlaceholder": "Feedback is currently being gathered."
 		},
-		"/services/it-virtual-assistant-services": {
-			"seoTitle": "IT Virtual Assistant & Technology Support | Virtual Office Angels",
+		"/services/it-virtual-assistant-and-tech-support": {
+			"seoTitle": "IT Virtual Assistant & Tech Support | VOA",
 			"metaDescription": "Find an IT virtual assistant for WordPress support, website maintenance, troubleshooting, traffic monitoring, and recurring technical tasks.",
 			"title": "Virtual IT Service & Technology Support",
 			"lead": "Virtual Office Angels matches businesses with experienced virtual assistants who support website maintenance, WordPress administration, troubleshooting, and recurring technical tasks across your digital systems.",
@@ -916,7 +916,7 @@
 			"feedbackHeading": "What Our Virtual IT Service & Technology Support Clients Say",
 			"feedbackPlaceholder": "Feedback is currently being gathered."
 		},
-		"/services/creative-copywriting-virtual-assistant": {
+		"/services/copywriting-virtual-assistant-support": {
 			"seoTitle": "Copywriting Virtual Assistant Support | Virtual Office Angels",
 			"metaDescription": "Find a copywriting virtual assistant for article writing, website content, proofreading, research, blog management, and ongoing publishing support.",
 			"title": "Copywriting Virtual Assistant Support",
@@ -1035,15 +1035,15 @@
 		],
 		[
 			"Property and CRM administration",
-			"/services/real-estate-virtual-assistant-services"
+			"/services/real-estate-virtual-assistant-admin-support"
 		],
 		[
 			"Daily business administration",
-			"/services/executive-and-administrative-virtual-assistance"
+			"/services/executive-virtual-assistant-admin-support"
 		],
 		[
 			"Campaign and content execution",
-			"/services/digital-marketing-virtual-assistant-services"
+			"/services/digital-marketing-virtual-assistant-support"
 		]
 	]
 }

@@ -31,7 +31,7 @@ Email, the domain and DNS are not touched by the launch.
 | Who | Does |
 | --- | --- |
 | VA Mhari | Every wp-admin and HostGator step, and the decision to roll back (the 30-minute rule below) |
-| Claude (in a session) | The checks from outside: every page, all 153 redirects, the sitemap, search-engine settings |
+| Claude (in a session) | The checks from outside: every page, all 154 redirects, the sitemap, search-engine settings |
 | HostGator support (live chat) | Standby, in case wp-admin is unreachable |
 
 ## Before the launch day
@@ -58,9 +58,9 @@ Email, the domain and DNS are not touched by the launch.
 
 6. Check again for any article, page or setting changed on live since 28 October (none on
    1 November). Copy each one to staging (an article also needs a row in `redirects.csv`).
-7. On staging, delete the **"Staging test" redirect group**: Tools → Redirection → Groups → Staging
-   test → Delete. Otherwise live gets 153 redirects pointing into `/staging/1384/`
-   (`REDIRECTS_STAGING_GUIDE.txt` step 9).
+7. ~~Delete the "Staging test" redirect group on staging~~ Done 2 November, after the addresses and
+   SEO update (Appearance → Site setup) was applied and checked. Staging's old addresses now answer
+   404 until live gets `redirects.csv` at step 10.
 8. Back up **staging** (UpdraftPlus, database and files) so the build itself is safe.
 
 ## Launch day
@@ -99,7 +99,7 @@ All on **live** wp-admin (`virtualofficeangels.com.au/wp-admin/`), which now has
    addresses in the sitemap.
 9. **Permalinks refreshed.** Settings → Permalinks → Save Changes, without changing anything.
 10. **Redirects imported.** Tools → Redirection → Import/Export → Import → `redirects.csv` (the
-    live file, *not* the staging one). Count: **153**.
+    live file, *not* the staging one). Count: **154**.
 11. **Cache cleared.** Admin bar → Caching → Purge All, and any other cache plugin live shows.
 12. **Wordfence Premium back on.** Live's licence is **Premium**; the deploy brings staging's free
     key. Wordfence → Dashboard → Global Options → Wordfence License → paste live's key (from the
@@ -123,7 +123,7 @@ All on **live** wp-admin (`virtualofficeangels.com.au/wp-admin/`), which now has
     - A few old addresses: `/about-us/`, `/contact-us/`, an old service page, an old article
 14. Claude, from outside:
     - every page answers 200, and a nonsense address answers 404
-    - all 153 redirects take one 301 to the right page, and their 117 destinations load
+    - all 154 redirects take one 301 to the right page, and their 117 destinations load
     - `http://` and `www.` addresses go to `https://virtualofficeangels.com.au/`
     - the sitemap lists only `https://` addresses: 13 pages and 100 articles, no old pages, no
       Thank You

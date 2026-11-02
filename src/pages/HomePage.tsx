@@ -212,7 +212,7 @@ export function HomePage() {
             <h2>Built on <em>HR expertise</em> and first-hand <em>market experience</em>.</h2>
             <p className="lead">Virtual Office Angels was established by Anne Villavieja, whose two decades of HR experience with Australian companies shape our practical approach to recruitment and long-term virtual support.</p>
             <p>Based in Australia and originally from the Philippines, Anne brings together an understanding of the country’s professional talent with the expectations of Australian businesses. That perspective helps Virtual Office Angels build working relationships designed for confidence, continuity, and long-term value.</p>
-            <Link className="text-link" to="/about">Learn more about us <ArrowRight /></Link>
+            <Link className="text-link" to="/about-us">Learn more about us <ArrowRight /></Link>
           </div>
         </div>
       </section>

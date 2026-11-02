@@ -88,11 +88,11 @@
 						},
 						{
 							"label": "Insurance Processing",
-							"href": "/services/insurance-processing-virtual-assistance"
+							"href": "/services/insurance-processing-virtual-assistant-support"
 						},
 						{
 							"label": "Real Estate & Admin",
-							"href": "/services/real-estate-virtual-assistant-services"
+							"href": "/services/real-estate-virtual-assistant-admin-support"
 						}
 					]
 				},
@@ -101,23 +101,23 @@
 					"items": [
 						{
 							"label": "Executive & Administrative",
-							"href": "/services/executive-and-administrative-virtual-assistance"
+							"href": "/services/executive-virtual-assistant-admin-support"
 						},
 						{
 							"label": "Digital Marketing",
-							"href": "/services/digital-marketing-virtual-assistant-services"
+							"href": "/services/digital-marketing-virtual-assistant-support"
 						},
 						{
 							"label": "Sales & E-Commerce",
-							"href": "/services/sales-and-e-commerce-virtual-assistant"
+							"href": "/services/sales-and-e-commerce-virtual-assistant-support"
 						},
 						{
 							"label": "IT Service & Technology",
-							"href": "/services/it-virtual-assistant-services"
+							"href": "/services/it-virtual-assistant-and-tech-support"
 						},
 						{
 							"label": "Copywriting",
-							"href": "/services/creative-copywriting-virtual-assistant"
+							"href": "/services/copywriting-virtual-assistant-support"
 						}
 					]
 				}
@@ -164,11 +164,11 @@
 		},
 		{
 			"label": "About",
-			"href": "/about",
+			"href": "/about-us",
 			"children": [
 				{
 					"label": "About us",
-					"href": "/about"
+					"href": "/about-us"
 				},
 				{
 					"label": "Client Stories & Testimonials",

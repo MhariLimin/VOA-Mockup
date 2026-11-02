@@ -1,6 +1,6 @@
 <?php
 /**
- * /about — AboutPage in SourcePage.tsx.
+ * /about-us — AboutPage in SourcePage.tsx.
  *
  * Our Story and Founder & Leadership stay distinct narratives; neither repeats the home page's founder
  * section. The copy below is the React build's, from the client's About Us content document.
@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$voa_brief = voa_page( '/about' );
+$voa_brief = voa_page( '/about-us' );
 $voa_site  = voa_data( 'site' );
 
 $voa_faqs = voa_content_about_pairs( 'faq' );
