@@ -15,7 +15,7 @@ Last updated 25 October 2026.
 | [EMAIL_PHP_UPGRADE_COMPLETED_2026-10-24.txt](EMAIL_PHP_UPGRADE_COMPLETED_2026-10-24.txt) | The announcement sent to the team |
 
 Backups, `.htaccess` copies, screenshots and the patched plugin files are kept outside Git, in
-`wordpress-backups/` and `wordpress-upgrade/`.
+`private/wordpress-backups/` and `private/wordpress-upgrade/`.
 
 ## Open items
 
@@ -36,10 +36,10 @@ This is the live list. Tick and date each item when it is done.
 - [x] Wordfence scan on all three sites, 25 October. No active malware. Virtual Financial Support: 9 plugins with
   security fixes to install. Virtual Office Angels: 16 Critical (6 were the old WP Logo Showcase copy, now
   deleted; 3 plugins with holes that have no fix yet). Virtual Loans
-  Assistant: 1 result, an abandoned plugin. Plugin names and details are in `wordpress-security/`, kept outside Git
+  Assistant: 1 result, an abandoned plugin. Plugin names and details are in `private/wordpress-security/`, kept outside Git
 - [ ] Install the plugin updates on Virtual Financial Support and Virtual Office Angels, after a backup; remove
   unused or abandoned plugins on all three (named in the scan results in
-  `wordpress-security/`)
+  `private/wordpress-security/`)
   - [x] Virtual Office Angels **staging**, 31 October: database backup, then 4 plugin updates and
     WordPress 7.1.4; the modified Twenty Twenty-Five file repaired in Wordfence. All 153 staging
     redirects checked from outside before and after; the pages checked by eye (Coming soon hides
@@ -50,10 +50,10 @@ This is the live list. Tick and date each item when it is done.
     too
   - [ ] Virtual Office Angels live: the old site's **page builder** not updated: its update needs a
     paid support renewal. The new website does not use it, so it goes at launch (3 November). Never
-    install a copy from an unofficial site. Name and version in `wordpress-security/`
+    install a copy from an unofficial site. Name and version in `private/wordpress-security/`
   - [x] Virtual Office Angels live, 31 October: **19 inactive plugins deleted**, among them most of
     the ones with no fix or abandoned. Pages, menu, slider, sitemap and the `http` → `https`
-    redirect checked afterwards. Names in `wordpress-security/`
+    redirect checked afterwards. Names in `private/wordpress-security/`
   - [ ] Virtual Office Angels live: the inactive **newsletter plugin** kept until Ms Anne decides
     whether its subscriber list is exported first. The active plugins with no fix or abandoned stay until launch
     (the old site uses them); staging has none of them
@@ -62,15 +62,15 @@ This is the live list. Tick and date each item when it is done.
   then the website database, email-sending and hosting passwords. Turn on two-step login
   for the hosting and WordPress admins
 - [x] Remove the 2023 leftover files from the Virtual Office Angels live and staging sites: deleted 25 October, after backups (exact paths in
-  `wordpress-upgrade/PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23_FULL.md`, kept outside Git)
+  `private/wordpress-upgrade/PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23_FULL.md`, kept outside Git)
 - [ ] Check the Wordfence firewall level on the upgraded sites; re-optimise if it fell back to Basic.
-  For Virtual Office Angels, with its plugin updates: `wordpress-security/VOA_FIREWALL_AND_PLUGIN_UPDATES_2026-10-30.txt`
+  For Virtual Office Angels, with its plugin updates: `private/wordpress-security/VOA_FIREWALL_AND_PLUGIN_UPDATES_2026-10-30.txt`
   (kept outside Git, as it names the vulnerable plugins)
   - [x] Virtual Office Angels, 31 October: live and staging had both fallen to Basic (live's
     `auto_prepend_file` line in `.user.ini` was commented out). Optimised, staging first as
     Wordfence advises for a site inside another's folder, then live; both LiteSpeed/lsapi, both now
     **Extended Protection**. Live and staging pages checked afterwards. The `.htaccess` and
-    `.user.ini` backups are in `wordpress-security/voa/10-30-2026/`
+    `.user.ini` backups are in `private/wordpress-security/voa/10-30-2026/`
   - [ ] Virtual Financial Support and Virtual Loans Assistant
 - [ ] Open Elementor once on Virtual Financial Support to confirm the page editor works
 - [ ] Ask HostGator to explain the 35-minute HTTPS outage on the Business plan server
@@ -107,7 +107,7 @@ it or remove it.
 - **Virtual Office Angels live:** 27 results (10 Critical, 1 High, 16 Medium). No malware and no
   suspicious files; down from 31, because the 6 leftover-plugin files are gone. Everything else is
   plugins: updates waiting, 3 with holes that have no fix yet, and 3 abandoned, the same ones as on
-  25 October. WordPress 7.0.8 has 7.1.4 waiting. The details are in `wordpress-security/voa/`, kept
+  25 October. WordPress 7.0.8 has 7.1.4 waiting. The details are in `private/wordpress-security/voa/`, kept
   outside Git.
 - **Virtual Office Angels staging:** 6 results (5 Medium, 1 Low), none Critical. No malware. Four
   plugin updates and WordPress 7.0.8 → 7.1.4. One modified file in the unused Twenty Twenty-Five

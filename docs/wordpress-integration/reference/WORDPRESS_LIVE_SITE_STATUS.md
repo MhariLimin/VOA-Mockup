@@ -385,7 +385,7 @@ Answered by the user on 2026-10-03.
 A database-only UpdraftPlus backup was taken on 2026-10-04 and downloaded off the server:
 `backup_2026-10-04-0610_…-db.gz`, 29.5 MB, 158 tables. It was checked locally: the archive is
 intact and its header names the live site, WordPress 7.0.6, PHP 7.4.33 and MySQL 5.7.44. It is kept in
-`wordpress-backups/`, which is git-ignored — it holds user accounts and must never reach GitHub.
+`private/wordpress-backups/`, which is git-ignored — it holds user accounts and must never reach GitHub.
 
 **Three things the backup log revealed:**
 

@@ -21,6 +21,6 @@ Bolt should refine this implementation rather than regenerate it. The 30 article
 
 ## Safe Bolt workflow
 
-After importing the `bolt/layout-enhance-1` branch, paste [`BOLT_START_PROMPT.md`](BOLT_START_PROMPT.md) in Discussion or Plan mode. It performs a no-edit branch and file check. Then use the numbered files in [`bolt-prompts/`](bolt-prompts/) one at a time, beginning with the homepage. Never paste the full prompt pack or request a site-wide continuation.
+After importing the `bolt/layout-enhance-1` branch, paste [`BOLT_START_PROMPT.md`](BOLT_START_PROMPT.md) in Discussion or Plan mode. It performs a no-edit branch and file check. Then use the numbered files in [`docs/archive/bolt-prompts/`](docs/archive/bolt-prompts/) one at a time, beginning with the homepage. Never paste the full prompt pack or request a site-wide continuation.
 
 `claude.md` contains the permanent branch and scope guardrails. The files in `docs/` remain design reference, not authorization for an autonomous full-site pass.

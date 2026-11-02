@@ -28,8 +28,8 @@ PHP says an update is the only complete remedy for the two 21 October vulnerabil
 | docs/wordpress-integration/reference/WORDPRESS_LIVE_SITE_STATUS.md | Records the 2–4 October live-site WordPress/PHP/plugin snapshot and its limitations. |
 | docs/project/OCT_08_TO_18_2026_HANDOFF.md | Records the new theme's local PHP 8.3 tests; explicitly not proof of staging deployment. |
 | wordpress-theme/README.md | Records earlier PHP 8.3 and PHP 7.4 local theme checks, some predating later changes. |
-| wordpress-backups/voa-staging-1384/backup_2026-10-19-1433_Virtual_Office_Angels_Online_V_abaa956d5376-plugins.zip | 19 October staging plugin-file snapshot. |
-| wordpress-backups/voa-staging-1384/backup_2026-10-19-1433_Virtual_Office_Angels_Online_V_abaa956d5376-db.gz | 19 October staging database snapshot previously used to identify active plugin slugs. Do **not** publish or attach this backup to a support ticket. |
+| private/wordpress-backups/voa-staging-1384/backup_2026-10-19-1433_Virtual_Office_Angels_Online_V_abaa956d5376-plugins.zip | 19 October staging plugin-file snapshot. |
+| private/wordpress-backups/voa-staging-1384/backup_2026-10-19-1433_Virtual_Office_Angels_Online_V_abaa956d5376-db.gz | 19 October staging database snapshot previously used to identify active plugin slugs. Do **not** publish or attach this backup to a support ticket. |
 
 ## Known, assumed, and unknown
 
@@ -128,7 +128,7 @@ Plugin **minimum PHP** requirements are floors, not proof of all PHP 8.3/8.4 beh
 ## Results — 23 October 2026 (UTC)
 
 All three active sites now run **PHP 8.3.36**, a fixed release, confirmed in each site's Site Health. Each was backed
-up first (UpdraftPlus, copies in `wordpress-backups/vla-live`, `vfs-live`, `voa-live`) and its public pages were
+up first (UpdraftPlus, copies in `private/wordpress-backups/vla-live`, `vfs-live`, `voa-live`) and its public pages were
 compared before and after the switch.
 
 | Site | Account | Before | After | Checked after the switch |
@@ -141,13 +141,13 @@ compared before and after the switch.
   restoring the `alt-php74` handler line in `.htaccess`. Cause, from the site's `error_log`: **Testimonials Showcase
   1.3.7** uses curly-brace string offsets (`includes/utils.php` line 719), removed in PHP 8. Its
   `includes/class-settings.php` line 105 also used `create_function()`. Both lines were replaced (copies in
-  `wordpress-upgrade/testimonials-showcase-patch/`; the change works on PHP 7.4 and 8.3) and the second switch
+  `private/wordpress-upgrade/testimonials-showcase-patch/`; the change works on PHP 7.4 and 8.3) and the second switch
   succeeded. **Do not reinstall that plugin from an old copy**; it is retired at cutover anyway.
 - Every other active VOA plugin was compile-checked under PHP 8.3 from the backup: no fatal errors. The HostGator
   plugin's non-English translation files fail to compile, but the site is English, so they never load.
 - **Undo for VFS and VOA**: MultiPHP Manager no longer offers alt-php74, so rollback means replacing the handler line
   in the site's `.htaccess` with `AddHandler application/x-httpd-alt-php74___lsphp .php .php7 .phtml`. The original
-  files are saved as `wordpress-upgrade/htaccess-vfs` and `htaccess-voa`.
+  files are saved as `private/wordpress-upgrade/htaccess-vfs` and `htaccess-voa`.
 - **VFS outage, 17:15–17:50 UTC**: HTTPS on the Business plan server stopped completing, for every site on
   it and even for static files; HTTP still answered and the account's error log showed no PHP errors. It recovered
   without any change on our side. Not explained yet; worth asking HostGator.
@@ -157,7 +157,7 @@ compared before and after the switch.
 | # | Item | Needs |
 | --- | --- | --- |
 | 1 | **Email routing.** The Pro account still holds old copies of `virtualfinancialsupport.com.au`, so mail sent through the Pro mail server to `@virtualfinancialsupport.com.au` (including VFS form notifications) is filed in a mailbox on the Pro account, not the real one on the Business server. The Business account likewise holds a copy of `virtualofficeangels.com`/`.com.au`. Fix: Email Routing → Remote Mail Exchanger for each such domain. Review the Pro-side `clientcare@virtualfinancialsupport.com.au` mailbox for missed enquiries. **Update 25 October: the team leader uses the Pro mailbox, so the Remote fix for Virtual Financial Support is withdrawn; see `README.md`** | Client approval |
-| 2 | **Old malware on VOA live**: three leftover items in the plugins folder, last active in March 2023. Inert on their own; review and remove with a backup. Exact paths are in the local full copy, `wordpress-upgrade/PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23_FULL.md` | Security review |
+| 2 | **Old malware on VOA live**: three leftover items in the plugins folder, last active in March 2023. Inert on their own; review and remove with a backup. Exact paths are in the local full copy, `private/wordpress-upgrade/PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23_FULL.md` | Security review |
 | 3 | Wordfence firewall protection level after the PHP change (Firewall → All Firewall Options → Protection Level); re-optimise if it fell back to Basic | Low priority |
 | 4 | VLA Jetpack: disconnect and reconnect, which renews its connection keys | Low effort |
 | 5 | DMARC is not set up for `virtualofficeangels.com.au` (WP Mail SMTP warning) | DNS change, client approval |

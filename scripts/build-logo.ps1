@@ -121,7 +121,7 @@ Add-Type -TypeDefinition $code -ReferencedAssemblies System.Drawing
 
 $root = "E:\_Yua\VOA\Mock Layout\VOA Layout 1"
 $res = [LogoBuild]::Build(
-  (Join-Path $root "VOA LOGOS.png"),
+  (Join-Path $root "docs\reference-images\VOA LOGOS.png"),
   (Join-Path $root "public\assets\voa-logo.png"),
   (Join-Path $root "public\assets\voa-logo-dark.png"),
   700)

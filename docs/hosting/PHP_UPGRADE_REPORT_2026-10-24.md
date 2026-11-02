@@ -62,6 +62,6 @@ version was confirmed in WordPress afterwards: **8.3.36** on all three.
 
 ## For reference (technical)
 
-- Backups taken tonight: `wordpress-backups/vla-live/`, `vfs-live/`, `voa-live/` (not in Git)
-- Undo copies of the PHP settings and the plugin fix: `wordpress-upgrade/` (not in Git)
+- Backups taken tonight: `private/wordpress-backups/vla-live/`, `vfs-live/`, `voa-live/` (not in Git)
+- Undo copies of the PHP settings and the plugin fix: `private/wordpress-upgrade/` (not in Git)
 - Full technical record: `docs/hosting/PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23.md`

@@ -136,7 +136,7 @@ main { padding-top: var(--header-height); }
 .nav-popover a { display: block; padding: 0.7rem 0.8rem; border-radius: 0.6rem; color: #19324a; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
 .nav-popover a:hover { color: #005ca8; background: #eff6fb; }
 
-/* H5: services mega panel — the reference layout in ref-images/image0.png, rebuilt on Layout 1's
+/* H5: services mega panel — the reference layout in docs/reference-images/image0.png, rebuilt on Layout 1's
    own eyebrow, link and text-link idioms so it reads as a wider sibling of the standard dropdown. */
 .nav-mega {
   display: grid;

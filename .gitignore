@@ -7,8 +7,7 @@ dist
 .env.*
 !.env.example
 
-# Site backups and plugin logs: private data, never committed.
-wordpress-backups/
+# Plugin logs.
 log.*.txt
 
 # The packaged theme, rebuilt with npm run wp:zip.
@@ -22,9 +21,6 @@ docs/project/SESSION_CONTINUITY_*.md
 docs/hosting/*.pdf
 public/new/
 
-# Local access register; may contain credentials after it is filled in.
-local-credentials/
-
 # Local working files: article drafts for the WordPress posts, exported copies of documents kept
 # here in Markdown or published elsewhere, and feedback screenshots.
 /*Article_*.docx
@@ -34,15 +30,13 @@ docs/seo/SEO Campaign for Australian States.pdf
 /image*.png
 docs/wordpress-integration/image*.png
 
-# Google Business Profile screenshots: they show managers' email addresses.
-google-my-business/
-
-# PHP upgrade working files: .htaccess copies, server error log, cPanel screenshots, patched plugin files.
-wordpress-upgrade/
-
-# Wordfence scan results and the hosted-website inventory: they map weaknesses on live servers.
-wordpress-security/
+# The hosted-website inventory: it maps weaknesses on live servers.
 docs/hosting/WEBSITE_INVENTORY_*
+
+# Private working files, never committed: site backups (wordpress-backups), Wordfence scan results
+# (wordpress-security), PHP upgrade files (wordpress-upgrade), Google Business Profile screenshots
+# (google-my-business) and the local access register (local-credentials).
+private/
 
 # Files kept beside the project but not part of it: the team's action tracker (holds a password, and
 # is over GitHub's 100 MB limit), HR forms that name staff and clients, and unrelated personal work.

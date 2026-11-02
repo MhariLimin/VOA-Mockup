@@ -11,7 +11,7 @@ Per `CLAUDE.md`: implement only confirmed items, preserve Layout 1's identity, v
 | **Layout 1** | This repo, `main` branch — the approved design, current source of truth |
 | **Layout 2** | `mock-layout-2` branch — rejected as an overall design, but named below as the **source of specific components/sections only** |
 | **VOA Content** | `E:\_Yua\VOA\Mock Layout\VOA Content` — a separate static-HTML proposal (its own `dist` build). Used **only as a copy/content source** for the sections named below. Do not merge its code, dependencies, or build into this repo. |
-| **ref-images** | `E:\_Yua\VOA\Mock Layout\VOA Layout 1\ref-images` — contains `image0.png`, `image1.png`, `image2.png` (referenced below) |
+| **ref-images** | `E:\_Yua\VOA\Mock Layout\VOA Layout 1\docs\reference-images` (was `ref-images`, moved 3 November 2026) — contains `image0.png`, `image1.png`, `image2.png` (referenced below) |
 | `image<n>.png` (no path given) | Parent directory `E:\_Yua\VOA\Mock Layout\` — contains `image.png`, `image2.png`–`image5.png` |
 
 **Note on scope reversal — confirmed by the user on 2026-09-20:** `CLAUDE.md` previously stated the standalone Services Overview page was intentionally removed and should not be restored without a new request, and that `VOA Content` should not be merged into this project without explicit request. Item HP1 below restores a `/services` page adapted from Layout 2, and multiple items below pull specific copy from `VOA Content`. Per `CLAUDE.md`'s own precedence rule, this request supersedes those two prior decisions for the specific items listed — nothing else about that guidance changes, and `VOA Content`'s code/build is still not merged.
@@ -51,7 +51,7 @@ Note: H5's "View all services →" link needs a `/services` destination, so the 
 - **H2.** Replace the "Get Started Today" button with a phone number (top-right of header), preceded by a call icon. Both icon and text are the same orange as the button they replace. Clicking it navigates to `/contact` (not a `tel:` link).
 - **H3.** Increase the Virtual Office Angels logo size.
 - **H4. [Blocked]** Swap in the client-supplied logo file once received — not yet delivered.
-- **H5.** Rebuild the Services dropdown to match `ref-images/image0.png`; cross-reference the equivalent dropdown markup/layout in `VOA Content`.
+- **H5.** Rebuild the Services dropdown to match `docs/reference-images/image0.png`; cross-reference the equivalent dropdown markup/layout in `VOA Content`.
 - **H6.** Move FAQs under the Insights dropdown instead of its own top-level nav item. **The `/faqs` route/URL does not change** — menu placement only, so no redirect is needed now or at WordPress cutover.
 - **H7.** Merge the "Our Story" and "Founder & Leadership" dropdown entries into a single nav item labelled **"About Virtual Office Angels"**, linking to `/about` (top of page, no anchor). Both sections remain on the page and are read in order by scrolling; the `#story` and `#leadership` anchors stay valid for any existing in-page or external links.
 
@@ -92,12 +92,12 @@ Remaining judgment calls:
 Section-level changes:
 
 - **HP1.** "Explore services" buttons link to a new `/services` overview page, adapted from Layout 2's `/services` page but restyled to Layout 1 fonts, theme, and sizing. *(This reinstates the previously-removed Services Overview route — see scope-reversal note above.)*
-- **HP2.** Replace the hero text content and font color with the copy shown in `ref-images/image1.png`. Keep the current button labels/text as-is; only the surrounding copy and color change.
-- **HP3.** Add the four-column stat row from `ref-images/image1.png` to the hero: **15+ years**, **Top 5%**, **12 months**, **100% managed**.
+- **HP2.** Replace the hero text content and font color with the copy shown in `docs/reference-images/image1.png`. Keep the current button labels/text as-is; only the surrounding copy and color change.
+- **HP3.** Add the four-column stat row from `docs/reference-images/image1.png` to the hero: **15+ years**, **Top 5%**, **12 months**, **100% managed**.
 - **HP4.** Rebuild "Our Clients" to follow Layout 2's "Trusted Partnership" section layout.
 - **HP5.** Remove the three-column section that currently follows Our Clients (Australian-managed / Specialist Matching / Established in 2010). This is superseded by the new sitewide "Virtual Office Angels model" section (G3), which is similar in spirit but not identical in copy — the two are not the same section.
 - **HP6.** Merge "A more considered match" and "Founder & Leadership" into one section. Its link/CTA text becomes "Learn more about us."
-- **HP7.** Rename "Industries and capabilities" to **"Specialised virtual assistant services"**; replace the subheading "Specialist support where precision matters" with the copy shown in `ref-images/image2.png` (cross-check against the "Specialised virtual assistant services" section on the `VOA Content` homepage), plus the paragraph that follows it there. Keep the existing service-card layout/grid as-is.
+- **HP7.** Rename "Industries and capabilities" to **"Specialised virtual assistant services"**; replace the subheading "Specialist support where precision matters" with the copy shown in `docs/reference-images/image2.png` (cross-check against the "Specialised virtual assistant services" section on the `VOA Content` homepage), plus the paragraph that follows it there. Keep the existing service-card layout/grid as-is.
 - **HP8.** Append the following text below each service card's existing copy. The word "Systems" renders in the site's existing orange accent color; each system name listed after it is underlined and rendered at slightly lower opacity:
   - Mortgage & Loans — *Systems: Connective, Mercury, Podium, Symmetry, Flex, AdviserLogic and COIN.*
   - Financial Planning — *Systems: Xplan, Risk Researcher, WealthSolver, CALM, Midwinter and AdviserLogic.*
@@ -243,7 +243,7 @@ Also note: the home page's Why Virtual Office Angels band uses the shorter "More
 | 3 | Homepage G2/G3 | Both excluded from home; existing contact form stays untouched |
 | 4 | Homepage order | Current bottom-half order retained — see Home page list above |
 | 5 | Service tags + systems (SP2/SP4/HP8) | Extracted from `VOA Content`; all 9 services mapped |
-| 6 | `ref-images` path | `VOA Layout 1/ref-images/` |
+| 6 | `ref-images` path | `VOA Layout 1/docs/reference-images/` |
 | 7 | Global sizing (G1) | ~10% token reduction, **home page first**, sitewide rollout only after sign-off |
 | 8 | Pagination (ART2) | `/insights` and `/videos` only, 10 per page; Client Stories unchanged |
 | 9 | Articles/Videos hero (ART1) | Delegated to us — decide after the services hero is built, then flag the choice |

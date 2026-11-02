@@ -32,7 +32,7 @@ As of 2026-10-04.
 ## Backup — 2026-10-04
 
 - **Database backup taken and downloaded:** 29.5 MB, 158 tables, checked intact. It is in
-  `wordpress-backups/`, which git ignores.
+  `private/wordpress-backups/`, which git ignores.
 - **Not taken yet:** a files backup.
 
 ## Planning and investigation
