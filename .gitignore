@@ -43,3 +43,7 @@ wordpress-upgrade/
 # Wordfence scan results and the hosted-website inventory: they map weaknesses on live servers.
 wordpress-security/
 docs/hosting/WEBSITE_INVENTORY_*
+
+# Files kept beside the project but not part of it: the team's action tracker (holds a password, and
+# is over GitHub's 100 MB limit), HR forms that name staff and clients, and unrelated personal work.
+misc/
