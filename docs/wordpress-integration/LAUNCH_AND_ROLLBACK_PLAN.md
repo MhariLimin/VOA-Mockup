@@ -1,7 +1,7 @@
 # Launch and rollback plan: VOA staging to the live website
 
-30 October 2026, updated 1 November · VA Mhari. **Launch: Tuesday 3 November 2026**, before the
-meeting that day. VA Mhari launches it; no sign-off is needed.
+30 October 2026, updated 2 November · VA Mhari. **Launch: Tuesday 3 November 2026**, after the
+meeting that day (moved from before the meeting on 2 November). VA Mhari launches it; no sign-off is needed.
 
 This is the exact sequence that step 12 of [`reference/MIGRATION_RUNBOOK.md`](reference/MIGRATION_RUNBOOK.md)
 left to be written once the facts were known. It replaces steps 12 and 13 there. What must be finished
@@ -38,8 +38,8 @@ Email, the domain and DNS are not touched by the launch.
 
 ### By 2 November
 
-1. **Launch window:** the morning of Tuesday 3 November, 3 hours, finished before the meeting. Keep
-   the rest of that day and the next morning free in case something needs fixing.
+1. **Launch window:** Tuesday 3 November, after the meeting, 3 hours. Keep the rest of that day and
+   the next morning free in case something needs fixing.
 2. Tell the team the **content freeze**: nothing published or changed on live until the launch is
    confirmed.
 3. **Live's Wordfence Premium key** is in the password manager (copied 30 October, before staging
@@ -129,7 +129,7 @@ All on **live** wp-admin (`virtualofficeangels.com.au/wp-admin/`), which now has
       Thank You
     - no page tells search engines to stay away, except Thank You
     - no link or image points at `/staging/1384/`
-15. **Decision at 2:45:** launched, or **Rollback**. Report the result at the meeting.
+15. **Decision at 2:45:** launched, or **Rollback**. Report the result to the team.
 
 ### After the window
 
@@ -167,7 +167,7 @@ Staging is not changed by a deploy, so the new website stays safe there while li
 5. Check, in a private window: the old home page, `/about-us/`, `/contact-us/` and one article load
    as before the launch; a contact form enquiry arrives; Wordfence → Scan runs (live's own key
    comes back with its database).
-6. Tell the team it is back, and report it at the meeting. Write down what went wrong; fix it on
+6. Tell the team it is back, and report it to Ms Anne. Write down what went wrong; fix it on
    staging; pick a new date.
 
 ## Two weeks after
