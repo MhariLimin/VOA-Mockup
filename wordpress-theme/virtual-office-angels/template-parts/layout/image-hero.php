@@ -3,7 +3,7 @@
  * Page opening with an image — ImageHero in SourcePage.tsx, used by Insights and Videos.
  *
  * With a photograph and no `aside`, the image takes the right half of the section behind a curved
- * cut, as on /managed-virtual-support. A caller passing its own aside (Videos passes a player-style poster) keeps the
+ * cut, as on /managed-virtual-support. A caller passing its own aside (Videos passes a still from its video) keeps the
  * column layout instead.
  *
  * Args:

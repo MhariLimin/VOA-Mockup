@@ -126,10 +126,6 @@ function voa_content_other_defaults( $entity ) {
 		),
 		'videos' => array(
 			'library_eyebrow' => array( 'Video library / Eyebrow', 'Video library' ),
-			'video_1' => array( 'Video library / Title 1', 'Choosing the right virtual assistant' ),
-			'video_2' => array( 'Video library / Title 2', 'Preparing your business to delegate' ),
-			'video_3' => array( 'Video library / Title 3', 'Building a strong remote working rhythm' ),
-			'video_description' => array( 'Video library / Placeholder description', 'Reserved for an existing, client-approved video with captions and a written transcript.' ),
 		),
 		'faqs' => array(
 			'closing_intro' => array( 'Closing / Introduction', 'We trust these answers provide useful information about hiring a virtual worker and what to consider when getting started.' ),

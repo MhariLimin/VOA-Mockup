@@ -154,7 +154,7 @@ Rebuilt during week 2 to follow the deployed VOA Content proposal (`https://voa-
 4. "More than recruitment" dark section: "What is an HR Managed Virtual Support Solution?", four stage cards, and links to How It Works and Managed Virtual Support. This single section replaced the former separate "Managed virtual support" band and "How it works" summary.
 5. Founder section: "Australian-led, people-first outsourcing company" / "Built on HR expertise and first-hand market experience."
 6. "Insights and resources" with three article previews.
-7. "Client feedback" media section with three shortened testimonial previews.
+7. "Client feedback" media section with four shortened testimonial previews: the latest four (Kathryn, Rocky, Greg, Steven) since 3 November 2026.
 8. FAQs: the five deployed questions and answers.
 9. "Let's talk" direct contact form.
 
@@ -183,8 +183,8 @@ Historical duplicate founder markup still exists under `.legacy-home-founder` bu
 ## Known prototype limitations and validation items
 
 - Contact forms currently navigate to `/thank-you`; there is no real form submission, server-side validation, consent record, email delivery, or spam protection.
-- Video cards are placeholders pending approved video URLs, captions, and transcripts. They render a “Coming soon” player-style poster (`VideoPoster`), not a real thumbnail.
-- Testimonial “avatars” are initials, not verified client portraits, and the service-page feedback cards use a generic icon with the document’s own “feedback currently being gathered” placeholder. Do not fabricate photographs or quotes.
+- The Videos page shows the one video from the old website's Videos page, "Contracts" (3 November 2026, `src/content/videoContent.ts`). The file stays in the WordPress media library; the mockup plays the live site's copy. It has no captions or transcript yet. The "Coming soon" placeholders were removed.
+- Testimonial “avatars” are initials, not verified client portraits. A service page shows its Client feedback section only when the client has supplied a testimonial for that service (Mortgage and Financial Planning, 3 November 2026); the placeholder cards were removed. Do not fabricate photographs or quotes.
 - Source testimonials, logos, founder biography, company details, service scope, and images require final client approval for accuracy, rights, and consent.
 - All ten services now have client-supplied content, and their final URLs were supplied on 2026-10-05.
 - `index.html` has one generic prototype title and description. Route-specific production SEO is not implemented.

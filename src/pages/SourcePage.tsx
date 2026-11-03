@@ -7,6 +7,7 @@ import { managedStepTitles, serviceDetails, serviceRouter } from '../content/ser
 import { processIntro, processStages } from '../content/processContent';
 import { managedSupportPage, ownershipSplit } from '../content/managedContent';
 import { testimonials } from '../content/testimonials';
+import { videos, videoSource } from '../content/videoContent';
 import { caseStudy } from '../content/caseStudy';
 import { sisterSites } from '../content/siteContent';
 import { ClientCarousel } from '../components/ui/ClientCarousel';
@@ -16,7 +17,7 @@ import { RotatingBackdrop } from '../components/ui/RotatingBackdrop';
 import { HeadingAccent } from '../components/ui/HeadingAccent';
 import { stageGlyphs } from '../components/ui/StageGlyphs';
 import { ItemGlyph, RoleGlyph } from '../components/ui/ItemGlyphs';
-import { ArrowLeft, ArrowRight, ArrowUpRight, BuildingIcon, MailIcon, PhoneIcon, PinIcon, PlayMark, PlusMark, ValueIcon } from '../components/ui/Icons';
+import { ArrowLeft, ArrowRight, ArrowUpRight, BuildingIcon, MailIcon, PhoneIcon, PinIcon, PlusMark, ValueIcon } from '../components/ui/Icons';
 import { contactBackgrounds } from '../content/homeContent';
 
 function Hero({ page, aside }: { page: SourcePageBrief; aside?: ReactNode }) {
@@ -199,11 +200,11 @@ function ServicePage({ page }: { page: SourcePageBrief }) {
       <p className="fit-flow-note">{detail.outcomeHeading}</p>
     </div></section>
 
-    <section className="section muted-section service-feedback"><div className="container">
+    {/* Only where the client has supplied testimonials for this service; the placeholder cards were
+        removed on 3 November 2026. */}
+    {feedback.length > 0 && <section className="section muted-section service-feedback"><div className="container">
       <div className="section-heading"><div><p className="eyebrow">Client feedback</p><h2><HeadingAccent text={detail.feedbackHeading} /></h2></div></div>
-      {/* Real testimonials for this service where the client has supplied them; otherwise the
-          document's three placeholder cards. */}
-      <div className="testimonial-grid testimonial-grid-3" data-count={feedback.length || 3}>{feedback.length > 0 ? feedback.map((testimonial) => (
+      <div className="testimonial-grid testimonial-grid-3" data-count={feedback.length}>{feedback.map((testimonial) => (
         <figure key={testimonial.name}>
           <blockquote>“{testimonial.quote}”</blockquote>
           <figcaption>
@@ -211,16 +212,8 @@ function ServicePage({ page }: { page: SourcePageBrief }) {
             <span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span>
           </figcaption>
         </figure>
-      )) : [1, 2, 3].map((slot) => (
-        <figure key={slot}>
-          <blockquote>“{detail.feedbackPlaceholder}”</blockquote>
-          <figcaption>
-            <span className="testimonial-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z" /></svg></span>
-            <span><strong>Client name</strong><small>Business</small></span>
-          </figcaption>
-        </figure>
       ))}</div>
-    </div></section>
+    </div></section>}
 
     <section className="section"><div className="container faq-page-grid"><aside><p className="eyebrow">Questions about the service</p><h2><HeadingAccent text={detail.faqHeading} /></h2><p className="lead compact">{detail.faqIntro}</p></aside><Accordion items={detail.faqs} idPrefix="service-faq" /></div></section>
 
@@ -656,31 +649,18 @@ function InsightsPage({ page }: { page: SourcePageBrief }) {
   </>;
 }
 
-const VIDEO_PLACEHOLDERS = ['Choosing the right virtual assistant', 'Preparing your business to delegate', 'Building a strong remote working rhythm'] as const;
-
-/* Stand-in artwork until approved videos exist: a player-style frame, clearly marked as coming soon. */
-function VideoPoster({ label, title, className = '' }: { label: string; title?: string; className?: string }) {
-  return <div className={`video-poster ${className}`.trim()} aria-hidden="true">
-    <span className="video-poster-chip">Coming soon</span>
-    <span className="video-poster-label">{label}</span>
-    <span className="video-poster-play"><PlayMark /></span>
-    {title && <span className="video-poster-title">{title}</span>}
-    <span className="video-poster-bar"><i /><b>0:00</b></span>
-  </div>;
-}
-
 function VideosPage({ page }: { page: SourcePageBrief }) {
   const PER_PAGE = 10;
   const listRef = useRef<HTMLElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageCount = Math.ceil(VIDEO_PLACEHOLDERS.length / PER_PAGE);
-  const pageItems = VIDEO_PLACEHOLDERS.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+  const pageCount = Math.ceil(videos.length / PER_PAGE);
+  const pageItems = videos.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
   function goToPage(n: number) { setCurrentPage(n); scrollToSection(listRef.current); }
   return <>
-    <ImageHero page={page} primary={['Watch videos', '#videos']} secondary={['Read articles', '/insights']} aside={<VideoPoster className="video-hero-poster" label="Video library" />} />
+    <ImageHero page={page} primary={['Watch videos', '#videos']} secondary={['Read articles', '/insights']} aside={<img className="video-hero-still" src={videos[0].poster} alt="" />} />
     <section className="section library-section" id="videos" ref={listRef}><div className="container">
-      <div className="section-heading library-heading"><p className="eyebrow">Video library</p><p className="library-count">{VIDEO_PLACEHOLDERS.length} videos</p></div>
-      <div className="media-grid">{pageItems.map((title, index) => <article className="video-card" key={title}><VideoPoster label={`Video 0${(currentPage - 1) * PER_PAGE + index + 1}`} title={title} /><p className="eyebrow">Video resource</p><h2>{title}</h2><p>Reserved for an existing, client-approved video with captions and a written transcript.</p></article>)}</div>
+      <div className="section-heading library-heading"><p className="eyebrow">Video library</p><p className="library-count">{videos.length} {videos.length === 1 ? 'video' : 'videos'}</p></div>
+      <div className={`media-grid${videos.length === 1 ? ' media-grid-single' : ''}`}>{pageItems.map((video) => <article className="video-card" key={video.upload}><video className="video-player" controls preload="none" poster={video.poster} src={videoSource(video)} aria-label={video.title} /><p className="eyebrow">Video resource</p><h2>{video.title}</h2></article>)}</div>
       <Pagination label="Video pages" currentPage={currentPage} pageCount={pageCount} onChange={goToPage} />
     </div></section>
     <PageClosing />

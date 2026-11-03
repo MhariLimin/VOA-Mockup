@@ -37,7 +37,7 @@ endif;
 $voa_groups  = isset( $voa_detail['systemGroups'] ) ? $voa_detail['systemGroups'] : array();
 $voa_systems = isset( $voa_detail['systems'] ) ? $voa_detail['systems'] : array();
 
-/* Real testimonials for this service where the client has supplied them; otherwise the document's three placeholder cards. */
+/* Real testimonials for this service where the client has supplied them; a service with none has no feedback section (3 November 2026). */
 $voa_feedback = array_values(
 	array_filter(
 		voa_data( 'testimonials' ),
@@ -154,9 +154,10 @@ foreach ( $voa_systems as $voa_index => $voa_system ) {
 	<p class="fit-flow-note"><?php echo esc_html( $voa_detail['outcomeHeading'] ); ?></p>
 </div></section>
 
+<?php if ( $voa_feedback ) : ?>
 <section class="section muted-section service-feedback"><div class="container">
 	<div class="section-heading"><div><p class="eyebrow">Client feedback</p><h2><?php echo voa_accent( $voa_detail['feedbackHeading'] ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?></h2></div></div>
-	<div class="testimonial-grid testimonial-grid-3" data-count="<?php echo $voa_feedback ? count( $voa_feedback ) : 3; ?>">
+	<div class="testimonial-grid testimonial-grid-3" data-count="<?php echo count( $voa_feedback ); ?>">
 		<?php foreach ( $voa_feedback as $voa_quote ) : ?>
 			<figure>
 				<blockquote>“<?php echo esc_html( $voa_quote['quote'] ); ?>”</blockquote>
@@ -166,17 +167,9 @@ foreach ( $voa_systems as $voa_index => $voa_system ) {
 				</figcaption>
 			</figure>
 		<?php endforeach; ?>
-		<?php for ( $voa_slot = 0; ! $voa_feedback && $voa_slot < 3; $voa_slot++ ) : ?>
-			<figure>
-				<blockquote>“<?php echo esc_html( $voa_detail['feedbackPlaceholder'] ); ?>”</blockquote>
-				<figcaption>
-					<span class="testimonial-avatar" aria-hidden="true"><?php echo voa_person_glyph(); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- static markup. ?></span>
-					<span><strong>Client name</strong><small>Business</small></span>
-				</figcaption>
-			</figure>
-		<?php endfor; ?>
 	</div>
 </div></section>
+<?php endif; ?>
 
 <section class="section"><div class="container faq-page-grid"><aside><p class="eyebrow">Questions about the service</p><h2><?php echo voa_accent( $voa_detail['faqHeading'] ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?></h2><p class="lead compact"><?php echo esc_html( $voa_detail['faqIntro'] ); ?></p></aside><?php get_template_part( 'template-parts/layout/accordion', null, array( 'items' => $voa_detail['faqs'], 'id_prefix' => 'service-faq' ) ); ?></div></section>
 

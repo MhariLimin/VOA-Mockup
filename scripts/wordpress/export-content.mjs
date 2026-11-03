@@ -42,6 +42,7 @@ try {
   const navigation = await load('/src/content/navigation.ts');
   const blog = await load('/src/content/blogContent.ts');
   const locations = await load('/src/content/locationPages.ts');
+  const videoContent = await load('/src/content/videoContent.ts');
   const clients = JSON.parse(await readFile(join(root, 'src/content/source/staging/clients.json'), 'utf8')).clients;
 
   const data = {
@@ -78,6 +79,8 @@ try {
       ...page,
       clients: { ...page.clients, wall: page.clients.wall.map((client) => ({ ...client, image: client.image ?? '' })) },
     }])),
+    /* Each video's file stays in the WordPress media library; `upload` is its path below wp-content/uploads. */
+    videos: videoContent.videos,
     accent: await accentPhrases(),
   };
 

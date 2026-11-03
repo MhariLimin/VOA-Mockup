@@ -64,5 +64,5 @@ export const testimonials: readonly Testimonial[] = [
   },
 ] as const;
 
-/* The home page keeps its three source-site previews until the client chooses new ones. */
-export const homeTestimonials = testimonials.slice(4, 7);
+/* The home page previews the four latest, the tracker's (3 November 2026). */
+export const homeTestimonials = testimonials.slice(0, 4);

@@ -83,13 +83,13 @@ Need Author Bio Section in every article
   a featured image, as on live: the theme uses each article's first picture
 - [x] Search, its no-results message and the 404 page work (local copy, 2 November); menus by eye
 - [x] Fixed 2 November with the Site setup update button: one article on staging, "When Does a Remote Support Role Require Industry Experience?": its
-  six links are broken (an image address joined to the page address). Two more articles link to
-  the old staging site (`/stagingsite2/why-us/`); point them at `/managed-virtual-support/`
+  six links were broken (an image address joined to the page address). Two more articles linked to
+  the old staging site (`/stagingsite2/why-us/`); they now point at `/managed-virtual-support/`
 
 ## 7. Launch day *(added)*
 
 The full sequence, with the rollback, is [`LAUNCH_AND_ROLLBACK_PLAN.md`](LAUNCH_AND_ROLLBACK_PLAN.md)
-(updated 1 November). **Launch: Tuesday 3 November 2026**, before the meeting; VA Mhari launches it,
+(updated 1 November). **Launch: Tuesday 3 November 2026**, after the meeting; VA Mhari launches it,
 no sign-off needed.
 
 - [ ] A fresh full backup of live, downloaded off the server; working off-server backups going forward
@@ -97,12 +97,12 @@ no sign-off needed.
   "Deploy all changes". It overwrites live completely, including anything published there since
   the clone (none on 1 November)
 - [x] A rollback plan, with someone available to run it: VA Mhari, 1 November
-- [x] A low-traffic launch window: the morning of Tuesday 3 November
+- [x] A launch window: Tuesday 3 November, after the meeting
 
 ## 8. After launch *(not blocking)*
 
 - [ ] The first two weeks: test the redirects again, submit the sitemap, watch Search Console for 404 errors *(added)*
-- [ ] **Videos** provided (files or URLs), with captions; the video cards show "Coming soon" until then
+- [ ] **Videos**: the old website's one video ("Contracts") is on the Videos page since 3 November; more videos, and captions for it, when provided
 - [ ] Post categories decided: the posts have none, and the theme currently works one out from the
   title *(added)*
 - [ ] **Old articles:** SEO title, meta description and focus keyphrase in Yoast for each of the 98 posts

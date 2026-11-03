@@ -178,15 +178,6 @@ function voa_role_glyph() {
 }
 
 /**
- * Service page: the generic person in the placeholder feedback cards.
- *
- * @return string
- */
-function voa_person_glyph() {
-	return '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z"/></svg>';
-}
-
-/**
  * /managed-virtual-support: the two-way arrows at the centre of the ownership split.
  *
  * @return string

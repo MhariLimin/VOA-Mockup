@@ -2,35 +2,19 @@
 /**
  * /videos — VideosPage in SourcePage.tsx.
  *
- * Three placeholders, deferred by the client on 2026-10-03 until approved videos with captions and
- * transcripts exist. Each is a player-style frame clearly marked "Coming soon", never a fake
- * thumbnail.
+ * The videos are data/videos.json (content/videoContent.ts): on 3 November 2026, the one video on the
+ * old website's Videos page. Each file stays in the WordPress media library and plays from
+ * wp-content/uploads; the poster, and the still beside the page heading, are frames of the video
+ * itself. The "Coming soon" placeholders it replaces were removed the same day.
  *
  * @package voa
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$voa_brief  = voa_page( '/videos' );
-$voa_videos = array( voa_content_plain( 'videos', 'video_1' ), voa_content_plain( 'videos', 'video_2' ), voa_content_plain( 'videos', 'video_3' ) );
-
-/**
- * The stand-in artwork: a player-style frame marked as coming soon.
- *
- * @param string $label Top label.
- * @param string $title Optional title.
- * @param string $class Extra class.
- * @return string
- */
-$voa_poster = static function ( $label, $title = '', $class = '' ) {
-	return sprintf(
-		'<div class="%s" aria-hidden="true"><span class="video-poster-chip">Coming soon</span><span class="video-poster-label">%s</span><span class="video-poster-play">%s</span>%s<span class="video-poster-bar"><i></i><b>0:00</b></span></div>',
-		esc_attr( trim( 'video-poster ' . $class ) ),
-		esc_html( $label ),
-		voa_get_icon( 'play' ),
-		$title ? '<span class="video-poster-title">' . esc_html( $title ) . '</span>' : ''
-	);
-};
+$voa_brief   = voa_page( '/videos' );
+$voa_videos  = voa_data( 'videos' );
+$voa_uploads = wp_get_upload_dir();
 
 get_header();
 
@@ -41,16 +25,16 @@ get_template_part(
 		'page'      => $voa_brief,
 		'primary'   => array( 'Watch videos', '#videos' ),
 		'secondary' => array( 'Read articles', '/insights' ),
-		'aside'     => $voa_poster( 'Video library', '', 'video-hero-poster' ),
+		'aside'     => $voa_videos ? '<img class="video-hero-still" src="' . esc_url( voa_media_url( $voa_videos[0]['poster'] ) ) . '" alt="">' : '',
 	)
 );
 ?>
 
 <section class="section library-section" id="videos"><div class="container">
-	<div class="section-heading library-heading"><p class="eyebrow"><?php echo voa_content_copy( 'videos', 'library_eyebrow' ); ?></p><p class="library-count"><?php echo count( $voa_videos ); ?> videos</p></div>
-	<div class="media-grid">
-		<?php foreach ( $voa_videos as $voa_index => $voa_title ) : ?>
-			<article class="video-card"><?php echo $voa_poster( 'Video 0' . ( $voa_index + 1 ), $voa_title ); // phpcs:ignore WordPress.Security.EscapingOutput.OutputNotEscaped -- escaped inside. ?><p class="eyebrow">Video resource</p><h2><?php echo esc_html( $voa_title ); ?></h2><p><?php echo voa_content_copy( 'videos', 'video_description' ); ?></p></article>
+	<div class="section-heading library-heading"><p class="eyebrow"><?php echo voa_content_copy( 'videos', 'library_eyebrow' ); ?></p><p class="library-count"><?php echo esc_html( count( $voa_videos ) . ( 1 === count( $voa_videos ) ? ' video' : ' videos' ) ); ?></p></div>
+	<div class="media-grid<?php echo 1 === count( $voa_videos ) ? ' media-grid-single' : ''; ?>">
+		<?php foreach ( $voa_videos as $voa_video ) : ?>
+			<article class="video-card"><video class="video-player" controls preload="none" poster="<?php echo esc_url( voa_media_url( $voa_video['poster'] ) ); ?>" src="<?php echo esc_url( trailingslashit( $voa_uploads['baseurl'] ) . $voa_video['upload'] ); ?>" aria-label="<?php echo esc_attr( $voa_video['title'] ); ?>"></video><p class="eyebrow">Video resource</p><h2><?php echo esc_html( $voa_video['title'] ); ?></h2></article>
 		<?php endforeach; ?>
 	</div>
 	<?php
