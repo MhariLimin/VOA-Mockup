@@ -36,7 +36,7 @@ This is the live list. Tick and date each item when it is done.
 - [x] Wordfence scan on all three sites, 25 October. No active malware. Virtual Financial Support: 9 plugins with
   security fixes to install. Virtual Office Angels: 16 Critical (6 were the old WP Logo Showcase copy, now
   deleted; 3 plugins with holes that have no fix yet). Virtual Loans
-  Assistant: 1 result, an abandoned plugin. Plugin names and details are in `private/wordpress-security/`, kept outside Git
+  Assistant: 1 result, an abandoned plugin. Monthly scan, 4 November: Virtual Loans Assistant, the same single result. Plugin names and details are in `private/wordpress-security/`, kept outside Git
 - [ ] Install the plugin updates on Virtual Financial Support and Virtual Office Angels, after a backup; remove
   unused or abandoned plugins on all three (named in the scan results in
   `private/wordpress-security/`)
