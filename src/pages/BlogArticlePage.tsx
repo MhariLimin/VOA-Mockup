@@ -4,7 +4,10 @@ import {
   articleCategory,
   blogArticles,
   formatArticleDate,
+  insightArticles,
   loadBlogArticle,
+  NEWS_CATEGORY,
+  newsArticles,
   type BlogArticle,
 } from '../content/blogContent';
 import { NotFoundPage } from './NotFoundPage';
@@ -26,19 +29,20 @@ export function BlogArticlePage() {
   if (!summary) return <NotFoundPage />;
   if (!article) return <div className="section article-loading"><div className="container narrow">Loading article…</div></div>;
 
-  const index = blogArticles.indexOf(summary);
-  const next = blogArticles[(index + 1) % blogArticles.length];
+  const isNews = summary.category === NEWS_CATEGORY;
+  const group = isNews ? newsArticles : insightArticles;
+  const next = group[(group.indexOf(summary) + 1) % group.length];
 
   return <article className="blog-detail">
     <header className="section blog-header">
       <div className="container narrow">
-        <Link className="article-back" to="/insights"><ArrowLeft /> All insights</Link>
+        <Link className="article-back" to={isNews ? '/news-and-community' : '/insights'}><ArrowLeft /> {isNews ? 'All news' : 'All insights'}</Link>
         <p className="eyebrow">{articleCategory(article)}</p>
         <h1>{article.title}</h1>
         <div className="blog-meta"><span>{formatArticleDate(article.date)}</span><span>By {article.author}</span></div>
       </div>
     </header>
-    <div className="container blog-featured"><img src={article.featuredImage} alt="" /></div>
+    {article.featuredImage && <div className="container blog-featured"><img src={article.featuredImage} alt="" /></div>}
     <section className="section blog-content-section">
       <div className="container narrow article-content" dangerouslySetInnerHTML={{ __html: article.content }} />
     </section>

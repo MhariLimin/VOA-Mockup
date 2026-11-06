@@ -67,6 +67,7 @@ export const navigation: NavigationItem[] = [
     children: [
       { label: 'Articles & Blog', href: '/insights' },
       { label: 'Videos & Resources', href: '/videos' },
+      { label: 'News & Community', href: '/news-and-community' },
     ],
   },
   { label: 'FAQs', href: '/faqs' },

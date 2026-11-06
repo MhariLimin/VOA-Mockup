@@ -3,7 +3,7 @@ export interface SourcePageBrief {
   eyebrow: string;
   title: string;
   summary: string;
-  template: 'about' | 'services' | 'service' | 'process' | 'why' | 'stories' | 'insights' | 'videos' | 'faqs' | 'contact';
+  template: 'about' | 'services' | 'service' | 'process' | 'why' | 'stories' | 'insights' | 'news' | 'videos' | 'faqs' | 'contact';
   tasks?: readonly string[];
   detail?: readonly string[];
   image?: string;
@@ -60,6 +60,8 @@ export const sourcePages: readonly SourcePageBrief[] = [
   },
   { path: '/insights', eyebrow: 'Insights', title: 'Explore better ways to delegate and work with virtual assistants.', summary: '', template: 'insights',
     image: '/assets/client/extra/insights-reading-at-home.jpg', imageAlt: 'A person at home reading printed notes beside a laptop' },
+  { path: '/news-and-community', eyebrow: 'News & Community', title: 'Company updates, announcements and events from Virtual Office Angels.', summary: '', template: 'news',
+    image: '/assets/client/hero/hero-video-call-team.jpg', imageAlt: 'A team member on a video call with four colleagues' },
   { path: '/videos', eyebrow: 'Videos and resources', title: 'Useful guidance, in a format that is easy to watch.', summary: '', template: 'videos' },
   { path: '/faqs', seoTitle: "Virtual Assistant FAQs Australia | Virtual Office Angels", metaDescription: "Know what to expect from Virtual Office Angels. Read the FAQs on delegating work, staying in touch, payment options, and managing your virtual assistant.", eyebrow: 'Frequently asked questions', title: 'What to know before working with us.', summary: '', template: 'faqs' },
   { path: '/contact', seoTitle: "Contact Us | Virtual Office Angels", metaDescription: "Ready to hire a virtual assistant? Get in touch with Virtual Office Angels to discuss your industry, daily tasks, systems, and the support your business needs.", eyebrow: 'Contact us', title: 'Tell us what the right support would change for your business.', summary: 'Share the role, responsibilities, systems, and working hours you have in mind. The Virtual Office Angels team can then discuss the next step.', template: 'contact' },

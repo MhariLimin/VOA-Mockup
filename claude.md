@@ -108,7 +108,8 @@ Routes are generated through React Router:
 - `/managed-virtual-support` (was `/why-voa`)
 - `/client-stories`
 - `/insights`
-- `/insights/:slug` for 30 local article-detail routes. WordPress uses the same `/insights/{article}/` addresses (decision of 2026-10-05)
+- `/insights/:slug` for all 100 local article-detail routes (the other 68 were copied from staging on 6 November 2026). WordPress uses the same `/insights/{article}/` addresses (decision of 2026-10-05)
+- `/news-and-community`: mockup only, added 6 November 2026 and not in the theme until approved. It lists the 9 News & Community articles, which keep their `/insights/{article}` addresses
 - `/videos`
 - `/faqs`
 - `/contact`
@@ -122,7 +123,7 @@ The staging source presented six primary services. The client has since supplied
 Captured local source library at handoff:
 
 - 30 client entries/logos.
-- 30 article JSON files and their local detail routes.
+- 100 article JSON files and their local detail routes, carrying the categories suggested to VA Paola (`docs/wordpress-integration/post-categories-suggested.csv`), not yet approved. Do not run `npm run wp:export` for staging until they and `/news-and-community` are approved.
 - 116 general staging images.
 - 39 blog-image files.
 - These counts describe captured files, not final approval for publication.

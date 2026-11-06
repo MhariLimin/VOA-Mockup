@@ -1,6 +1,7 @@
 import { useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { articleCategory, blogArticles, formatArticleDate } from '../content/blogContent';
+import { TopicDropdown } from '../components/ui/TopicDropdown';
+import { articleCardImage, articleCategory, articleTopicGroups, formatArticleDate, insightArticles, newsArticles, type BlogArticleSummary } from '../content/blogContent';
 import { faqTopics, sourceFaqs } from '../content/faqContent';
 import { servicePages, type SourcePageBrief } from '../content/sourcePages';
 import { managedStepTitles, serviceDetails, serviceRouter } from '../content/serviceDetails';
@@ -626,13 +627,13 @@ function ImageHero({ page, primary, secondary, aside }: { page: SourcePageBrief;
   </section>;
 }
 
-function InsightsPage({ page }: { page: SourcePageBrief }) {
+function ArticleLibraryPage({ page, articles, eyebrow }: { page: SourcePageBrief; articles: readonly BlogArticleSummary[]; eyebrow: string }) {
   const PER_PAGE = 10;
   const listRef = useRef<HTMLElement>(null);
-  const categories = ['All insights', ...new Set(blogArticles.map(articleCategory))];
+  const counts = articles.reduce<Record<string, number>>((all, article) => ({ ...all, [articleCategory(article)]: (all[articleCategory(article)] ?? 0) + 1 }), {});
   const [activeCategory, setActiveCategory] = useState('All insights');
   const [currentPage, setCurrentPage] = useState(1);
-  const visibleArticles = activeCategory === 'All insights' ? blogArticles : blogArticles.filter((article) => articleCategory(article) === activeCategory);
+  const visibleArticles = activeCategory === 'All insights' ? articles : articles.filter((article) => articleCategory(article) === activeCategory);
   const pageCount = Math.ceil(visibleArticles.length / PER_PAGE);
   const pageArticles = visibleArticles.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
   function selectCategory(cat: string) { setActiveCategory(cat); setCurrentPage(1); }
@@ -640,9 +641,8 @@ function InsightsPage({ page }: { page: SourcePageBrief }) {
   return <>
     <ImageHero page={page} />
     <section className="section library-section" id="articles" ref={listRef}><div className="container">
-      <div className="section-heading library-heading"><p className="eyebrow">Article library</p><p className="library-count">{visibleArticles.length} {visibleArticles.length === 1 ? 'article' : 'articles'}</p></div>
-      <div className="filter-row" aria-label="Article topics">{categories.map((category) => <button className={activeCategory === category ? 'active' : ''} aria-pressed={activeCategory === category} type="button" key={category} onClick={() => selectCategory(category)}>{category}</button>)}</div>
-      <div className="article-grid">{pageArticles.map((article, index) => <article className={index === 0 && currentPage === 1 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={article.featuredImage} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <ArrowRight /></Link></div></article>)}</div>
+      <div className="section-heading library-heading"><p className="eyebrow">{eyebrow}</p><div className="library-tools">{Object.keys(counts).length > 1 && <TopicDropdown label="Topic" value={activeCategory} groups={articleTopicGroups} counts={{ ...counts, 'All insights': articles.length }} onChange={selectCategory} />}<p className="library-count">{visibleArticles.length} {visibleArticles.length === 1 ? 'article' : 'articles'}</p></div></div>
+      <div className="article-grid">{pageArticles.map((article, index) => <article className={index === 0 && currentPage === 1 && activeCategory === 'All insights' ? 'article-card featured' : 'article-card'} key={article.slug}><Link className="article-art" to={`/insights/${article.slug}`}><img src={articleCardImage(article)} alt="" loading="lazy" /><span>{articleCategory(article)}</span></Link><div><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h2><Link to={`/insights/${article.slug}`}>{article.title}</Link></h2><Link className="text-link" to={`/insights/${article.slug}`}>Read article <ArrowRight /></Link></div></article>)}</div>
       <Pagination label="Article pages" currentPage={currentPage} pageCount={pageCount} onChange={goToPage} />
     </div></section>
     <PageClosing />
@@ -704,7 +704,8 @@ export function SourcePage({ page }: { page: SourcePageBrief }) {
     case 'process': return <ProcessPage page={page} />;
     case 'why': return <WhyPage page={page} />;
     case 'stories': return <StoriesPage page={page} />;
-    case 'insights': return <InsightsPage page={page} />;
+    case 'insights': return <ArticleLibraryPage page={page} articles={insightArticles} eyebrow="Article library" />;
+    case 'news': return <ArticleLibraryPage page={page} articles={newsArticles} eyebrow="News library" />;
     case 'videos': return <VideosPage page={page} />;
     case 'faqs': return <FaqPage page={page} />;
     case 'contact': return <ContactPage page={page} />;

@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { buyerQuestions, contactBackgrounds, heroBackgrounds, heroStats, moreThanRecruitment, specialistServices } from '../content/homeContent';
-import { blogArticles, articleCategory, formatArticleDate } from '../content/blogContent';
+import { articleCardImage, articleCategory, formatArticleDate, insightArticles } from '../content/blogContent';
 import { homeTestimonials } from '../content/testimonials';
 import { siteContent } from '../content/siteContent';
 import { ClientCarousel } from '../components/ui/ClientCarousel';
@@ -221,7 +221,7 @@ export function HomePage() {
         <div className="container">
           <div className="section-heading"><div><p className="eyebrow">Insights and resources</p><h2>Learn more about <em>delegation</em> and <em>virtual staffing</em>.</h2><p className="lead compact">Explore current guidance on building capacity, choosing the right virtual assistant, and getting more value from a remote team.</p></div><Link className="button button-secondary" to="/insights">Browse articles</Link></div>
           <div className="article-rail" ref={articleRail} tabIndex={0} role="group" aria-label="Latest articles">
-            {blogArticles.map((article) => <Link className="home-article-card" to={`/insights/${article.slug}`} key={article.slug}><span className="home-article-image"><img src={article.featuredImage} alt="" loading="lazy" /></span><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h3>{article.title}</h3><span className="text-link">Read article <ArrowRight /></span></Link>)}
+            {insightArticles.slice(0, 30).map((article) => <Link className="home-article-card" to={`/insights/${article.slug}`} key={article.slug}><span className="home-article-image"><img src={articleCardImage(article)} alt="" loading="lazy" /></span><small>{formatArticleDate(article.date)} · {articleCategory(article)}</small><h3>{article.title}</h3><span className="text-link">Read article <ArrowRight /></span></Link>)}
           </div>
           <div className="rail-controls">
             <button type="button" onClick={() => scrollRail(-1)} aria-label="Scroll to earlier articles"><ArrowLeft /></button>
