@@ -12,7 +12,6 @@ Last updated 25 October 2026.
 | --- | --- |
 | [PHP_UPGRADE_REPORT_2026-10-24.md](PHP_UPGRADE_REPORT_2026-10-24.md) | Plain-language report of the PHP upgrade on the night of 23–24 October. A PDF copy sits beside it (not in Git) |
 | [PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23.md](PHP_SECURITY_UPGRADE_HANDOFF_2026-10-23.md) | The technical record: the plan, the results per site, and how to undo the change |
-| [EMAIL_PHP_UPGRADE_COMPLETED_2026-10-24.txt](EMAIL_PHP_UPGRADE_COMPLETED_2026-10-24.txt) | The announcement sent to the team |
 
 Backups, `.htaccess` copies, screenshots and the patched plugin files are kept outside Git, in
 `private/wordpress-backups/` and `private/wordpress-upgrade/`.

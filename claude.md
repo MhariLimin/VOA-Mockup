@@ -43,7 +43,7 @@ The repository sits inside `E:\_Yua\VOA\Mock Layout`. Its parent directory conta
 - Parent-level `BOLT_MASTER_PROMPT.md` and `BOLT_REBUILD_BRIEF.md`: obsolete Bolt handoff material.
 - Sibling `VOA Content/`: a different static proposal/build with its own `dist` workflow. It is not the selected `VOA Layout 1` application and must not be merged into or edited as part of this project unless explicitly requested.
 
-The user previously stopped a page-screenshot exercise and requested removal of the generated screenshots directory. Capture scripts remain in this repository, but do not regenerate a full screenshot set unless asked.
+The user previously stopped a page-screenshot exercise and requested removal of the generated screenshots directory. The capture scripts were removed on 8 November 2026 (in Git history); do not regenerate a full screenshot set unless asked.
 
 ## Technology and commands
 
@@ -111,6 +111,7 @@ Routes are generated through React Router:
 - `/insights/:slug` for all 100 local article-detail routes (the other 68 were copied from staging on 6 November 2026). WordPress uses the same `/insights/{article}/` addresses (decision of 2026-10-05)
 - `/news-and-community`: mockup only, added 6 November 2026 and not in the theme until approved. It lists the 9 News & Community articles, which keep their `/insights/{article}` addresses
 - `/videos`
+- `/privacy-policy` and `/terms-of-use`: mockup only, drafts added 8 November 2026 for Ms Anne to review (live has neither); linked in the footer, not in the theme until approved. The copy was written for the mockup; each page lists what the client must confirm
 - `/faqs`
 - `/contact`
 - `/thank-you`
@@ -195,7 +196,7 @@ Historical duplicate founder markup still exists under `.legacy-home-founder` bu
 - `ServicesPage` in `SourcePage.tsx` is **live** — it renders the `/services` index. Do not remove it as dead code. A fallback branch for services without a `serviceDetails` entry is unused while all ten are defined.
 - The homepage contains hidden legacy founder markup. Confirm visual and content parity before removing it in a focused cleanup.
 - Multiple page templates use the historically named `FinalCta`, but it renders the requested contact form. Judge rendered behavior, not the function name.
-- Some historical Bolt prompt files may describe abandoned or superseded requests. Never treat them as the current backlog.
+- The Bolt prompt pack was removed on 8 November 2026 (in Git history). Never treat Bolt-era requests as the current backlog.
 - Review the actual rendered UI before declaring a visual defect; do not infer appearance only from class names.
 
 ## How the user runs this project

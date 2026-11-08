@@ -1,6 +1,10 @@
 REDIRECT SETUP AND TESTING ON VOA STAGING
 Prepared 28 October 2026
 
+STATUS, 8 November: steps 1 to 9 are done (tested 28 October, test redirects deleted 2 November), and
+redirects-staging-1384.csv has been removed from the repository (it is in Git history). Only step 10
+is left, on launch day.
+
 Staging:  https://virtualofficeangels.com.au/staging/1384/
 Plugin:   Redirection (already installed; staging is a copy of live)
 Time:     about 45 minutes

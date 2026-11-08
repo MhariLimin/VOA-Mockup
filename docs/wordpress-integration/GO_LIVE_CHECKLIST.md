@@ -31,8 +31,8 @@ Need Author Bio Section in every article
   staging with Appearance → Site setup → **Apply the addresses and SEO update**. The writer sent
   none for How It Works, Insights and Videos: Yoast's automatic title until they do *(after launch)*
 - [ ] **Redirects**: the 154 old addresses (54 pages and archives, 100 articles), tested on staging with
-  `redirects-staging-1384.csv`, then imported on live at launch with `redirects.csv`. See
-  `REDIRECTS_STAGING_GUIDE.txt` *(added)*
+  a staging copy of the file (removed 8 November, in Git history), then imported on live at launch with
+  `redirects.csv`. See `REDIRECTS_STAGING_GUIDE.txt` step 10 *(added)*
   - [x] Tested on staging, 28 October: all 153 answer with one 301 to the right address, and all
     117 landing pages load
   - [x] Updated 2 November for the new addresses: the About Us row removed (`/about-us/` is now the
@@ -42,7 +42,7 @@ Need Author Bio Section in every article
   - [ ] Launch day: import `redirects.csv` on live and test again (guide step 10)
 - [x] Duplicates removed, 1 November: the 24 old pages, `/home-old/` and `/contact-us/` among them,
   are in staging's Trash, and Thank You is hidden from search. The page sitemap now lists 13 pages;
-  all 153 staging redirects checked afterwards. See `SITEMAP_CLEANUP_STAGING_GUIDE.txt` *(added)*
+  all 153 staging redirects checked afterwards *(added)*
 - [ ] The sitemap: `https://` addresses only (set on launch day, `LAUNCH_AND_ROLLBACK_PLAN.md` step 8).
   The old testimonials sitemap is already gone on staging (checked 30 October) *(added)*
 - [ ] Search engine visibility: **on** for live, **off** for staging (Settings → Reading) *(added)*
@@ -70,9 +70,18 @@ Need Author Bio Section in every article
   (`LAUNCH_AND_ROLLBACK_PLAN.md` step 12). Scanned the same day: 6 results, none Critical, no
   malware; clean once its 4 plugin updates, WordPress 7.1.4 and the theme-file Repair are done
 
+- [ ] Different logins for live and staging *(added 8 November)*: the deploy copies staging's users
+  and passwords to live. Former staff and unused accounts removed on staging; new passwords ready in
+  the password manager; set on live after the deploy (`LAUNCH_AND_ROLLBACK_PLAN.md` before-launch
+  step 9 and step 20)
+- [ ] The author address `/author/anne/` is listed in both sites' author sitemaps (checked 8 November),
+  which shows the author's login-style name. If the site keeps one author, turn off author archives
+  on staging (Yoast → Settings → Advanced → Author archives) so live gets the same *(added)*
+
 ## 5. Legal *(added)*
 
-- [ ] *(after launch)* Privacy policy and terms pages, current and linked in the footer. Live has none today
+- [ ] *(after launch)* Privacy policy and terms pages, current and linked in the footer. Live has none today.
+  Drafts on the mockup for Ms Anne to review, 8 November: `/privacy-policy` and `/terms-of-use`
 - [ ] *(after launch)* A decision on cookie consent, now that Analytics will be added
 
 ## 6. Testing *(added)*

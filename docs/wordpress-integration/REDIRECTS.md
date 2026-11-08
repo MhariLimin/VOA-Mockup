@@ -46,7 +46,7 @@ On the local WordPress copy, with Redirection 5.10.1 (live has 5.10.0):
 
 Redirection matches the whole address, including the folder WordPress sits in, so `redirects.csv`
 matches nothing on staging (`/staging/1384/`) and its targets point at the live site.
-[`redirects-staging-1384.csv`](redirects-staging-1384.csv) is the same 153 rows with `/staging/1384`
+`redirects-staging-1384.csv` (removed 8 November, in Git history) was the same 153 rows with `/staging/1384`
 in front of every source and target, for testing only. Import it into its own group and delete that
 group before launch. Step-by-step: [`REDIRECTS_STAGING_GUIDE.txt`](REDIRECTS_STAGING_GUIDE.txt).
 

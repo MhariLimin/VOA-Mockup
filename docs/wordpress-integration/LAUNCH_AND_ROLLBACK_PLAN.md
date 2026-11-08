@@ -1,7 +1,7 @@
 # Launch and rollback plan: VOA staging to the live website
 
-30 October 2026, updated 2 November · VA Mhari. **Launch: Tuesday 3 November 2026**, after the
-meeting that day (moved from before the meeting on 2 November). VA Mhari launches it; no sign-off is needed.
+30 October 2026, updated 8 November · VA Mhari. **Launch date: to be confirmed by Ms Anne.** It was
+set for Tuesday 3 November, after the meeting, and is on hold. VA Mhari launches it; no sign-off is needed.
 
 This is the exact sequence that step 12 of [`reference/MIGRATION_RUNBOOK.md`](reference/MIGRATION_RUNBOOK.md)
 left to be written once the facts were known. It replaces steps 12 and 13 there. What must be finished
@@ -36,10 +36,10 @@ Email, the domain and DNS are not touched by the launch.
 
 ## Before the launch day
 
-### By 2 November
+### Before the launch day
 
-1. **Launch window:** Tuesday 3 November, after the meeting, 3 hours. Keep the rest of that day and
-   the next morning free in case something needs fixing.
+1. **Launch window:** the date Ms Anne confirms, 3 hours. Keep the rest of that day and the next
+   morning free in case something needs fixing.
 2. Tell the team the **content freeze**: nothing published or changed on live until the launch is
    confirmed.
 3. **Live's Wordfence Premium key** is in the password manager (copied 30 October, before staging
@@ -52,16 +52,37 @@ Email, the domain and DNS are not touched by the launch.
    **↻** button that runs the deploy, and a red bin that **deletes staging**. The Production Site row
    has **Clone to staging**, which copies live over staging and would wipe the new website: never
    click it. Staging was created 22 September 2026.
-5. The staging sitemap cleanup done (`SITEMAP_CLEANUP_STAGING_GUIDE.txt`).
+5. The staging sitemap cleanup done (1–2 November).
 
-### The day before (2 November)
+### The day before
 
 6. Check again for any article, page or setting changed on live since 28 October (none on
-   1 November). Copy each one to staging (an article also needs a row in `redirects.csv`).
+   1 November). Copy each one to staging (an article also needs a row in `redirects.csv`). This
+   includes any of the writer's November articles published on live.
 7. ~~Delete the "Staging test" redirect group on staging~~ Done 2 November, after the addresses and
    SEO update (Appearance → Site setup) was applied and checked. Staging's old addresses now answer
    404 until live gets `redirects.csv` at step 10.
 8. Back up **staging** (UpdraftPlus, database and files) so the build itself is safe.
+9. **New passwords ready** *(added 8 November)*. The deploy gives live staging's users and
+   passwords, so without a change both websites share the same logins, and a password leaked from
+   staging would also open live. On staging, Users → All Users: remove former staff and accounts
+   nobody uses (the deploy carries the list to live). For each user who stays, a new strong password
+   for **live**: ready 8 November in a private file outside this repository (all five users kept).
+   Never in chat or this repository. Do not
+   set them on staging: the deploy would copy them to live and the two would match again.
+10. **Staging up to date** *(added 8 November)*: the latest theme uploaded (the 3 November build: the
+    Videos page, service-page feedback, the four home testimonials), plus anything approved since
+    (post categories, News & Community, Privacy Policy and Terms of Use) built into the theme,
+    uploaded, then Appearance → Site setup. Check the changed pages on staging by eye.
+11. **Contact form tested on staging** *(added 8 November)*. In the team leaders' review (tracker,
+    "Staging site comments"), enquiries from Mortgage, Financial Planning and Accounting arrived, but
+    those from most other pages were reported as not received. Check Flamingo → Inbound Messages on
+    staging for those tests, then send a fresh test from the Contact page, a service page and the home
+    page, and check `clientcare@virtualofficeangels.com.au`, spam included. Fix any failure before
+    launch: launch day's single test (step 13) is too late to find it.
+12. **Settings made on staging, so the deploy carries them** *(added 8 November)*: author archives
+    off if agreed (go-live checklist section 4); the Google Search Console verification code in
+    Yoast (Settings → Site connections), if Search Console is set up by then.
 
 ## Launch day
 
@@ -75,7 +96,9 @@ Times are from the start of the window. Stop at any step that does not go as wri
    - cPanel → **Backup Wizard** → full backup, downloaded too, if cPanel access is available. It
      runs outside WordPress, so it works even if wp-admin breaks.
 2. Export from live what the deploy would lose: contact form enquiries (Flamingo → Inbound Messages
-   → Export, if live has it) and anything else from the step 6 list.
+   → Export, if live has it), anything else from the step 6 list, and the inactive newsletter
+   plugin's subscriber list unless Ms Anne has said it is not needed (`../hosting/README.md`): the
+   deploy removes the plugin and its data.
 3. Write down the time. **Rollback is possible from here on.**
 
 ### Deploy: 0:45 to 1:15
@@ -134,10 +157,19 @@ All on **live** wp-admin (`virtualofficeangels.com.au/wp-admin/`), which now has
 ### After the window
 
 16. Google Search Console: submit `https://virtualofficeangels.com.au/sitemap_index.xml` (once access
-    is given).
+    is given). Google Analytics: the tracking code added, if the property is set up, and a visit shows
+    in its Realtime report.
 17. Google Business Profile: check the website link and the hours (9am–6pm).
-18. Wordfence → Scan → Start New Scan on live, now the new website.
+18. Wordfence → Scan → Start New Scan on live, now the new website. Plugins: the old site's plugins
+    (the old page builder, the newsletter plugin and the others named in `private/wordpress-security/`)
+    are gone, as on staging.
 19. End the content freeze.
+20. **New passwords on live**, the same day: Users → each user → Edit → Set New Password, pasted from
+    the private passwords file (before-launch step 9; it has a box to tick for each user). Change
+    Mhari last, as WordPress may ask you to log in again. Tell each person their new live password
+    privately. Staging keeps the old ones. Then move the passwords into the password manager and
+    delete the file. Then turn on two-step login for the administrators (Wordfence → Login Security).
+    If staging is ever deployed again, live gets staging's passwords back: set them again.
 
 ## When to roll back
 
@@ -180,4 +212,6 @@ Staging is not changed by a deploy, so the new website stays safe there while li
 
 ## Open before this plan is final
 
+- The launch date
 - Whether live keeps contact form enquiries in wp-admin (Flamingo) that need exporting
+- Whether the newsletter subscriber list is needed (Ms Anne)
