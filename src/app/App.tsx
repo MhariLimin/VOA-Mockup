@@ -9,6 +9,7 @@ import { SourcePage } from '../pages/SourcePage';
 import { LocationPage } from '../pages/LocationPage';
 import { locationPages } from '../content/locationPages';
 import { ThankYouPage } from '../pages/ThankYouPage';
+import { PrivacyPolicyPage, TermsOfUsePage } from '../pages/LegalPage';
 
 export function App() {
   return (
@@ -30,6 +31,9 @@ export function App() {
         ))}
         <Route path="/insights/:slug" element={<BlogArticlePage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
+        {/* Drafts on the mockup only (8 November 2026), not in the theme until approved. */}
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-of-use" element={<TermsOfUsePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </PageShell>
