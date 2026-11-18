@@ -12,6 +12,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/* The Preview theme's Insights: the Topic dropdown, without News & Community (preview/library.php). */
+if ( voa_is_preview() ) {
+	get_template_part( 'preview/library', null, array( 'news' => false ) );
+	return;
+}
+
 const VOA_ARTICLES_PER_PAGE = 10;
 
 $voa_brief    = voa_page( '/insights' );

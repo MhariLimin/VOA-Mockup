@@ -1,0 +1,25 @@
+{
+	"newsCategory": "News & Community",
+	"topicGroups": [
+		{
+			"label": "By service",
+			"topics": [
+				"Mortgage & Loans",
+				"Financial Planning",
+				"Accounting & Bookkeeping",
+				"Real Estate",
+				"Digital Marketing"
+			]
+		},
+		{
+			"label": "By topic",
+			"topics": [
+				"All insights",
+				"Hiring a Virtual Assistant",
+				"Specialised Virtual Assistants",
+				"Leadership & Delegation",
+				"Business Growth"
+			]
+		}
+	]
+}

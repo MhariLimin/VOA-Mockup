@@ -200,7 +200,7 @@ get_header();
 	<div class="container">
 		<div class="section-heading"><div><p class="eyebrow"><?php echo voa_content_copy( 'home', 'insights_eyebrow' ); ?></p><h2><?php echo voa_content_copy( 'home', 'insights_heading' ); ?></h2><p class="lead compact"><?php echo voa_content_copy( 'home', 'insights_intro' ); ?></p></div><a class="button button-secondary" href="<?php echo esc_url( voa_url( '/insights' ) ); ?>">Browse articles</a></div>
 		<div class="article-rail" tabindex="0" role="group" aria-label="Latest articles">
-			<?php foreach ( voa_articles( VOA_HOME_RAIL_ARTICLES ) as $voa_article ) : ?>
+			<?php foreach ( voa_library_articles( false, VOA_HOME_RAIL_ARTICLES ) as $voa_article ) : ?>
 				<a class="home-article-card" href="<?php echo esc_url( get_permalink( $voa_article ) ); ?>"><span class="home-article-image"><?php voa_article_image_tag( $voa_article ); ?></span><small><?php echo esc_html( voa_article_date( $voa_article ) ); ?> · <?php echo esc_html( voa_article_category( $voa_article ) ); ?></small><h3><?php echo esc_html( get_the_title( $voa_article ) ); ?></h3><span class="text-link">Read article <?php voa_icon( 'arrow-right' ); ?></span></a>
 			<?php endforeach; ?>
 		</div>

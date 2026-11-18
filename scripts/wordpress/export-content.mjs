@@ -14,8 +14,15 @@
    Article images are left out: articles already live in the WordPress media library on the client's
    site, and come across with the database.
 
-   Usage: node scripts/wordpress/export-content.mjs
-   Re-run it whenever the React content changes, then commit the result with the change. */
+   Usage: node scripts/wordpress/export-content.mjs [--preview]
+   Re-run it whenever the React content changes, then commit the result with the change.
+
+   --preview (8 November 2026) writes the data to data-preview/ instead of data/. That folder is what
+   makes the Preview theme: it carries the mockup's items still waiting for approval (post categories,
+   News & Community, Privacy Policy and Terms of Use), while data/ stays the approved set. Media and the
+   stylesheets are shared by both themes, so they are written either way. `npm run wp:zip` builds the
+   two ZIPs. Never run the plain export while unapproved items are in the mockup: it would put them in
+   data/, the approved theme. */
 
 import { copyFile, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -23,7 +30,8 @@ import { createServer } from 'vite';
 
 const root = process.cwd();
 const theme = join(root, 'wordpress-theme', 'virtual-office-angels');
-const dataDir = join(theme, 'data');
+const preview = process.argv.includes('--preview');
+const dataDir = join(theme, preview ? 'data-preview' : 'data');
 const mediaDir = join(theme, 'assets', 'media');
 
 const vite = await createServer({ server: { middlewareMode: true }, appType: 'custom', logLevel: 'error' });
@@ -72,7 +80,15 @@ try {
     testimonials: testimonials.testimonials,
     caseStudy: caseStudy.caseStudy,
     clients: clients.map(({ name, image }) => ({ name, image })),
-    articles: blog.blogArticles.map((article) => ({ ...article, category: blog.articleCategory(article) })),
+    /* cardFallback: the picture a card shows when the article has none (articleCardImage), as the
+       article's own images live in the WordPress media library, not in the theme. */
+    articles: blog.blogArticles.map((article) => ({
+      ...article,
+      category: blog.articleCategory(article),
+      cardFallback: article.featuredImage ? '' : blog.articleCardImage(article),
+    })),
+    /* The topic dropdown's two columns and the category that has its own News & Community page. */
+    library: { newsCategory: blog.NEWS_CATEGORY, topicGroups: blog.articleTopicGroups },
     /* Keyed by city. A client without a logo gets an empty image, so Website Content offers it a
        logo field; the page shows the name until one is chosen. */
     locations: Object.fromEntries(locations.locationPages.map((page) => [page.slug, {
@@ -89,7 +105,7 @@ try {
   for (const [name, value] of Object.entries(data)) {
     await writeFile(join(dataDir, `${name}.json`), `${JSON.stringify(value, null, '\t')}\n`);
   }
-  console.log(`data: ${Object.keys(data).length} files`);
+  console.log(`data: ${Object.keys(data).length} files in ${preview ? 'data-preview' : 'data'}/`);
 
   /* Every /assets/ path named anywhere in the data, the React pages or the stylesheets. */
   const sources = [

@@ -26,6 +26,11 @@ function voa_data_raw( $name ) {
 
 	if ( ! isset( $cache[ $name ] ) ) {
 		$file = get_template_directory() . '/data/' . $name . '.json';
+		/* The Preview theme reads its own copy of a file where it has one (inc/preview.php). */
+		$preview_file = get_template_directory() . '/data-preview/' . $name . '.json';
+		if ( function_exists( 'voa_is_preview' ) && voa_is_preview() && file_exists( $preview_file ) ) {
+			$file = $preview_file;
+		}
 		$json = file_exists( $file ) ? json_decode( file_get_contents( $file ), true ) : null; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		if ( null === $json && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
@@ -158,6 +163,12 @@ function voa_article_date( $post = null ) {
 function voa_article_category( $post = null ) {
 	$post = get_post( $post );
 
+	/* The Preview theme shows the categories suggested to VA Paola, without changing the posts. */
+	$preview = function_exists( 'voa_preview_category' ) ? voa_preview_category( $post ) : '';
+	if ( '' !== $preview ) {
+		return $preview;
+	}
+
 	foreach ( get_the_category( $post->ID ) as $term ) {
 		if ( 'uncategorized' !== $term->slug ) {
 			return $term->name;
@@ -261,6 +272,13 @@ function voa_article_image_tag( $post, $alt = '' ) {
 
 	if ( $url ) {
 		printf( '<img src="%s" alt="%s" loading="lazy">', esc_url( $url ), esc_attr( $alt ) );
+		return;
+	}
+
+	/* Preview: a card (not the article page itself) shows a stand-in picture, as the mockup does. */
+	$fallback = function_exists( 'voa_preview_card_fallback' ) && ! is_singular( 'post' ) ? voa_preview_card_fallback( $post ) : '';
+	if ( $fallback ) {
+		printf( '<img src="%s" alt="%s" loading="lazy">', esc_url( $fallback ), esc_attr( $alt ) );
 		return;
 	}
 

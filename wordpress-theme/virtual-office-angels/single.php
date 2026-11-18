@@ -15,16 +15,25 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	$voa_next = get_adjacent_post( false, '', true );
+	$voa_next       = get_adjacent_post( false, '', true );
+	$voa_back_url   = voa_url( '/insights' );
+	$voa_back_label = 'All insights';
 	if ( ! $voa_next ) {
 		$voa_newest = voa_articles( 1 );
 		$voa_next   = $voa_newest && $voa_newest[0]->ID !== get_the_ID() ? $voa_newest[0] : null;
+	}
+	/* Preview: News & Community articles go back to their own page and read on within it. */
+	if ( voa_is_preview() ) {
+		$voa_nav        = voa_preview_article_nav( get_post() );
+		$voa_next       = $voa_nav['next'];
+		$voa_back_url   = $voa_nav['back_url'];
+		$voa_back_label = $voa_nav['back_label'];
 	}
 	?>
 	<article class="blog-detail">
 		<header class="section blog-header">
 			<div class="container narrow">
-				<a class="article-back" href="<?php echo esc_url( voa_url( '/insights' ) ); ?>"><?php voa_icon( 'arrow-left' ); ?> All insights</a>
+				<a class="article-back" href="<?php echo esc_url( $voa_back_url ); ?>"><?php voa_icon( 'arrow-left' ); ?> <?php echo esc_html( $voa_back_label ); ?></a>
 				<p class="eyebrow"><?php echo esc_html( voa_article_category() ); ?></p>
 				<h1><?php the_title(); ?></h1>
 				<div class="blog-meta"><span><?php echo esc_html( voa_article_date() ); ?></span><span>By <?php echo esc_html( get_the_author() ); ?></span></div>

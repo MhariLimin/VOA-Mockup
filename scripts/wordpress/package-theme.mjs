@@ -8,8 +8,16 @@
    The archive has one top-level folder, virtual-office-angels/, which is the theme's directory name
    on the server. README files stay in; they are harmless and explain the theme to whoever opens it.
 
-   Usage: node scripts/wordpress/package-theme.mjs [output.zip]
-   Default output: wordpress-theme/virtual-office-angels.zip (git-ignored). */
+   Usage: node scripts/wordpress/package-theme.mjs   (npm run wp:zip)
+
+   Two ZIPs from the one theme folder (8 November 2026), both git-ignored:
+     wordpress-theme/virtual-office-angels.zip          "Virtual Office Angels": the approved site,
+                                                        without data-preview/
+     wordpress-theme/virtual-office-angels-preview.zip  "Virtual Office Angels (Preview)": the same
+                                                        theme plus data-preview/, which switches on
+                                                        the items waiting for approval
+   They install side by side, as different theme folders, so switching between them in Appearance →
+   Themes is the rollback. Every update goes into both because both come from the same files. */
 
 import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
@@ -17,7 +25,6 @@ import { crc32, deflateRawSync } from 'node:zlib';
 
 const NAME = 'virtual-office-angels';
 const source = join(process.cwd(), 'wordpress-theme', NAME);
-const output = process.argv[2] ?? join(process.cwd(), 'wordpress-theme', `${NAME}.zip`);
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -36,13 +43,16 @@ function dosTime(date) {
   };
 }
 
+async function pack(folder, output, { include, transform }) {
 const locals = [];
 const centrals = [];
 let offset = 0;
 
 for (const file of await walk(source)) {
-  const name = Buffer.from(`${NAME}/${relative(source, file).split('\\').join('/')}`, 'utf8');
-  const data = await readFile(file);
+  const path = relative(source, file).split('\\').join('/');
+  if (!include(path)) continue;
+  const name = Buffer.from(`${folder}/${path}`, 'utf8');
+  const data = transform(path, await readFile(file));
   const packed = deflateRawSync(data, { level: 9 });
   const { time, date } = dosTime((await stat(file)).mtime);
   const sum = crc32(data);
@@ -90,3 +100,17 @@ end.writeUInt32LE(offset, 16);
 const zip = Buffer.concat([...locals, directory, end]);
 await writeFile(output, zip);
 console.log(`${output}\n${centrals.length / 2} files, ${(zip.length / 1048576).toFixed(1)} MB`);
+}
+
+const out = (name) => join(process.cwd(), 'wordpress-theme', `${name}.zip`);
+const unchanged = (path, data) => data;
+
+await pack(NAME, out(NAME), { include: (path) => !path.startsWith('data-preview/'), transform: unchanged });
+
+/* The preview's own theme name, so the two are told apart in Appearance → Themes. */
+await pack(`${NAME}-preview`, out(`${NAME}-preview`), {
+  include: () => true,
+  transform: (path, data) => path !== 'style.css' ? data : Buffer.from(data.toString('utf8')
+    .replace('Theme Name: Virtual Office Angels', 'Theme Name: Virtual Office Angels (Preview)')
+    .replace('Description: ', 'Description: PREVIEW: includes the items still waiting for approval (post categories, News & Community, Privacy Policy and Terms of Use). Switch back to "Virtual Office Angels" to roll back. '), 'utf8'),
+});

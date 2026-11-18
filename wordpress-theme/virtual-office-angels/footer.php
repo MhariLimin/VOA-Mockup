@@ -23,6 +23,9 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<div class="container footer-bottom">
 		<span>Virtual Office Angels Pty. Ltd. 2010-2026 · ABN 58 155 459 788</span>
+		<?php if ( voa_is_preview() ) : ?>
+			<nav class="footer-legal" aria-label="Legal"><a href="<?php echo esc_url( voa_url( '/privacy-policy' ) ); ?>">Privacy Policy</a><a href="<?php echo esc_url( voa_url( '/terms-of-use' ) ); ?>">Terms of Use</a></nav>
+		<?php endif; ?>
 	</div>
 </footer>
 <?php wp_footer(); ?>

@@ -8,6 +8,7 @@
  *   article library      InsightsPage — topic filter and ten-a-page paging, in place
  *   testimonial pages    StoriesPage — four-a-page paging of the testimonials, in place
  *   FAQ topics           FaqPage activeTopic — the topic buttons swap the question list
+ *   legal contents       LegalPage useActiveSection — highlights the section being read (preview only)
  *
  * The library, the testimonials and the FAQ page carry their full data as JSON beside the markup; the first view is
  * rendered by PHP, and the builders here produce the same markup for every later one.
@@ -178,6 +179,46 @@
 			grid.insertAdjacentHTML('afterend', pagination('Article pages', page, pages));
 		}
 
+		/* Preview theme: the Topic dropdown (TopicDropdown.tsx) instead of the filter buttons. It opens on
+		   click or Enter; Escape or a click outside closes it, and focus goes back to the trigger. */
+		var dropdown = section.querySelector('.topic-dropdown');
+		if (dropdown) {
+			var trigger = dropdown.querySelector('.topic-trigger');
+			var panel = dropdown.querySelector('.nav-popover');
+			var options = dropdown.querySelectorAll('.topic-option');
+			var setOpen = function (open) {
+				panel.setAttribute('data-open', open ? 'true' : 'false');
+				trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+			};
+			trigger.addEventListener('click', function () {
+				setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+			});
+			document.addEventListener('pointerdown', function (event) {
+				if (trigger.getAttribute('aria-expanded') === 'true' && !dropdown.contains(event.target)) {
+					setOpen(false);
+				}
+			});
+			document.addEventListener('keydown', function (event) {
+				if (event.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+					setOpen(false);
+					trigger.focus();
+				}
+			});
+			Array.prototype.forEach.call(options, function (option) {
+				option.addEventListener('click', function () {
+					topic = option.querySelector('span').textContent;
+					page = 1;
+					trigger.querySelector('span').innerHTML = '<small>Topic</small>' + escape(topic);
+					Array.prototype.forEach.call(options, function (other) {
+						other.setAttribute('aria-current', other === option ? 'true' : 'false');
+					});
+					setOpen(false);
+					trigger.focus();
+					render();
+				});
+			});
+		}
+
 		Array.prototype.forEach.call(filters, function (button) {
 			button.addEventListener('click', function () {
 				topic = button.textContent;
@@ -273,6 +314,51 @@
 		});
 	}
 
+	/* --- Legal contents (Preview theme: Privacy Policy and Terms of Use) ---------------------- */
+
+	function legalSections() {
+		var links = document.querySelectorAll('.legal-toc a');
+		var headings = [];
+		var frame = 0;
+
+		if (!links.length) {
+			return;
+		}
+		Array.prototype.forEach.call(links, function (link) {
+			headings.push(document.getElementById(link.getAttribute('href').slice(1)));
+		});
+
+		/* The section whose heading has passed a line a third of the way down the window. */
+		function update() {
+			var line = window.innerHeight * 0.33;
+			var current = 0;
+			frame = 0;
+			headings.forEach(function (heading, i) {
+				if (heading && heading.getBoundingClientRect().top <= line) {
+					current = i;
+				}
+			});
+			Array.prototype.forEach.call(links, function (link, i) {
+				link.className = i === current ? 'active' : '';
+				if (i === current) {
+					link.setAttribute('aria-current', 'location');
+				} else {
+					link.removeAttribute('aria-current');
+				}
+			});
+		}
+
+		function schedule() {
+			if (!frame) {
+				frame = window.requestAnimationFrame(update);
+			}
+		}
+
+		update();
+		window.addEventListener('scroll', schedule, { passive: true });
+		window.addEventListener('resize', schedule);
+	}
+
 	function init() {
 		servicesBackdrop();
 		articleRail();
@@ -280,6 +366,7 @@
 		articleLibrary();
 		testimonialPages();
 		faqTopics();
+		legalSections();
 	}
 
 	if (document.readyState === 'loading') {

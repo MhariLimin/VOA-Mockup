@@ -66,6 +66,23 @@ rewrites it into a Windows path.
    anything, and running it twice is harmless.
 3. Articles need nothing: the theme renders the posts already in WordPress.
 
+## Approved and Preview themes (9 November 2026)
+
+`npm run wp:zip` builds two ZIPs from this one folder:
+
+| ZIP | Theme name | What it is |
+| --- | --- | --- |
+| `virtual-office-angels.zip` | Virtual Office Angels | The approved site. Leaves out `data-preview/` |
+| `virtual-office-angels-preview.zip` | Virtual Office Angels (Preview) | The same theme plus `data-preview/`, which switches on the items waiting for approval |
+
+Different folder names, so WordPress installs them side by side; activating one or the other in
+Appearance → Themes is the rollback. The preview's extras live in `inc/preview.php` and `preview/`,
+and read `data-preview/` (`node scripts/wordpress/export-content.mjs --preview`). They write nothing
+to the database: the suggested categories come from `data-preview/articles.json`, and
+`/news-and-community/`, `/privacy-policy/` and `/terms-of-use/` are rewrite rules the preview adds and
+the approved theme removes. When an item is approved, move it into the approved theme and out of the
+preview.
+
 ## Running it locally
 
 There is no local WordPress in this repository. It is built and tested against a throwaway install in
