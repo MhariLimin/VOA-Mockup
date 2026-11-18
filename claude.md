@@ -41,6 +41,7 @@ The repository sits inside `E:\_Yua\VOA\Mock Layout`. Its parent directory conta
 - `reference-assista.png`, `reference-athena.png`, `reference-prialto.png`, and `reference-somewhere.png`: visual benchmarks only. Do not copy their identity or assume their content/claims belong to Virtual Office Angels.
 - `image.png` through `image5.png`: screenshots used during prior feedback, including Layout 2 work. Do not treat them as current Layout 1 requirements without confirmation.
 - Parent-level `BOLT_MASTER_PROMPT.md` and `BOLT_REBUILD_BRIEF.md`: obsolete Bolt handoff material.
+- Sibling `VOA Team App/` (started 18 November 2026): a separate React/Vite prototype of the team's time clock and SOA/EOD app, with sample data saved in the browser. Not part of the website; see its README.
 - Sibling `VOA Content/`: a different static proposal/build with its own `dist` workflow. It is not the selected `VOA Layout 1` application and must not be merged into or edited as part of this project unless explicitly requested.
 
 The user previously stopped a page-screenshot exercise and requested removal of the generated screenshots directory. The capture scripts were removed on 8 November 2026 (in Git history); do not regenerate a full screenshot set unless asked.
@@ -111,7 +112,7 @@ Routes are generated through React Router:
 - `/insights/:slug` for all 100 local article-detail routes (the other 68 were copied from staging on 6 November 2026). WordPress uses the same `/insights/{article}/` addresses (decision of 2026-10-05)
 - `/news-and-community`: mockup only, added 6 November 2026 and not in the theme until approved. It lists the 9 News & Community articles, which keep their `/insights/{article}` addresses
 - `/videos`
-- `/privacy-policy` and `/terms-of-use`: mockup only, drafts added 8 November 2026 for Ms Anne to review (live has neither); linked in the footer, not in the theme until approved. The copy was written for the mockup; each page lists what the client must confirm
+- `/privacy-policy` and `/terms-of-use`: added 8 November 2026 (live has neither); linked in the footer, in the preview theme only. The wording is VA Paola's revision of 18 November 2026 (`Virtual_Office_Angels_Privacy_Policy_and_Terms_of_Use.docx`), applied as written. Treated as approved on 18 November 2026 (VA Mhari's decision, so the preview theme can go on staging): the draft note was removed, though the approvals list sent to Ms Anne was not changed. The effective date stays "[Publication date]" until publication. Layout (18 November 2026, second pass): the compact inner hero (`legal-hero`, effective date as the eyebrow, the title's last word in the heading accent), then each section as its own card with the shared card surface (`legal-section`, revealed on scroll), beside a sticky contents card on the right that highlights the section being read (`legal-toc`; theme script `legalSections()` in `assets/js/interactions.js`); on narrow screens the contents card sits above the sections. The section numbers are decorative and hidden from screen readers
 - `/faqs`
 - `/contact`
 - `/thank-you`
@@ -123,8 +124,9 @@ The staging source presented six primary services. The client has since supplied
 
 Captured local source library at handoff:
 
-- 30 client entries/logos.
+- 36 client entries: the 30 captured from staging, plus six the client named on 9 November 2026 (Industrias Service Group, Seet Advisory, Velar Finance, Hokus, ITSM, and Coastal Financial Consultants, whose logo was supplied on 11 November). In both carousels, mockup and theme.
 - 100 article JSON files and their local detail routes, carrying the categories suggested to VA Paola (`docs/wordpress-integration/post-categories-suggested.csv`), not yet approved. Do not run `npm run wp:export` for staging until they and `/news-and-community` are approved.
+- **Two themes from one folder (9 November 2026).** `npm run wp:zip` builds `virtual-office-angels.zip` ("Virtual Office Angels", the approved site) and `virtual-office-angels-preview.zip` ("Virtual Office Angels (Preview)"). The preview is the same theme plus `data-preview/`, written by `node scripts/wordpress/export-content.mjs --preview`; that folder switches on the unapproved items (categories, News & Community with the Topic dropdown, Privacy Policy and Terms of Use) through `inc/preview.php` and `preview/*.php`, without writing to the database, so switching back to the approved theme is the rollback. Every theme change therefore reaches both. Refresh the preview data with `--preview` after a mockup change; never run the plain export while unapproved items are in the mockup. When an item is approved, move it from the preview into the approved theme.
 - 116 general staging images.
 - 39 blog-image files.
 - These counts describe captured files, not final approval for publication.

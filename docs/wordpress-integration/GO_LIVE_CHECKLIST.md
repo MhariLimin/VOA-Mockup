@@ -14,7 +14,7 @@ for all three websites is tracked in [`../hosting/README.md`](../hosting/README.
   - the office address: the website shows Ground Floor, 465 Victoria Avenue, Chatswood, as the
     tracker does
   - business hours: **9am–6pm** on the website (FAQ answer changed 28 October). The Google Business
-    Profile (9am–5:30pm) is in section 3
+    Profile (9am–5:30pm) is in section 3. 9am–6pm confirmed correct, 11 November
   - phone numbers: 1 300 737 883 throughout; the team leaders called it and it works (tracker)
 - [ ] *(after launch)* The article author name decided: display name (the theme) or username (`annevillavieja`, as in
   React). Usernames shown publicly help password guessing *(added)* 
@@ -50,8 +50,18 @@ Need Author Bio Section in every article
 ## 3. Tracking
 
 - [ ] *(after launch)* **Google Analytics** set up and recording visits (none exists on the Business Profile account)
+  - [x] Property created, 8–9 November: "Virtual Office Angels website", owned by the IT Support Gmail,
+    one web stream for `https://virtualofficeangels.com.au`, data kept 14 months. The tag is not on
+    the old live site
+  - [ ] Launch day: connect it with Site Kit by Google and check Realtime (`LAUNCH_AND_ROLLBACK_PLAN.md`
+    step 16), after the cookie consent decision
 - [ ] *(after launch)* **Google Search Console** set up, the site verified, the sitemap submitted
-- [ ] *(after launch)* **Google Business Profile** updated: website link, hours and address checked; confirm the change prompt *(added)*
+  - [x] Set up and verified, 8 November: property `https://virtualofficeangels.com.au/`, owned by the
+    IT Support Gmail, verified by HTML tag in Yoast on live **and** staging (so the deploy keeps it);
+    a second user with Full access
+  - [ ] Launch day: submit the sitemap (`LAUNCH_AND_ROLLBACK_PLAN.md` step 16)
+- [ ] *(after launch)* **Google Business Profile** updated: website link, hours and address checked; confirm the change prompt *(added)*.
+  Hours: **9am–6pm** is correct (VA Mhari, 11 November), so the profile's 9am–5:30pm changes
 
 ## 4. Security and server
 
@@ -81,7 +91,12 @@ Need Author Bio Section in every article
 ## 5. Legal *(added)*
 
 - [ ] *(after launch)* Privacy policy and terms pages, current and linked in the footer. Live has none today.
-  Drafts on the mockup for Ms Anne to review, 8 November: `/privacy-policy` and `/terms-of-use`
+  Drafts on the mockup for Ms Anne to review, 8 November: `/privacy-policy` and `/terms-of-use`.
+  VA Paola's revised wording applied 18 November (mockup and preview theme); the effective date
+  stays a placeholder until publication. Same day, VA Mhari's decision: treated as approved (the
+  draft note removed) so the preview theme can go on staging, and laid out like the other pages: a
+  compact hero, each section as a card, and a sticky contents card on the right. The approvals list
+  sent to Ms Anne is unchanged
 - [ ] *(after launch)* A decision on cookie consent, now that Analytics will be added
 
 ## 6. Testing *(added)*

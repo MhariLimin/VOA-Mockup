@@ -58,7 +58,8 @@ Email, the domain and DNS are not touched by the launch.
 
 6. Check again for any article, page or setting changed on live since 28 October (none on
    1 November). Copy each one to staging (an article also needs a row in `redirects.csv`). This
-   includes any of the writer's November articles published on live.
+   includes any of the writer's November articles published on live. VA Mhari is the only one who
+   uploads articles (11 November), so this is a short check of her own uploads, not a full comparison.
 7. ~~Delete the "Staging test" redirect group on staging~~ Done 2 November, after the addresses and
    SEO update (Appearance → Site setup) was applied and checked. Staging's old addresses now answer
    404 until live gets `redirects.csv` at step 10.
@@ -74,15 +75,43 @@ Email, the domain and DNS are not touched by the launch.
     Videos page, service-page feedback, the four home testimonials), plus anything approved since
     (post categories, News & Community, Privacy Policy and Terms of Use) built into the theme,
     uploaded, then Appearance → Site setup. Check the changed pages on staging by eye.
+    **Which theme is active goes live.** Staging can hold two themes (9 November): "Virtual Office
+    Angels", the approved site, and "Virtual Office Angels (Preview)", which adds the items waiting
+    for approval. Before the deploy, Appearance → Themes must show the approved one as **Active**,
+    unless Ms Anne has approved the preview's items by then.
+    Both installed on staging on 9 November, the approved one active (with the six new client
+    logos), the preview installed but not active.
 11. **Contact form tested on staging** *(added 8 November)*. In the team leaders' review (tracker,
     "Staging site comments"), enquiries from Mortgage, Financial Planning and Accounting arrived, but
     those from most other pages were reported as not received. Check Flamingo → Inbound Messages on
     staging for those tests, then send a fresh test from the Contact page, a service page and the home
     page, and check `clientcare@virtualofficeangels.com.au`, spam included. Fix any failure before
     launch: launch day's single test (step 13) is too late to find it.
+    **Tested 11 November:** Flamingo holds all 20 of the team leaders' tests (13–14 October), so the
+    form saved every one. Fresh tests from 12 pages (home, About, Services and nine service pages):
+    each reached the server; 7 were sent and arrived in clientcare, and 5 were stopped by **Akismet**
+    as spam (reCAPTCHA had passed them), because one address sent many in a few minutes. The other
+    12 pages show the same working form (checked without sending). Two things to fix before launch:
+    - **Akismet's false positives are silent.** The visitor sees "There was an error trying to send
+      your message", no email is sent, and the enquiry sits in Flamingo → Inbound Messages → Spam.
+      **Fixed in the theme, 12 November** (`inc/forms.php`, VA Mhari's choice): an enquiry only
+      Akismet objects to is now sent, with "[Check: possible spam]" at the start of the subject, and
+      the visitor gets Thank You. Anything reCAPTCHA or Contact Form 7's own checks catch stays
+      blocked, and the visitor is then shown the email address and phone number. Uploaded and
+      tested 12 November with Akismet's test name: sent, Thank You shown, and the email arrived in
+      clientcare labelled "[Check: possible spam]". Flamingo still
+      files its own copy of such an enquiry under Spam (it reads Akismet's verdict itself); the
+      email is what the team works from.
+    - **WordPress's admin email** (Settings → General) on staging is an address built from Ms Anne's name,
+      not a valid address, so WordPress's notices go nowhere. Set a real address on staging so the
+      deploy carries it; WordPress confirms it by email first. 12 November: changed to
+      the team's support Gmail address (VA Mhari's choice) and confirmed the same day.
+    - **Test enquiries cleared** from staging's Flamingo on 12 November (38: the team leaders' and
+      ours), Trash emptied, so none reach live. Any test sent after this adds a new one: clear it
+      again before the deploy.
 12. **Settings made on staging, so the deploy carries them** *(added 8 November)*: author archives
     off if agreed (go-live checklist section 4); the Google Search Console verification code in
-    Yoast (Settings → Site connections), if Search Console is set up by then.
+    Yoast (Settings → Site connections): done 8 November, on live and staging.
 
 ## Launch day
 
@@ -95,10 +124,11 @@ Times are from the start of the window. Stop at any step that does not go as wri
      (Database, Plugins, Themes, Uploads, Others) and check none is 0 KB.
    - cPanel → **Backup Wizard** → full backup, downloaded too, if cPanel access is available. It
      runs outside WordPress, so it works even if wp-admin breaks.
-2. Export from live what the deploy would lose: contact form enquiries (Flamingo → Inbound Messages
-   → Export, if live has it), anything else from the step 6 list, and the inactive newsletter
-   plugin's subscriber list unless Ms Anne has said it is not needed (`../hosting/README.md`): the
-   deploy removes the plugin and its data.
+2. Export from live what the deploy would lose: anything from the step 6 list. Checked 12 November,
+   nothing else needs exporting: live has no Flamingo, so its enquiries exist only as emails in
+   clientcare; the inactive newsletter plugin (MailPoet) holds only Ms Anne's own two addresses,
+   added at install in February 2023 and never confirmed, and an older email plugin's tables are
+   empty.
 3. Write down the time. **Rollback is possible from here on.**
 
 ### Deploy: 0:45 to 1:15
@@ -160,7 +190,11 @@ All on **live** wp-admin (`virtualofficeangels.com.au/wp-admin/`), which now has
     is given). Google Analytics: the tracking code added, if the property is set up, and a visit shows
     in its Realtime report.
 17. Google Business Profile: check the website link and the hours (9am–6pm).
-18. Wordfence → Scan → Start New Scan on live, now the new website. Plugins: the old site's plugins
+18. Off-site backups *(added 11 November)*: live now has staging's UpdraftPlus settings, Google Drive
+    (the team's support Gmail address; files weekly, keep 4; database daily, keep 14). UpdraftPlus →
+    Settings: check the account holder shown is that account, not the old one, then Backup Now
+    (database only) and check it reaches Drive's `UpdraftPlus` folder.
+    Wordfence → Scan → Start New Scan on live, now the new website. Plugins: the old site's plugins
     (the old page builder, the newsletter plugin and the others named in `private/wordpress-security/`)
     are gone, as on staging.
 19. End the content freeze.
@@ -213,5 +247,3 @@ Staging is not changed by a deploy, so the new website stays safe there while li
 ## Open before this plan is final
 
 - The launch date
-- Whether live keeps contact form enquiries in wp-admin (Flamingo) that need exporting
-- Whether the newsletter subscriber list is needed (Ms Anne)

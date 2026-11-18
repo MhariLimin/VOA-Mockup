@@ -53,10 +53,27 @@ This is the live list. Tick and date each item when it is done.
   - [x] Virtual Office Angels live, 31 October: **19 inactive plugins deleted**, among them most of
     the ones with no fix or abandoned. Pages, menu, slider, sitemap and the `http` → `https`
     redirect checked afterwards. Names in `private/wordpress-security/`
-  - [ ] Virtual Office Angels live: the inactive **newsletter plugin** kept until Ms Anne decides
-    whether its subscriber list is exported first. The active plugins with no fix or abandoned stay until launch
+  - [ ] Virtual Office Angels live: the inactive **newsletter plugin** (MailPoet). Its subscriber list
+    was checked 12 November in phpMyAdmin: only Ms Anne's own two addresses, never confirmed, so
+    nothing to export; the deploy removes it. The active plugins with no fix or abandoned stay until launch
     (the old site uses them); staging has none of them
-  - [ ] Virtual Financial Support
+  - [x] Virtual Financial Support, 16 November: full backup (database and files, kept on the
+    server), then all 18 plugin updates in three groups, the page builder last on its own, with its
+    database update run. All 12 pages checked after each group (no errors, same page-builder content)
+    and by eye; the contact form shows. WordPress was already 7.1.4. Its theme has an update
+    (3.3.3 → 3.3.10) that WordPress was set to install itself the same day. Names in
+    `private/wordpress-security/`
+  - [x] Virtual Financial Support, 18 November: full backup (kept on the server), then the two
+    abandoned plugins deactivated, checked and deleted. One had nothing to do (the plugin it served
+    was already off); the other made visitors' scripts load deferred. All 12 pages checked before
+    and after (no errors, same page-builder content) and by eye. Scripts now load the normal way, as
+    they always did for logged-in staff; a replacement setting in the cache plugin was not switched
+    on (it can defer scripts the old plugin skipped, so it needs its own test). Names in
+    `private/wordpress-security/`
+  - [x] Virtual Loans Assistant, 16 November: full backup (database and files, kept on the server),
+    then the abandoned plugin from the scans deactivated and deleted. It had never been set up and
+    nothing on the site used it. All 10 pages checked afterwards (no errors) and by eye. Wordfence rescan the same day: 0 results (was 1 Critical). Name in
+    `private/wordpress-security/`
 - [ ] Change passwords one at a time, once the scans are clean: starting with the most exposed ones,
   then the website database, email-sending and hosting passwords. Turn on two-step login
   for the hosting and WordPress admins
@@ -71,9 +88,12 @@ This is the live list. Tick and date each item when it is done.
     **Extended Protection**. Live and staging pages checked afterwards. The `.htaccess` and
     `.user.ini` backups are in `private/wordpress-security/voa/10-30-2026/`
   - [ ] Virtual Financial Support and Virtual Loans Assistant
-- [ ] Open Elementor once on Virtual Financial Support to confirm the page editor works
+- [x] Open Elementor once on Virtual Financial Support to confirm the page editor works: opens
+  normally after the 16 November update (closed without saving)
 - [ ] Ask HostGator to explain the 35-minute HTTPS outage on the Business plan server
-- [ ] Reconnect Jetpack on Virtual Loans Assistant (renews its connection keys)
+- [x] Reconnect Jetpack on Virtual Loans Assistant (renews its connection keys): 16 November, after a
+  backup. Site disconnected and reconnected; the owner is now VA Mhari's WordPress.com account
+  (was a user called "Admin"). Stats carried over; Jetpack Protect: no vulnerabilities
 - [ ] List every website on both HostGator plans; agree with Ms Anne which to keep; back up and remove
   the rest
 - [ ] Later: DMARC for `virtualofficeangels.com.au` (DNS change, needs approval)
@@ -85,16 +105,39 @@ it or remove it.
 
 - [ ] HostGator account recovery email changed to a mailbox someone can reach, so the October lockout
   cannot recur
-- [ ] Off-site backups: UpdraftPlus's Google Drive connection never worked. Decide whose Google account
-  backups go to, agree a schedule, and test a restore
+- [ ] Off-site backups: UpdraftPlus's Google Drive connection never worked. 11 November: staging was
+  found signed in to a Google account named "VA Joseph" (copied from live, so live is probably the
+  same). Removed on staging and replaced with the team's support Gmail address (VA Mhari's decision);
+  schedule files weekly (keep 4) and database daily (keep 14), which live inherits at launch
+  (launch plan step 18). Schedule saved and a database-only test backup uploaded to Drive on
+  12 November ("Google Drive: OK" in the log). 16 November: the first scheduled backups (database,
+  then files) ran and uploaded to Drive ("Google Drive: OK"), but **3.7 days late**: the database run due
+  13 November 2:26 ran 16 November 7:51, so none ran 13 to 15 November. WordPress only starts scheduled
+  jobs when someone visits the site, and staging, behind Coming Soon, gets almost no visits. Live has
+  daily visitors, so it should keep to time; a server cron job on HostGator calling `wp-cron.php` would
+  make it reliable on both (hosting change, needs approval). Still to do: a test restore. Find out whether VA Joseph's Drive holds website backups (they contain the
+  database, enquiries included) and have them deleted or handed over
 - [ ] Keep one HostGator plan. The 4 October research found Business and Pro have the same features
   and differ only in size; it recommended keeping Pro unless everything fits within Business's 50
   sites and 50 GB after the old sites are removed. Use the renewal prices on the billing page
 - [ ] Former staff access reviewed beyond wp-admin: HostGator users, FTP, email accounts, Crazy Domains,
   any Google account linked through Site Kit, UpdraftPlus remote storage
+  - 16 November, HostGator: 2 account users (the owner, and the team's Tech login, whose profile
+    still carried a former VA's name: renamed "VOA Tech Support"; its phone and address are still
+    theirs). 7 extra FTP logins, one reaching the whole Business plan and one with an unrecognised
+    name: **nothing deleted**, asked of Ms Anne (approvals item 11). Anonymous FTP off, no SSH keys,
+    no extra Web Disk accounts on either plan. The other cPanel logins are email only (approvals
+    item 8). Details in `private/wordpress-security/HOSTGATOR_ACCESS_REVIEW_2026-11-16.txt`
 - [ ] An "accounts and services" table, without passwords: each HostGator plan's renewal date, the
   Crazy Domains registrar details (expiry, auto-renew, registrant, nameservers), Wordfence edition and
   who receives its alerts
+  - Started 10 November in `private/ACCOUNTS_AND_SERVICES.md` (outside Git). Filled: the four domains'
+    registrar, registrant, nameservers, email and web hosts, and both HostGator plans' dates. Found two
+    accounts not recorded before: Cloudflare (DNS for Virtual Financial Support and Virtual Loans
+    Assistant) and Microsoft 365 (email for virtualofficeangels.com). Still to fill: the domain expiry
+    dates and auto-renew (needs Crazy Domains access from Ms Anne; two .au domains are already in their
+    renewal window), the Cloudflare and Microsoft 365 owners, and Wordfence editions and alert
+    recipients
 - [ ] Find out whether an Elegant Themes (Divi) licence is being paid, and for which site. Virtual
   Loans Assistant uses Divi
 - [ ] A mail client (Thunderbird or Outlook, IMAP) for the HostGator mailboxes, if still wanted
