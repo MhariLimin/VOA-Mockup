@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { PageClosing } from '../components/layout/PageClosing';
 
@@ -7,9 +7,11 @@ import { PageClosing } from '../components/layout/PageClosing';
    applied as written. Treated as approved on 18 November 2026, so the draft note was removed; the
    effective date stays "[Publication date]" until the pages are published.
 
-   Layout (18 November 2026): the article page's centred header, then the policy as one document card
-   that opens with a numbered list of its sections. The numbers are decoration only (hidden from screen
-   readers); no new visible copy. */
+   Layout (18 November 2026, second pass): the compact inner hero the other pages use, with the effective
+   date as its eyebrow and the title's last word in the heading accent. Below it, each section is its own
+   card, revealed as it scrolls in, beside a sticky contents card on the right that highlights the
+   section being read (above the sections on narrow screens). The section numbers are decoration only,
+   hidden from screen readers; no new visible copy. */
 
 const company = 'Virtual Office Angels Pty Limited (ABN 58 155 459 788)';
 
@@ -30,28 +32,63 @@ function ContactDetails() {
   </p>;
 }
 
+/* The section whose heading has passed a line a third of the way down the window. */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState(ids[0]);
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = window.innerHeight * 0.33;
+      let current = ids[0];
+      for (const id of ids) {
+        const heading = document.getElementById(id);
+        if (heading && heading.getBoundingClientRect().top <= line) current = id;
+      }
+      setActive(current);
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [ids]);
+  return active;
+}
+
 function LegalLayout({ title, sections }: { title: string; sections: Section[] }) {
+  const [ids] = useState(() => sections.map(([heading]) => sectionId(heading)));
+  const active = useActiveSection(ids);
+  const split = title.lastIndexOf(' ');
   return <article className="legal-page">
-    <header className="section blog-header legal-header">
-      <div className="container narrow">
-        <h1>{title}</h1>
-        <div className="blog-meta"><span>Effective date [Publication date]</span></div>
+    <section className="section inner-hero compact-inner-hero legal-hero">
+      <div className="container inner-hero-grid">
+        <div>
+          <p className="eyebrow">Effective date [Publication date]</p>
+          <h1>{title.slice(0, split)} <em>{title.slice(split + 1)}</em></h1>
+        </div>
       </div>
-    </header>
+    </section>
     <section className="section legal-body">
-      <div className="container legal-document">
-        <nav className="legal-contents" aria-label={`${title} sections`}>
+      <div className="container legal-layout">
+        <nav className="legal-toc" aria-label={`${title} sections`}>
           <ol>
-            {sections.map(([heading], index) => <li key={heading}>
-              <a href={`#${sectionId(heading)}`}><span aria-hidden="true">{sectionNumber(index)}</span>{heading}</a>
+            {sections.map(([heading], index) => <li key={ids[index]}>
+              <a href={`#${ids[index]}`} className={active === ids[index] ? 'active' : undefined} aria-current={active === ids[index] ? 'location' : undefined}><span aria-hidden="true">{sectionNumber(index)}</span>{heading}</a>
             </li>)}
           </ol>
         </nav>
-        <div className="article-content">
-          {sections.map(([heading, body], index) => <section key={heading} className="legal-section">
+        <div className="legal-sections">
+          {sections.map(([heading, body], index) => <section key={ids[index]} className="section legal-section">
             <span className="legal-number" aria-hidden="true">{sectionNumber(index)}</span>
-            <h2 id={sectionId(heading)}>{heading}</h2>
-            {body}
+            <div className="article-content">
+              <h2 id={ids[index]}>{heading}</h2>
+              {body}
+            </div>
           </section>)}
         </div>
       </div>
