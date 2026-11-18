@@ -6,6 +6,10 @@
  * of every enquiry, Contact Form 7's own error messages are used unchanged, and enquiries that came
  * from a Google ad are labelled the way the live Ads form labels them.
  *
+ * Changed 12 November 2026 (VA Mhari): an enquiry only Akismet calls spam is sent, labelled, rather
+ * than dropped, and the two failure messages give the email address and phone number. See
+ * voa_enquiry_akismet_review and voa_enquiry_failure_message at the end of this file.
+ *
  * Appearance → Site setup creates the form (voa_create_enquiry_form). Its fields are written so that,
  * with the filters below and the few rules in wordpress.css, Contact Form 7 renders the mockup's form
  * label for label. After that the form is the client's to edit under Contact → Contact Forms; the
@@ -280,3 +284,98 @@ function voa_enquiry_ads_label( $components, $contact_form, $mail ) {
 	return $components;
 }
 add_filter( 'wpcf7_mail_components', 'voa_enquiry_ads_label', 10, 3 );
+
+/**
+ * The start of the subject when Akismet alone judged an enquiry to be spam (12 November 2026).
+ */
+const VOA_POSSIBLE_SPAM_LABEL = '[Check: possible spam] ';
+
+/**
+ * Whether Akismet alone flagged the enquiry being sent. Set by voa_enquiry_akismet_review, read by
+ * voa_enquiry_possible_spam_label, within the one submission.
+ *
+ * @param bool|null $flag True to record it; null to read.
+ * @return bool
+ */
+function voa_enquiry_akismet_flagged( $flag = null ) {
+	static $flagged = false;
+
+	if ( null !== $flag ) {
+		$flagged = (bool) $flag;
+	}
+
+	return $flagged;
+}
+
+/**
+ * Send, labelled, an enquiry that only Akismet calls spam, rather than drop it.
+ *
+ * Testing on staging, 11 November 2026: Google reCAPTCHA passed every test enquiry as human, then
+ * Akismet blocked 5 of 12. A blocked enquiry sends no email; the visitor sees an error and the
+ * enquiry waits unseen in Flamingo's Spam tab. So when Akismet is the only check that objected (every
+ * line of the spam log is Akismet's), the enquiry goes through as normal, to the inbox, with
+ * VOA_POSSIBLE_SPAM_LABEL at the start of the subject. Anything Contact Form 7's own checks or
+ * reCAPTCHA (priority 9) caught stays blocked, and so does anything a later filter flags: this runs at
+ * 11, straight after Akismet (10), which skips its check when an earlier one already flagged it.
+ *
+ * @param bool             $spam       Whether the checks so far found spam.
+ * @param WPCF7_Submission $submission The submission.
+ * @return bool
+ */
+function voa_enquiry_akismet_review( $spam, $submission = null ) {
+	if ( ! $spam || ! $submission instanceof WPCF7_Submission || ! voa_is_enquiry_form( $submission->get_contact_form() ) ) {
+		return $spam;
+	}
+
+	$log = $submission->get_spam_log();
+
+	if ( empty( $log ) ) {
+		return $spam;
+	}
+
+	foreach ( $log as $entry ) {
+		if ( ! isset( $entry['agent'] ) || 'akismet' !== $entry['agent'] ) {
+			return $spam;
+		}
+	}
+
+	voa_enquiry_akismet_flagged( true );
+
+	return false;
+}
+add_filter( 'wpcf7_spam', 'voa_enquiry_akismet_review', 11, 2 );
+
+/**
+ * Label the staff email of an enquiry that Akismet alone flagged.
+ *
+ * @param array            $components   subject, sender, body, recipient, additional_headers, attachments.
+ * @param WPCF7_ContactForm $contact_form The form.
+ * @param WPCF7_Mail        $mail         The mail being composed.
+ * @return array
+ */
+function voa_enquiry_possible_spam_label( $components, $contact_form, $mail ) {
+	if ( voa_enquiry_akismet_flagged() && voa_is_enquiry_form( $contact_form ) && 'mail' === $mail->name() ) {
+		$components['subject'] = VOA_POSSIBLE_SPAM_LABEL . $components['subject'];
+	}
+
+	return $components;
+}
+add_filter( 'wpcf7_mail_components', 'voa_enquiry_possible_spam_label', 10, 3 );
+
+/**
+ * When an enquiry still cannot be sent (blocked as spam, or the email failed), tell the visitor how
+ * else to reach us instead of Contact Form 7's "try again later". Wording written 12 November 2026,
+ * approved by VA Mhari; the address and number are the website's own.
+ *
+ * @param string $message The message Contact Form 7 would show.
+ * @param string $status  Which message it is.
+ * @return string
+ */
+function voa_enquiry_failure_message( $message, $status = '' ) {
+	if ( in_array( $status, array( 'spam', 'mail_sent_ng' ), true ) && voa_is_enquiry_form( wpcf7_get_current_contact_form() ) ) {
+		return 'Sorry, your message couldn\'t be sent. Please email clientcare@virtualofficeangels.com.au or call 1 300 737 883.';
+	}
+
+	return $message;
+}
+add_filter( 'wpcf7_display_message', 'voa_enquiry_failure_message', 10, 2 );
