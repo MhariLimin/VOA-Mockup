@@ -118,5 +118,29 @@
 	{
 		"name": "YMLife",
 		"image": "/assets/source/staging/images/08dea4768d-YMLife.png"
+	},
+	{
+		"name": "Industrias Service Group",
+		"image": "/assets/client/logos/industrias-service-group.png"
+	},
+	{
+		"name": "Seet Advisory",
+		"image": "/assets/client/logos/seet-advisory.png"
+	},
+	{
+		"name": "Velar Finance",
+		"image": "/assets/client/logos/velar-finance.png"
+	},
+	{
+		"name": "Coastal Financial Consultants",
+		"image": "/assets/client/logos/coastal-financial-consultants.png"
+	},
+	{
+		"name": "Hokus",
+		"image": "/assets/client/logos/hokus.png"
+	},
+	{
+		"name": "ITSM",
+		"image": "/assets/client/logos/itsm.png"
 	}
 ]

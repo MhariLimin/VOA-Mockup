@@ -37,7 +37,8 @@ export interface LocationPage {
 }
 
 const logo = (file: string) => `/assets/source/staging/images/${file}`;
-/* Logos the client supplied on 1 November 2026, for clients the library did not have. */
+/* Logos the client supplied on 1 November 2026 (Coastal Financial Consultants on 11 November), for
+   clients the library did not have. */
 const clientLogo = (file: string) => `/assets/client/logos/${file}`;
 
 const services = {
@@ -137,7 +138,7 @@ export const locationPages: readonly LocationPage[] = [
       intro: 'Our experience across Australian industries includes specialised support for financial planning and mortgage broking businesses. In Brisbane and on the Gold Coast, we provide HR-managed virtual assistants to clients in Toowong and Helensvale, with roles focused on financial planner support and loan administration.',
       wall: [
         { client: 'Seet Advisory', location: 'Toowong, Brisbane', image: clientLogo('seet-advisory.png') },
-        { client: 'Coastal Financial Consultants', location: 'Helensvale, Gold Coast' },
+        { client: 'Coastal Financial Consultants', location: 'Helensvale, Gold Coast', image: clientLogo('coastal-financial-consultants.png') },
       ],
     },
     hours: {

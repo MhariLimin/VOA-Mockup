@@ -90,8 +90,8 @@ Not from the writer: the highlighted heading words (the city or area), the closi
 
 ## Before any of this goes live
 
-- Logos for RedP Marketing and Coastal Financial Consultants (the others were supplied on
-  1 November).
+- The logo for RedP Marketing (the others were supplied on 1 November, Coastal Financial
+  Consultants' on 11 November).
 - The writer's spelling "authorized" in the Sydney and Brisbane mortgage cards; the rest of the copy
   uses "authorised".
 - Keyword Planner volumes for the three cities, to confirm the order (and Brisbane versus Melbourne).

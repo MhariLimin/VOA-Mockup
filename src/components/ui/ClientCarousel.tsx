@@ -46,8 +46,9 @@ export function ClientCarousel() {
     <div className="client-carousel-viewport">
       <div className="client-carousel-track" style={{ transform: `translateX(-${active * (100 / visible)}%)`, transition: transitioning && !reducedMotion ? undefined : 'none', '--visible-clients': visible } as CSSProperties}>
         {slides.map((client, index) => <div className="client-slide" key={`${client.image}-${index}`} aria-hidden={index < active || index >= active + visible}>
-          <img src={client.image} alt={client.name || 'Virtual Office Angels client logo'} loading="lazy" />
-          {client.name && <span>{client.name}</span>}
+          {/* A client without a logo yet shows its name in the logo's place, as on the city pages. */}
+          {client.image ? <img src={client.image} alt={client.name || 'Virtual Office Angels client logo'} loading="lazy" /> : <strong className="client-slide-name">{client.name}</strong>}
+          {client.image && client.name && <span>{client.name}</span>}
         </div>)}
       </div>
     </div>

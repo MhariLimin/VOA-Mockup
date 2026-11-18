@@ -18,8 +18,13 @@ $voa_slides  = array_merge( $voa_clients, array_slice( $voa_clients, 0, 5 ) );
 		<div class="client-carousel-track" style="transform:translateX(-0%);--visible-clients:5">
 			<?php foreach ( $voa_slides as $voa_index => $voa_client ) : ?>
 				<div class="client-slide" aria-hidden="<?php echo $voa_index >= 5 ? 'true' : 'false'; ?>">
-					<img src="<?php echo esc_url( voa_media_url( $voa_client['image'] ) ); ?>" alt="<?php echo esc_attr( $voa_client['name'] ? $voa_client['name'] : 'Virtual Office Angels client logo' ); ?>" loading="lazy">
-					<?php if ( $voa_client['name'] ) : ?>
+					<?php $voa_logo = voa_media_url( $voa_client['image'] ); ?>
+					<?php if ( $voa_logo ) : ?>
+						<img src="<?php echo esc_url( $voa_logo ); ?>" alt="<?php echo esc_attr( $voa_client['name'] ? $voa_client['name'] : 'Virtual Office Angels client logo' ); ?>" loading="lazy">
+					<?php else : /* No logo yet: the name takes the logo's place, as on the city pages. */ ?>
+						<strong class="client-slide-name"><?php echo esc_html( $voa_client['name'] ); ?></strong>
+					<?php endif; ?>
+					<?php if ( $voa_logo && $voa_client['name'] ) : ?>
 						<span><?php echo esc_html( $voa_client['name'] ); ?></span>
 					<?php endif; ?>
 				</div>
